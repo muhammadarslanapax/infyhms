@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:infyhms_flutter/controller/splash_controller.dart';
+
+class SplashScreen extends StatelessWidget {
+  SplashScreen({Key? key}) : super(key: key);
+  SplashController splashController = Get.put(SplashController());
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Container(
+            height: 100,
+            width: 100,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/image/InfyHMS logo.png"),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
