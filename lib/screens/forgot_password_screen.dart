@@ -4,17 +4,16 @@ import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/screens/forgot_password_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorConst.whiteColor,
@@ -69,61 +68,36 @@ class LoginScreen extends StatelessWidget {
                           padding: EdgeInsets.only(top: height * 0.06, left: 20, right: 20),
                           child: Column(
                             children: [
-                              Text(StringUtils.signIn, style: TextStyleConst.boldTextStyle),
-                              SizedBox(height: height * 0.03),
+                              Text(StringUtils.forgotPassword, style: TextStyleConst.boldTextStyle),
+                              SizedBox(height: height * 0.01),
+                              Text(StringUtils.forgotScreenDetail, style: TextStyleConst.hintTextStyle),
+                              SizedBox(height: height * 0.05),
                               CommonTextField(
                                 hintText: StringUtils.signInEmail,
                               ),
-                              SizedBox(height: height * 0.02),
-                              CommonTextField(
-                                hintText: StringUtils.signInPassword,
-                                suffixIcon: const Icon(
-                                  Icons.remove_red_eye,
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: TextButton(
-                                  child: Text(
-                                    StringUtils.forgotPassword,
-                                    style: TextStyleConst.forgotTextStyle,
-                                  ),
-                                  onPressed: () {
-                                    Get.to(() => const ForgotPasswordScreen(), transition: Transition.rightToLeft);
-                                  },
-                                ),
-                              ),
-                              SizedBox(height: height * 0.01),
+                              SizedBox(height: height * 0.07),
                               Row(
                                 children: [
-                                  Container(
-                                    height: 25,
-                                    width: 25,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: ColorConst.blueColor,
-                                    ),
-                                    child: const Icon(
-                                      Icons.check,
-                                      color: ColorConst.whiteColor,
-                                      size: 18,
-                                    ),
+                                  CommonButton(
+                                    textColor: ColorConst.whiteColor,
+                                    onTap: () {},
+                                    color: ColorConst.blueColor,
+                                    text: StringUtils.sendLink,
+                                    width: width / 2.3,
+                                    height: 50,
                                   ),
-                                  SizedBox(width: width * 0.01),
-                                  Text(
-                                    StringUtils.rememberPassword,
-                                    style: TextStyleConst.mediumTextStyle(ColorConst.blueColor),
+                                  const Spacer(),
+                                  CommonButton(
+                                    textColor: Colors.grey,
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    color: ColorConst.borderGreyColor,
+                                    text: StringUtils.cancel,
+                                    width: width / 2.3,
+                                    height: 50,
                                   ),
                                 ],
-                              ),
-                              SizedBox(height: height * 0.06),
-                              CommonButton(
-                                textColor: Colors.white,
-                                onTap: () {},
-                                color: ColorConst.blueColor,
-                                text: StringUtils.login,
-                                width: width,
-                                height: 50,
                               )
                             ],
                           ),

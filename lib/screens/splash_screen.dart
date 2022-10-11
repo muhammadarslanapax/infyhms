@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/controller/splash_controller.dart';
+import 'package:infyhms_flutter/utils/image_utils.dart';
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class SplashScreen extends StatelessWidget {
             width: 100,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/image/InfyHMS logo.png"),
+                image: AssetImage(ImageUtils.splashLogo),
               ),
             ),
           ),
