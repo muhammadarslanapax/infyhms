@@ -7,8 +7,8 @@ class TextStyleConst {
         color: color,
         fontWeight: FontWeight.w600,
       );
-  static TextStyle boldTextStyle(Color color) => GoogleFonts.nunitoSans(
-        fontSize: 25,
+  static TextStyle boldTextStyle(Color color, double fontSize) => GoogleFonts.nunitoSans(
+        fontSize: fontSize,
         fontWeight: FontWeight.w700,
       );
   static TextStyle hintTextStyle(Color color) => GoogleFonts.nunitoSans(

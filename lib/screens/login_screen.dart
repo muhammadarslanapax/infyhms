@@ -80,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                               child: Column(
                                 children: [
                                   /// SignIn
-                                  Text(StringUtils.signIn, style: TextStyleConst.boldTextStyle(Colors.black)),
+                                  Text(StringUtils.signIn, style: TextStyleConst.boldTextStyle(Colors.black, width * 0.06)),
                                   SizedBox(height: height * 0.03),
 
                                   /// Email TextField

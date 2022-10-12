@@ -71,7 +71,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                             padding: EdgeInsets.only(top: height * 0.06, left: 20, right: 20),
                             child: Column(
                               children: [
-                                Text(StringUtils.forgotPassword, style: TextStyleConst.boldTextStyle(ColorConst.blueColor)),
+                                Text(StringUtils.forgotPassword, style: TextStyleConst.boldTextStyle(ColorConst.blueColor, width * 0.06)),
                                 SizedBox(height: height * 0.01),
                                 Text(StringUtils.forgotScreenDetail, style: TextStyleConst.hintTextStyle(ColorConst.hintGreyColor)),
                                 SizedBox(height: height * 0.05),
