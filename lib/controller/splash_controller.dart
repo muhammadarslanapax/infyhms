@@ -6,7 +6,7 @@ class SplashController extends GetxController {
   void onInit() {
     Future.delayed(
       const Duration(seconds: 3),
-      () => Get.to(const LoginScreen()),
+      () => Get.offAll(() => LoginScreen()),
     );
     // TODO: implement onInit
     super.onInit();
