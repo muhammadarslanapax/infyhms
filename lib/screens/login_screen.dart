@@ -5,6 +5,7 @@ import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/login_controller.dart';
+import 'package:infyhms_flutter/screens/appointment_screen.dart';
 import 'package:infyhms_flutter/screens/forgot_password_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
@@ -56,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                           color: ColorConst.bgGreyColor,
                         ),
                         Container(
-                          height: height / 1.6,
+                          height: height / 1.54,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: ColorConst.whiteColor,
@@ -169,10 +170,10 @@ class LoginScreen extends StatelessWidget {
                                                 ),
                                         ),
                                       ),
-                                      SizedBox(width: width * 0.01),
+                                      SizedBox(width: width * 0.03),
                                       Text(
                                         StringUtils.rememberPassword,
-                                        style: TextStyleConst.mediumTextStyle(ColorConst.blackColor),
+                                        style: TextStyleConst.mediumTextStyle(ColorConst.blackColor, width * 0.05),
                                       ),
                                     ],
                                   ),
@@ -180,15 +181,17 @@ class LoginScreen extends StatelessWidget {
 
                                   /// Login button
                                   CommonButton(
-                                    textColor: Colors.white,
+                                    textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                     onTap: () {
-                                      if (logInController.formKey.currentState!.validate()) {}
+                                      // if (logInController.formKey.currentState!.validate()) {}
+                                      Get.to(() => AppointmentScreen());
                                     },
                                     color: ColorConst.blueColor,
                                     text: StringUtils.login,
                                     width: width,
                                     height: 50,
-                                  )
+                                  ),
+                                  SizedBox(height: height * 0.04)
                                 ],
                               ),
                             ),

@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:infyhms_flutter/screens/login_screen.dart';
+import 'package:infyhms_flutter/screens/onboarding_screen.dart';
 
 class SplashController extends GetxController {
   @override
   void onInit() {
     Future.delayed(
       const Duration(seconds: 3),
-      () => Get.offAll(() => LoginScreen(), transition: Transition.fade),
+      () => Get.offAll(() => OnBoardingScreen(), transition: Transition.fade),
     );
     // TODO: implement onInit
     super.onInit();

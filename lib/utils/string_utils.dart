@@ -14,4 +14,16 @@ class StringUtils {
   static const introTwoSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
   static const introThreeTitle = "Read Prescriptions";
   static const introThreeSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
+  static const appointment = "Appointment";
+  static const bills = "Bills";
+  static const diagnosisTests = "Diagnosis Tests";
+  static const documents = "Documents";
+  static const noticeBoards = "Notice Boards";
+  static const invoices = "Invoices";
+  static const liveConsultations = "Live Consultations";
+  static const patientsCases = "Patients Cases";
+  static const patientAdmissions = "Patient Admissions";
+  static const prescriptions = "Prescriptions";
+  static const vaccinatedPatients = "Vaccinated Patients";
+  static const logOut = "Logout";
 }

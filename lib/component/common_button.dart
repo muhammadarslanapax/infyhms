@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:infyhms_flutter/constant/text_style_const.dart';
 
 class CommonButton extends StatelessWidget {
   const CommonButton({
@@ -8,16 +7,17 @@ class CommonButton extends StatelessWidget {
     required this.height,
     required this.text,
     required this.color,
-    required this.textColor,
     required this.onTap,
+    required this.textStyleConst,
   }) : super(key: key);
 
   final double width;
   final double height;
   final String text;
-  final Color textColor;
+
   final Color color;
   final VoidCallback onTap;
+  final TextStyle textStyleConst;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class CommonButton extends StatelessWidget {
         fixedSize: Size(width, height),
       ),
       onPressed: onTap,
-      child: Text(text, style: TextStyleConst.mediumTextStyle(textColor)),
+      child: Text(text, style: textStyleConst),
     );
   }
 }
