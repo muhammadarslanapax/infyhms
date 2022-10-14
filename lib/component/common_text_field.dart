@@ -17,27 +17,27 @@ class CommonTextField extends StatelessWidget {
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: ColorConst.borderGreyColor, width: 1.5),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
         ),
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: ColorConst.borderGreyColor, width: 1.5),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: ColorConst.borderGreyColor, width: 1.5),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: ColorConst.borderGreyColor, width: 1.5),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
         ),
         disabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: ColorConst.borderGreyColor, width: 1.5),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: ColorConst.borderGreyColor, width: 1.5),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
         ),
         hintText: hintText,
         hintStyle: TextStyleConst.hintTextStyle(ColorConst.hintGreyColor),

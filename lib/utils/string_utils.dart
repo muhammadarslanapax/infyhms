@@ -26,4 +26,12 @@ class StringUtils {
   static const prescriptions = "Prescriptions";
   static const vaccinatedPatients = "Vaccinated Patients";
   static const logOut = "Logout";
+  static const myAccount = "My Account";
+  static const editProfile = "Edit Profile";
+  static const changePassword = "Change Password";
+  static const firstName = "First Name: ";
+  static const lastName = "Last Name: ";
+  static const email = "Email: ";
+  static const phone = "Phone: ";
+  static const save = "Save";
 }

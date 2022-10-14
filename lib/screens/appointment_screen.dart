@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/appointment_controller.dart';
@@ -72,7 +73,6 @@ class AppointmentScreen extends StatelessWidget {
                               switch (index) {
                                 case 0:
                                   appointmentController.currentDrawerIndex.value = 0;
-                                  // appointmentController.scaffoldKey.currentState!.closeDrawer();
                                   break;
                                 case 1:
                                   appointmentController.currentDrawerIndex.value = 1;
@@ -146,27 +146,13 @@ class AppointmentScreen extends StatelessWidget {
             ],
           ),
         ),
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              appointmentController.scaffoldKey.currentState!.openDrawer();
-            },
-            icon: const Icon(
-              Icons.menu,
-              color: ColorConst.blackColor,
-            ),
-          ),
-          backgroundColor: ColorConst.whiteColor,
-          elevation: 3,
-          shadowColor: ColorConst.greyShadowColor,
+        appBar: CommonAppBar(
+          title: StringUtils.appointment,
+          leadOnTap: () {
+            appointmentController.scaffoldKey.currentState!.openDrawer();
+          },
           centerTitle: true,
-          title: Text(
-            StringUtils.appointment,
-            style: TextStyleConst.boldTextStyle(
-              ColorConst.blackColor,
-              width * 0.05,
-            ),
-          ),
+          leadIcon: const Icon(Icons.menu),
         ),
         body: Column(
           children: [

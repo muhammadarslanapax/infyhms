@@ -90,21 +90,20 @@ class ForgotPasswordScreen extends StatelessWidget {
                                 ),
                                 SizedBox(height: height * 0.07),
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     CommonButton(
                                       textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                       onTap: () {
                                         if (forgotPasswordController.formKey.currentState!.validate()) {
                                           forgotPasswordController.forgotController.clear();
-                                          print("object");
                                         }
                                       },
                                       color: ColorConst.blueColor,
                                       text: StringUtils.sendLink,
-                                      width: width / 2.4,
+                                      width: width / 2.3,
                                       height: 50,
                                     ),
-                                    const Spacer(),
                                     CommonButton(
                                       textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.05),
                                       onTap: () {
@@ -113,7 +112,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                       },
                                       color: ColorConst.borderGreyColor,
                                       text: StringUtils.cancel,
-                                      width: width / 2.4,
+                                      width: width / 2.3,
                                       height: 50,
                                     ),
                                   ],
