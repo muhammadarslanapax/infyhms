@@ -12,7 +12,7 @@ import 'package:onboarding_animation/onboarding_animation.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({Key? key}) : super(key: key);
-  OnBoardingController onBoardingController = Get.put(OnBoardingController());
+  final OnBoardingController onBoardingController = Get.put(OnBoardingController());
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

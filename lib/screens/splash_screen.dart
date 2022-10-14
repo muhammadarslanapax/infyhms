@@ -5,7 +5,7 @@ import 'package:infyhms_flutter/utils/image_utils.dart';
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({Key? key}) : super(key: key);
-  SplashController splashController = Get.put(SplashController());
+  final SplashController splashController = Get.put(SplashController());
 
   @override
   Widget build(BuildContext context) {

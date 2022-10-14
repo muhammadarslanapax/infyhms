@@ -10,7 +10,7 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({Key? key}) : super(key: key);
-  ForgotPasswordController forgotPasswordController = Get.put(ForgotPasswordController());
+  final ForgotPasswordController forgotPasswordController = Get.put(ForgotPasswordController());
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -86,6 +86,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                     if (!RegExp(r"[a-zA-Z0-9+_.-]+@[a-zA-Z.-]+\.[a-z]+").hasMatch(value!)) {
                                       return "Please enter valid email";
                                     }
+                                    return null;
                                   },
                                 ),
                                 SizedBox(height: height * 0.07),

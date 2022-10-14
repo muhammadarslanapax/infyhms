@@ -8,10 +8,9 @@ import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
-class EditProfileScreen extends StatelessWidget {
-  EditProfileScreen({Key? key}) : super(key: key);
-
-  final TextEditingController firstNameController = TextEditingController();
+class ChangePasswordScreen extends StatelessWidget {
+  ChangePasswordScreen({Key? key}) : super(key: key);
+  final TextEditingController currentPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +18,8 @@ class EditProfileScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: ColorConst.whiteColor,
         appBar: CommonAppBar(
-          title: StringUtils.editProfile,
+          title: StringUtils.changePassword,
           leadOnTap: () {
             Get.back();
           },
@@ -36,100 +34,44 @@ class EditProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: height * 0.04),
-              Center(
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Container(
-                      height: 100,
-                      width: 100,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.red,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaXaKH9Q7gVGHSc2_IK3mOhpEaiULsMGxwRUe2nL4b&s"),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: -5,
-                      right: -8,
-                      child: Container(
-                        height: 45,
-                        width: 45,
-                        decoration: const BoxDecoration(
-                          color: ColorConst.whiteColor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: Container(
-                            height: 35,
-                            width: 35,
-                            decoration: const BoxDecoration(
-                              color: ColorConst.blueColor,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.camera_alt,
-                              color: ColorConst.whiteColor,
-                              size: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: height * 0.04),
+              SizedBox(height: height * 0.02),
               CommonRequiredText(
                 width: width,
-                text: StringUtils.firstName,
+                text: StringUtils.currentPassword,
               ),
               SizedBox(height: height * 0.01),
               CommonTextField(
+                hintText: "Enter Current Password",
                 validator: (value) {
                   return null;
                 },
-                controller: firstNameController,
+                controller: currentPasswordController,
               ),
               SizedBox(height: height * 0.02),
               CommonRequiredText(
                 width: width,
-                text: StringUtils.lastName,
+                text: StringUtils.newPassword,
               ),
               SizedBox(height: height * 0.01),
               CommonTextField(
+                hintText: "Enter New Password",
                 validator: (value) {
                   return null;
                 },
-                controller: firstNameController,
+                controller: currentPasswordController,
               ),
               SizedBox(height: height * 0.02),
               CommonRequiredText(
                 width: width,
-                text: StringUtils.email,
+                text: StringUtils.confirmPassword,
               ),
               SizedBox(height: height * 0.01),
               CommonTextField(
+                hintText: "Re-enter New Password",
                 validator: (value) {
                   return null;
                 },
-                controller: firstNameController,
-              ),
-              SizedBox(height: height * 0.02),
-              CommonRequiredText(
-                width: width,
-                text: StringUtils.phone,
-              ),
-              SizedBox(height: height * 0.01),
-              CommonTextField(
-                validator: (value) {
-                  return null;
-                },
-                controller: firstNameController,
+                controller: currentPasswordController,
               ),
               SizedBox(height: height * 0.05),
               Row(

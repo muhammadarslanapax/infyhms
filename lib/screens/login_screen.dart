@@ -13,7 +13,7 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
-  LogInController logInController = Get.put(LogInController());
+  final LogInController logInController = Get.put(LogInController());
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +94,7 @@ class LoginScreen extends StatelessWidget {
                                       if (!RegExp(r"[a-zA-Z0-9+_.-]+@[a-zA-Z.-]+\.[a-z]+").hasMatch(value!)) {
                                         return "Please enter valid email";
                                       }
+                                      return null;
                                     },
                                     hintText: StringUtils.signInEmail,
                                   ),
@@ -109,6 +110,7 @@ class LoginScreen extends StatelessWidget {
                                       if (logInController.passwordController.text.length < 8) {
                                         return "Please enter minimum 8 character";
                                       }
+                                      return null;
                                     },
                                     hintText: StringUtils.signInPassword,
                                   ),

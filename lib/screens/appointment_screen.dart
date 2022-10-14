@@ -1,16 +1,113 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/appointment_controller.dart';
+import 'package:infyhms_flutter/screens/my_account_screen.dart';
+import 'package:infyhms_flutter/screens/new_appointment_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/list_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
-class AppointmentScreen extends StatelessWidget {
+class AppointmentScreen extends StatefulWidget {
   AppointmentScreen({Key? key}) : super(key: key);
-  AppointmentController appointmentController = Get.put(AppointmentController());
+
+  @override
+  State<AppointmentScreen> createState() => _AppointmentScreenState();
+}
+
+class _AppointmentScreenState extends State<AppointmentScreen> {
+  final AppointmentController appointmentController = Get.put(AppointmentController());
+
+  final List<Map<String, dynamic>> appointment = [
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
+      "title": "Dr.Harsh rathod",
+      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +115,20 @@ class AppointmentScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: GestureDetector(
+          onTap: () {
+            Get.to(() => NewAppointmentScreen(), transition: Transition.circularReveal);
+          },
+          child: Container(
+            height: 55,
+            width: 55,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: ColorConst.blueColor,
+            ),
+            child: const Icon(Icons.add, color: ColorConst.whiteColor),
+          ),
+        ),
         key: appointmentController.scaffoldKey,
         drawer: Drawer(
           shape: const RoundedRectangleBorder(
@@ -31,7 +142,7 @@ class AppointmentScreen extends StatelessWidget {
               SizedBox(height: height * 0.02),
               ListTile(
                 title: Text(
-                  "Harsh rathod",
+                  "Harsh Rathod",
                   style: TextStyleConst.mediumTextStyle(
                     ColorConst.blackColor,
                     width * 0.045,
@@ -41,7 +152,7 @@ class AppointmentScreen extends StatelessWidget {
                   "harsh@gmail.com",
                   style: TextStyleConst.mediumTextStyle(
                     ColorConst.hintGreyColor,
-                    width * 0.04,
+                    width * 0.035,
                   ),
                 ),
                 leading: Container(
@@ -57,7 +168,10 @@ class AppointmentScreen extends StatelessWidget {
                 ),
                 trailing: IconButton(
                   icon: const Icon(Icons.arrow_forward_ios_rounded, size: 15),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.back();
+                    Get.to(() => const MyAccountScreen());
+                  },
                 ),
               ),
               SizedBox(height: height * 0.01),
@@ -152,7 +266,7 @@ class AppointmentScreen extends StatelessWidget {
             appointmentController.scaffoldKey.currentState!.openDrawer();
           },
           centerTitle: true,
-          leadIcon: const Icon(Icons.menu),
+          leadIcon: const Icon(Icons.menu, color: ColorConst.blackColor),
         ),
         body: Column(
           children: [
@@ -220,34 +334,62 @@ class AppointmentScreen extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
-                itemCount: 20,
+                itemCount: appointment.length,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      ListTile(
-                        title: Text(
-                          "Dr.Harsh rathod",
-                          style: TextStyleConst.mediumTextStyle(
-                            ColorConst.blackColor,
-                            width * 0.045,
-                          ),
+                      Slidable(
+                        startActionPane: ActionPane(
+                          extentRatio: 0.2,
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {},
+                              backgroundColor: ColorConst.borderGreyColor,
+                              foregroundColor: Colors.white,
+                              label: StringUtils.cancel,
+                              lableColor: ColorConst.hintGreyColor,
+                            ),
+                          ],
                         ),
-                        subtitle: Text(
-                          "Code addict  |  10:00 AM - 9th Sep, 2022",
-                          style: TextStyleConst.mediumTextStyle(
-                            ColorConst.hintGreyColor,
-                            width * 0.04,
-                          ),
+                        endActionPane: ActionPane(
+                          extentRatio: 0.2,
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {},
+                              backgroundColor: const Color(0xFFFCE5E5),
+                              foregroundColor: Colors.white,
+                              label: StringUtils.delete,
+                              lableColor: Colors.red,
+                            ),
+                          ],
                         ),
-                        leading: Container(
-                          height: 60,
-                          width: 60,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image:
-                                  NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s"),
+                        child: ListTile(
+                          title: Text(
+                            appointment[index]["title"],
+                            style: TextStyleConst.mediumTextStyle(
+                              ColorConst.blackColor,
+                              width * 0.045,
+                            ),
+                          ),
+                          subtitle: Text(
+                            appointment[index]["subTitle"],
+                            style: TextStyleConst.mediumTextStyle(
+                              ColorConst.hintGreyColor,
+                              width * 0.04,
+                            ),
+                          ),
+                          leading: Container(
+                            height: 60,
+                            width: 60,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s"),
+                              ),
                             ),
                           ),
                         ),

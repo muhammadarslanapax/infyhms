@@ -5,6 +5,7 @@ import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
+import 'package:infyhms_flutter/screens/change_password_screen.dart';
 import 'package:infyhms_flutter/screens/edit_profile_screen.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
@@ -19,7 +20,9 @@ class MyAccountScreen extends StatelessWidget {
       child: Scaffold(
         appBar: CommonAppBar(
           title: StringUtils.myAccount,
-          leadOnTap: () {},
+          leadOnTap: () {
+            Get.back();
+          },
           centerTitle: false,
           leadIcon: const Icon(
             Icons.arrow_back_rounded,
@@ -71,7 +74,9 @@ class MyAccountScreen extends StatelessWidget {
             SizedBox(height: height * 0.02),
             CommonAccountButton(
               width: width,
-              onTap: () {},
+              onTap: () {
+                Get.to(() => ChangePasswordScreen(), transition: Transition.rightToLeft);
+              },
               text: StringUtils.changePassword,
             ),
             const Spacer(),
