@@ -4,9 +4,9 @@ import 'package:infyhms_flutter/constant/text_style_const.dart';
 
 class CommonAccountButton extends StatelessWidget {
   final double width;
-  VoidCallback onTap;
-  String text;
-  CommonAccountButton({
+  final VoidCallback onTap;
+  final String text;
+  const CommonAccountButton({
     Key? key,
     required this.width,
     required this.onTap,

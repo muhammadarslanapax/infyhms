@@ -3,15 +3,15 @@ import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 
 class CommonAppBar extends StatelessWidget with PreferredSizeWidget {
-  String title;
-  VoidCallback leadOnTap;
-  bool centerTitle;
-  Icon leadIcon;
+  final String title;
+  final VoidCallback leadOnTap;
+  // final bool centerTitle;
+  final Icon leadIcon;
   CommonAppBar({
     Key? key,
     required this.title,
     required this.leadOnTap,
-    required this.centerTitle,
+    // required this.centerTitle,
     required this.leadIcon,
   }) : super(key: key);
 
@@ -27,7 +27,7 @@ class CommonAppBar extends StatelessWidget with PreferredSizeWidget {
         ),
         backgroundColor: ColorConst.whiteColor,
         elevation: 3,
-        centerTitle: centerTitle,
+        centerTitle: true,
         shadowColor: ColorConst.greyShadowColor,
         title: Text(
           title,

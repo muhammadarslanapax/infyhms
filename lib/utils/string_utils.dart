@@ -43,4 +43,6 @@ class StringUtils {
   static const doctor = "Doctor: ";
   static const timer = "Timer: ";
   static const description = "Description: ";
+  static const admissionDetails = "Admission Details";
+  static const insuranceDetails = "Insurance Details";
 }

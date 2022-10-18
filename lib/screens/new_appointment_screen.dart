@@ -12,10 +12,8 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 class NewAppointmentScreen extends StatelessWidget {
   NewAppointmentScreen({Key? key}) : super(key: key);
   final TextEditingController doctorController = TextEditingController();
-
-  TextEditingController dateController = TextEditingController();
-
-  var items = [
+  final TextEditingController dateController = TextEditingController();
+  final List<String> items = [
     'Doctor 1',
     'Doctor 2',
     'Doctor 3',
@@ -34,7 +32,6 @@ class NewAppointmentScreen extends StatelessWidget {
           leadOnTap: () {
             Get.back();
           },
-          centerTitle: true,
           leadIcon: const Icon(
             Icons.arrow_back_rounded,
             color: ColorConst.blackColor,

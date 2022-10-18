@@ -25,7 +25,6 @@ class EditProfileScreen extends StatelessWidget {
           leadOnTap: () {
             Get.back();
           },
-          centerTitle: false,
           leadIcon: const Icon(
             Icons.arrow_back_rounded,
             color: ColorConst.blackColor,
