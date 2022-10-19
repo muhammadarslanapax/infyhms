@@ -18,7 +18,7 @@ class CommonText extends StatelessWidget {
       text,
       style: TextStyleConst.boldTextStyle(
         ColorConst.blackColor,
-        width * 0.045,
+        width * 0.05,
       ),
     );
   }

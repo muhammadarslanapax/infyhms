@@ -24,7 +24,10 @@ class CommonDetailText extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Text(
                 titleText,
-                style: TextStyleConst.hintTextStyle(ColorConst.hintGreyColor),
+                style: TextStyleConst.mediumTextStyle(
+                  ColorConst.hintGreyColor,
+                  width * 0.045,
+                ),
               ),
             ),
           ),

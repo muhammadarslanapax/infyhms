@@ -4,9 +4,18 @@ import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/home_controller.dart';
+import 'package:infyhms_flutter/screens/admissions_screen.dart';
 import 'package:infyhms_flutter/screens/appointment_screen.dart';
 import 'package:infyhms_flutter/screens/bill_screen.dart';
+import 'package:infyhms_flutter/screens/case_screen.dart';
+import 'package:infyhms_flutter/screens/diagnosis_screen.dart';
+import 'package:infyhms_flutter/screens/document_screen.dart';
+import 'package:infyhms_flutter/screens/invoice_screen.dart';
+import 'package:infyhms_flutter/screens/live_consultations_screen.dart';
 import 'package:infyhms_flutter/screens/my_account_screen.dart';
+import 'package:infyhms_flutter/screens/notice_board_screen.dart';
+import 'package:infyhms_flutter/screens/prescriptions_screen.dart';
+import 'package:infyhms_flutter/screens/vaccination_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/list_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
@@ -24,7 +33,15 @@ class HomeScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             key: controller.scaffoldKey,
+            appBar: CommonAppBar(
+              title: controller.appBarTitle.value,
+              leadOnTap: () {
+                controller.scaffoldKey.currentState?.openDrawer();
+              },
+              leadIcon: const Icon(Icons.menu, color: ColorConst.blackColor),
+            ),
             drawer: Drawer(
+              width: width / 1.2,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(30),
@@ -91,38 +108,47 @@ class HomeScreen extends StatelessWidget {
                                   controller.currentDrawerIndex.value = 1;
                                   break;
                                 case 2:
+                                  controller.currentWidget = const DiagnosisScreen();
                                   controller.appBarTitle.value = StringUtils.diagnosisTests;
                                   controller.currentDrawerIndex.value = 2;
                                   break;
                                 case 3:
+                                  controller.currentWidget = const DocumentScreen();
                                   controller.appBarTitle.value = StringUtils.documents;
                                   controller.currentDrawerIndex.value = 3;
                                   break;
                                 case 4:
+                                  controller.currentWidget = const NoticeBoardScreen();
                                   controller.appBarTitle.value = StringUtils.noticeBoards;
                                   controller.currentDrawerIndex.value = 4;
                                   break;
                                 case 5:
+                                  controller.currentWidget = const InvoiceScreen();
                                   controller.appBarTitle.value = StringUtils.invoices;
                                   controller.currentDrawerIndex.value = 5;
                                   break;
                                 case 6:
+                                  controller.currentWidget = LiveConsultationsScreen();
                                   controller.appBarTitle.value = StringUtils.liveConsultations;
                                   controller.currentDrawerIndex.value = 6;
                                   break;
                                 case 7:
-                                  controller.appBarTitle.value = StringUtils.patientsCases;
+                                  controller.currentWidget = const CaseScreen();
+                                  controller.appBarTitle.value = StringUtils.myCases;
                                   controller.currentDrawerIndex.value = 7;
                                   break;
                                 case 8:
-                                  controller.appBarTitle.value = StringUtils.patientAdmissions;
+                                  controller.currentWidget = const AdmissionScreen();
+                                  controller.appBarTitle.value = StringUtils.myAdmissions;
                                   controller.currentDrawerIndex.value = 8;
                                   break;
                                 case 9:
+                                  controller.currentWidget = const PrescriptionsScreen();
                                   controller.appBarTitle.value = StringUtils.prescriptions;
                                   controller.currentDrawerIndex.value = 9;
                                   break;
                                 case 10:
+                                  controller.currentWidget = const VaccinationScreen();
                                   controller.appBarTitle.value = StringUtils.vaccinatedPatients;
                                   controller.currentDrawerIndex.value = 10;
                                   break;
@@ -167,13 +193,6 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: height * 0.01),
                 ],
               ),
-            ),
-            appBar: CommonAppBar(
-              title: controller.appBarTitle.value,
-              leadOnTap: () {
-                controller.scaffoldKey.currentState?.openDrawer();
-              },
-              leadIcon: const Icon(Icons.menu, color: ColorConst.blackColor),
             ),
             body: controller.currentWidget,
           );

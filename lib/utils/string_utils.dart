@@ -8,6 +8,9 @@ class StringUtils {
   static const forgotScreenDetail = "Enter your email to reset your password";
   static const sendLink = "Send Link";
   static const cancel = "Cancel";
+  static const edit = "Edit";
+  static const editDocument = "Edit Document";
+  static const newDocument = "New Document";
   static const delete = "Delete";
   static const introOneTitle = "Book an Appointment";
   static const introOneSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
@@ -23,7 +26,9 @@ class StringUtils {
   static const invoices = "Invoices";
   static const liveConsultations = "Live Consultations";
   static const patientsCases = "Cases";
+  static const myCases = "My Cases";
   static const patientAdmissions = "Admissions";
+  static const myAdmissions = "My Admissions";
   static const prescriptions = "Prescriptions";
   static const vaccinatedPatients = "Vaccinated";
   static const logOut = "Logout";

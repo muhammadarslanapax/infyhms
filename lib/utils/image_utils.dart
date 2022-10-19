@@ -19,4 +19,6 @@ class ImageUtils {
   static const prescriptionIcon = "assets/icon/prescription.png";
   static const vaccinatedIcon = "assets/icon/vaccinated.png";
   static const logOutIcon = "assets/icon/logout.png";
+  static const downloadIcon = "assets/icon/downloadIcon.png";
+  static const videoIcon = "assets/icon/videoIcon.png";
 }
