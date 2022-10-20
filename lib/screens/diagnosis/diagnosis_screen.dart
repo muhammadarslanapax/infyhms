@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/screens/diagnosis_test_detail_screen.dart';
+import 'package:infyhms_flutter/screens/diagnosis/diagnosis_test_detail_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 
 class DiagnosisScreen extends StatelessWidget {

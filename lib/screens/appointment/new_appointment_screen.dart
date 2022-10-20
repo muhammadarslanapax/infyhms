@@ -54,7 +54,7 @@ class NewAppointmentScreen extends StatelessWidget {
                   SizedBox(height: height * 0.01),
                   CommonDropDown(
                     onChange: (value) {},
-                    hintText: "Select Department",
+                    hintText: StringUtils.selectDepartment,
                     dropdownItems: items.map((String items) {
                       return DropdownMenuItem(
                         value: items,
@@ -70,7 +70,7 @@ class NewAppointmentScreen extends StatelessWidget {
                   SizedBox(height: height * 0.01),
                   CommonDropDown(
                     onChange: (value) {},
-                    hintText: "Select Doctor",
+                    hintText: StringUtils.selectDoctor,
                     dropdownItems: items.map((String items) {
                       return DropdownMenuItem(
                         value: items,
@@ -97,7 +97,7 @@ class NewAppointmentScreen extends StatelessWidget {
                       return null;
                     },
                     controller: dateController,
-                    hintText: "Select Date",
+                    hintText: StringUtils.selectDate,
                     suffixIcon: const Icon(
                       Icons.calendar_month,
                       color: ColorConst.blueColor,
@@ -154,7 +154,7 @@ class NewAppointmentScreen extends StatelessWidget {
                       return null;
                     },
                     controller: dateController,
-                    hintText: "Type here..",
+                    hintText: StringUtils.typeHere,
                   ),
                   SizedBox(height: height * 0.02),
                   Row(

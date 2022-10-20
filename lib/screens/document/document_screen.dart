@@ -3,8 +3,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/screens/edit_document_screen.dart';
-import 'package:infyhms_flutter/screens/new_document_screen.dart';
+import 'package:infyhms_flutter/screens/document/edit_document_screen.dart';
+import 'package:infyhms_flutter/screens/document/new_document_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 

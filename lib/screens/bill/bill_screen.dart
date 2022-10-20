@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/screens/invoice_detail_screen.dart';
+import 'package:infyhms_flutter/screens/bill/bill_detail_screen.dart';
 
-class InvoiceScreen extends StatelessWidget {
-  const InvoiceScreen({Key? key}) : super(key: key);
+class BillScreen extends StatelessWidget {
+  const BillScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class InvoiceScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              Get.to(() => const InvoiceDetailScreen(), transition: Transition.rightToLeft);
+              Get.to(() => const BillDetailScreen(), transition: Transition.rightToLeft);
             },
             child: Container(
               margin: EdgeInsets.only(left: 15, right: 15, top: index == 0 ? 15 : 5),
@@ -41,25 +41,14 @@ class InvoiceScreen extends StatelessWidget {
                           width * 0.045,
                         ),
                       ),
-                      SizedBox(height: height * 0.004),
-                      RichText(
-                        text: TextSpan(
-                          text: "Paid | ",
-                          style: TextStyleConst.mediumTextStyle(
-                            Colors.green,
-                            width * 0.037,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: "13th Jul, 2022",
-                              style: TextStyleConst.mediumTextStyle(
-                                ColorConst.hintGreyColor,
-                                width * 0.037,
-                              ),
-                            ),
-                          ],
+                      SizedBox(height: height * 0.002),
+                      Text(
+                        "16th Jun, 2022",
+                        style: TextStyleConst.mediumTextStyle(
+                          ColorConst.hintGreyColor,
+                          width * 0.037,
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Container(

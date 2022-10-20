@@ -5,6 +5,7 @@ import 'package:infyhms_flutter/component/common_detail_text.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
+import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class CaseDetailScreen extends StatelessWidget {
   const CaseDetailScreen({Key? key}) : super(key: key);
@@ -91,25 +92,25 @@ class CaseDetailScreen extends StatelessWidget {
                 SizedBox(height: height * 0.025),
                 CommonDetailText(
                   width: width,
-                  titleText: "Doctor:",
+                  titleText: StringUtils.doctor,
                   descriptionText: "Bhuva Patel",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
-                  titleText: "Fee:",
+                  titleText: StringUtils.fee,
                   descriptionText: "\$ 500.00",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
-                  titleText: "Created On:",
+                  titleText: StringUtils.createOn,
                   descriptionText: "3 weeks ago",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
-                  titleText: "Description:",
+                  titleText: StringUtils.description,
                   descriptionText: "N/A",
                 ),
               ],

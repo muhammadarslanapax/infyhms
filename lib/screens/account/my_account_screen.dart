@@ -5,8 +5,8 @@ import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/screens/change_password_screen.dart';
-import 'package:infyhms_flutter/screens/edit_profile_screen.dart';
+import 'package:infyhms_flutter/screens/account/change_password_screen.dart';
+import 'package:infyhms_flutter/screens/account/edit_profile_screen.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class MyAccountScreen extends StatelessWidget {

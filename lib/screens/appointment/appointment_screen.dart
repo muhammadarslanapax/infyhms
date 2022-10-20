@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/appointment_controller.dart';
-import 'package:infyhms_flutter/screens/new_appointment_screen.dart';
+import 'package:infyhms_flutter/screens/appointment/new_appointment_screen.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class AppointmentScreen extends StatelessWidget {

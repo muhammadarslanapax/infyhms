@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/screens/case_detail_screen.dart';
+import 'package:infyhms_flutter/screens/case/case_detail_screen.dart';
 
 class CaseScreen extends StatelessWidget {
   const CaseScreen({Key? key}) : super(key: key);

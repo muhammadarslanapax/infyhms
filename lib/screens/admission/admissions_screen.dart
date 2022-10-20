@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/screens/prescription_detail_screen.dart';
+import 'package:infyhms_flutter/screens/admission/admission_detail_screen.dart';
 
-class PrescriptionsScreen extends StatelessWidget {
-  const PrescriptionsScreen({Key? key}) : super(key: key);
+class AdmissionScreen extends StatelessWidget {
+  const AdmissionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class PrescriptionsScreen extends StatelessWidget {
             children: [
               ListTile(
                 onTap: () {
-                  Get.to(() => const PrescriptionsDetailScreen(), transition: Transition.rightToLeft);
+                  Get.to(() => const AdmissionDetailScreen(), transition: Transition.rightToLeft);
                 },
                 title: Padding(
                   padding: const EdgeInsets.only(bottom: 3),
@@ -32,7 +32,7 @@ class PrescriptionsScreen extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  "12:00 AM - 9th Jun, 2022",
+                  "WKY3GF0F  |  12:00 AM - 9th Jun, 2022",
                   style: TextStyleConst.mediumTextStyle(
                     ColorConst.hintGreyColor,
                     width * 0.037,

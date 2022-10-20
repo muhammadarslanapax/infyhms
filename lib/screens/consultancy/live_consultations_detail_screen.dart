@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_detail_text.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
+import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class LiveConsultationsDetailScreen extends StatelessWidget {
   const LiveConsultationsDetailScreen({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class LiveConsultationsDetailScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: CommonAppBar(
-          title: "Live Consultations Details",
+          title: StringUtils.liveConsultationsDetails,
           leadOnTap: () {
             Get.back();
           },
@@ -32,37 +33,37 @@ class LiveConsultationsDetailScreen extends StatelessWidget {
                 SizedBox(height: height * 0.02),
                 CommonDetailText(
                   width: width,
-                  titleText: "Consultation Title:",
+                  titleText: StringUtils.consultationTitle,
                   descriptionText: "Regular Checkup",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
-                  titleText: "Consultation Date:",
+                  titleText: StringUtils.consultationDate,
                   descriptionText: "14th Jun, 2022 - 11:45 AM",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
-                  titleText: "Duration Minutes:",
+                  titleText: StringUtils.durationMinute,
                   descriptionText: "120",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
-                  titleText: "Doctor Name:",
+                  titleText: StringUtils.doctorName,
                   descriptionText: "Jenil Shah",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
-                  titleText: "Type:",
+                  titleText: StringUtils.type,
                   descriptionText: "IPD",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
-                  titleText: "Type Number:",
+                  titleText: StringUtils.typeNumber,
                   descriptionText: "NDPL1J6N",
                 ),
               ],

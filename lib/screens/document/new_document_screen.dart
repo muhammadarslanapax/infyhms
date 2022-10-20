@@ -43,7 +43,7 @@ class NewDocumentScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CommonRequiredText(width: width, text: "Title: "),
+                CommonRequiredText(width: width, text: StringUtils.title),
                 SizedBox(height: height * 0.01),
                 CommonTextField(
                   validator: (value) {
@@ -52,11 +52,11 @@ class NewDocumentScreen extends StatelessWidget {
                   controller: controller,
                 ),
                 SizedBox(height: height * 0.02),
-                CommonRequiredText(width: width, text: "Document Type: "),
+                CommonRequiredText(width: width, text: StringUtils.documentType),
                 SizedBox(height: height * 0.01),
                 CommonDropDown(
                   onChange: (value) {},
-                  hintText: "Select Doctor",
+                  hintText: StringUtils.selectDoctor,
                   dropdownItems: items.map((String items) {
                     return DropdownMenuItem(
                       value: items,
@@ -65,7 +65,7 @@ class NewDocumentScreen extends StatelessWidget {
                   }).toList(),
                 ),
                 SizedBox(height: height * 0.02),
-                CommonRequiredText(width: width, text: "Attachment: "),
+                CommonRequiredText(width: width, text: StringUtils.attachment),
                 SizedBox(height: height * 0.01),
                 Container(
                   height: 100,
@@ -73,10 +73,10 @@ class NewDocumentScreen extends StatelessWidget {
                   color: Colors.red,
                 ),
                 SizedBox(height: height * 0.02),
-                CommonRequiredText(width: width, text: "Note: "),
+                CommonRequiredText(width: width, text: StringUtils.note),
                 SizedBox(height: height * 0.01),
                 CommonTextField(
-                  hintText: "Type here...",
+                  hintText: StringUtils.typeHere,
                   maxLine: 4,
                   validator: (value) {
                     return null;

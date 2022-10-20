@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:infyhms_flutter/screens/appointment_screen.dart';
+import 'package:infyhms_flutter/screens/appointment/appointment_screen.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class HomeController extends GetxController {

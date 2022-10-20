@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:infyhms_flutter/screens/onboarding_screen.dart';
+import 'package:infyhms_flutter/screens/welcome/onboarding_screen.dart';
 
 class SplashController extends GetxController {
   @override

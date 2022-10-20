@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_detail_text.dart';
+import 'package:infyhms_flutter/component/common_text.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
+import 'package:infyhms_flutter/utils/string_utils.dart';
 
-class InvoiceDetailScreen extends StatelessWidget {
-  const InvoiceDetailScreen({Key? key}) : super(key: key);
+class BillDetailScreen extends StatelessWidget {
+  const BillDetailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class InvoiceDetailScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: CommonAppBar(
-          title: "Invoice Details",
+          title: "Bill Details",
           leadOnTap: () {
             Get.back();
           },
@@ -31,10 +33,10 @@ class InvoiceDetailScreen extends StatelessWidget {
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: height * 0.03),
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       height: 50,
@@ -52,35 +54,17 @@ class InvoiceDetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Invoice #2BVF5Q",
+                          "Bill #2BVF5Q",
                           style: TextStyleConst.boldTextStyle(
                             ColorConst.blackColor,
                             width * 0.05,
                           ),
                         ),
-                        SizedBox(height: height * 0.004),
                         Text(
-                          "Invoice Date: 13th Jul, 2022",
-                          style: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.037),
+                          "Bill Date: 16th Jun, 2022 - 3:59 PM",
+                          style: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.04),
                         ),
                       ],
-                    ),
-                    const Spacer(),
-                    Container(
-                      height: 30,
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: ColorConst.greenColor.withOpacity(0.15),
-                      ),
-                      child: Center(
-                          child: Text(
-                        "Paid",
-                        style: TextStyleConst.mediumTextStyle(
-                          ColorConst.greenColor,
-                          width * 0.035,
-                        ),
-                      )),
                     )
                   ],
                 ),
@@ -89,17 +73,69 @@ class InvoiceDetailScreen extends StatelessWidget {
                   thickness: 1.5,
                   color: ColorConst.greyShadowColor,
                 ),
+                SizedBox(height: height * 0.01),
+                CommonText(
+                  width: width,
+                  text: StringUtils.admissionDetails,
+                ),
                 SizedBox(height: height * 0.025),
                 CommonDetailText(
                   width: width,
-                  titleText: "Issue For:",
-                  descriptionText: "Mahesh Kaushik #298/6, Block A Adarsh Nagar, Naya Gaon, Mohali 160103",
+                  titleText: StringUtils.admissionId,
+                  descriptionText: "ED2WRTUW",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
-                  titleText: "Issue By:",
-                  descriptionText: "HMS Ashok Vihar, New Delhi",
+                  titleText: StringUtils.patientCellNO,
+                  descriptionText: "+917878987844",
+                ),
+                SizedBox(height: height * 0.015),
+                CommonDetailText(
+                  width: width,
+                  titleText: StringUtils.doctor,
+                  descriptionText: "Brendan Hatfield",
+                ),
+                SizedBox(height: height * 0.015),
+                CommonDetailText(
+                  width: width,
+                  titleText: StringUtils.dischargeDate,
+                  descriptionText: "14th Jun, 2022 - 12:00 PM",
+                ),
+                SizedBox(height: height * 0.015),
+                CommonDetailText(
+                  width: width,
+                  titleText: StringUtils.createOn,
+                  descriptionText: "3 months ago",
+                ),
+                SizedBox(height: height * 0.025),
+                CommonText(
+                  width: width,
+                  text: StringUtils.insuranceDetails,
+                ),
+                SizedBox(height: height * 0.025),
+                CommonDetailText(
+                  width: width,
+                  titleText: StringUtils.packageName,
+                  descriptionText: "Healthcare Package",
+                ),
+                SizedBox(height: height * 0.015),
+                CommonDetailText(
+                  width: width,
+                  titleText: StringUtils.insuranceName,
+                  descriptionText: "Senior Citizen Health Insurance",
+                ),
+                SizedBox(height: height * 0.015),
+                CommonDetailText(
+                  width: width,
+                  titleText: StringUtils.totalDays,
+                  descriptionText: "4",
+                ),
+                SizedBox(height: height * 0.015),
+                CommonDetailText(
+                  width: width,
+                  titleText: StringUtils.policyNo,
+                  descriptionText: "N/A",
                 ),
                 SizedBox(height: height * 0.02),
                 Container(
@@ -114,7 +150,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 15, right: 15, left: 15),
                         child: Text(
-                          "Item Details",
+                          StringUtils.itemDetails,
                           style: TextStyleConst.mediumTextStyle(
                             ColorConst.blackColor,
                             width * 0.04,
@@ -174,59 +210,6 @@ class InvoiceDetailScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 15, left: 15),
-                        child: Divider(
-                          color: ColorConst.hintGreyColor,
-                          thickness: 1.5,
-                        ),
-                      ),
-                      SizedBox(height: height * 0.01),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Sub Total:",
-                              style: TextStyleConst.mediumTextStyle(
-                                ColorConst.blackColor,
-                                width * 0.045,
-                              ),
-                            ),
-                            Text(
-                              "\$ 1200",
-                              style: TextStyleConst.mediumTextStyle(
-                                ColorConst.blackColor,
-                                width * 0.045,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: height * 0.01),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Discount:",
-                              style: TextStyleConst.mediumTextStyle(
-                                ColorConst.orangeColor,
-                                width * 0.045,
-                              ),
-                            ),
-                            Text(
-                              "\$ 12",
-                              style: TextStyleConst.mediumTextStyle(
-                                ColorConst.orangeColor,
-                                width * 0.045,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                       SizedBox(height: height * 0.01),
                       Container(
                         height: 50,
@@ -243,7 +226,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Total Amount:",
+                              StringUtils.totalAmount,
                               style: TextStyleConst.boldTextStyle(
                                 ColorConst.blackColor,
                                 width * 0.045,
@@ -267,7 +250,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                   child: CommonButton(
                     width: width / 2,
                     height: 50,
-                    text: "Download Invoice",
+                    text: StringUtils.downloadBill,
                     color: ColorConst.blueColor,
                     onTap: () {},
                     textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
