@@ -1,4 +1,12 @@
+import 'package:dio/dio.dart';
+import 'package:infyhms_flutter/api_request/api_request.dart';
+
 class StringUtils {
+  /// api calling
+  static final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
+  static const loginPatient = "login";
+
+  /// auth
   static const signIn = "Sign In";
   static const signInEmail = "Enter Email Address";
   static const signInPassword = "Enter Password";

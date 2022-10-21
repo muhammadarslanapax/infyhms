@@ -1,6 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
+import 'package:infyhms_flutter/component/common_error.dart';
+import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
@@ -88,12 +91,12 @@ class LoginScreen extends StatelessWidget {
                                   CommonTextField(
                                     controller: logInController.emailController,
                                     validator: (value) {
-                                      if (logInController.emailController.text.trim().isEmpty) {
-                                        return "Please enter an email";
-                                      }
-                                      if (!RegExp(r"[a-zA-Z0-9+_.-]+@[a-zA-Z.-]+\.[a-z]+").hasMatch(value!)) {
-                                        return "Please enter valid email";
-                                      }
+                                      // if (logInController.emailController.text.trim().isEmpty) {
+                                      //   return "Please enter an email";
+                                      // }
+                                      // if (!RegExp(r"[a-zA-Z0-9+_.-]+@[a-zA-Z.-]+\.[a-z]+").hasMatch(value!)) {
+                                      //   return "Please enter valid email";
+                                      // }
                                       return null;
                                     },
                                     hintText: StringUtils.signInEmail,
@@ -104,12 +107,11 @@ class LoginScreen extends StatelessWidget {
                                   CommonTextField(
                                     controller: logInController.passwordController,
                                     validator: (value) {
-                                      if (logInController.passwordController.text.trim().isEmpty) {
-                                        return "Please enter password";
-                                      }
-                                      if (logInController.passwordController.text.length < 8) {
-                                        return "Please enter minimum 8 character";
-                                      }
+                                      //   if (logInController.passwordController.text.trim().isEmpty) {
+                                      //     return "Please enter password";
+                                      //   }
+                                      //   return null;
+                                      // },
                                       return null;
                                     },
                                     hintText: StringUtils.signInPassword,
@@ -185,8 +187,22 @@ class LoginScreen extends StatelessWidget {
                                   CommonButton(
                                     textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                     onTap: () {
-                                      // if (logInController.formKey.currentState!.validate()) {}
-                                      Get.to(() => const HomeScreen());
+                                      StringUtils.client.loginPatient({
+                                        "email": logInController.emailController.text,
+                                        "password": logInController.passwordController.text,
+                                      })
+                                        ..then((value) {
+                                          logInController.loginModel = value;
+                                          if (logInController.loginModel!.success == true) {
+                                            Get.to(() => const HomeScreen());
+                                          } else {
+                                            CommonError().showMaterialBanner(context, "${value.message}");
+                                          }
+                                        })
+                                        ..onError((DioError error, stackTrace) {
+                                          DisplaySnackBar.displaySnackBar(context, "${error.response!.data["message"]}");
+                                          return logInController.loginModel!;
+                                        });
                                     },
                                     color: ColorConst.blueColor,
                                     text: StringUtils.login,
