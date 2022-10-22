@@ -268,7 +268,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                   child: CommonButton(
                     width: width / 2,
                     height: 50,
-                    text: StringUtils.downloadInvoice,
+                    text: StringUtils.downInvoice,
                     color: ColorConst.blueColor,
                     onTap: () {},
                     textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),

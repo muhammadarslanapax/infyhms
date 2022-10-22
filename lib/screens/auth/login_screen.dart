@@ -11,6 +11,7 @@ import 'package:infyhms_flutter/controller/login_controller.dart';
 import 'package:infyhms_flutter/screens/auth/forgot_password_screen.dart';
 import 'package:infyhms_flutter/screens/home_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
+import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -194,7 +195,8 @@ class LoginScreen extends StatelessWidget {
                                         ..then((value) {
                                           logInController.loginModel = value;
                                           if (logInController.loginModel!.success == true) {
-                                            Get.to(() => const HomeScreen());
+                                            PreferenceUtils.setStringValue("token", logInController.loginModel!.data!.token!);
+                                            Get.offAll(() => const HomeScreen());
                                           } else {
                                             CommonError().showMaterialBanner(context, "${value.message}");
                                           }

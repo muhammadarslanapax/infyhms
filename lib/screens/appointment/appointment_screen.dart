@@ -1,102 +1,41 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/appointment_controller.dart';
+import 'package:infyhms_flutter/model/appointment_model.dart';
 import 'package:infyhms_flutter/screens/appointment/new_appointment_screen.dart';
+import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
-class AppointmentScreen extends StatelessWidget {
+class AppointmentScreen extends StatefulWidget {
   AppointmentScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AppointmentScreen> createState() => _AppointmentScreenState();
+}
+
+class _AppointmentScreenState extends State<AppointmentScreen> {
   final AppointmentController appointmentController = Get.put(AppointmentController());
-  final List<Map<String, dynamic>> appointment = [
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s",
-      "title": "Dr.Harsh rathod",
-      "subTitle": "Code addict  |  10:00 AM - 9th Sep, 2022",
-    },
-  ];
+  AppointmentModel? appointmentModel;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    StringUtils.client.getAppointments("Bearer ${PreferenceUtils.getStringValue("token")}")
+      ..then((value) {
+        appointmentModel = value;
+        print(appointmentModel?.success);
+      })
+      ..onError((DioError error, stackTrace) {
+        print("error --- ${error.message}");
+
+        return AppointmentModel();
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +49,7 @@ class AppointmentScreen extends StatelessWidget {
             children: [
               Container(
                 height: 70,
-                margin: EdgeInsets.only(top: height * 0.01, bottom: height * 0.015),
+                margin: EdgeInsets.only(top: height * 0.01),
                 width: double.infinity,
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
@@ -170,75 +109,95 @@ class AppointmentScreen extends StatelessWidget {
                   },
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: appointment.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        Slidable(
-                          startActionPane: ActionPane(
-                            extentRatio: 0.2,
-                            motion: const ScrollMotion(),
+              appointmentModel != null
+                  ? Expanded(
+                      child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: appointmentModel!.data!.length,
+                        itemBuilder: (context, index) {
+                          return Column(
                             children: [
-                              SlidableAction(
-                                onPressed: (context) {},
-                                backgroundColor: ColorConst.borderGreyColor,
-                                foregroundColor: Colors.white,
-                                label: StringUtils.cancel,
-                                lableColor: ColorConst.hintGreyColor,
-                              ),
-                            ],
-                          ),
-                          endActionPane: ActionPane(
-                            extentRatio: 0.2,
-                            motion: const ScrollMotion(),
-                            children: [
-                              SlidableAction(
-                                onPressed: (context) {},
-                                backgroundColor: const Color(0xFFFCE5E5),
-                                foregroundColor: Colors.white,
-                                label: StringUtils.delete,
-                                lableColor: Colors.red,
-                              ),
-                            ],
-                          ),
-                          child: ListTile(
-                            title: Text(
-                              appointment[index]["title"],
-                              style: TextStyleConst.mediumTextStyle(
-                                ColorConst.blackColor,
-                                width * 0.045,
-                              ),
-                            ),
-                            subtitle: Text(
-                              appointment[index]["subTitle"],
-                              style: TextStyleConst.mediumTextStyle(
-                                ColorConst.hintGreyColor,
-                                width * 0.037,
-                              ),
-                            ),
-                            leading: Container(
-                              height: 60,
-                              width: 60,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s"),
+                              Slidable(
+                                startActionPane: ActionPane(
+                                  extentRatio: 0.2,
+                                  motion: const ScrollMotion(),
+                                  children: [
+                                    SlidableAction(
+                                      onPressed: (context) {},
+                                      backgroundColor: ColorConst.borderGreyColor,
+                                      foregroundColor: Colors.white,
+                                      label: StringUtils.cancel,
+                                      lableColor: ColorConst.hintGreyColor,
+                                    ),
+                                  ],
+                                ),
+                                endActionPane: ActionPane(
+                                  extentRatio: 0.2,
+                                  motion: const ScrollMotion(),
+                                  children: [
+                                    SlidableAction(
+                                      onPressed: (context) {},
+                                      backgroundColor: const Color(0xFFFCE5E5),
+                                      foregroundColor: Colors.white,
+                                      label: StringUtils.delete,
+                                      lableColor: Colors.red,
+                                    ),
+                                  ],
+                                ),
+                                child: ListTile(
+                                  title: Text(
+                                    appointmentModel!.data![index].doctor_name!,
+                                    style: TextStyleConst.mediumTextStyle(
+                                      ColorConst.blackColor,
+                                      width * 0.045,
+                                    ),
+                                  ),
+                                  subtitle: Row(
+                                    children: [
+                                      Text(
+                                        "${appointmentModel!.data![index].doctor_department!} |",
+                                        style: TextStyleConst.mediumTextStyle(
+                                          ColorConst.hintGreyColor,
+                                          width * 0.037,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${appointmentModel!.data![index].appointment_time!} -",
+                                        style: TextStyleConst.mediumTextStyle(
+                                          ColorConst.hintGreyColor,
+                                          width * 0.037,
+                                        ),
+                                      ),
+                                      Text(
+                                        appointmentModel!.data![index].appointment_date!,
+                                        style: TextStyleConst.mediumTextStyle(
+                                          ColorConst.hintGreyColor,
+                                          width * 0.037,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  leading: Container(
+                                    height: 60,
+                                    width: 60,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s"),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: height * 0.01),
-                      ],
-                    );
-                  },
-                ),
-              ),
+                              SizedBox(height: height * 0.01),
+                            ],
+                          );
+                        },
+                      ),
+                    )
+                  : const Center(child: CircularProgressIndicator())
             ],
           ),
           Align(

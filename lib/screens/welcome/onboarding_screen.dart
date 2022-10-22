@@ -5,6 +5,7 @@ import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/onBoarding_controller.dart';
 import 'package:infyhms_flutter/screens/auth/login_screen.dart';
+import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/widget/onboarding/first_onboarding_screen.dart';
 import 'package:infyhms_flutter/widget/onboarding/second_onboarding_screen.dart';
 import 'package:infyhms_flutter/widget/onboarding/third_onboarding_screen.dart';
@@ -81,6 +82,7 @@ class OnBoardingScreen extends StatelessWidget {
                                 curve: Curves.ease,
                               );
                             } else {
+                              PreferenceUtils.setBoolValue("isShowOnBoarding", false);
                               Get.offAll(() => LoginScreen(), transition: Transition.fade);
                             }
                           },

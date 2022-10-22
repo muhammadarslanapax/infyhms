@@ -5,6 +5,7 @@ class StringUtils {
   /// api calling
   static final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
   static const loginPatient = "login";
+  static const appointments = "appointments";
 
   /// auth
   static const signIn = "Sign In";
@@ -115,6 +116,7 @@ class StringUtils {
   static const subTotal = "Sub Total:";
   static const discount = "Discount:";
   static const downloadInvoice = "Download Invoice:";
+  static const downInvoice = "Download Invoice";
 
   /// prescription
   static const foodAllergies = "Food Allergies:";
