@@ -7,7 +7,7 @@ import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/controller/login_controller.dart';
+import 'package:infyhms_flutter/controller/auth_controller/login_controller.dart';
 import 'package:infyhms_flutter/screens/auth/forgot_password_screen.dart';
 import 'package:infyhms_flutter/screens/home_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';

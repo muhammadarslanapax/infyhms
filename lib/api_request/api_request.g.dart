@@ -35,7 +35,7 @@ class _ApiClient implements ApiClient {
         if (statusCode == null) {
           return false;
         }
-        if (statusCode == 422) {
+        if (statusCode == 401) {
           return true;
         } else {
           return statusCode >= 200 && statusCode < 300;
@@ -69,7 +69,7 @@ class _ApiClient implements ApiClient {
         if (statusCode == null) {
           return false;
         }
-        if (statusCode == 401) {
+        if (statusCode == 422) {
           return true;
         } else {
           return statusCode >= 200 && statusCode < 300;
@@ -84,6 +84,33 @@ class _ApiClient implements ApiClient {
         )
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = AppointmentModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<FilterAppointmentModel> getPastAppointments(
+    token,
+    filter,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<FilterAppointmentModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'appointment-filter?status=${filter}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = FilterAppointmentModel.fromJson(_result.data!);
     return value;
   }
 

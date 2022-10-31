@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:infyhms_flutter/controller/splash_controller.dart';
+import 'package:infyhms_flutter/controller/intro_controller/splash_controller.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 
 class SplashScreen extends StatelessWidget {

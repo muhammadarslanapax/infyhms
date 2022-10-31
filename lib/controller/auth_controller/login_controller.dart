@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:infyhms_flutter/model/login_model.dart';
+import 'package:infyhms_flutter/model/auth_model/login_model.dart';
 
 class LogInController extends GetxController {
   LoginModel? loginModel;

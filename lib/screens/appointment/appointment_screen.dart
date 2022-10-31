@@ -4,38 +4,17 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/controller/appointment_controller.dart';
-import 'package:infyhms_flutter/model/appointment_model.dart';
+import 'package:infyhms_flutter/controller/appointment_controller/appointment_controller.dart';
+import 'package:infyhms_flutter/controller/appointment_controller/filter_appointment_controller.dart';
+import 'package:infyhms_flutter/model/appointment_model/filter/filter_appointment_model.dart';
 import 'package:infyhms_flutter/screens/appointment/new_appointment_screen.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
-class AppointmentScreen extends StatefulWidget {
+class AppointmentScreen extends StatelessWidget {
   AppointmentScreen({Key? key}) : super(key: key);
-
-  @override
-  State<AppointmentScreen> createState() => _AppointmentScreenState();
-}
-
-class _AppointmentScreenState extends State<AppointmentScreen> {
   final AppointmentController appointmentController = Get.put(AppointmentController());
-  AppointmentModel? appointmentModel;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    StringUtils.client.getAppointments("Bearer ${PreferenceUtils.getStringValue("token")}")
-      ..then((value) {
-        appointmentModel = value;
-        print(appointmentModel?.success);
-      })
-      ..onError((DioError error, stackTrace) {
-        print("error --- ${error.message}");
-
-        return AppointmentModel();
-      });
-  }
+  final FilterAppointmentController filterAppointmentController = Get.put(FilterAppointmentController());
 
   @override
   Widget build(BuildContext context) {
@@ -62,16 +41,56 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                           onTap: () {
                             switch (index) {
                               case 0:
+                                filterAppointmentController.isApiCall.value = false;
+
                                 appointmentController.currentIndex.value = 0;
+                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "past")
+                                  ..then((value) {
+                                    filterAppointmentController.filterAppointmentModel = value;
+                                    filterAppointmentController.isApiCall.value = true;
+                                  })
+                                  ..onError((DioError error, stackTrace) {
+                                    return FilterAppointmentModel();
+                                  });
                                 break;
                               case 1:
+                                filterAppointmentController.isApiCall.value = false;
+
                                 appointmentController.currentIndex.value = 1;
+                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "pending")
+                                  ..then((value) {
+                                    filterAppointmentController.filterAppointmentModel = value;
+                                    filterAppointmentController.isApiCall.value = true;
+                                  })
+                                  ..onError((DioError error, stackTrace) {
+                                    return FilterAppointmentModel();
+                                  });
                                 break;
                               case 2:
+                                filterAppointmentController.isApiCall.value = false;
+
                                 appointmentController.currentIndex.value = 2;
+                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "cancelled")
+                                  ..then((value) {
+                                    filterAppointmentController.filterAppointmentModel = value;
+                                    filterAppointmentController.isApiCall.value = true;
+                                  })
+                                  ..onError((DioError error, stackTrace) {
+                                    return FilterAppointmentModel();
+                                  });
                                 break;
                               case 3:
+                                filterAppointmentController.isApiCall.value = false;
+
                                 appointmentController.currentIndex.value = 3;
+                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "completed")
+                                  ..then((value) {
+                                    filterAppointmentController.filterAppointmentModel = value;
+                                    filterAppointmentController.isApiCall.value = true;
+                                  })
+                                  ..onError((DioError error, stackTrace) {
+                                    return FilterAppointmentModel();
+                                  });
                                 break;
                             }
                           },
@@ -109,95 +128,124 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   },
                 ),
               ),
-              appointmentModel != null
-                  ? Expanded(
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: appointmentModel!.data!.length,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              Slidable(
-                                startActionPane: ActionPane(
-                                  extentRatio: 0.2,
-                                  motion: const ScrollMotion(),
+              Obx(
+                () => filterAppointmentController.isApiCall.value != false
+                    ? filterAppointmentController.filterAppointmentModel!.data!.isNotEmpty
+                        ? Expanded(
+                            child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: filterAppointmentController.filterAppointmentModel!.data!.length,
+                              itemBuilder: (context, index) {
+                                return Column(
                                   children: [
-                                    SlidableAction(
-                                      onPressed: (context) {},
-                                      backgroundColor: ColorConst.borderGreyColor,
-                                      foregroundColor: Colors.white,
-                                      label: StringUtils.cancel,
-                                      lableColor: ColorConst.hintGreyColor,
+                                    Slidable(
+                                      startActionPane: ActionPane(
+                                        extentRatio: 0.2,
+                                        motion: const ScrollMotion(),
+                                        children: [
+                                          SlidableAction(
+                                            onPressed: (context) {},
+                                            backgroundColor: ColorConst.borderGreyColor,
+                                            foregroundColor: Colors.white,
+                                            label: StringUtils.cancel,
+                                            lableColor: ColorConst.hintGreyColor,
+                                          ),
+                                        ],
+                                      ),
+                                      endActionPane: ActionPane(
+                                        extentRatio: 0.2,
+                                        motion: const ScrollMotion(),
+                                        children: [
+                                          SlidableAction(
+                                            onPressed: (context) {},
+                                            backgroundColor: const Color(0xFFFCE5E5),
+                                            foregroundColor: Colors.white,
+                                            label: StringUtils.delete,
+                                            lableColor: Colors.red,
+                                          ),
+                                        ],
+                                      ),
+                                      child: ListTile(
+                                        title: Text(
+                                          filterAppointmentController.filterAppointmentModel!.data![index].doctor_name!,
+                                          style: TextStyleConst.mediumTextStyle(
+                                            ColorConst.blackColor,
+                                            width * 0.045,
+                                          ),
+                                        ),
+                                        subtitle: Row(
+                                          children: [
+                                            Text(
+                                              "${filterAppointmentController.filterAppointmentModel!.data![index].doctor_department!} | ",
+                                              style: TextStyleConst.mediumTextStyle(
+                                                ColorConst.hintGreyColor,
+                                                width * 0.036,
+                                              ),
+                                            ),
+                                            Text(
+                                              "${filterAppointmentController.filterAppointmentModel!.data![index].appointment_time!} - ",
+                                              style: TextStyleConst.mediumTextStyle(
+                                                ColorConst.hintGreyColor,
+                                                width * 0.036,
+                                              ),
+                                            ),
+                                            Flexible(
+                                              child: Text(
+                                                filterAppointmentController.filterAppointmentModel!.data![index].appointment_date!,
+                                                style: TextStyleConst.mediumTextStyle(
+                                                  ColorConst.hintGreyColor,
+                                                  width * 0.036,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        leading: Container(
+                                          height: 60,
+                                          width: 60,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(filterAppointmentController.filterAppointmentModel!.data![index].doctor_image_url!),
+                                            ),
+                                          ),
+                                          // child: CachedNetworkImage(
+                                          //   imageUrl:
+                                          //       appointmentModel!.data![index].doctor_image_url!,
+                                          //   placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                                          //   errorWidget: (context, url, error) => const Icon(Icons.error),
+                                          // ),
+                                        ),
+                                      ),
                                     ),
+                                    SizedBox(height: height * 0.01),
                                   ],
-                                ),
-                                endActionPane: ActionPane(
-                                  extentRatio: 0.2,
-                                  motion: const ScrollMotion(),
-                                  children: [
-                                    SlidableAction(
-                                      onPressed: (context) {},
-                                      backgroundColor: const Color(0xFFFCE5E5),
-                                      foregroundColor: Colors.white,
-                                      label: StringUtils.delete,
-                                      lableColor: Colors.red,
-                                    ),
-                                  ],
-                                ),
-                                child: ListTile(
-                                  title: Text(
-                                    appointmentModel!.data![index].doctor_name!,
-                                    style: TextStyleConst.mediumTextStyle(
-                                      ColorConst.blackColor,
-                                      width * 0.045,
-                                    ),
-                                  ),
-                                  subtitle: Row(
-                                    children: [
-                                      Text(
-                                        "${appointmentModel!.data![index].doctor_department!} |",
-                                        style: TextStyleConst.mediumTextStyle(
-                                          ColorConst.hintGreyColor,
-                                          width * 0.037,
-                                        ),
-                                      ),
-                                      Text(
-                                        "${appointmentModel!.data![index].appointment_time!} -",
-                                        style: TextStyleConst.mediumTextStyle(
-                                          ColorConst.hintGreyColor,
-                                          width * 0.037,
-                                        ),
-                                      ),
-                                      Text(
-                                        appointmentModel!.data![index].appointment_date!,
-                                        style: TextStyleConst.mediumTextStyle(
-                                          ColorConst.hintGreyColor,
-                                          width * 0.037,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  leading: Container(
-                                    height: 60,
-                                    width: 60,
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s"),
-                                      ),
-                                    ),
-                                  ),
+                                );
+                              },
+                            ),
+                          )
+                        : Expanded(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Appointment is empty",
+                                style: TextStyleConst.mediumTextStyle(
+                                  ColorConst.blackColor,
+                                  width * 0.04,
                                 ),
                               ),
-                              SizedBox(height: height * 0.01),
-                            ],
-                          );
-                        },
+                            ),
+                          )
+                    : const Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
                       ),
-                    )
-                  : const Center(child: CircularProgressIndicator())
+              )
             ],
           ),
           Align(
@@ -206,7 +254,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               padding: const EdgeInsets.all(25),
               child: GestureDetector(
                 onTap: () {
-                  Get.to(() => NewAppointmentScreen(), transition: Transition.circularReveal);
+                  Get.to(() => NewAppointmentScreen(), transition: Transition.rightToLeft);
                 },
                 child: Container(
                   height: 55,

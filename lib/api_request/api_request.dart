@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:infyhms_flutter/model/appointment_model.dart';
-import 'package:infyhms_flutter/model/login_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/appointment_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/filter/filter_appointment_model.dart';
+import 'package:infyhms_flutter/model/auth_model/login_model.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -16,6 +17,12 @@ abstract class ApiClient {
   @GET(StringUtils.appointments)
   Future<AppointmentModel> getAppointments(
     @Header('Authorization') String? token,
+  );
+
+  @POST("appointment-filter?status={filter}")
+  Future<FilterAppointmentModel> getPastAppointments(
+    @Header('Authorization') String? token,
+    @Path("filter") String filter,
   );
 }
 
