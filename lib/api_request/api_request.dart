@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:infyhms_flutter/model/appointment_model/appointment_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/filter/filter_appointment_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/new_appointment/doctor_department_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/new_appointment/get_doctor_model.dart';
 import 'package:infyhms_flutter/model/auth_model/login_model.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:retrofit/retrofit.dart';
@@ -23,6 +25,17 @@ abstract class ApiClient {
   Future<FilterAppointmentModel> getPastAppointments(
     @Header('Authorization') String? token,
     @Path("filter") String filter,
+  );
+
+  @GET("doctor-department")
+  Future<DoctorDepartmentModel> getDoctorDepartment(
+    @Header('Authorization') String? token,
+  );
+
+  @POST("doctor/{id}")
+  Future<GetDoctorModel> getDoctor(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
   );
 }
 

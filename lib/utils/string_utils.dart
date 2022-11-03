@@ -139,4 +139,5 @@ class StringUtils {
   static const selectDoctor = "Select Doctor";
   static const selectDate = "Select Date";
   static const typeHere = "Type here..";
+  static const date = "Date";
 }

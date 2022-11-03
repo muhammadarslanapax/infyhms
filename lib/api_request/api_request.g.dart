@@ -31,16 +31,6 @@ class _ApiClient implements ApiClient {
       method: 'POST',
       headers: _headers,
       extra: _extra,
-      validateStatus: (statusCode) {
-        if (statusCode == null) {
-          return false;
-        }
-        if (statusCode == 401) {
-          return true;
-        } else {
-          return statusCode >= 200 && statusCode < 300;
-        }
-      },
     )
         .compose(
           _dio.options,
@@ -65,16 +55,6 @@ class _ApiClient implements ApiClient {
       method: 'GET',
       headers: _headers,
       extra: _extra,
-      validateStatus: (statusCode) {
-        if (statusCode == null) {
-          return false;
-        }
-        if (statusCode == 422) {
-          return true;
-        } else {
-          return statusCode >= 200 && statusCode < 300;
-        }
-      },
     )
         .compose(
           _dio.options,
@@ -111,6 +91,57 @@ class _ApiClient implements ApiClient {
         )
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = FilterAppointmentModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DoctorDepartmentModel> getDoctorDepartment(token) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<DoctorDepartmentModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'doctor-department',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = DoctorDepartmentModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetDoctorModel> getDoctor(
+    token,
+    id,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<GetDoctorModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'doctor/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetDoctorModel.fromJson(_result.data!);
     return value;
   }
 

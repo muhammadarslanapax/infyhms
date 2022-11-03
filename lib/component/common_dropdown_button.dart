@@ -9,6 +9,7 @@ class CommonDropDown extends StatelessWidget {
     this.dropButtonHeight,
     this.onChange,
     this.errorText,
+    this.onTap,
     required this.dropdownItems,
   }) : super(key: key);
 
@@ -17,6 +18,7 @@ class CommonDropDown extends StatelessWidget {
   final double? dropButtonHeight;
   final ValueChanged<String?>? onChange;
   final String? errorText;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class CommonDropDown extends StatelessWidget {
         color: Colors.white,
       ),
       child: DropdownButtonFormField(
+        onTap: onTap,
         isExpanded: true,
         // validator: (value) => value == null ? 'Please select any code' : null,
         menuMaxHeight: dropButtonHeight,
