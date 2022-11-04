@@ -11,7 +11,8 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class NewDocumentScreen extends StatelessWidget {
   NewDocumentScreen({Key? key}) : super(key: key);
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController notesController = TextEditingController();
   final List<String> items = [
     'Doctor 1',
     'Doctor 2',
@@ -49,7 +50,7 @@ class NewDocumentScreen extends StatelessWidget {
                   validator: (value) {
                     return null;
                   },
-                  controller: controller,
+                  controller: titleController,
                 ),
                 SizedBox(height: height * 0.02),
                 CommonRequiredText(width: width, text: StringUtils.documentType),
@@ -81,7 +82,7 @@ class NewDocumentScreen extends StatelessWidget {
                   validator: (value) {
                     return null;
                   },
-                  controller: controller,
+                  controller: notesController,
                 ),
                 SizedBox(height: height * 0.02),
                 Row(
@@ -89,7 +90,9 @@ class NewDocumentScreen extends StatelessWidget {
                   children: [
                     CommonButton(
                       textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
-                      onTap: () {},
+                      onTap: () {
+
+                      },
                       color: ColorConst.blueColor,
                       text: StringUtils.save,
                       width: width / 2.3,
