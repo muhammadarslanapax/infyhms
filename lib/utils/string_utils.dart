@@ -1,0 +1,143 @@
+import 'package:dio/dio.dart';
+import 'package:infyhms_flutter/api_request/api_request.dart';
+
+class StringUtils {
+  /// api calling
+  static final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
+  static const loginPatient = "login";
+  static const appointments = "appointments";
+
+  /// auth
+  static const signIn = "Sign In";
+  static const signInEmail = "Enter Email Address";
+  static const signInPassword = "Enter Password";
+  static const forgotPassword = "Forgot Password?";
+  static const rememberPassword = "Remember Me";
+  static const login = "Login";
+  static const forgotScreenDetail = "Enter your email to reset your password";
+  static const sendLink = "Send Link";
+  static const cancel = "Cancel";
+  static const edit = "Edit";
+  static const editDocument = "Edit Document";
+  static const newDocument = "New Document";
+  static const delete = "Delete";
+  static const introOneTitle = "Book an Appointment";
+  static const introOneSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
+  static const introTwoTitle = "Schedule Live Consultation";
+  static const introTwoSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
+  static const introThreeTitle = "Read Prescriptions";
+  static const introThreeSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
+  static const appointment = "Appointment";
+  static const bills = "Bills";
+  static const diagnosisTests = "Diagnosis Tests";
+  static const documents = "Documents";
+  static const noticeBoards = "Notice Boards";
+  static const invoices = "Invoices";
+  static const liveConsultations = "Live Consultations";
+  static const patientsCases = "Cases";
+  static const myCases = "My Cases";
+  static const patientAdmissions = "Admissions";
+  static const myAdmissions = "My Admissions";
+  static const prescriptions = "Prescriptions";
+  static const vaccinatedPatients = "Vaccinated";
+  static const logOut = "Logout";
+  static const myAccount = "My Account";
+  static const editProfile = "Edit Profile";
+  static const changePassword = "Change Password";
+  static const firstName = "First Name:";
+  static const lastName = "Last Name:";
+  static const email = "Email:";
+  static const phone = "Phone:";
+  static const save = "Save";
+  static const currentPassword = "Current Password:";
+  static const newPassword = "New Password:";
+  static const confirmPassword = "Confirm Password:";
+  static const newAppointment = "New Appointment";
+  static const doctorDepartment = "Doctor Department:";
+  static const doctor = "Doctor:";
+
+  static const timer = "Timer:";
+  static const description = "Description:";
+
+  /// Admission
+  static const admissionDetails = "Admission Details";
+  static const insuranceDetails = "Insurance Details";
+  static const admissionId = "Admission Id:";
+  static const admissionDate = "Admission Date:";
+  static const dischargeDate = "Discharge Date:";
+  static const bed = "Bed:";
+  static const guardianName = "Guardian Name:";
+  static const guardianRelation = "Guardian Relation:";
+  static const guardianContact = "Guardian Contact:";
+  static const guardianAddress = "Guardian Address:";
+  static const createOn = "Created On:";
+  static const packageName = "Package Name:";
+  static const insuranceName = "Insurance Name:";
+  static const agentName = "Agent Name:";
+  static const policyNo = "Policy No:";
+
+  /// bill
+  static const patientCellNO = "Patient Cell No:";
+  static const totalDays = "Total Days:";
+  static const itemDetails = "Item Details";
+  static const totalAmount = "Total Amount";
+  static const downloadBill = "Download Bill";
+  static const fee = "Fee:";
+
+  /// Consultancy
+  static const liveConsultationsDetails = "Live Consultations Details";
+  static const consultationTitle = "Consultation Title:";
+  static const consultationDate = "Consultation Date:";
+  static const durationMinute = "Duration Minutes:";
+  static const doctorName = "Doctor Name:";
+  static const type = "Type:";
+  static const typeNumber = "Type Number:";
+
+  /// diagnosis
+  static const diagnosisCategory = "Diagnosis Category:";
+  static const reportNumber = "Report number:";
+  static const averageGlucose = "Average Glucose:";
+  static const fastingBloodSugar = "Fasting Blood Sugar:";
+  static const urineSugar = "Urine Sugar:";
+  static const bloodPressure = "Blood Pressure:";
+  static const diabetes = "Diabetes:";
+  static const cholesterol = "Cholesterol:";
+  static const downloadDiagnosisTest = "Download Diagnosis Test";
+
+  ///document
+  static const title = "Title:";
+  static const documentType = "Document Type:";
+  static const attachment = "Attachment:";
+  static const note = "Note:";
+
+  /// invoice
+  static const issueFor = "Issue For:";
+  static const issueBy = "Issue By:";
+  static const subTotal = "Sub Total:";
+  static const discount = "Discount:";
+  static const downloadInvoice = "Download Invoice:";
+  static const downInvoice = "Download Invoice";
+
+  /// prescription
+  static const foodAllergies = "Food Allergies:";
+  static const tendencyBleed = "Tendency Bleed:";
+  static const heartDisease = "Heart Disease";
+  static const highBloodPressure = "High Blood Pressure:";
+  static const surgery = "Surgery:";
+  static const accident = "Accident:";
+  static const others = "Others:";
+  static const medicalHistory = "Medical History:";
+  static const currentMedication = "Current Medication:";
+  static const femalePregnancy = "Female Pregnancy:";
+  static const breastFeeding = "Breast Feeding:";
+  static const healthInsurance = "Health Insurance:";
+  static const lowIncome = "Low Income:";
+  static const reference = "Reference";
+
+  /// hint text
+  static const selectDepartment = "Select Department";
+  static const selectDoctor = "Select Doctor";
+  static const selectDate = "Select Date";
+  static const typeHere = "Type here..";
+  static const date = "Date";
+}
