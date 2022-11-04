@@ -10,6 +10,7 @@ class CommonDropDown extends StatelessWidget {
     this.onChange,
     this.errorText,
     this.onTap,
+    this.value,
     required this.dropdownItems,
   }) : super(key: key);
 
@@ -19,6 +20,7 @@ class CommonDropDown extends StatelessWidget {
   final ValueChanged<String?>? onChange;
   final String? errorText;
   final VoidCallback? onTap;
+  final String? value;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class CommonDropDown extends StatelessWidget {
         color: Colors.white,
       ),
       child: DropdownButtonFormField(
+        value: value,
         onTap: onTap,
         isExpanded: true,
         // validator: (value) => value == null ? 'Please select any code' : null,

@@ -4,15 +4,22 @@ import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_dropdown_button.dart';
 import 'package:infyhms_flutter/component/common_required_text.dart';
+import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/appointment_controller/new_appointment_controller.dart';
+import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
-class NewAppointmentScreen extends StatelessWidget {
+class NewAppointmentScreen extends StatefulWidget {
   const NewAppointmentScreen({Key? key}) : super(key: key);
 
+  @override
+  State<NewAppointmentScreen> createState() => _NewAppointmentScreenState();
+}
+
+class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -54,6 +61,8 @@ class NewAppointmentScreen extends StatelessWidget {
                             CommonDropDown(
                               onChange: (value) {
                                 print(value);
+                                controller.dateController.clear();
+                                controller.departmentId = value;
                                 controller.getDoctorName(int.parse(value!)).then((value) {
                                   controller.isSelectDoctorDepartment = true;
                                 });
@@ -82,7 +91,12 @@ class NewAppointmentScreen extends StatelessWidget {
                             ),
                             SizedBox(height: height * 0.01),
                             CommonDropDown(
+                              value: controller.doctorId,
                               onChange: (value) {
+                                controller.doctorId = value!;
+                                controller.dateController.clear();
+                                controller.update();
+
                                 print(value);
                               },
                               hintText: StringUtils.selectDoctor,
@@ -111,13 +125,20 @@ class NewAppointmentScreen extends StatelessWidget {
                             ),
                             SizedBox(height: height * 0.01),
                             CommonTextField(
+                              readOnly: true,
                               onTap: () {
-                                showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1999),
-                                  lastDate: DateTime(2025),
-                                );
+                                controller.selectDate(context).then((value) async {
+                                  await StringUtils.client
+                                      .getBookingSlotDate(
+                                          "Bearer ${PreferenceUtils.getStringValue("token")}", controller.selectedDate!, controller.doctorId)
+                                      .then((value) {
+                                    controller.slotBookingModel = value;
+                                    controller.isSelectDate = true;
+                                    controller.selectedTime = controller.slotBookingModel!.data!.bookingSlotArr![0];
+
+                                    controller.update();
+                                  });
+                                });
                               },
                               validator: (value) {
                                 return null;
@@ -132,43 +153,73 @@ class NewAppointmentScreen extends StatelessWidget {
                             SizedBox(height: height * 0.02),
 
                             /// Booking slot
-                            CommonRequiredText(
-                              width: width,
-                              text: StringUtils.timer,
-                            ),
-                            SizedBox(height: height * 0.01),
-                            GridView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: 9,
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                childAspectRatio: 2.5,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10,
-                              ),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                      color: ColorConst.borderGreyColor,
-                                      width: 1.5,
-                                    ),
-                                  ),
-                                  height: 50,
-                                  child: Center(
-                                    child: Text(
-                                      "8:00 AM",
-                                      style: TextStyleConst.hintTextStyle(
-                                        ColorConst.hintGreyColor,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            SizedBox(height: height * 0.02),
+                            controller.isSelectDate != false
+                                ? CommonRequiredText(
+                                    width: width,
+                                    text: StringUtils.timer,
+                                  )
+                                : const SizedBox(),
+                            controller.isSelectDate != false ? SizedBox(height: height * 0.01) : const SizedBox(),
+                            controller.isSelectDate != false
+                                ? controller.slotBookingModel!.data!.bookingSlotArr!.isNotEmpty
+                                    ? GridView.builder(
+                                        shrinkWrap: true,
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        itemCount: controller.slotBookingModel!.data!.bookingSlotArr!.length,
+                                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 3,
+                                          childAspectRatio: 2.5,
+                                          crossAxisSpacing: 10,
+                                          mainAxisSpacing: 10,
+                                        ),
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              controller.currentIndex = index;
+                                              controller.selectedTime = controller.slotBookingModel!.data!.bookingSlotArr![index];
+                                              controller.update();
+                                            },
+                                            child: Container(
+                                              decoration: controller.currentIndex != index
+                                                  ? BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(10),
+                                                      border: Border.all(
+                                                        color: ColorConst.borderGreyColor,
+                                                        width: 1.5,
+                                                      ),
+                                                    )
+                                                  : BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(10),
+                                                      color: ColorConst.blueColor,
+                                                    ),
+                                              height: 50,
+                                              child: Center(
+                                                child: Text(
+                                                  controller.slotBookingModel!.data!.bookingSlotArr![index],
+                                                  style: controller.currentIndex != index
+                                                      ? TextStyleConst.hintTextStyle(
+                                                          ColorConst.hintGreyColor,
+                                                        )
+                                                      : TextStyleConst.hintTextStyle(
+                                                          ColorConst.whiteColor,
+                                                        ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : Center(
+                                        child: Text(
+                                          "No slot available",
+                                          style: TextStyleConst.mediumTextStyle(
+                                            ColorConst.redColor,
+                                            width * 0.04,
+                                          ),
+                                        ),
+                                      )
+                                : const SizedBox(),
+                            controller.isSelectDate != false ? SizedBox(height: height * 0.02) : const SizedBox(),
 
                             /// Description
                             CommonRequiredText(
@@ -178,12 +229,12 @@ class NewAppointmentScreen extends StatelessWidget {
                             SizedBox(height: height * 0.02),
                             CommonTextField(
                               keyBoardType: TextInputType.multiline,
-                              maxLine: 5,
+                              maxLine: 4,
                               onTap: () {},
                               validator: (value) {
                                 return null;
                               },
-                              controller: controller.dateController,
+                              controller: controller.descriptionController,
                               hintText: StringUtils.typeHere,
                             ),
                             SizedBox(height: height * 0.02),
@@ -194,7 +245,18 @@ class NewAppointmentScreen extends StatelessWidget {
                               children: [
                                 CommonButton(
                                   textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
-                                  onTap: () {},
+                                  onTap: () {
+                                    StringUtils.client
+                                        .createAppointment("Bearer ${PreferenceUtils.getStringValue("token")}", controller.departmentId!,
+                                            controller.doctorId, controller.selectedDate!, controller.selectedTime!)
+                                        .then((value) {
+                                      controller.createAppointmentModel = value;
+                                      if (value.success == true) {
+                                        DisplaySnackBar.displaySnackBar(context, value.message!);
+                                        Get.back();
+                                      }
+                                    });
+                                  },
                                   color: ColorConst.blueColor,
                                   text: StringUtils.save,
                                   width: width / 2.3,

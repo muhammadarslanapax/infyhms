@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:infyhms_flutter/model/appointment_model/appointment_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/create_appointment/create_appointment_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/filter/filter_appointment_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/new_appointment/doctor_department_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/new_appointment/get_doctor_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/slot_booking/slot_booking_model.dart';
 import 'package:infyhms_flutter/model/auth_model/login_model.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:retrofit/retrofit.dart';
@@ -36,6 +38,22 @@ abstract class ApiClient {
   Future<GetDoctorModel> getDoctor(
     @Header('Authorization') String? token,
     @Path("id") int id,
+  );
+
+  @POST("slot-booking")
+  Future<SlotBookingModel> getBookingSlotDate(
+    @Header('Authorization') String? token,
+    @Field("editSelectedDate") String editSelectedDate,
+    @Field("doctor_id") String doctorId,
+  );
+
+  @POST("appointment-create")
+  Future<CreateAppointmentModel> createAppointment(
+    @Header('Authorization') String? token,
+    @Field("department_id") String departmentId,
+    @Field("doctor_id") String doctorId,
+    @Field("opd_date") String selectedDate,
+    @Field("time") String selectedTime,
   );
 }
 

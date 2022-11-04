@@ -11,9 +11,12 @@ class CommonTextField extends StatelessWidget {
   final int? maxLine;
   final int? minLine;
   final TextInputType? keyBoardType;
+  final bool readOnly;
+
   const CommonTextField({
     Key? key,
     this.maxLine,
+    this.readOnly = false,
     this.minLine,
     this.keyBoardType,
     this.hintText,
@@ -25,7 +28,13 @@ class CommonTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return TextFormField(
+      style: TextStyleConst.mediumTextStyle(
+        ColorConst.blackColor,
+        width * 0.04,
+      ),
+      readOnly: readOnly,
       keyboardType: keyBoardType,
       maxLines: maxLine,
       minLines: minLine,
