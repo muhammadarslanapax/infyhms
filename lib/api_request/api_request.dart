@@ -96,11 +96,13 @@ abstract class ApiClient {
 
   @GET("document-delete/{id}")
   Future<DocumentDeleteModel> deleteDocument(
+      @Header('Authorization') String? token,
     @Path("id") int documentId,
   );
 
   @GET("document-download/{id}")
   Future<DocumentDownloadModel> downloadDocument(
+      @Header('Authorization') String? token,
     @Path("id") int documentId,
   );
 }

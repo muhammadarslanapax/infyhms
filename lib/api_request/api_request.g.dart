@@ -372,10 +372,15 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<DocumentDeleteModel> deleteDocument(documentId) async {
+  Future<DocumentDeleteModel> deleteDocument(
+    token,
+    documentId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DocumentDeleteModel>(Options(
@@ -395,10 +400,15 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<DocumentDownloadModel> downloadDocument(documentId) async {
+  Future<DocumentDownloadModel> downloadDocument(
+    token,
+    documentId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DocumentDownloadModel>(Options(

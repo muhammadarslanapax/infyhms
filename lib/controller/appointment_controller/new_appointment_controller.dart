@@ -55,7 +55,6 @@ class NewAppointmentController extends GetxController {
     if (picked != null) {
       selectedDate = "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
       dateController.text = selectedDate!;
-      print(selectedDate);
     }
   }
 }

@@ -14,7 +14,7 @@ class DocumentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final height = MediaQuery.of(context).size.height;
+    final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return GetBuilder<DocumentController>(
         init: DocumentController(),
@@ -33,11 +33,11 @@ class DocumentScreen extends StatelessWidget {
                             children: [
                               Slidable(
                                 startActionPane: ActionPane(
-                                  extentRatio: 0.2,
+                                  extentRatio: 0.25,
                                   motion: const ScrollMotion(),
                                   children: [
                                     SlidableAction(
-                                      onPressed: (context) {
+                                      onPressed: (contextAction) {
                                         Get.to(() => EditDocumentScreen(), transition: Transition.leftToRight);
                                       },
                                       backgroundColor: ColorConst.orangeColor.withOpacity(0.15),
@@ -47,11 +47,13 @@ class DocumentScreen extends StatelessWidget {
                                   ],
                                 ),
                                 endActionPane: ActionPane(
-                                  extentRatio: 0.2,
+                                  extentRatio: 0.25,
                                   motion: const ScrollMotion(),
                                   children: [
                                     SlidableAction(
-                                      onPressed: (context) {},
+                                      onPressed: (contextAction) {
+                                        controller.showDeleteDialog(context, height, width,index);
+                                      },
                                       backgroundColor: const Color(0xFFFCE5E5),
                                       label: StringUtils.delete,
                                       // lableColor: Colors.red,
@@ -110,8 +112,11 @@ class DocumentScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(25),
                   child: GestureDetector(
-                    onTap: () {
-                      Get.to(() => NewDocumentScreen(), transition: Transition.circularReveal);
+                    onTap: () async {
+                      final message = await Get.to(() => const NewDocumentScreen(), transition: Transition.rightToLeft);
+                      if (message == "Call API") {
+                        controller.getDocuments();
+                      }
                     },
                     child: Container(
                       height: 55,

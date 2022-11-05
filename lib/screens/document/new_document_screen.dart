@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_dropdown_button.dart';
@@ -25,7 +25,7 @@ class NewDocumentScreen extends StatelessWidget {
           init: NewDocumentController(),
           builder: (controller) {
             return GestureDetector(
-              onTap: (){
+              onTap: () {
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               child: Scaffold(
@@ -75,16 +75,28 @@ class NewDocumentScreen extends StatelessWidget {
                               ),
                               SizedBox(height: height * 0.02),
                               CommonRequiredText(width: width, text: StringUtils.attachment),
-                              SizedBox(height: height * 0.01),
+                              SizedBox(height: height * 0.02),
                               InkWell(
                                 onTap: () {
                                   controller.pickImage();
                                 },
-                                child: Container(
-                                  height: 100,
-                                  width: 100,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.red,
+                                child: DottedBorder(
+                                  color: Colors.grey,
+                                  radius: const Radius.circular(10),
+                                  // strokeCap: StrokeCap.round,
+                                  strokeWidth: 2,
+                                  borderType: BorderType.RRect,
+                                  dashPattern: const [4],
+                                  child: Container(
+                                    height: 100,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      image: !controller.showFile
+                                          ? const DecorationImage(image: AssetImage("assets/icon/take_photo.png"),scale: 4)
+                                          : DecorationImage(image: FileImage(File(controller.file!.path))),
+                                    ),
                                   ),
                                 ),
                               ),

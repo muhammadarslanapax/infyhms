@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CommonButton extends StatelessWidget {
-  CommonButton({
+  const CommonButton({
     Key? key,
     required this.width,
     required this.height,
@@ -15,7 +15,7 @@ class CommonButton extends StatelessWidget {
   final double width;
   final double height;
   final String text;
-  bool? isIcon;
+  final bool? isIcon;
   final Color color;
   final VoidCallback onTap;
   final TextStyle textStyleConst;
