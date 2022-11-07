@@ -14,6 +14,7 @@ import 'package:infyhms_flutter/model/bills_model/bill_model.dart';
 import 'package:infyhms_flutter/model/case_model/case_model.dart';
 import 'package:infyhms_flutter/model/diagnosis_model/diagnosis_test_details_model.dart';
 import 'package:infyhms_flutter/model/diagnosis_model/diagnosis_test_model.dart';
+import 'package:infyhms_flutter/model/prescriptions_model/prescriptions_model.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -105,6 +106,11 @@ abstract class ApiClient {
 
   @GET("patient-admissions")
   Future<AdmissionModel> getAdmission(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("patient-prescription")
+  Future<PrescriptionsModel> getPrescription(
     @Header('Authorization') String? token,
   );
 }

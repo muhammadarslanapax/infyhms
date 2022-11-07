@@ -138,17 +138,17 @@ class HomeScreen extends StatelessWidget {
                                   controller.currentDrawerIndex.value = 7;
                                   break;
                                 case 8:
-                                  controller.currentWidget = const AdmissionScreen();
+                                  controller.currentWidget = AdmissionScreen();
                                   controller.appBarTitle.value = StringUtils.myAdmissions;
                                   controller.currentDrawerIndex.value = 8;
                                   break;
                                 case 9:
-                                  controller.currentWidget = const PrescriptionsScreen();
+                                  controller.currentWidget = PrescriptionsScreen();
                                   controller.appBarTitle.value = StringUtils.prescriptions;
                                   controller.currentDrawerIndex.value = 9;
                                   break;
                                 case 10:
-                                  controller.currentWidget = const VaccinationScreen();
+                                  controller.currentWidget = VaccinationScreen();
                                   controller.appBarTitle.value = StringUtils.vaccinatedPatients;
                                   controller.currentDrawerIndex.value = 10;
                                   break;

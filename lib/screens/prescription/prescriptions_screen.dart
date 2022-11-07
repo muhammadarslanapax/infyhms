@@ -2,58 +2,86 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
+import 'package:infyhms_flutter/controller/prescription_controller/prescription_controller.dart';
 import 'package:infyhms_flutter/screens/prescription/prescription_detail_screen.dart';
 
 class PrescriptionsScreen extends StatelessWidget {
-  const PrescriptionsScreen({Key? key}) : super(key: key);
+  PrescriptionsScreen({Key? key}) : super(key: key);
+  final PrescriptionController prescriptionController = Get.put(PrescriptionController());
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: EdgeInsets.only(top: index == 0 ? 15 : 0),
-          child: Column(
-            children: [
-              ListTile(
-                onTap: () {
-                  Get.to(() => const PrescriptionsDetailScreen(), transition: Transition.rightToLeft);
+    return Obx(
+      () => prescriptionController.isGetPrescription.value == true
+          ? Container(
+              color: Colors.white,
+              child: ListView.builder(
+                itemCount: prescriptionController.prescriptionsModel!.data!.length,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      ListTile(
+                        contentPadding: EdgeInsets.only(top: index == 0 ? 15 : 10, left: 15, right: 15),
+                        onTap: () {
+                          Get.to(
+                            () => PrescriptionsDetailScreen(
+                              accident: prescriptionController.prescriptionsModel!.data![index].accident!,
+                              breastFeeding: prescriptionController.prescriptionsModel!.data![index].breast_feeding!,
+                              currentMedication: prescriptionController.prescriptionsModel!.data![index].current_medication!,
+                              diabetes: prescriptionController.prescriptionsModel!.data![index].diabetic!,
+                              doctorName: prescriptionController.prescriptionsModel!.data![index].doctor_name!,
+                              femalePregnancy: prescriptionController.prescriptionsModel!.data![index].female_pregnancy!,
+                              foodAllergies: prescriptionController.prescriptionsModel!.data![index].food_allergies!,
+                              healthInsurance: prescriptionController.prescriptionsModel!.data![index].health_insurance!,
+                              heartDisease: prescriptionController.prescriptionsModel!.data![index].heart_disease!,
+                              highBloodPressure: prescriptionController.prescriptionsModel!.data![index].high_blood_pressure!,
+                              lowIncome: prescriptionController.prescriptionsModel!.data![index].low_income!,
+                              medicalHistory: prescriptionController.prescriptionsModel!.data![index].medical_history!,
+                              others: prescriptionController.prescriptionsModel!.data![index].others!,
+                              reference: prescriptionController.prescriptionsModel!.data![index].reference!,
+                              surgery: prescriptionController.prescriptionsModel!.data![index].surgery!,
+                              tendencyBleed: prescriptionController.prescriptionsModel!.data![index].tendency_bleed!,
+                            ),
+                            transition: Transition.rightToLeft,
+                          );
+                        },
+                        title: Padding(
+                          padding: const EdgeInsets.only(bottom: 3),
+                          child: Text(
+                            prescriptionController.prescriptionsModel!.data![index].doctor_name!,
+                            style: TextStyleConst.mediumTextStyle(
+                              ColorConst.blackColor,
+                              width * 0.045,
+                            ),
+                          ),
+                        ),
+                        subtitle: Text(
+                          "${prescriptionController.prescriptionsModel!.data![index].created_time!} - ${prescriptionController.prescriptionsModel!.data![index].created_date!}",
+                          style: TextStyleConst.mediumTextStyle(
+                            ColorConst.hintGreyColor,
+                            width * 0.037,
+                          ),
+                        ),
+                        leading: Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(prescriptionController.prescriptionsModel!.data![index].doctor_image!),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
                 },
-                title: Padding(
-                  padding: const EdgeInsets.only(bottom: 3),
-                  child: Text(
-                    "Jenil Shah",
-                    style: TextStyleConst.mediumTextStyle(
-                      ColorConst.blackColor,
-                      width * 0.045,
-                    ),
-                  ),
-                ),
-                subtitle: Text(
-                  "12:00 AM - 9th Jun, 2022",
-                  style: TextStyleConst.mediumTextStyle(
-                    ColorConst.hintGreyColor,
-                    width * 0.037,
-                  ),
-                ),
-                leading: Container(
-                  height: 60,
-                  width: 60,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s"),
-                    ),
-                  ),
-                ),
               ),
-            ],
-          ),
-        );
-      },
+            )
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 }
