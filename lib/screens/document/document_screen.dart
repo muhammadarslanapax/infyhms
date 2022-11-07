@@ -37,8 +37,14 @@ class DocumentScreen extends StatelessWidget {
                                   motion: const ScrollMotion(),
                                   children: [
                                     SlidableAction(
-                                      onPressed: (contextAction) {
-                                        Get.to(() => EditDocumentScreen(), transition: Transition.leftToRight);
+                                      onPressed: (contextAction) async {
+                                        final message = await Get.to(
+                                          () => EditDocumentScreen(documentId: controller.documentsModel?.data?[index].id ?? 0),
+                                          transition: Transition.leftToRight,
+                                        );
+                                        if (message == "Call API") {
+                                          controller.getDocuments();
+                                        }
                                       },
                                       backgroundColor: ColorConst.orangeColor.withOpacity(0.15),
                                       label: StringUtils.edit,
@@ -52,7 +58,7 @@ class DocumentScreen extends StatelessWidget {
                                   children: [
                                     SlidableAction(
                                       onPressed: (contextAction) {
-                                        controller.showDeleteDialog(context, height, width,index);
+                                        controller.showDeleteDialog(context, height, width, index);
                                       },
                                       backgroundColor: const Color(0xFFFCE5E5),
                                       label: StringUtils.delete,
@@ -80,10 +86,11 @@ class DocumentScreen extends StatelessWidget {
                                   leading: Container(
                                     height: 35,
                                     width: 35,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       image: DecorationImage(
                                         fit: BoxFit.contain,
-                                        image: NetworkImage(controller.documentsModel?.data?[index].document_url ?? ""),
+                                        // image: NetworkImage(controller.documentsModel?.data?[index].document_url ?? ""),
+                                        image: AssetImage("assets/icon/imageIcon.png"),
                                       ),
                                     ),
                                   ),

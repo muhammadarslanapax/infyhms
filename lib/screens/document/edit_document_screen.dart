@@ -14,7 +14,11 @@ import 'package:infyhms_flutter/controller/document_controller/edit_document_con
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class EditDocumentScreen extends StatelessWidget {
-  const EditDocumentScreen({Key? key}) : super(key: key);
+  const EditDocumentScreen({
+    Key? key,
+    required this.documentId,
+  }) : super(key: key);
+  final int documentId;
 
   @override
   Widget build(BuildContext context) {
@@ -24,112 +28,123 @@ class EditDocumentScreen extends StatelessWidget {
       child: GetBuilder<EditDocumentController>(
           init: EditDocumentController(),
           builder: (controller) {
-            return Scaffold(
-              backgroundColor: Colors.white,
-              appBar: CommonAppBar(
-                title: StringUtils.editDocument,
-                leadOnTap: () {
-                  Get.back();
-                },
-                leadIcon: const Icon(
-                  Icons.arrow_back_rounded,
-                  color: ColorConst.blackColor,
+            return GestureDetector(
+              onTap: () {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              child: Scaffold(
+                backgroundColor: Colors.white,
+                appBar: CommonAppBar(
+                  title: StringUtils.editDocument,
+                  leadOnTap: () {
+                    Get.back();
+                  },
+                  leadIcon: const Icon(
+                    Icons.arrow_back_rounded,
+                    color: ColorConst.blackColor,
+                  ),
                 ),
-              ),
-              body: controller.documentsTypeModel == null
-                  ? const Center(child: CircularProgressIndicator())
-                  : Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                      child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CommonRequiredText(width: width, text: StringUtils.title),
-                            SizedBox(height: height * 0.01),
-                            CommonTextField(
-                              validator: (value) {
-                                return null;
-                              },
-                              controller: controller.titleController,
-                            ),
-                            SizedBox(height: height * 0.02),
-                            CommonRequiredText(width: width, text: StringUtils.documentType),
-                            SizedBox(height: height * 0.01),
-                            CommonDropDown(
-                              onChange: (value) {},
-                              hintText: "Select Document Type",
-                              dropdownItems: controller.documentsTypeModel!.data!.map((items) {
-                                return DropdownMenuItem(
-                                  value: items.id.toString(),
-                                  child: Text(items.name ?? ""),
-                                );
-                              }).toList(),
-                            ),
-                            SizedBox(height: height * 0.02),
-                            CommonRequiredText(width: width, text: StringUtils.attachment),
-                            SizedBox(height: height * 0.01),
-                            InkWell(
-                              onTap: () {},
-                              child: DottedBorder(
-                                color: Colors.grey,
-                                radius: const Radius.circular(10),
-                                // strokeCap: StrokeCap.round,
-                                strokeWidth: 2,
-                                borderType: BorderType.RRect,
-                                dashPattern: const [4],
-                                child: Container(
-                                  height: 100,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    image: !controller.showFile
-                                        ? const DecorationImage(image: AssetImage("assets/icon/take_photo.png"), scale: 4)
-                                        : DecorationImage(image: FileImage(File(controller.file!.path))),
+                body: controller.documentsTypeModel == null
+                    ? const Center(child: CircularProgressIndicator())
+                    : Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                        child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CommonRequiredText(width: width, text: StringUtils.title),
+                              SizedBox(height: height * 0.01),
+                              CommonTextField(
+                                validator: (value) {
+                                  return null;
+                                },
+                                controller: controller.titleController,
+                              ),
+                              SizedBox(height: height * 0.02),
+                              CommonRequiredText(width: width, text: StringUtils.documentType),
+                              SizedBox(height: height * 0.01),
+                              CommonDropDown(
+                                onChange: (value) {
+                                  controller.docId = value;
+                                },
+                                hintText: "Select Document Type",
+                                dropdownItems: controller.documentsTypeModel!.data!.map((items) {
+                                  return DropdownMenuItem(
+                                    value: items.id.toString(),
+                                    child: Text(items.name ?? ""),
+                                  );
+                                }).toList(),
+                              ),
+                              SizedBox(height: height * 0.02),
+                              CommonRequiredText(width: width, text: StringUtils.attachment),
+                              SizedBox(height: height * 0.01),
+                              InkWell(
+                                onTap: () {
+                                  controller.pickImage();
+                                },
+                                child: DottedBorder(
+                                  color: Colors.grey,
+                                  radius: const Radius.circular(10),
+                                  // strokeCap: StrokeCap.round,
+                                  strokeWidth: 2,
+                                  borderType: BorderType.RRect,
+                                  dashPattern: const [4],
+                                  child: Container(
+                                    height: 100,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      image: !controller.showFile
+                                          ? const DecorationImage(image: AssetImage("assets/icon/take_photo.png"), scale: 4)
+                                          : DecorationImage(image: FileImage(File(controller.file!.path))),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: height * 0.02),
-                            CommonRequiredText(width: width, text: StringUtils.note),
-                            SizedBox(height: height * 0.01),
-                            CommonTextField(
-                              hintText: StringUtils.typeHere,
-                              maxLine: 4,
-                              validator: (value) {
-                                return null;
-                              },
-                              controller: controller.notesController,
-                            ),
-                            SizedBox(height: height * 0.02),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CommonButton(
-                                  textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
-                                  onTap: () {},
-                                  color: ColorConst.blueColor,
-                                  text: StringUtils.save,
-                                  width: width / 2.3,
-                                  height: 50,
-                                ),
-                                CommonButton(
-                                  textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.05),
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  color: ColorConst.borderGreyColor,
-                                  text: StringUtils.cancel,
-                                  width: width / 2.3,
-                                  height: 50,
-                                ),
-                              ],
-                            ),
-                          ],
+                              SizedBox(height: height * 0.02),
+                              CommonRequiredText(width: width, text: StringUtils.note),
+                              SizedBox(height: height * 0.01),
+                              CommonTextField(
+                                hintText: StringUtils.typeHere,
+                                maxLine: 4,
+                                validator: (value) {
+                                  return null;
+                                },
+                                controller: controller.notesController,
+                              ),
+                              SizedBox(height: height * 0.02),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CommonButton(
+                                    textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
+                                    onTap: () {
+                                      controller.editDocuments(context, documentId);
+                                    },
+                                    color: ColorConst.blueColor,
+                                    text: StringUtils.save,
+                                    width: width / 2.3,
+                                    height: 50,
+                                  ),
+                                  CommonButton(
+                                    textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.05),
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    color: ColorConst.borderGreyColor,
+                                    text: StringUtils.cancel,
+                                    width: width / 2.3,
+                                    height: 50,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
+              ),
             );
           }),
     );

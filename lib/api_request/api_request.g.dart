@@ -320,7 +320,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<DocumentStoreModel> updateDocument(
+  Future<DocumentUpdateModel> updateDocument(
     token,
     title,
     documentTypeId,
@@ -353,8 +353,8 @@ class _ApiClient implements ApiClient {
         filename: file.path.split(Platform.pathSeparator).last,
       ),
     ));
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<DocumentStoreModel>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DocumentUpdateModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -367,7 +367,7 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = DocumentStoreModel.fromJson(_result.data!);
+    final value = DocumentUpdateModel.fromJson(_result.data!);
     return value;
   }
 

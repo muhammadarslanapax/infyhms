@@ -11,6 +11,7 @@ import 'package:infyhms_flutter/model/auth_model/login_model.dart';
 import 'package:infyhms_flutter/model/documents/document_delete_model/document_delete.dart';
 import 'package:infyhms_flutter/model/documents/document_download_model/document_download.dart';
 import 'package:infyhms_flutter/model/documents/document_store_model/document_store.dart';
+import 'package:infyhms_flutter/model/documents/document_update_model/document_update.dart';
 import 'package:infyhms_flutter/model/documents/documents_model/documents.dart';
 import 'package:infyhms_flutter/model/documents/documents_type_model/documents_type.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
@@ -85,7 +86,7 @@ abstract class ApiClient {
 
   @MultiPart()
   @POST("document-update/{id}")
-  Future<DocumentStoreModel> updateDocument(
+  Future<DocumentUpdateModel> updateDocument(
     @Header('Authorization') String? token,
     @Part(name: "title") String title,
     @Part(name: "document_type_id") String documentTypeId,
