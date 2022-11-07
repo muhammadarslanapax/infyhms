@@ -10,14 +10,15 @@ class AdmissionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: EdgeInsets.only(top: index == 0 ? 15 : 0),
-          child: Column(
+    return Container(
+      color: Colors.white,
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (context, index) {
+          return Column(
             children: [
               ListTile(
+                contentPadding: EdgeInsets.only(top: index == 0 ? 15 : 10, left: 15, right: 15),
                 onTap: () {
                   Get.to(() => const AdmissionDetailScreen(), transition: Transition.rightToLeft);
                 },
@@ -51,9 +52,9 @@ class AdmissionScreen extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

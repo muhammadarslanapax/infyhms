@@ -7,7 +7,7 @@ import 'package:infyhms_flutter/controller/home_controller.dart';
 import 'package:infyhms_flutter/screens/account/my_account_screen.dart';
 import 'package:infyhms_flutter/screens/admission/admissions_screen.dart';
 import 'package:infyhms_flutter/screens/appointment/appointment_screen.dart';
-import 'package:infyhms_flutter/screens/bill/bill_screen.dart';
+import 'package:infyhms_flutter/screens/bills/bills_screen.dart';
 import 'package:infyhms_flutter/screens/case/case_screen.dart';
 import 'package:infyhms_flutter/screens/consultancy/live_consultations_screen.dart';
 import 'package:infyhms_flutter/screens/diagnosis/diagnosis_screen.dart';
@@ -103,12 +103,12 @@ class HomeScreen extends StatelessWidget {
                                   controller.currentDrawerIndex.value = 0;
                                   break;
                                 case 1:
-                                  controller.currentWidget = const BillScreen();
+                                  controller.currentWidget = BillScreen();
                                   controller.appBarTitle.value = StringUtils.bills;
                                   controller.currentDrawerIndex.value = 1;
                                   break;
                                 case 2:
-                                  controller.currentWidget = const DiagnosisScreen();
+                                  controller.currentWidget = DiagnosisScreen();
                                   controller.appBarTitle.value = StringUtils.diagnosisTests;
                                   controller.currentDrawerIndex.value = 2;
                                   break;
@@ -133,7 +133,7 @@ class HomeScreen extends StatelessWidget {
                                   controller.currentDrawerIndex.value = 6;
                                   break;
                                 case 7:
-                                  controller.currentWidget = const CaseScreen();
+                                  controller.currentWidget = CaseScreen();
                                   controller.appBarTitle.value = StringUtils.myCases;
                                   controller.currentDrawerIndex.value = 7;
                                   break;

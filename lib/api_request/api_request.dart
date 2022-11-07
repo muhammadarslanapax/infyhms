@@ -1,11 +1,19 @@
 import 'package:dio/dio.dart';
+import 'package:infyhms_flutter/model/admission_model/admission_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/appointment_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/cancel_appointment/cancel_appoitment_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/create_appointment/create_appointment_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/delete_appointement/delete_appointment_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/doctor/doctor_department_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/doctor/get_doctor_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/filter/filter_appointment_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/new_appointment/doctor_department_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/new_appointment/get_doctor_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/slot_booking/slot_booking_model.dart';
 import 'package:infyhms_flutter/model/auth_model/login_model.dart';
+import 'package:infyhms_flutter/model/bills_model/bill_detail_model.dart';
+import 'package:infyhms_flutter/model/bills_model/bill_model.dart';
+import 'package:infyhms_flutter/model/case_model/case_model.dart';
+import 'package:infyhms_flutter/model/diagnosis_model/diagnosis_test_details_model.dart';
+import 'package:infyhms_flutter/model/diagnosis_model/diagnosis_test_model.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -54,6 +62,50 @@ abstract class ApiClient {
     @Field("doctor_id") String doctorId,
     @Field("opd_date") String selectedDate,
     @Field("time") String selectedTime,
+  );
+
+  @POST("cancel-appointment")
+  Future<CancelAppointmentModel> cancelAppointment(
+    @Header('Authorization') String? token,
+    @Field("id") int id,
+  );
+
+  @POST("delete-appointment")
+  Future<DeleteAppointmentModel> deleteAppointment(
+    @Header('Authorization') String? token,
+    @Field("id") int id,
+  );
+
+  @GET("bills")
+  Future<BillsModel> getBills(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("bills/{id}")
+  Future<BillDetailModel> getBillsDetails(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @GET("diagnosis")
+  Future<DiagnosisTestModel> getDiagnosisTest(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("diagnosis/{id}")
+  Future<DiagnosisTestDetailsModel> getDiagnosisTestDetails(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @GET("patient-cases")
+  Future<CaseModel> getCase(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("patient-admissions")
+  Future<AdmissionModel> getAdmission(
+    @Header('Authorization') String? token,
   );
 }
 
