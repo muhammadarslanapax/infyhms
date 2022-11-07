@@ -94,19 +94,23 @@ class DocumentScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  trailing: GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      margin: const EdgeInsets.only(right: 10),
-                                      width: 25,
-                                      height: 25,
-                                      decoration: const BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage(ImageUtils.downloadIcon),
+                                  trailing: controller.isDownloading && controller.currentIndex.contains(index)
+                                      ? const CircularProgressIndicator(color: ColorConst.primaryColor)
+                                      : InkWell(
+                                          onTap: () {
+                                            controller.downloadDocument(context, index);
+                                          },
+                                          child: Container(
+                                            margin: const EdgeInsets.only(right: 10),
+                                            width: 25,
+                                            height: 25,
+                                            decoration: const BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(ImageUtils.downloadIcon),
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  ),
                                 ),
                               ),
                             ],

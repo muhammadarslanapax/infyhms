@@ -8,4 +8,10 @@ class LogInController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   RxBool isCheck = false.obs;
+  RxBool showPassword = false.obs;
+
+  void hideAndShowPassword() {
+    showPassword.value = !showPassword.value;
+    print(showPassword.value);
+  }
 }

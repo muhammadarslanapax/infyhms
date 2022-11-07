@@ -4,7 +4,7 @@ import 'package:infyhms_flutter/constant/text_style_const.dart';
 
 class CommonTextField extends StatelessWidget {
   final String? hintText;
-  final Icon? suffixIcon;
+  final Widget? suffixIcon;
   final VoidCallback? onTap;
   final String? Function(String?) validator;
   final TextEditingController controller;
@@ -12,6 +12,7 @@ class CommonTextField extends StatelessWidget {
   final int? minLine;
   final TextInputType? keyBoardType;
   final bool readOnly;
+  final bool? obscureText;
 
   const CommonTextField({
     Key? key,
@@ -24,6 +25,7 @@ class CommonTextField extends StatelessWidget {
     this.suffixIcon,
     required this.controller,
     this.onTap,
+    this.obscureText,
   }) : super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class CommonTextField extends StatelessWidget {
         ColorConst.blackColor,
         width * 0.04,
       ),
+      obscureText: obscureText ?? false,
       readOnly: readOnly,
       keyboardType: keyBoardType,
       maxLines: maxLine,

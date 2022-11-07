@@ -14,6 +14,12 @@ import 'package:infyhms_flutter/model/documents/document_store_model/document_st
 import 'package:infyhms_flutter/model/documents/document_update_model/document_update.dart';
 import 'package:infyhms_flutter/model/documents/documents_model/documents.dart';
 import 'package:infyhms_flutter/model/documents/documents_type_model/documents_type.dart';
+import 'package:infyhms_flutter/model/invoice/invoice_details_model.dart';
+import 'package:infyhms_flutter/model/invoice/invoice_model.dart';
+import 'package:infyhms_flutter/model/live_consultancy/live_consultation_details_model.dart';
+import 'package:infyhms_flutter/model/live_consultancy/live_consultation_filter.dart';
+import 'package:infyhms_flutter/model/live_consultancy/live_consultation_model.dart';
+import 'package:infyhms_flutter/model/notice_board_model/notice_board.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -97,14 +103,47 @@ abstract class ApiClient {
 
   @GET("document-delete/{id}")
   Future<DocumentDeleteModel> deleteDocument(
-      @Header('Authorization') String? token,
+    @Header('Authorization') String? token,
     @Path("id") int documentId,
   );
 
   @GET("document-download/{id}")
   Future<DocumentDownloadModel> downloadDocument(
-      @Header('Authorization') String? token,
+    @Header('Authorization') String? token,
     @Path("id") int documentId,
+  );
+
+  @GET("notice-board")
+  Future<NoticeBoardModel> getNoticeBoard(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("invoices")
+  Future<InvoiceModel> getInvoices(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("invoice/{id}")
+  Future<InvoiceDetailsModel> getInvoiceData(
+    @Header('Authorization') String? token,
+    @Path("id") int invoiceId,
+  );
+
+  @GET("live-consultation")
+  Future<LiveConsultationModel> liveConsultations(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("live-consultation/{id}")
+  Future<LiveConsultationDetailsModel> liveConsultationData(
+    @Header('Authorization') String? token,
+    @Path("id") int consultationId,
+  );
+
+  @POST("live-consultation-filter?status={status}")
+  Future<LiveConsultationFilter> liveConsultationFilter(
+    @Header('Authorization') String? token,
+    @Path("status") int status,
   );
 }
 

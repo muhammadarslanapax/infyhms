@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,9 +13,53 @@ import 'package:infyhms_flutter/model/documents/documents_model/documents.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:path_provider/path_provider.dart';
 
 class DocumentController extends GetxController {
   DocumentsModel? documentsModel;
+  Dio dio = Dio();
+  int received = 0;
+  String progress = '0';
+  int total = 0;
+  bool isDownloading = false;
+  List<int> currentIndex = [];
+
+  void downloadDocument(context, int index) async {
+    currentIndex.add(index);
+    String url = documentsModel?.data?[index].document_url ?? "";
+
+    if (Platform.isIOS) {
+      launchUrl(Uri.parse(url));
+    } else {
+
+      String fileName = url.substring(url.lastIndexOf("/") + 1);
+      Directory? dir = await getExternalStorageDirectory();
+      Directory filePath = await Directory("${dir!.path.split("/Android").first}/Documents/HMS").create();
+      try {
+        isDownloading = true;
+        update();
+        await dio.download(
+          url,
+          '${filePath.path}/$fileName', //'Phone/omo/' + fileName,
+          deleteOnError: true,
+          onReceiveProgress: (receivedBytes, totalBytes) {
+            received = receivedBytes;
+            total = totalBytes;
+            progress = (received / total * 100).toStringAsFixed(0);
+          },
+        );
+        if (progress == "100") {
+          DisplaySnackBar.displaySnackBar(context, "Downloaded");
+        }
+        isDownloading = false;
+        currentIndex.remove(index);
+        update();
+      } catch (e) {
+        DisplaySnackBar.displaySnackBar(context, "Document can't be downloaded");
+      }
+    }
+  }
 
   void showDeleteDialog(context, double height, double width, int index) {
     showDialog(
@@ -100,7 +146,7 @@ class DocumentController extends GetxController {
 
   void deleteData(BuildContext context, int id) {
     CommonLoader.showLoader(context);
-    StringUtils.client.deleteDocument("Bearer ${PreferenceUtils.getStringValue("token")}",id)
+    StringUtils.client.deleteDocument("Bearer ${PreferenceUtils.getStringValue("token")}", id)
       ..then((value) {
         DisplaySnackBar.displaySnackBar(context, "Document deleted");
         Get.back();

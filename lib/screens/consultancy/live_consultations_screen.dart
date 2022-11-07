@@ -110,64 +110,67 @@ class LiveConsultationsScreen extends StatelessWidget {
                             topRight: Radius.circular(50),
                           ),
                         ),
+
                         context: context,
                         builder: (context) {
                           return Container(
                             margin: const EdgeInsets.only(right: 25, top: 30, left: 25),
-                            height: height / 2.8,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Regular Checkup",
-                                  style: TextStyleConst.boldTextStyle(
-                                    ColorConst.blackColor,
-                                    width * 0.045,
-                                  ),
-                                ),
-                                SizedBox(height: height * 0.01),
-                                Text(
-                                  "* Awaited",
-                                  style: TextStyleConst.boldTextStyle(
-                                    ColorConst.orangeColor,
-                                    width * 0.045,
-                                  ),
-                                ),
-                                SizedBox(height: height * 0.02),
-                                CommonDetailText(
-                                  width: width,
-                                  titleText: "Host Video:",
-                                  descriptionText: "Super Admin",
-                                ),
-                                SizedBox(height: height * 0.01),
-                                CommonDetailText(
-                                  width: width,
-                                  titleText: "Consultation Date:",
-                                  descriptionText: "2022-06-14, 11:45:00",
-                                ),
-                                SizedBox(height: height * 0.01),
-                                CommonDetailText(
-                                  width: width,
-                                  titleText: "Duration:",
-                                  descriptionText: "10 minutes",
-                                ),
-                                SizedBox(height: height * 0.03),
-                                Center(
-                                  child: CommonButton(
-                                    isIcon: true,
-                                    width: width / 2,
-                                    height: 50,
-                                    text: "Join now",
-                                    color: ColorConst.blueColor,
-                                    onTap: () {},
-                                    textStyleConst: TextStyleConst.mediumTextStyle(
-                                      ColorConst.whiteColor,
-                                      width * 0.05,
+                            height: height * 0.4,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Regular checkup",
+                                    style: TextStyleConst.boldTextStyle(
+                                      ColorConst.blackColor,
+                                      width * 0.045,
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: height * 0.02),
-                              ],
+                                  SizedBox(height: height * 0.01),
+                                  Text(
+                                    "* Awaited",
+                                    style: TextStyleConst.boldTextStyle(
+                                      ColorConst.orangeColor,
+                                      width * 0.045,
+                                    ),
+                                  ),
+                                  SizedBox(height: height * 0.02),
+                                  CommonDetailText(
+                                    width: width,
+                                    titleText: "Host Video:",
+                                    descriptionText: "Super Admin",
+                                  ),
+                                  SizedBox(height: height * 0.01),
+                                  CommonDetailText(
+                                    width: width,
+                                    titleText: "Consultation Date:",
+                                    descriptionText: "2022-06-14, 11:45:00",
+                                  ),
+                                  SizedBox(height: height * 0.01),
+                                  CommonDetailText(
+                                    width: width,
+                                    titleText: "Duration:",
+                                    descriptionText: "10 minutes",
+                                  ),
+                                  SizedBox(height: height * 0.03),
+                                  Center(
+                                    child: CommonButton(
+                                      isIcon: true,
+                                      width: width / 2,
+                                      height: 50,
+                                      text: "Join now",
+                                      color: ColorConst.blueColor,
+                                      onTap: () {},
+                                      textStyleConst: TextStyleConst.mediumTextStyle(
+                                        ColorConst.whiteColor,
+                                        width * 0.05,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: height * 0.02),
+                                ],
+                              ),
                             ),
                           );
                         },
