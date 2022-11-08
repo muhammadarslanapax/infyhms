@@ -18,6 +18,7 @@ import 'package:infyhms_flutter/screens/prescription/prescriptions_screen.dart';
 import 'package:infyhms_flutter/screens/vaccination/vaccination_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/list_utils.dart';
+import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -53,14 +54,14 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: height * 0.02),
                   ListTile(
                     title: Text(
-                      "Harsh Rathod",
+                      "${PreferenceUtils.getStringValue("first_name")} ${PreferenceUtils.getStringValue("last_name")}",
                       style: TextStyleConst.mediumTextStyle(
                         ColorConst.blackColor,
                         width * 0.045,
                       ),
                     ),
                     subtitle: Text(
-                      "harsh@gmail.com",
+                      PreferenceUtils.getStringValue("email"),
                       style: TextStyleConst.mediumTextStyle(
                         ColorConst.hintGreyColor,
                         width * 0.035,
@@ -69,11 +70,11 @@ class HomeScreen extends StatelessWidget {
                     leading: Container(
                       height: 60,
                       width: 60,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s"),
+                          image: NetworkImage(PreferenceUtils.getStringValue("image_url")),
                         ),
                       ),
                     ),

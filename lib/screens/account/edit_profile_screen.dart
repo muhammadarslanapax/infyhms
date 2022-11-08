@@ -6,12 +6,12 @@ import 'package:infyhms_flutter/component/common_required_text.dart';
 import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
+import 'package:infyhms_flutter/controller/my_account_controller/edit_profile_controller.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({Key? key}) : super(key: key);
-
-  final TextEditingController firstNameController = TextEditingController();
+  final EditProfileController editProfileController = Get.put(EditProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +45,12 @@ class EditProfileScreen extends StatelessWidget {
                       Container(
                         height: 100,
                         width: 100,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.red,
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaXaKH9Q7gVGHSc2_IK3mOhpEaiULsMGxwRUe2nL4b&s"),
+                            image: NetworkImage(editProfileController.imageUrl!),
                           ),
                         ),
                       ),
@@ -94,7 +94,7 @@ class EditProfileScreen extends StatelessWidget {
                   validator: (value) {
                     return null;
                   },
-                  controller: firstNameController,
+                  controller: editProfileController.firstNameController,
                 ),
                 SizedBox(height: height * 0.02),
                 CommonRequiredText(
@@ -106,7 +106,7 @@ class EditProfileScreen extends StatelessWidget {
                   validator: (value) {
                     return null;
                   },
-                  controller: firstNameController,
+                  controller: editProfileController.lastNameController,
                 ),
                 SizedBox(height: height * 0.02),
                 CommonRequiredText(
@@ -118,7 +118,7 @@ class EditProfileScreen extends StatelessWidget {
                   validator: (value) {
                     return null;
                   },
-                  controller: firstNameController,
+                  controller: editProfileController.emailController,
                 ),
                 SizedBox(height: height * 0.02),
                 CommonRequiredText(
@@ -127,10 +127,11 @@ class EditProfileScreen extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.01),
                 CommonTextField(
+                  readOnly: true,
                   validator: (value) {
                     return null;
                   },
-                  controller: firstNameController,
+                  controller: editProfileController.phoneController,
                 ),
                 SizedBox(height: height * 0.05),
                 Row(

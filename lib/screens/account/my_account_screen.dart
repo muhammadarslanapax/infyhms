@@ -7,6 +7,7 @@ import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/screens/account/change_password_screen.dart';
 import 'package:infyhms_flutter/screens/account/edit_profile_screen.dart';
+import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class MyAccountScreen extends StatelessWidget {
@@ -36,19 +37,19 @@ class MyAccountScreen extends StatelessWidget {
               child: Container(
                 height: 100,
                 width: 100,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.red,
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaXaKH9Q7gVGHSc2_IK3mOhpEaiULsMGxwRUe2nL4b&s"),
+                    image: NetworkImage(PreferenceUtils.getStringValue("image_url")),
                   ),
                 ),
               ),
             ),
             SizedBox(height: height * 0.03),
             Text(
-              "Anand Patel",
+              "${PreferenceUtils.getStringValue("first_name")} ${PreferenceUtils.getStringValue("last_name")}",
               style: TextStyleConst.mediumTextStyle(
                 ColorConst.blackColor,
                 width * 0.045,
@@ -56,7 +57,7 @@ class MyAccountScreen extends StatelessWidget {
             ),
             SizedBox(height: height * 0.005),
             Text(
-              "anand@gmail.com",
+              PreferenceUtils.getStringValue("email"),
               style: TextStyleConst.mediumTextStyle(
                 ColorConst.hintGreyColor,
                 width * 0.04,
