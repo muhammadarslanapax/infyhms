@@ -10,10 +10,10 @@ LiveConsultationFilter _$LiveConsultationFilterFromJson(
         Map<String, dynamic> json) =>
     LiveConsultationFilter(
       success: json['success'] as bool?,
-      data: json['data'] == null
-          ? null
-          : LiveConsultationFilterData.fromJson(
-              json['data'] as Map<String, dynamic>),
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) =>
+              LiveConsultationFilterData.fromJson(e as Map<String, dynamic>))
+          .toList(),
       message: json['message'] as String?,
     );
 

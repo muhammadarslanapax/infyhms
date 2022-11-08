@@ -3,7 +3,7 @@ part 'live_consultation_filter.g.dart';
 @JsonSerializable()
 class LiveConsultationFilter {
   bool? success;
-  LiveConsultationFilterData? data;
+  List<LiveConsultationFilterData>? data;
   String? message;
 
   LiveConsultationFilter({

@@ -143,7 +143,7 @@ abstract class ApiClient {
   @POST("live-consultation-filter?status={status}")
   Future<LiveConsultationFilter> liveConsultationFilter(
     @Header('Authorization') String? token,
-    @Path("status") int status,
+    @Path("status") String status,
   );
 }
 

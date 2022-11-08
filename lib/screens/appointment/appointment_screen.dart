@@ -254,7 +254,7 @@ class AppointmentScreen extends StatelessWidget {
               padding: const EdgeInsets.all(25),
               child: GestureDetector(
                 onTap: () {
-                  Get.to(() => NewAppointmentScreen(), transition: Transition.rightToLeft);
+                  Get.to(() => const NewAppointmentScreen(), transition: Transition.rightToLeft);
                 },
                 child: Container(
                   height: 55,

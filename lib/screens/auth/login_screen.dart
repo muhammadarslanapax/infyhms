@@ -112,12 +112,12 @@ class LoginScreen extends StatelessWidget {
                                     /// password TextField
                                     Obx(() {
                                       return CommonTextField(
-                                        obscureText: logInController.showPassword.value,
+                                        obscureText: !logInController.showPassword.value,
                                         suffixIcon: InkWell(
                                           onTap: () {
                                             logInController.hideAndShowPassword();
                                           },
-                                          child: logInController.showPassword.value
+                                          child: !logInController.showPassword.value
                                               ? const Icon(Icons.visibility_off_outlined, color: Colors.black)
                                               : const Icon(Icons.visibility, color: Colors.black),
                                         ),

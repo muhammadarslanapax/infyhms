@@ -177,7 +177,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    controller.invoiceDetailsModel?.data?.invoice_items?[index].description ?? "N/A",
+                                                    controller.invoiceDetailsModel?.data?.invoice_items?[index].account_name ?? "N/A",
                                                     style: TextStyleConst.mediumTextStyle(
                                                       ColorConst.blackColor,
                                                       width * 0.045,
@@ -193,7 +193,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                                                   ),
                                                   SizedBox(height: height * 0.003),
                                                   Text(
-                                                    controller.invoiceDetailsModel?.data?.invoice_items?[index].account_name ?? "N/A",
+                                                    controller.invoiceDetailsModel?.data?.invoice_items?[index].description ?? "N/A",
                                                     style: TextStyleConst.mediumTextStyle(
                                                       ColorConst.hintGreyColor,
                                                       width * 0.04,
