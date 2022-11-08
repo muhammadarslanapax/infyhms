@@ -65,6 +65,7 @@ class EditDocumentScreen extends StatelessWidget {
                               CommonRequiredText(width: width, text: StringUtils.documentType),
                               SizedBox(height: height * 0.01),
                               CommonDropDown(
+                                value: controller.docId,
                                 onChange: (value) {
                                   controller.docId = value;
                                 },
@@ -81,7 +82,7 @@ class EditDocumentScreen extends StatelessWidget {
                               SizedBox(height: height * 0.01),
                               InkWell(
                                 onTap: () {
-                                  controller.pickImage();
+                                  controller.pickImage(context);
                                 },
                                 child: DottedBorder(
                                   color: Colors.grey,
@@ -97,7 +98,7 @@ class EditDocumentScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.white,
                                       image: !controller.showFile
-                                          ? const DecorationImage(image: AssetImage("assets/icon/take_photo.png"), scale: 4)
+                                          ? DecorationImage(image: NetworkImage(controller.filePath))
                                           : DecorationImage(image: FileImage(File(controller.file!.path))),
                                     ),
                                   ),

@@ -16,7 +16,6 @@ class LiveConsultationsController extends GetxController {
   RxBool gotDetailsOfConsultation = false.obs;
 
   void launchConsultationURL(context, String url) {
-    print("---------$url");
     try {
       launchUrl(Uri.parse(url));
     } catch (e) {

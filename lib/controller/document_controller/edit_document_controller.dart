@@ -15,13 +15,20 @@ class EditDocumentController extends GetxController {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController notesController = TextEditingController();
   DocumentsTypeModel? documentsTypeModel;
+  var arguments = Get.arguments;
   String? docId;
   ImagePicker imagePicker = ImagePicker();
   XFile? file;
+  String filePath = "";
   bool showFile = false;
 
-  void pickImage() async {
-    file = await imagePicker.pickImage(source: ImageSource.gallery);
+  void pickImage(BuildContext context) async {
+    try {
+      file = await imagePicker.pickImage(source: ImageSource.gallery);
+    } catch (e) {
+      DisplaySnackBar.displaySnackBar(context, "Please give access to photos from settings", 5);
+    }
+
     if (file != null) {
       showFile = true;
       update();
@@ -31,6 +38,11 @@ class EditDocumentController extends GetxController {
   void getDocumentTypes() {
     StringUtils.client.getDocumentsType("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
       documentsTypeModel = value;
+
+      titleController.text = arguments["title"];
+      notesController.text = arguments["note"];
+      docId = "${arguments["docType"]}";
+      filePath = arguments["attachment"];
       update();
     });
   }
@@ -40,9 +52,11 @@ class EditDocumentController extends GetxController {
       DisplaySnackBar.displaySnackBar(context, "Please enter title");
     } else if (docId == null) {
       DisplaySnackBar.displaySnackBar(context, "Please select document type");
-    } else if (file == null) {
-      DisplaySnackBar.displaySnackBar(context, "Please attach file");
-    } else if (notesController.text.trim().isEmpty) {
+    }
+    // else if (file == null) {
+    //   DisplaySnackBar.displaySnackBar(context, "Please attach file");
+    // }
+    else if (notesController.text.trim().isEmpty) {
       DisplaySnackBar.displaySnackBar(context, "Please enter notes");
     } else {
       CommonLoader.showLoader(context);
@@ -51,22 +65,25 @@ class EditDocumentController extends GetxController {
         titleController.text.trim(),
         docId ?? "",
         notesController.text.trim(),
-        File(file!.path),
+        file == null ? null : File(file?.path ?? ""),
         documentId,
-      )..then((value) {
-        if (value.success == true) {
-          DisplaySnackBar.displaySnackBar(context, "Document updated successfully");
-          Get.back();
-          Get.back(result: "Call API");
-        }
-      })
+      )
+        ..then((value) {
+          if (value.success == true) {
+            DisplaySnackBar.displaySnackBar(context, "Document updated successfully");
+            Get.back();
+            Get.back(result: "Call API");
+          }
+        })
         ..onError((DioError error, stackTrace) {
           Get.back();
           Get.back();
-           return DocumentUpdateModel();
+          print("+++$error++++");
+          return DocumentUpdateModel();
         });
     }
   }
+
   @override
   void onInit() {
     // TODO: implement onInit

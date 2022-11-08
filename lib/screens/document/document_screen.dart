@@ -39,9 +39,14 @@ class DocumentScreen extends StatelessWidget {
                                     SlidableAction(
                                       onPressed: (contextAction) async {
                                         final message = await Get.to(
-                                          () => EditDocumentScreen(documentId: controller.documentsModel?.data?[index].id ?? 0),
-                                          transition: Transition.leftToRight,
-                                        );
+                                            () => EditDocumentScreen(documentId: controller.documentsModel?.data?[index].id ?? 0),
+                                            transition: Transition.leftToRight,
+                                            arguments: {
+                                              "title": controller.documentsModel?.data?[index].title,
+                                              "docType": controller.documentsModel?.data?[index].document_type_id,
+                                              "attachment": controller.documentsModel?.data?[index].document_url,
+                                              "note": controller.documentsModel?.data?[index].notes,
+                                            });
                                         if (message == "Call API") {
                                           controller.getDocuments();
                                         }

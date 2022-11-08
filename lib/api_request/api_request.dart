@@ -97,7 +97,7 @@ abstract class ApiClient {
     @Part(name: "title") String title,
     @Part(name: "document_type_id") String documentTypeId,
     @Part(name: "notes") String notes,
-    @Part(name: "file") File file,
+    @Part(name: "file") File? file,
     @Path("id") int documentId,
   );
 

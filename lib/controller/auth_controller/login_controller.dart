@@ -12,6 +12,5 @@ class LogInController extends GetxController {
 
   void hideAndShowPassword() {
     showPassword.value = !showPassword.value;
-    print(showPassword.value);
   }
 }
