@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/model/appointment_model/create_appointment/create_appointment_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/new_appointment/doctor_department_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/new_appointment/get_doctor_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/doctor/doctor_department_model.dart';
+import 'package:infyhms_flutter/model/appointment_model/doctor/get_doctor_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/slot_booking/slot_booking_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
@@ -26,6 +27,7 @@ class NewAppointmentController extends GetxController {
 
   bool isSelectDate = false;
   bool isSelectDoctorDepartment = false;
+  bool isSelectDoctor = false;
 
   @override
   void onInit() {
@@ -41,6 +43,7 @@ class NewAppointmentController extends GetxController {
     await StringUtils.client.getDoctor("Bearer ${PreferenceUtils.getStringValue("token")}", id).then((value) {
       getDoctorModel = value;
       doctorId = value.data![0].id.toString();
+      isSelectDoctor = true;
       update();
     });
   }
@@ -55,7 +58,45 @@ class NewAppointmentController extends GetxController {
     if (picked != null) {
       selectedDate = "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
       dateController.text = selectedDate!;
-      print(selectedDate);
+    }
+  }
+
+  selectDateApiCall(BuildContext context) {
+    if (isSelectDoctor) {
+      selectDate(context).then((value) async {
+        if (selectedDate != null) {
+          await StringUtils.client.getBookingSlotDate("Bearer ${PreferenceUtils.getStringValue("token")}", selectedDate!, doctorId).then((value) {
+            slotBookingModel = value;
+            isSelectDate = true;
+            if (slotBookingModel!.data!.bookingSlotArr!.isNotEmpty) {
+              selectedTime = slotBookingModel!.data!.bookingSlotArr![0];
+            }
+            update();
+          });
+        }
+      });
+    }
+  }
+
+  createNewAppointment(BuildContext context) {
+    if (isSelectDoctorDepartment == false) {
+      DisplaySnackBar.displaySnackBar(context, "Please select doctor department");
+    } else if (isSelectDate == false) {
+      DisplaySnackBar.displaySnackBar(context, "Please select date");
+    } else if (isSelectDoctor == false) {
+      DisplaySnackBar.displaySnackBar(context, "Please select doctor");
+    } else if (slotBookingModel!.data!.bookingSlotArr!.isEmpty) {
+      DisplaySnackBar.displaySnackBar(context, "Please select other date");
+    } else {
+      StringUtils.client
+          .createAppointment("Bearer ${PreferenceUtils.getStringValue("token")}", departmentId!, doctorId, selectedDate!, selectedTime!)
+          .then((value) {
+        createAppointmentModel = value;
+        if (value.success == true) {
+          DisplaySnackBar.displaySnackBar(context, value.message!);
+          Get.back();
+        }
+      });
     }
   }
 }

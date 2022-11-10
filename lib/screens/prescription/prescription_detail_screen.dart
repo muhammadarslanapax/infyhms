@@ -6,7 +6,42 @@ import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class PrescriptionsDetailScreen extends StatelessWidget {
-  const PrescriptionsDetailScreen({Key? key}) : super(key: key);
+  final String? doctorName;
+  final String? foodAllergies;
+  final String? tendencyBleed;
+  final String? heartDisease;
+  final String? highBloodPressure;
+  final String? diabetes;
+  final String? surgery;
+  final String? accident;
+  final String? others;
+  final String? medicalHistory;
+  final String? currentMedication;
+  final String? femalePregnancy;
+  final String? breastFeeding;
+  final String? healthInsurance;
+  final String? lowIncome;
+  final String? reference;
+
+  const PrescriptionsDetailScreen({
+    Key? key,
+    required this.diabetes,
+    required this.breastFeeding,
+    required this.femalePregnancy,
+    required this.others,
+    required this.accident,
+    required this.currentMedication,
+    required this.doctorName,
+    required this.foodAllergies,
+    required this.healthInsurance,
+    required this.heartDisease,
+    required this.highBloodPressure,
+    required this.lowIncome,
+    required this.medicalHistory,
+    required this.reference,
+    required this.surgery,
+    required this.tendencyBleed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +50,7 @@ class PrescriptionsDetailScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: CommonAppBar(
-          title: "Admission Details",
+          title: "Prescriptions Details",
           leadOnTap: () {
             Get.back();
           },
@@ -33,97 +68,97 @@ class PrescriptionsDetailScreen extends StatelessWidget {
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.doctor,
-                  descriptionText: "Ann Joseph",
+                  descriptionText: doctorName!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.foodAllergies,
-                  descriptionText: "No",
+                  descriptionText: foodAllergies!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.tendencyBleed,
-                  descriptionText: "No",
+                  descriptionText: tendencyBleed!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.heartDisease,
-                  descriptionText: "Yes",
+                  descriptionText: heartDisease!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.highBloodPressure,
-                  descriptionText: "Yes",
+                  descriptionText: highBloodPressure!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.diabetes,
-                  descriptionText: "No",
+                  descriptionText: diabetes!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.surgery,
-                  descriptionText: "No",
+                  descriptionText: surgery!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.accident,
-                  descriptionText: "No",
+                  descriptionText: accident!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.others,
-                  descriptionText: "No",
+                  descriptionText: others!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.medicalHistory,
-                  descriptionText: "Diabetes",
+                  descriptionText: medicalHistory!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.currentMedication,
-                  descriptionText: "Dolo-650",
+                  descriptionText: currentMedication!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.femalePregnancy,
-                  descriptionText: "No",
+                  descriptionText: femalePregnancy!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.breastFeeding,
-                  descriptionText: "No",
+                  descriptionText: breastFeeding!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.healthInsurance,
-                  descriptionText: "N/A ",
+                  descriptionText: healthInsurance!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.lowIncome,
-                  descriptionText: "Yes",
+                  descriptionText: lowIncome!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.reference,
-                  descriptionText: "None",
+                  descriptionText: reference!,
                 ),
                 SizedBox(height: height * 0.015),
               ],

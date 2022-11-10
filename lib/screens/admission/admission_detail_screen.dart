@@ -7,7 +7,41 @@ import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class AdmissionDetailScreen extends StatelessWidget {
-  const AdmissionDetailScreen({Key? key}) : super(key: key);
+  final String? admissionId;
+  final String? doctor;
+  final String? admissionDate;
+  final String? admissionTime;
+  final String? dischargeDate;
+  final String? dischargeTime;
+  final String? bed;
+  final String? guardianName;
+  final String? guardianRelation;
+  final String? guardianContact;
+  final String? guardianAddress;
+  final String? createOn;
+  final String? packageName;
+  final String? insuranceName;
+  final String? agentName;
+  final String? policyNo;
+  const AdmissionDetailScreen({
+    Key? key,
+    required this.admissionDate,
+    required this.dischargeTime,
+    required this.admissionTime,
+    required this.doctor,
+    required this.createOn,
+    required this.insuranceName,
+    required this.packageName,
+    required this.admissionId,
+    required this.guardianContact,
+    required this.guardianRelation,
+    required this.agentName,
+    required this.bed,
+    required this.dischargeDate,
+    required this.guardianAddress,
+    required this.guardianName,
+    required this.policyNo,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,61 +71,61 @@ class AdmissionDetailScreen extends StatelessWidget {
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.admissionId,
-                  descriptionText: "ED2WRTUW",
+                  descriptionText: admissionId!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.doctor,
-                  descriptionText: "Brendan Hatfield",
+                  descriptionText: doctor!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.admissionDate,
-                  descriptionText: "14th Jun, 2022 - 12:00 PM",
+                  descriptionText: "${admissionDate!} - ${admissionTime!}",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.dischargeDate,
-                  descriptionText: "17th Jun, 2022 - 9:06 AM",
+                  descriptionText: "${dischargeDate!} - ${dischargeTime!}",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.bed,
-                  descriptionText: "N/A",
+                  descriptionText: bed!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.guardianName,
-                  descriptionText: "N/A",
+                  descriptionText: guardianName!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.guardianRelation,
-                  descriptionText: "N/A",
+                  descriptionText: guardianRelation!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.guardianContact,
-                  descriptionText: "N/A",
+                  descriptionText: guardianContact!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.guardianAddress,
-                  descriptionText: "N/A",
+                  descriptionText: guardianAddress!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.createOn,
-                  descriptionText: "4 months ago",
+                  descriptionText: createOn!,
                 ),
                 SizedBox(height: height * 0.02),
                 CommonText(width: width, text: StringUtils.insuranceDetails),
@@ -99,25 +133,25 @@ class AdmissionDetailScreen extends StatelessWidget {
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.packageName,
-                  descriptionText: "All in One Package",
+                  descriptionText: packageName!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.insuranceName,
-                  descriptionText: "Accidental Insurance",
+                  descriptionText: insuranceName!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.agentName,
-                  descriptionText: "sddfdvdfd",
+                  descriptionText: agentName!,
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.policyNo,
-                  descriptionText: "N/A",
+                  descriptionText: policyNo!,
                 ),
               ],
             ),

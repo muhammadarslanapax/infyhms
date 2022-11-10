@@ -196,6 +196,13 @@ class LoginScreen extends StatelessWidget {
                                           logInController.loginModel = value;
                                           if (logInController.loginModel!.success == true) {
                                             PreferenceUtils.setStringValue("token", logInController.loginModel!.data!.token!);
+                                            PreferenceUtils.setStringValue("first_name", logInController.loginModel!.data!.user!.first_name!);
+                                            PreferenceUtils.setStringValue("last_name", logInController.loginModel!.data!.user!.last_name!);
+                                            PreferenceUtils.setStringValue("email", logInController.loginModel!.data!.user!.email!);
+                                            PreferenceUtils.setStringValue("phone_number", logInController.loginModel!.data!.user!.phone_number!);
+                                            PreferenceUtils.setStringValue("image_url", logInController.loginModel!.data!.user!.image_url!);
+                                            PreferenceUtils.setStringValue("password", logInController.passwordController.text);
+
                                             Get.offAll(() => const HomeScreen());
                                           } else {
                                             CommonError().showMaterialBanner(context, "${value.message}");

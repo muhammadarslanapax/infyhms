@@ -7,7 +7,8 @@ import 'package:infyhms_flutter/controller/home_controller.dart';
 import 'package:infyhms_flutter/screens/account/my_account_screen.dart';
 import 'package:infyhms_flutter/screens/admission/admissions_screen.dart';
 import 'package:infyhms_flutter/screens/appointment/appointment_screen.dart';
-import 'package:infyhms_flutter/screens/bill/bill_screen.dart';
+import 'package:infyhms_flutter/screens/auth/login_screen.dart';
+import 'package:infyhms_flutter/screens/bills/bills_screen.dart';
 import 'package:infyhms_flutter/screens/case/case_screen.dart';
 import 'package:infyhms_flutter/screens/consultancy/live_consultations_screen.dart';
 import 'package:infyhms_flutter/screens/diagnosis/diagnosis_screen.dart';
@@ -18,7 +19,9 @@ import 'package:infyhms_flutter/screens/prescription/prescriptions_screen.dart';
 import 'package:infyhms_flutter/screens/vaccination/vaccination_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/list_utils.dart';
+import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
+import 'package:infyhms_flutter/utils/variable_utils.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -52,28 +55,34 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: height * 0.02),
                   ListTile(
-                    title: Text(
-                      "Harsh Rathod",
-                      style: TextStyleConst.mediumTextStyle(
-                        ColorConst.blackColor,
-                        width * 0.045,
+                    title: Obx(
+                      () => Text(
+                        "${VariableUtils.firstName} ${VariableUtils.lastName}",
+                        style: TextStyleConst.mediumTextStyle(
+                          ColorConst.blackColor,
+                          width * 0.045,
+                        ),
                       ),
                     ),
-                    subtitle: Text(
-                      "harsh@gmail.com",
-                      style: TextStyleConst.mediumTextStyle(
-                        ColorConst.hintGreyColor,
-                        width * 0.035,
+                    subtitle: Obx(
+                      () => Text(
+                        VariableUtils.email.value,
+                        style: TextStyleConst.mediumTextStyle(
+                          ColorConst.hintGreyColor,
+                          width * 0.035,
+                        ),
                       ),
                     ),
-                    leading: Container(
-                      height: 60,
-                      width: 60,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-YIPLhIBLVQKh_S4BNo18b03Ct5P_iYFeBBjDCYx&s"),
+                    leading: Obx(
+                      () => Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(VariableUtils.imageUrl.replaceAll(" ", "")),
+                          ),
                         ),
                       ),
                     ),
@@ -81,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                       icon: const Icon(Icons.arrow_forward_ios_rounded, size: 15),
                       onPressed: () {
                         Get.back();
-                        Get.to(() => const MyAccountScreen());
+                        Get.to(() => MyAccountScreen());
                       },
                     ),
                   ),
@@ -103,12 +112,12 @@ class HomeScreen extends StatelessWidget {
                                   controller.currentDrawerIndex.value = 0;
                                   break;
                                 case 1:
-                                  controller.currentWidget = const BillScreen();
+                                  controller.currentWidget = BillScreen();
                                   controller.appBarTitle.value = StringUtils.bills;
                                   controller.currentDrawerIndex.value = 1;
                                   break;
                                 case 2:
-                                  controller.currentWidget = const DiagnosisScreen();
+                                  controller.currentWidget = DiagnosisScreen();
                                   controller.appBarTitle.value = StringUtils.diagnosisTests;
                                   controller.currentDrawerIndex.value = 2;
                                   break;
@@ -133,22 +142,22 @@ class HomeScreen extends StatelessWidget {
                                   controller.currentDrawerIndex.value = 6;
                                   break;
                                 case 7:
-                                  controller.currentWidget = const CaseScreen();
+                                  controller.currentWidget = CaseScreen();
                                   controller.appBarTitle.value = StringUtils.myCases;
                                   controller.currentDrawerIndex.value = 7;
                                   break;
                                 case 8:
-                                  controller.currentWidget = const AdmissionScreen();
+                                  controller.currentWidget = AdmissionScreen();
                                   controller.appBarTitle.value = StringUtils.myAdmissions;
                                   controller.currentDrawerIndex.value = 8;
                                   break;
                                 case 9:
-                                  controller.currentWidget = const PrescriptionsScreen();
+                                  controller.currentWidget = PrescriptionsScreen();
                                   controller.appBarTitle.value = StringUtils.prescriptions;
                                   controller.currentDrawerIndex.value = 9;
                                   break;
                                 case 10:
-                                  controller.currentWidget = const VaccinationScreen();
+                                  controller.currentWidget = VaccinationScreen();
                                   controller.appBarTitle.value = StringUtils.vaccinatedPatients;
                                   controller.currentDrawerIndex.value = 10;
                                   break;
@@ -179,7 +188,15 @@ class HomeScreen extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(right: 15),
                     child: ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        StringUtils.client.logout("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+                          controller.logoutModel = value;
+                          if (controller.logoutModel!.success == true) {
+                            PreferenceUtils.setStringValue("token", "");
+                            Get.offAll(() => LoginScreen());
+                          }
+                        });
+                      },
                       title: const Text(StringUtils.logOut),
                       leading: const SizedBox(
                         height: 25,

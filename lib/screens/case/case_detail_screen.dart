@@ -8,7 +8,8 @@ import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class CaseDetailScreen extends StatelessWidget {
-  const CaseDetailScreen({Key? key}) : super(key: key);
+  CaseDetailScreen({Key? key}) : super(key: key);
+  final argument = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class CaseDetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Case - #2BVF5Q",
+                          "Case - ${argument["case_id"]}",
                           style: TextStyleConst.boldTextStyle(
                             ColorConst.blackColor,
                             width * 0.05,
@@ -60,7 +61,7 @@ class CaseDetailScreen extends StatelessWidget {
                         ),
                         SizedBox(height: height * 0.004),
                         Text(
-                          "16th Sep, 2022 - 12:00 PM",
+                          "${argument["case_date"]} - ${argument["case_time"]}",
                           style: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.037),
                         ),
                       ],
@@ -75,7 +76,7 @@ class CaseDetailScreen extends StatelessWidget {
                       ),
                       child: Center(
                           child: Text(
-                        "Active",
+                        argument["status"],
                         style: TextStyleConst.mediumTextStyle(
                           ColorConst.greenColor,
                           width * 0.035,
@@ -93,25 +94,25 @@ class CaseDetailScreen extends StatelessWidget {
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.doctor,
-                  descriptionText: "Bhuva Patel",
+                  descriptionText: argument["doctor_name"],
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.fee,
-                  descriptionText: "\$ 500.00",
+                  descriptionText: "${argument["currency"]} ${argument["fee"]}",
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.createOn,
-                  descriptionText: "3 weeks ago",
+                  descriptionText: argument["created_on"],
                 ),
                 SizedBox(height: height * 0.015),
                 CommonDetailText(
                   width: width,
                   titleText: StringUtils.description,
-                  descriptionText: "N/A",
+                  descriptionText: argument["description"],
                 ),
               ],
             ),

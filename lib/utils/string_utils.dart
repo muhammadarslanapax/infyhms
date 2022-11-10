@@ -17,6 +17,9 @@ class StringUtils {
   static const forgotScreenDetail = "Enter your email to reset your password";
   static const sendLink = "Send Link";
   static const cancel = "Cancel";
+  static const yes = "Yes";
+  static const no = "No";
+
   static const edit = "Edit";
   static const editDocument = "Edit Document";
   static const newDocument = "New Document";
@@ -49,6 +52,7 @@ class StringUtils {
   static const email = "Email:";
   static const phone = "Phone:";
   static const save = "Save";
+
   static const currentPassword = "Current Password:";
   static const newPassword = "New Password:";
   static const confirmPassword = "Confirm Password:";

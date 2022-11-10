@@ -21,4 +21,6 @@ class ImageUtils {
   static const logOutIcon = "assets/icon/logout.png";
   static const downloadIcon = "assets/icon/downloadIcon.png";
   static const videoIcon = "assets/icon/videoIcon.png";
+  static const deleteIcon = "assets/icon/delete.png";
+  static const alertIcon = "assets/icon/alert.png";
 }

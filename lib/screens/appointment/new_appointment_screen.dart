@@ -4,12 +4,10 @@ import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_dropdown_button.dart';
 import 'package:infyhms_flutter/component/common_required_text.dart';
-import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/appointment_controller/new_appointment_controller.dart';
-import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class NewAppointmentScreen extends StatefulWidget {
@@ -60,9 +58,9 @@ class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
                             SizedBox(height: height * 0.01),
                             CommonDropDown(
                               onChange: (value) {
-                                print(value);
                                 controller.dateController.clear();
                                 controller.departmentId = value;
+                                controller.isSelectDate = false;
                                 controller.getDoctorName(int.parse(value!)).then((value) {
                                   controller.isSelectDoctorDepartment = true;
                                 });
@@ -95,9 +93,8 @@ class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
                               onChange: (value) {
                                 controller.doctorId = value!;
                                 controller.dateController.clear();
+                                controller.isSelectDate = false;
                                 controller.update();
-
-                                print(value);
                               },
                               hintText: StringUtils.selectDoctor,
                               dropdownItems: controller.isSelectDoctorDepartment != false
@@ -127,18 +124,8 @@ class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
                             CommonTextField(
                               readOnly: true,
                               onTap: () {
-                                controller.selectDate(context).then((value) async {
-                                  await StringUtils.client
-                                      .getBookingSlotDate(
-                                          "Bearer ${PreferenceUtils.getStringValue("token")}", controller.selectedDate!, controller.doctorId)
-                                      .then((value) {
-                                    controller.slotBookingModel = value;
-                                    controller.isSelectDate = true;
-                                    controller.selectedTime = controller.slotBookingModel!.data!.bookingSlotArr![0];
-
-                                    controller.update();
-                                  });
-                                });
+                                controller.selectedDate = null;
+                                controller.selectDateApiCall(context);
                               },
                               validator: (value) {
                                 return null;
@@ -246,16 +233,7 @@ class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
                                 CommonButton(
                                   textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                   onTap: () {
-                                    StringUtils.client
-                                        .createAppointment("Bearer ${PreferenceUtils.getStringValue("token")}", controller.departmentId!,
-                                            controller.doctorId, controller.selectedDate!, controller.selectedTime!)
-                                        .then((value) {
-                                      controller.createAppointmentModel = value;
-                                      if (value.success == true) {
-                                        DisplaySnackBar.displaySnackBar(context, value.message!);
-                                        Get.back();
-                                      }
-                                    });
+                                    controller.createNewAppointment(context);
                                   },
                                   color: ColorConst.blueColor,
                                   text: StringUtils.save,
@@ -280,9 +258,7 @@ class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
                       ),
                     ),
                   )
-                : const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                : const Center(child: CircularProgressIndicator());
           },
         ),
       ),
