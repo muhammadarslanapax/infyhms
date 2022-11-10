@@ -13,8 +13,8 @@ import 'package:infyhms_flutter/model/documents/documents_model/documents.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DocumentController extends GetxController {
   DocumentsModel? documentsModel;
@@ -54,7 +54,7 @@ class DocumentController extends GetxController {
         currentIndex.remove(index);
         update();
       } catch (e) {
-        DisplaySnackBar.displaySnackBar(context, "Document can't be downloaded");
+        DisplaySnackBar.displaySnackBar(context, "Documents can't be downloaded");
       }
     }
   }
