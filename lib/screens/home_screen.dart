@@ -107,7 +107,7 @@ class HomeScreen extends StatelessWidget {
                               controller.update();
                               switch (index) {
                                 case 0:
-                                  controller.currentWidget = AppointmentScreen();
+                                  controller.currentWidget =  AppointmentScreen();
                                   controller.appBarTitle.value = StringUtils.appointment;
                                   controller.currentDrawerIndex.value = 0;
                                   break;

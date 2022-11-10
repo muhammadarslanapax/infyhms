@@ -11,12 +11,12 @@ class DisplaySnackBar {
           style: TextStyleConst.mediumTextStyle(Colors.white, 17),
         ),
         elevation: 0,
-        duration: const Duration(seconds: 2),
+        duration: Duration(seconds: sec ?? 3),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),
         margin: const EdgeInsets.all(10),
-        dismissDirection: DismissDirection.up,
+        dismissDirection: DismissDirection.horizontal,
         behavior: SnackBarBehavior.floating,
       ),
     );

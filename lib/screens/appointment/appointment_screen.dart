@@ -45,6 +45,8 @@ class AppointmentScreen extends StatelessWidget {
                             filterAppointmentController.isApiCall.value = false;
                             switch (index) {
                               case 0:
+                                filterAppointmentController.isApiCall.value = false;
+
                                 appointmentController.currentIndex.value = 0;
                                 StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "past")
                                   ..then((value) {
@@ -56,6 +58,8 @@ class AppointmentScreen extends StatelessWidget {
                                   });
                                 break;
                               case 1:
+                                filterAppointmentController.isApiCall.value = false;
+
                                 appointmentController.currentIndex.value = 1;
                                 StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "pending")
                                   ..then((value) {
@@ -67,6 +71,8 @@ class AppointmentScreen extends StatelessWidget {
                                   });
                                 break;
                               case 2:
+                                filterAppointmentController.isApiCall.value = false;
+
                                 appointmentController.currentIndex.value = 2;
                                 StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "cancelled")
                                   ..then((value) {
@@ -78,6 +84,8 @@ class AppointmentScreen extends StatelessWidget {
                                   });
                                 break;
                               case 3:
+                                filterAppointmentController.isApiCall.value = false;
+
                                 appointmentController.currentIndex.value = 3;
                                 StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "completed")
                                   ..then((value) {
@@ -643,7 +651,7 @@ class AppointmentScreen extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                "No appointments found",
+                                "Appointment is empty",
                                 style: TextStyleConst.mediumTextStyle(
                                   ColorConst.blackColor,
                                   width * 0.04,

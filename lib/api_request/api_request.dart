@@ -21,6 +21,18 @@ import 'package:infyhms_flutter/model/diagnosis_model/diagnosis_test_details_mod
 import 'package:infyhms_flutter/model/diagnosis_model/diagnosis_test_model.dart';
 import 'package:infyhms_flutter/model/prescriptions_model/prescriptions_model.dart';
 import 'package:infyhms_flutter/model/vaccinated_model/vaccinated_model.dart';
+import 'package:infyhms_flutter/model/documents/document_delete_model/document_delete.dart';
+import 'package:infyhms_flutter/model/documents/document_download_model/document_download.dart';
+import 'package:infyhms_flutter/model/documents/document_store_model/document_store.dart';
+import 'package:infyhms_flutter/model/documents/document_update_model/document_update.dart';
+import 'package:infyhms_flutter/model/documents/documents_model/documents.dart';
+import 'package:infyhms_flutter/model/documents/documents_type_model/documents_type.dart';
+import 'package:infyhms_flutter/model/invoice/invoice_details_model.dart';
+import 'package:infyhms_flutter/model/invoice/invoice_model.dart';
+import 'package:infyhms_flutter/model/live_consultancy/live_consultation_details_model.dart';
+import 'package:infyhms_flutter/model/live_consultancy/live_consultation_filter.dart';
+import 'package:infyhms_flutter/model/live_consultancy/live_consultation_model.dart';
+import 'package:infyhms_flutter/model/notice_board_model/notice_board.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -70,6 +82,83 @@ abstract class ApiClient {
     @Field("opd_date") String selectedDate,
     @Field("time") String selectedTime,
   );
+
+  @GET("documents")
+  Future<DocumentsModel> getDocuments(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("document-type")
+  Future<DocumentsTypeModel> getDocumentsType(
+    @Header('Authorization') String? token,
+  );
+
+  @MultiPart()
+  @POST("document-store")
+  Future<DocumentStoreModel> storeDocument(
+    @Header('Authorization') String? token,
+    @Part(name: "title") String title,
+    @Part(name: "document_type_id") String documentTypeId,
+    @Part(name: "notes") String notes,
+    @Part(name: "file") File file,
+  );
+
+  @MultiPart()
+  @POST("document-update/{id}")
+  Future<DocumentUpdateModel> updateDocument(
+    @Header('Authorization') String? token,
+    @Part(name: "title") String title,
+    @Part(name: "document_type_id") String documentTypeId,
+    @Part(name: "notes") String notes,
+    @Part(name: "file") File? file,
+    @Path("id") int documentId,
+  );
+
+  @GET("document-delete/{id}")
+  Future<DocumentDeleteModel> deleteDocument(
+    @Header('Authorization') String? token,
+    @Path("id") int documentId,
+  );
+
+  @GET("document-download/{id}")
+  Future<DocumentDownloadModel> downloadDocument(
+    @Header('Authorization') String? token,
+    @Path("id") int documentId,
+  );
+
+  @GET("notice-board")
+  Future<NoticeBoardModel> getNoticeBoard(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("invoices")
+  Future<InvoiceModel> getInvoices(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("invoice/{id}")
+  Future<InvoiceDetailsModel> getInvoiceData(
+    @Header('Authorization') String? token,
+    @Path("id") int invoiceId,
+  );
+
+  @GET("live-consultation")
+  Future<LiveConsultationModel> liveConsultations(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("live-consultation/{id}")
+  Future<LiveConsultationDetailsModel> liveConsultationData(
+    @Header('Authorization') String? token,
+    @Path("id") int consultationId,
+  );
+
+  @POST("live-consultation-filter?status={status}")
+  Future<LiveConsultationFilter> liveConsultationFilter(
+    @Header('Authorization') String? token,
+    @Path("status") String status,
+  );
+}
 
   @POST("cancel-appointment")
   Future<CancelAppointmentModel> cancelAppointment(
