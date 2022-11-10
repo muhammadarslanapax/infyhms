@@ -16,76 +16,88 @@ class DiagnosisScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Obx(
       () => diagnosisTestController.isDiagnosisTestApiCall.value == true
-          ? Container(
-              color: Colors.white,
-              child: ListView.builder(
-                itemCount: diagnosisTestController.diagnosisTestModel!.data!.length,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    onTap: () {
-                      Get.to(
-                        () => DiagnosisTestDetailScreen(),
-                        transition: Transition.rightToLeft,
-                        arguments: diagnosisTestController.diagnosisTestModel!.data![index].id,
-                      );
-                    },
-                    contentPadding: EdgeInsets.only(top: index == 0 ? 15 : 10, left: 15, right: 15),
-                    leading: Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(diagnosisTestController.diagnosisTestModel!.data![index].patient_image!),
-                        ),
-                      ),
-                    ),
-                    trailing: GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 10),
-                        width: 25,
-                        height: 25,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(ImageUtils.downloadIcon),
-                          ),
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      diagnosisTestController.diagnosisTestModel!.data![index].doctor_name!,
+          ? diagnosisTestController.diagnosisTestModel!.data!.isEmpty
+              ? Center(
+                  child: Center(
+                    child: Text(
+                      "No diagnosis test found",
                       style: TextStyleConst.mediumTextStyle(
                         ColorConst.blackColor,
-                        width * 0.045,
+                        width * 0.04,
                       ),
                     ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: height * 0.002),
-                        Text(
-                          diagnosisTestController.diagnosisTestModel!.data![index].category!,
-                          style: TextStyleConst.mediumTextStyle(
-                            ColorConst.hintGreyColor,
-                            width * 0.035,
+                  ),
+                )
+              : Container(
+                  color: Colors.white,
+                  child: ListView.builder(
+                    itemCount: diagnosisTestController.diagnosisTestModel!.data!.length,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        onTap: () {
+                          Get.to(
+                            () => DiagnosisTestDetailScreen(),
+                            transition: Transition.rightToLeft,
+                            arguments: diagnosisTestController.diagnosisTestModel!.data![index].id,
+                          );
+                        },
+                        contentPadding: EdgeInsets.only(top: index == 0 ? 15 : 10, left: 15, right: 15),
+                        leading: Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(diagnosisTestController.diagnosisTestModel!.data![index].patient_image!),
+                            ),
                           ),
                         ),
-                        Text(
-                          "${diagnosisTestController.diagnosisTestModel!.data![index].report_number!} | ${diagnosisTestController.diagnosisTestModel!.data![index].created_at}",
-                          style: TextStyleConst.mediumTextStyle(
-                            ColorConst.hintGreyColor,
-                            width * 0.036,
+                        trailing: GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            width: 25,
+                            height: 25,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(ImageUtils.downloadIcon),
+                              ),
+                            ),
                           ),
                         ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            )
+                        title: Text(
+                          diagnosisTestController.diagnosisTestModel!.data![index].doctor_name!,
+                          style: TextStyleConst.mediumTextStyle(
+                            ColorConst.blackColor,
+                            width * 0.045,
+                          ),
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: height * 0.002),
+                            Text(
+                              diagnosisTestController.diagnosisTestModel!.data![index].category!,
+                              style: TextStyleConst.mediumTextStyle(
+                                ColorConst.hintGreyColor,
+                                width * 0.035,
+                              ),
+                            ),
+                            Text(
+                              "${diagnosisTestController.diagnosisTestModel!.data![index].report_number!} | ${diagnosisTestController.diagnosisTestModel!.data![index].created_at}",
+                              style: TextStyleConst.mediumTextStyle(
+                                ColorConst.hintGreyColor,
+                                width * 0.036,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                )
           : const Center(child: CircularProgressIndicator()),
     );
   }

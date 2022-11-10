@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:infyhms_flutter/model/account_model/edit_profile_model.dart';
 import 'package:infyhms_flutter/model/admission_model/admission_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/appointment_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/cancel_appointment/cancel_appoitment_model.dart';
@@ -9,6 +12,8 @@ import 'package:infyhms_flutter/model/appointment_model/doctor/get_doctor_model.
 import 'package:infyhms_flutter/model/appointment_model/filter/filter_appointment_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/slot_booking/slot_booking_model.dart';
 import 'package:infyhms_flutter/model/auth_model/login_model.dart';
+import 'package:infyhms_flutter/model/auth_model/logout_model.dart';
+import 'package:infyhms_flutter/model/auth_model/reset_password_model.dart';
 import 'package:infyhms_flutter/model/bills_model/bill_detail_model.dart';
 import 'package:infyhms_flutter/model/bills_model/bill_model.dart';
 import 'package:infyhms_flutter/model/case_model/case_model.dart';
@@ -119,9 +124,31 @@ abstract class ApiClient {
   Future<VaccinatedModel> getVaccinated(
     @Header('Authorization') String? token,
   );
-}
 
-// validateStatus: (statusCode) {
+  @MultiPart()
+  @POST("update-profile")
+  Future<EditProfileModel> editProfile(
+    @Header('Authorization') String? token,
+    @Part(name: "first_name") String firstName,
+    @Part(name: "last_name") String lastName,
+    @Part(name: "email") String email,
+    @Part(name: "phone") String phone,
+    @Part(name: "image") File? profileImage,
+  );
+
+  @POST("logout")
+  Future<LogoutModel> logout(
+    @Header('Authorization') String? token,
+  );
+
+  @POST("reset-password")
+  Future<ResetPasswordModel> resetPassword(
+    @Header('Authorization') String? token,
+    @Body() Map<String, dynamic> data,
+  );
+}
+//
+// validateStatus: (statusCod
 // if (statusCode == null) {
 // return false;
 // }

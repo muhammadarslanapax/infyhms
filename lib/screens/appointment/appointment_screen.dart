@@ -643,7 +643,7 @@ class AppointmentScreen extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                "Appointment is empty",
+                                "No appointments found",
                                 style: TextStyleConst.mediumTextStyle(
                                   ColorConst.blackColor,
                                   width * 0.04,

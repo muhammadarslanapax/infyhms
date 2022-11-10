@@ -7,6 +7,7 @@ import 'package:infyhms_flutter/controller/home_controller.dart';
 import 'package:infyhms_flutter/screens/account/my_account_screen.dart';
 import 'package:infyhms_flutter/screens/admission/admissions_screen.dart';
 import 'package:infyhms_flutter/screens/appointment/appointment_screen.dart';
+import 'package:infyhms_flutter/screens/auth/login_screen.dart';
 import 'package:infyhms_flutter/screens/bills/bills_screen.dart';
 import 'package:infyhms_flutter/screens/case/case_screen.dart';
 import 'package:infyhms_flutter/screens/consultancy/live_consultations_screen.dart';
@@ -20,6 +21,7 @@ import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/list_utils.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
+import 'package:infyhms_flutter/utils/variable_utils.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -53,28 +55,34 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: height * 0.02),
                   ListTile(
-                    title: Text(
-                      "${PreferenceUtils.getStringValue("first_name")} ${PreferenceUtils.getStringValue("last_name")}",
-                      style: TextStyleConst.mediumTextStyle(
-                        ColorConst.blackColor,
-                        width * 0.045,
+                    title: Obx(
+                      () => Text(
+                        "${VariableUtils.firstName} ${VariableUtils.lastName}",
+                        style: TextStyleConst.mediumTextStyle(
+                          ColorConst.blackColor,
+                          width * 0.045,
+                        ),
                       ),
                     ),
-                    subtitle: Text(
-                      PreferenceUtils.getStringValue("email"),
-                      style: TextStyleConst.mediumTextStyle(
-                        ColorConst.hintGreyColor,
-                        width * 0.035,
+                    subtitle: Obx(
+                      () => Text(
+                        VariableUtils.email.value,
+                        style: TextStyleConst.mediumTextStyle(
+                          ColorConst.hintGreyColor,
+                          width * 0.035,
+                        ),
                       ),
                     ),
-                    leading: Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(PreferenceUtils.getStringValue("image_url")),
+                    leading: Obx(
+                      () => Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(VariableUtils.imageUrl.replaceAll(" ", "")),
+                          ),
                         ),
                       ),
                     ),
@@ -82,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                       icon: const Icon(Icons.arrow_forward_ios_rounded, size: 15),
                       onPressed: () {
                         Get.back();
-                        Get.to(() => const MyAccountScreen());
+                        Get.to(() => MyAccountScreen());
                       },
                     ),
                   ),
@@ -180,7 +188,15 @@ class HomeScreen extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(right: 15),
                     child: ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        StringUtils.client.logout("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+                          controller.logoutModel = value;
+                          if (controller.logoutModel!.success == true) {
+                            PreferenceUtils.setStringValue("token", "");
+                            Get.offAll(() => LoginScreen());
+                          }
+                        });
+                      },
                       title: const Text(StringUtils.logOut),
                       leading: const SizedBox(
                         height: 25,
