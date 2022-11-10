@@ -23,6 +23,7 @@ class ChangePasswordScreen extends StatelessWidget {
           title: StringUtils.changePassword,
           leadOnTap: () {
             Get.back();
+            changePasswordController.clearController();
           },
           leadIcon: const Icon(
             Icons.arrow_back_rounded,

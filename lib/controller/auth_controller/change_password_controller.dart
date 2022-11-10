@@ -13,13 +13,13 @@ class ChangePasswordController extends GetxController {
   ResetPasswordModel? resetPasswordModel;
 
   void changePassword(BuildContext context) {
-    if (confirmPasswordController.text.isEmpty) {
+    if (currentPasswordController.text.isEmpty) {
       DisplaySnackBar.displaySnackBar(context, "Please enter current password");
     } else if (currentPasswordController.text != PreferenceUtils.getStringValue("password")) {
       DisplaySnackBar.displaySnackBar(context, "Please enter correct current password");
     } else if (newPasswordController.text.isEmpty) {
       DisplaySnackBar.displaySnackBar(context, "Please enter new password");
-    } else if (newPasswordController.text.length <= 6) {
+    } else if (newPasswordController.text.length < 6) {
       DisplaySnackBar.displaySnackBar(context, "Please enter minimum 6 character password");
     } else if (confirmPasswordController.text.isEmpty) {
       DisplaySnackBar.displaySnackBar(context, "Please enter confirm password");
