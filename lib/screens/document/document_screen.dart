@@ -25,103 +25,113 @@ class DocumentScreen extends StatelessWidget {
                 color: Colors.white,
                 child: controller.documentsModel == null
                     ? const Center(child: CircularProgressIndicator(color: ColorConst.primaryColor))
-                    : ListView.builder(
-                        itemCount: controller.documentsModel!.data!.length,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              Slidable(
-                                startActionPane: ActionPane(
-                                  extentRatio: 0.25,
-                                  motion: const ScrollMotion(),
-                                  children: [
-                                    SlidableAction(
-                                      onPressed: (contextAction) async {
-                                        final message = await Get.to(
-                                            () => EditDocumentScreen(documentId: controller.documentsModel?.data?[index].id ?? 0),
-                                            transition: Transition.leftToRight,
-                                            arguments: {
-                                              "title": controller.documentsModel?.data?[index].title,
-                                              "docType": controller.documentsModel?.data?[index].document_type_id,
-                                              "attachment": controller.documentsModel?.data?[index].document_url,
-                                              "note": controller.documentsModel?.data?[index].notes,
-                                            });
-                                        if (message == "Call API") {
-                                          controller.getDocuments();
-                                        }
-                                      },
-                                      backgroundColor: ColorConst.orangeColor.withOpacity(0.15),
-                                      label: StringUtils.edit,
-                                      // lableColor: ColorConst.orangeColor,
-                                    ),
-                                  ],
-                                ),
-                                endActionPane: ActionPane(
-                                  extentRatio: 0.25,
-                                  motion: const ScrollMotion(),
-                                  children: [
-                                    SlidableAction(
-                                      onPressed: (contextAction) {
-                                        controller.showDeleteDialog(context, height, width, index);
-                                      },
-                                      backgroundColor: const Color(0xFFFCE5E5),
-                                      label: StringUtils.delete,
-                                      // lableColor: Colors.red,
-                                    ),
-                                  ],
-                                ),
-                                child: ListTile(
-                                  onTap: () {},
-                                  contentPadding: EdgeInsets.only(top: index == 0 ? 15 : 0, right: 15, left: 15),
-                                  title: Text(
-                                    controller.documentsModel?.data?[index].title ?? "",
-                                    style: TextStyleConst.mediumTextStyle(
-                                      ColorConst.blackColor,
-                                      width * 0.045,
-                                    ),
-                                  ),
-                                  subtitle: Text(
-                                    controller.documentsModel?.data?[index].notes ?? "",
-                                    style: TextStyleConst.mediumTextStyle(
-                                      ColorConst.hintGreyColor,
-                                      width * 0.037,
-                                    ),
-                                  ),
-                                  leading: Container(
-                                    height: 35,
-                                    width: 35,
-                                    decoration: const BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.contain,
-                                        // image: NetworkImage(controller.documentsModel?.data?[index].document_url ?? ""),
-                                        image: AssetImage("assets/icon/imageIcon.png"),
-                                      ),
-                                    ),
-                                  ),
-                                  trailing: controller.isDownloading && controller.currentIndex.contains(index)
-                                      ? const CircularProgressIndicator(color: ColorConst.primaryColor)
-                                      : InkWell(
-                                          onTap: () {
-                                            controller.downloadDocument(context, index);
+                    : controller.documentsModel?.data?.isEmpty ?? true
+                        ? Center(
+                            child: Text(
+                              "No documents found",
+                              style: TextStyleConst.mediumTextStyle(
+                                ColorConst.blackColor,
+                                width * 0.04,
+                              ),
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: controller.documentsModel!.data!.length,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  Slidable(
+                                    startActionPane: ActionPane(
+                                      extentRatio: 0.25,
+                                      motion: const ScrollMotion(),
+                                      children: [
+                                        SlidableAction(
+                                          onPressed: (contextAction) async {
+                                            final message = await Get.to(
+                                                () => EditDocumentScreen(documentId: controller.documentsModel?.data?[index].id ?? 0),
+                                                transition: Transition.leftToRight,
+                                                arguments: {
+                                                  "title": controller.documentsModel?.data?[index].title,
+                                                  "docType": controller.documentsModel?.data?[index].document_type_id,
+                                                  "attachment": controller.documentsModel?.data?[index].document_url,
+                                                  "note": controller.documentsModel?.data?[index].notes,
+                                                });
+                                            if (message == "Call API") {
+                                              controller.getDocuments();
+                                            }
                                           },
-                                          child: Container(
-                                            margin: const EdgeInsets.only(right: 10),
-                                            width: 25,
-                                            height: 25,
-                                            decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(ImageUtils.downloadIcon),
-                                              ),
-                                            ),
+                                          backgroundColor: ColorConst.orangeColor.withOpacity(0.15),
+                                          label: StringUtils.edit,
+                                          // lableColor: ColorConst.orangeColor,
+                                        ),
+                                      ],
+                                    ),
+                                    endActionPane: ActionPane(
+                                      extentRatio: 0.25,
+                                      motion: const ScrollMotion(),
+                                      children: [
+                                        SlidableAction(
+                                          onPressed: (contextAction) {
+                                            controller.showDeleteDialog(context, height, width, index);
+                                          },
+                                          backgroundColor: const Color(0xFFFCE5E5),
+                                          label: StringUtils.delete,
+                                          // lableColor: Colors.red,
+                                        ),
+                                      ],
+                                    ),
+                                    child: ListTile(
+                                      onTap: () {},
+                                      contentPadding: EdgeInsets.only(top: index == 0 ? 15 : 0, right: 15, left: 15),
+                                      title: Text(
+                                        controller.documentsModel?.data?[index].title ?? "",
+                                        style: TextStyleConst.mediumTextStyle(
+                                          ColorConst.blackColor,
+                                          width * 0.045,
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        controller.documentsModel?.data?[index].notes ?? "",
+                                        style: TextStyleConst.mediumTextStyle(
+                                          ColorConst.hintGreyColor,
+                                          width * 0.037,
+                                        ),
+                                      ),
+                                      leading: Container(
+                                        height: 35,
+                                        width: 35,
+                                        decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            fit: BoxFit.contain,
+                                            // image: NetworkImage(controller.documentsModel?.data?[index].document_url ?? ""),
+                                            image: AssetImage("assets/icon/imageIcon.png"),
                                           ),
                                         ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      ),
+                                      ),
+                                      trailing: controller.isDownloading && controller.currentIndex.contains(index)
+                                          ? const CircularProgressIndicator(color: ColorConst.primaryColor)
+                                          : InkWell(
+                                              onTap: () {
+                                                controller.downloadDocument(context, index);
+                                              },
+                                              child: Container(
+                                                margin: const EdgeInsets.only(right: 10),
+                                                width: 25,
+                                                height: 25,
+                                                decoration: const BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage(ImageUtils.downloadIcon),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
               ),
               Align(
                 alignment: Alignment.bottomRight,

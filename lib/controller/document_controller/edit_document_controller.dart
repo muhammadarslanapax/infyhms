@@ -78,7 +78,6 @@ class EditDocumentController extends GetxController {
         ..onError((DioError error, stackTrace) {
           Get.back();
           Get.back();
-          print("+++$error++++");
           return DocumentUpdateModel();
         });
     }

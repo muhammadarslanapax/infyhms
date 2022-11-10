@@ -64,6 +64,8 @@ class LiveConsultationsController extends GetxController {
         gotConsultationData.value = true;
       })
       ..onError((DioError error, stackTrace) {
+        liveConsultationFilter.value = LiveConsultationFilter();
+        gotConsultationData.value = true;
         return LiveConsultationFilter();
       });
   }

@@ -28,11 +28,9 @@ class DocumentController extends GetxController {
   void downloadDocument(context, int index) async {
     currentIndex.add(index);
     String url = documentsModel?.data?[index].document_url ?? "";
-
     if (Platform.isIOS) {
       launchUrl(Uri.parse(url));
     } else {
-
       String fileName = url.substring(url.lastIndexOf("/") + 1);
       Directory? dir = await getExternalStorageDirectory();
       Directory filePath = await Directory("${dir!.path.split("/Android").first}/Documents/HMS").create();
@@ -160,10 +158,15 @@ class DocumentController extends GetxController {
   }
 
   void getDocuments() {
-    StringUtils.client.getDocuments("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
-      documentsModel = value;
-      update();
-    });
+    StringUtils.client.getDocuments("Bearer ${PreferenceUtils.getStringValue("token")}")
+      ..then((value) {
+        documentsModel = value;
+        update();
+      })
+      ..onError((DioError error, stackTrace) {
+        documentsModel = DocumentsModel();
+        return DocumentsModel();
+      });
   }
 
   @override
