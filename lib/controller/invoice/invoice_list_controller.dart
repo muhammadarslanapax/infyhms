@@ -11,6 +11,7 @@ class InvoiceListController extends GetxController {
     StringUtils.client.getInvoices("Bearer ${PreferenceUtils.getStringValue("token")}")
       ..then((value) {
         invoiceModel = value;
+        print(invoiceModel!.message);
         update();
       })
       ..onError((DioError error, stackTrace) {

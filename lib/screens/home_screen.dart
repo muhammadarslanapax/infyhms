@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                   ListTile(
                     title: Obx(
                       () => Text(
-                        "${VariableUtils.firstName} ${VariableUtils.lastName}",
+                        "${VariableUtils.firstName.value} ${VariableUtils.lastName.value}",
                         style: TextStyleConst.mediumTextStyle(
                           ColorConst.blackColor,
                           width * 0.045,
@@ -107,7 +107,7 @@ class HomeScreen extends StatelessWidget {
                               controller.update();
                               switch (index) {
                                 case 0:
-                                  controller.currentWidget =  AppointmentScreen();
+                                  controller.currentWidget = AppointmentScreen();
                                   controller.appBarTitle.value = StringUtils.appointment;
                                   controller.currentDrawerIndex.value = 0;
                                   break;

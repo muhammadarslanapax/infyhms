@@ -51,6 +51,7 @@ class InvoiceDetailsController extends GetxController {
   }
 
   void getInvoiceDetails() {
+    print(invoiceId);
     StringUtils.client.getInvoiceData("Bearer ${PreferenceUtils.getStringValue("token")}", invoiceId).then((value) {
       invoiceDetailsModel = value;
       update();

@@ -61,7 +61,9 @@ class InvoiceItemList {
   String? description;
   int? quantity;
   int? price;
-  int? total;
+  double? total;
+  double? discount;
+  double? amount;
 
   InvoiceItemList({
     this.id,
@@ -70,6 +72,8 @@ class InvoiceItemList {
     this.quantity,
     this.price,
     this.total,
+    this.amount,
+    this.discount,
   });
 
   factory InvoiceItemList.fromJson(Map<String, dynamic> json) => _$InvoiceItemListFromJson(json);

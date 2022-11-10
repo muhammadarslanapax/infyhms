@@ -235,7 +235,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          "\$ 1200",
+                                          "",
                                           style: TextStyleConst.mediumTextStyle(
                                             ColorConst.blackColor,
                                             width * 0.045,
