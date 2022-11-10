@@ -6,7 +6,6 @@ import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/model/invoice/invoice_details_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InvoiceDetailsController extends GetxController {
@@ -24,8 +23,7 @@ class InvoiceDetailsController extends GetxController {
       launchUrl(Uri.parse(url));
     } else {
       String fileName = url.substring(url.lastIndexOf("/") + 1);
-      Directory? dir = await getExternalStorageDirectory();
-      Directory filePath = await Directory("${dir!.path.split("/Android").first}/Documents/HMS").create();
+      Directory filePath = await Directory("storage/emulated/0/Documents/HMS").create(recursive: true);
       try {
         isDownloading = true;
         update();

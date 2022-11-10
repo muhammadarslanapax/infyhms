@@ -235,7 +235,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          "",
+                                          "${controller.invoiceDetailsModel?.data?.currencySymbol} ${controller.invoiceDetailsModel?.data?.sub_total ?? "N/A"}",
                                           style: TextStyleConst.mediumTextStyle(
                                             ColorConst.blackColor,
                                             width * 0.045,
@@ -258,7 +258,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          "\$ 12",
+                                          "${controller.invoiceDetailsModel?.data?.currencySymbol ?? "N/A"} ${controller.invoiceDetailsModel?.data?.discount ?? "N/A"}",
                                           style: TextStyleConst.mediumTextStyle(
                                             ColorConst.orangeColor,
                                             width * 0.045,
@@ -290,7 +290,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          "\$ 870",
+                                          "${controller.invoiceDetailsModel?.data?.currencySymbol ?? "N/A"} ${controller.invoiceDetailsModel?.data?.total_amount ?? "N/A"}",
                                           style: TextStyleConst.boldTextStyle(
                                             ColorConst.blackColor,
                                             width * 0.045,

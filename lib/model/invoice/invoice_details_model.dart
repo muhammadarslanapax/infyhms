@@ -27,12 +27,15 @@ class InvoiceDetailsData {
   String? patient_name;
   String? issued_by;
   String? hospital_address;
-  List<InvoiceItemList>? invoice_items;
   String? address;
   String? city;
   String? zip;
   String? currencySymbol;
   String? invoice_download;
+  List<InvoiceItemList>? invoice_items;
+  dynamic sub_total;
+  dynamic discount;
+  dynamic total_amount;
 
   InvoiceDetailsData({
     this.id,
@@ -41,12 +44,15 @@ class InvoiceDetailsData {
     this.patient_name,
     this.issued_by,
     this.hospital_address,
-    this.invoice_items,
     this.address,
     this.city,
     this.zip,
     this.currencySymbol,
     this.invoice_download,
+    this.invoice_items,
+    this.sub_total,
+    this.discount,
+    this.total_amount,
   });
 
   factory InvoiceDetailsData.fromJson(Map<String, dynamic> json) => _$InvoiceDetailsDataFromJson(json);
@@ -60,10 +66,8 @@ class InvoiceItemList {
   String? account_name;
   String? description;
   int? quantity;
-  int? price;
-  double? total;
-  double? discount;
-  double? amount;
+  dynamic price;
+  dynamic total;
 
   InvoiceItemList({
     this.id,
@@ -72,8 +76,6 @@ class InvoiceItemList {
     this.quantity,
     this.price,
     this.total,
-    this.amount,
-    this.discount,
   });
 
   factory InvoiceItemList.fromJson(Map<String, dynamic> json) => _$InvoiceItemListFromJson(json);

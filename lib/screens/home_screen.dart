@@ -104,6 +104,7 @@ class HomeScreen extends StatelessWidget {
                           return ListTile(
                             onTap: () {
                               Get.back();
+                              Get.deleteAll();
                               controller.update();
                               switch (index) {
                                 case 0:
