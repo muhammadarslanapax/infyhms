@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
+import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/model/appointment_model/create_appointment/create_appointment_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/doctor/doctor_department_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/doctor/get_doctor_model.dart';
@@ -33,19 +35,29 @@ class NewAppointmentController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    StringUtils.client.getDoctorDepartment("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
-      doctorDepartmentModel = value;
-      update();
-    });
+    StringUtils.client.getDoctorDepartment("Bearer ${PreferenceUtils.getStringValue("token")}")
+      ..then((value) {
+        doctorDepartmentModel = value;
+        update();
+      })
+      ..onError((DioError error, stackTrace) {
+        CheckSocketException.checkSocketException(error);
+        return DoctorDepartmentModel();
+      });
   }
 
-  Future getDoctorName(int id) async {
-    await StringUtils.client.getDoctor("Bearer ${PreferenceUtils.getStringValue("token")}", id).then((value) {
-      getDoctorModel = value;
-      doctorId = value.data![0].id.toString();
-      isSelectDoctor = true;
-      update();
-    });
+  getDoctorName(int id) {
+    StringUtils.client.getDoctor("Bearer ${PreferenceUtils.getStringValue("token")}", id)
+      ..then((value) {
+        getDoctorModel = value;
+        doctorId = value.data![0].id.toString();
+        isSelectDoctor = true;
+        update();
+      })
+      ..onError((DioError error, stackTrace) {
+        CheckSocketException.checkSocketException(error);
+        return GetDoctorModel();
+      });
   }
 
   Future<void> selectDate(BuildContext context) async {
@@ -72,6 +84,8 @@ class NewAppointmentController extends GetxController {
               selectedTime = slotBookingModel!.data!.bookingSlotArr![0];
             }
             update();
+          }).onError((DioError error, stackTrace) {
+            CheckSocketException.checkSocketException(error);
           });
         }
       });
@@ -88,15 +102,18 @@ class NewAppointmentController extends GetxController {
     } else if (slotBookingModel!.data!.bookingSlotArr!.isEmpty) {
       DisplaySnackBar.displaySnackBar(context, "Please select other date");
     } else {
-      StringUtils.client
-          .createAppointment("Bearer ${PreferenceUtils.getStringValue("token")}", departmentId!, doctorId, selectedDate!, selectedTime!)
-          .then((value) {
-        createAppointmentModel = value;
-        if (value.success == true) {
-          DisplaySnackBar.displaySnackBar(context, value.message!);
-          Get.back();
-        }
-      });
+      StringUtils.client.createAppointment("Bearer ${PreferenceUtils.getStringValue("token")}", departmentId!, doctorId, selectedDate!, selectedTime!)
+        ..then((value) {
+          createAppointmentModel = value;
+          if (value.success == true) {
+            DisplaySnackBar.displaySnackBar(context, value.message!);
+            Get.back();
+          }
+        })
+        ..onError((DioError error, stackTrace) {
+          CheckSocketException.checkSocketException(error);
+          return CreateAppointmentModel();
+        });
     }
   }
 }

@@ -267,7 +267,9 @@ class BillDetailScreen extends StatelessWidget {
                                 height: 50,
                                 text: StringUtils.downloadBill,
                                 color: ColorConst.blueColor,
-                                onTap: () {},
+                                onTap: () {
+                                  billDetailsController.downloadPDF(context, billDetailsController.billDetailModel!.data!.bill_download!);
+                                },
                                 textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                               ),
                             ),

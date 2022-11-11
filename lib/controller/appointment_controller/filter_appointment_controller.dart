@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/controller/appointment_controller/appointment_controller.dart';
 import 'package:infyhms_flutter/model/appointment_model/cancel_appointment/cancel_appoitment_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/delete_appointement/delete_appointment_model.dart';
@@ -18,14 +19,12 @@ class FilterAppointmentController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     if (appointmentController.currentIndex.value == 0) {
-      StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "past")
-        ..then((value) {
-          filterAppointmentModel = value;
-          isApiCall.value = true;
-        })
-        ..onError((DioError error, stackTrace) {
-          return FilterAppointmentModel();
-        });
+      StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "past").then((value) {
+        filterAppointmentModel = value;
+        isApiCall.value = true;
+      }).onError((DioError error, stackTrace) {
+        CheckSocketException.checkSocketException(error);
+      });
     }
   }
 }

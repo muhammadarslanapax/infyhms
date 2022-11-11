@@ -4,7 +4,7 @@ import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_detail_text.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/controller/live_consultancy/live_consultations_controller.dart';
+import 'package:infyhms_flutter/controller/live_consultancy_controller/live_consultations_controller.dart';
 import 'package:infyhms_flutter/screens/consultancy/live_consultations_detail_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/widget/live_consul_status.dart';

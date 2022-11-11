@@ -55,7 +55,9 @@ class DiagnosisScreen extends StatelessWidget {
                           ),
                         ),
                         trailing: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            diagnosisTestController.downloadPDF(context, diagnosisTestController.diagnosisTestModel!.data![index].pdf_url!);
+                          },
                           child: Container(
                             margin: const EdgeInsets.only(right: 10),
                             width: 25,

@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_app_bar.dart';
+import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/home_controller.dart';
@@ -196,6 +198,8 @@ class HomeScreen extends StatelessWidget {
                             PreferenceUtils.setStringValue("token", "");
                             Get.offAll(() => LoginScreen());
                           }
+                        }).onError((DioError error, stackTrace) {
+                          CheckSocketException.checkSocketException(error);
                         });
                       },
                       title: const Text(StringUtils.logOut),

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
+import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/model/live_consultancy/live_consultation_details_model.dart';
 import 'package:infyhms_flutter/model/live_consultancy/live_consultation_filter.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
@@ -25,14 +26,12 @@ class LiveConsultationsController extends GetxController {
 
   void getDetailsOfConsultation(int consultationId) {
     gotDetailsOfConsultation.value = false;
-    StringUtils.client.liveConsultationData("Bearer ${PreferenceUtils.getStringValue("token")}", consultationId)
-      ..then((value) {
-        liveConsultationDetailsModel.value = value;
-        gotDetailsOfConsultation.value = true;
-      })
-      ..onError((DioError error, stackTrace) {
-        return LiveConsultationDetailsModel();
-      });
+    StringUtils.client.liveConsultationData("Bearer ${PreferenceUtils.getStringValue("token")}", consultationId).then((value) {
+      liveConsultationDetailsModel.value = value;
+      gotDetailsOfConsultation.value = true;
+    }).onError((DioError error, stackTrace) {
+      CheckSocketException.checkSocketException(error);
+    });
   }
 
   void changeIndex(int index) {
@@ -58,16 +57,14 @@ class LiveConsultationsController extends GetxController {
   }
 
   void getConsultancy(String status) {
-    StringUtils.client.liveConsultationFilter("Bearer ${PreferenceUtils.getStringValue("token")}", status)
-      ..then((value) {
-        liveConsultationFilter.value = value;
-        gotConsultationData.value = true;
-      })
-      ..onError((DioError error, stackTrace) {
-        liveConsultationFilter.value = LiveConsultationFilter();
-        gotConsultationData.value = true;
-        return LiveConsultationFilter();
-      });
+    StringUtils.client.liveConsultationFilter("Bearer ${PreferenceUtils.getStringValue("token")}", status).then((value) {
+      liveConsultationFilter.value = value;
+      gotConsultationData.value = true;
+    }).onError((DioError error, stackTrace) {
+      liveConsultationFilter.value = LiveConsultationFilter();
+      gotConsultationData.value = true;
+      CheckSocketException.checkSocketException(error);
+    });
   }
 
   @override

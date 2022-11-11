@@ -22,7 +22,5 @@ class HomeController extends GetxController {
     VariableUtils.email.value = PreferenceUtils.getStringValue("email");
     VariableUtils.phoneNo.value = PreferenceUtils.getStringValue("phone_number");
     VariableUtils.imageUrl.value = PreferenceUtils.getStringValue("image_url");
-
-    print(VariableUtils.firstName.value);
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/controller/notice_board_controller.dart';
+import 'package:infyhms_flutter/controller/notice_board_controller/notice_board_controller.dart';
 
 class NoticeBoardScreen extends StatelessWidget {
   const NoticeBoardScreen({Key? key}) : super(key: key);

@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/model/account_model/edit_profile_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
@@ -63,6 +65,8 @@ class EditProfileController extends GetxController {
 
         Get.back();
       }
+    }).onError((DioError error, stackTrace) {
+      CheckSocketException.checkSocketException(error);
     });
   }
 }

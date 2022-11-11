@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_detail_text.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
-import 'package:infyhms_flutter/controller/live_consultancy/live_consultations_controller.dart';
+import 'package:infyhms_flutter/controller/live_consultancy_controller/live_consultations_controller.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class LiveConsultationsDetailScreen extends StatelessWidget {

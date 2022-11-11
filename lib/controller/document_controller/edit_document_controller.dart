@@ -6,8 +6,9 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:infyhms_flutter/component/common_loader.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
-import 'package:infyhms_flutter/model/documents/document_update_model/document_update.dart';
-import 'package:infyhms_flutter/model/documents/documents_type_model/documents_type.dart';
+import 'package:infyhms_flutter/component/common_socket_exception.dart';
+import 'package:infyhms_flutter/model/documents_model/document_update_model/document_update.dart';
+import 'package:infyhms_flutter/model/documents_model/documents_type_model/documents_type.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
@@ -78,6 +79,7 @@ class EditDocumentController extends GetxController {
         ..onError((DioError error, stackTrace) {
           Get.back();
           Get.back();
+          CheckSocketException.checkSocketException(error);
           return DocumentUpdateModel();
         });
     }

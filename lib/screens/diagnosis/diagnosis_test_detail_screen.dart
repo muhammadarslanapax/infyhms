@@ -103,7 +103,10 @@ class DiagnosisTestDetailScreen extends StatelessWidget {
                             height: 50,
                             text: StringUtils.downloadDiagnosisTest,
                             color: ColorConst.blueColor,
-                            onTap: () {},
+                            onTap: () {
+                              diagnosisTestDetailsController.downloadPDF(
+                                  context, diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.pdf_url!);
+                            },
                             textStyleConst: TextStyleConst.mediumTextStyle(
                               ColorConst.whiteColor,
                               width * 0.05,

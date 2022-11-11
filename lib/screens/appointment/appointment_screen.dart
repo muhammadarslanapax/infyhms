@@ -4,11 +4,11 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
+import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/appointment_controller/appointment_controller.dart';
 import 'package:infyhms_flutter/controller/appointment_controller/filter_appointment_controller.dart';
-import 'package:infyhms_flutter/model/appointment_model/filter/filter_appointment_model.dart';
 import 'package:infyhms_flutter/screens/appointment/new_appointment_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
@@ -48,53 +48,49 @@ class AppointmentScreen extends StatelessWidget {
                                 filterAppointmentController.isApiCall.value = false;
 
                                 appointmentController.currentIndex.value = 0;
-                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "past")
-                                  ..then((value) {
-                                    filterAppointmentController.filterAppointmentModel = value;
-                                    filterAppointmentController.isApiCall.value = true;
-                                  })
-                                  ..onError((DioError error, stackTrace) {
-                                    return FilterAppointmentModel();
-                                  });
+                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "past").then((value) {
+                                  filterAppointmentController.filterAppointmentModel = value;
+                                  filterAppointmentController.isApiCall.value = true;
+                                }).onError((DioError error, stackTrace) {
+                                  CheckSocketException.checkSocketException(error);
+                                });
                                 break;
                               case 1:
                                 filterAppointmentController.isApiCall.value = false;
 
                                 appointmentController.currentIndex.value = 1;
-                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "pending")
-                                  ..then((value) {
-                                    filterAppointmentController.filterAppointmentModel = value;
-                                    filterAppointmentController.isApiCall.value = true;
-                                  })
-                                  ..onError((DioError error, stackTrace) {
-                                    return FilterAppointmentModel();
-                                  });
+                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "pending").then((value) {
+                                  filterAppointmentController.filterAppointmentModel = value;
+                                  filterAppointmentController.isApiCall.value = true;
+                                }).onError((DioError error, stackTrace) {
+                                  CheckSocketException.checkSocketException(error);
+                                });
                                 break;
                               case 2:
                                 filterAppointmentController.isApiCall.value = false;
 
                                 appointmentController.currentIndex.value = 2;
-                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "cancelled")
-                                  ..then((value) {
-                                    filterAppointmentController.filterAppointmentModel = value;
-                                    filterAppointmentController.isApiCall.value = true;
-                                  })
-                                  ..onError((DioError error, stackTrace) {
-                                    return FilterAppointmentModel();
-                                  });
+                                StringUtils.client
+                                    .getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "cancelled")
+                                    .then((value) {
+                                  filterAppointmentController.filterAppointmentModel = value;
+                                  filterAppointmentController.isApiCall.value = true;
+                                }).onError((DioError error, stackTrace) {
+                                  CheckSocketException.checkSocketException(error);
+                                });
                                 break;
                               case 3:
                                 filterAppointmentController.isApiCall.value = false;
 
                                 appointmentController.currentIndex.value = 3;
-                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "completed")
-                                  ..then((value) {
-                                    filterAppointmentController.filterAppointmentModel = value;
-                                    filterAppointmentController.isApiCall.value = true;
-                                  })
-                                  ..onError((DioError error, stackTrace) {
-                                    return FilterAppointmentModel();
-                                  });
+                                StringUtils.client
+                                    .getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "completed")
+                                    .then((value) {
+                                  filterAppointmentController.filterAppointmentModel = value;
+                                  filterAppointmentController.isApiCall.value = true;
+                                }).onError((DioError error, stackTrace) {
+                                  CheckSocketException.checkSocketException(error);
+                                });
                                 break;
                             }
                           },
@@ -315,64 +311,50 @@ class AppointmentScreen extends StatelessWidget {
                                                                           if (filterAppointmentController.deleteAppointmentModel!.success == true) {
                                                                             switch (appointmentController.currentIndex.value) {
                                                                               case 0:
-                                                                                print(index);
                                                                                 filterAppointmentController.isApiCall.value = false;
 
                                                                                 appointmentController.currentIndex.value = 0;
-                                                                                StringUtils.client.getPastAppointments(
-                                                                                    "Bearer ${PreferenceUtils.getStringValue("token")}", "past")
-                                                                                  ..then((value) {
-                                                                                    filterAppointmentController.filterAppointmentModel = value;
-                                                                                    filterAppointmentController.isApiCall.value = true;
-                                                                                  })
-                                                                                  ..onError((DioError error, stackTrace) {
-                                                                                    return FilterAppointmentModel();
-                                                                                  });
+                                                                                StringUtils.client
+                                                                                    .getPastAppointments(
+                                                                                        "Bearer ${PreferenceUtils.getStringValue("token")}", "past")
+                                                                                    .then((value) {
+                                                                                  filterAppointmentController.filterAppointmentModel = value;
+                                                                                  filterAppointmentController.isApiCall.value = true;
+                                                                                }).onError((DioError error, stackTrace) {
+                                                                                  CheckSocketException.checkSocketException(error);
+                                                                                });
                                                                                 break;
                                                                               case 1:
                                                                                 print(index);
                                                                                 filterAppointmentController.isApiCall.value = false;
 
                                                                                 appointmentController.currentIndex.value = 1;
-                                                                                StringUtils.client.getPastAppointments(
-                                                                                    "Bearer ${PreferenceUtils.getStringValue("token")}", "pending")
-                                                                                  ..then((value) {
-                                                                                    filterAppointmentController.filterAppointmentModel = value;
-                                                                                    filterAppointmentController.isApiCall.value = true;
-                                                                                  })
-                                                                                  ..onError((DioError error, stackTrace) {
-                                                                                    return FilterAppointmentModel();
-                                                                                  });
+                                                                                StringUtils.client
+                                                                                    .getPastAppointments(
+                                                                                        "Bearer ${PreferenceUtils.getStringValue("token")}",
+                                                                                        "pending")
+                                                                                    .then((value) {
+                                                                                  filterAppointmentController.filterAppointmentModel = value;
+                                                                                  filterAppointmentController.isApiCall.value = true;
+                                                                                }).onError((DioError error, stackTrace) {
+                                                                                  CheckSocketException.checkSocketException(error);
+                                                                                });
                                                                                 break;
-                                                                              // case 2:
-                                                                              //   filterAppointmentController.isApiCall.value = false;
-                                                                              //
-                                                                              //   appointmentController.currentIndex.value = 2;
-                                                                              //   StringUtils.client.getPastAppointments(
-                                                                              //       "Bearer ${PreferenceUtils.getStringValue("token")}", "cancelled")
-                                                                              //     ..then((value) {
-                                                                              //       filterAppointmentController.filterAppointmentModel = value;
-                                                                              //       filterAppointmentController.isApiCall.value = true;
-                                                                              //     })
-                                                                              //     ..onError((DioError error, stackTrace) {
-                                                                              //       return FilterAppointmentModel();
-                                                                              //     });
-                                                                              //   break;
-                                                                              case 3:
-                                                                                print(index);
 
+                                                                              case 3:
                                                                                 filterAppointmentController.isApiCall.value = false;
 
                                                                                 appointmentController.currentIndex.value = 3;
-                                                                                StringUtils.client.getPastAppointments(
-                                                                                    "Bearer ${PreferenceUtils.getStringValue("token")}", "completed")
-                                                                                  ..then((value) {
-                                                                                    filterAppointmentController.filterAppointmentModel = value;
-                                                                                    filterAppointmentController.isApiCall.value = true;
-                                                                                  })
-                                                                                  ..onError((DioError error, stackTrace) {
-                                                                                    return FilterAppointmentModel();
-                                                                                  });
+                                                                                StringUtils.client
+                                                                                    .getPastAppointments(
+                                                                                        "Bearer ${PreferenceUtils.getStringValue("token")}",
+                                                                                        "completed")
+                                                                                    .then((value) {
+                                                                                  filterAppointmentController.filterAppointmentModel = value;
+                                                                                  filterAppointmentController.isApiCall.value = true;
+                                                                                }).onError((DioError error, stackTrace) {
+                                                                                  CheckSocketException.checkSocketException(error);
+                                                                                });
                                                                                 break;
                                                                             }
                                                                           }
@@ -538,15 +520,15 @@ class AppointmentScreen extends StatelessWidget {
                                                                             filterAppointmentController.isApiCall.value = false;
 
                                                                             appointmentController.currentIndex.value = 2;
-                                                                            StringUtils.client.getPastAppointments(
-                                                                                "Bearer ${PreferenceUtils.getStringValue("token")}", "cancelled")
-                                                                              ..then((value) {
-                                                                                filterAppointmentController.filterAppointmentModel = value;
-                                                                                filterAppointmentController.isApiCall.value = true;
-                                                                              })
-                                                                              ..onError((DioError error, stackTrace) {
-                                                                                return FilterAppointmentModel();
-                                                                              });
+                                                                            StringUtils.client
+                                                                                .getPastAppointments(
+                                                                                    "Bearer ${PreferenceUtils.getStringValue("token")}", "cancelled")
+                                                                                .then((value) {
+                                                                              filterAppointmentController.filterAppointmentModel = value;
+                                                                              filterAppointmentController.isApiCall.value = true;
+                                                                            }).onError((DioError error, stackTrace) {
+                                                                              CheckSocketException.checkSocketException(error);
+                                                                            });
                                                                           }
 
                                                                           Get.back();

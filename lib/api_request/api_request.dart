@@ -19,14 +19,14 @@ import 'package:infyhms_flutter/model/bills_model/bill_model.dart';
 import 'package:infyhms_flutter/model/case_model/case_model.dart';
 import 'package:infyhms_flutter/model/diagnosis_model/diagnosis_test_details_model.dart';
 import 'package:infyhms_flutter/model/diagnosis_model/diagnosis_test_model.dart';
-import 'package:infyhms_flutter/model/documents/document_delete_model/document_delete.dart';
-import 'package:infyhms_flutter/model/documents/document_download_model/document_download.dart';
-import 'package:infyhms_flutter/model/documents/document_store_model/document_store.dart';
-import 'package:infyhms_flutter/model/documents/document_update_model/document_update.dart';
-import 'package:infyhms_flutter/model/documents/documents_model/documents.dart';
-import 'package:infyhms_flutter/model/documents/documents_type_model/documents_type.dart';
-import 'package:infyhms_flutter/model/invoice/invoice_details_model.dart';
-import 'package:infyhms_flutter/model/invoice/invoice_model.dart';
+import 'package:infyhms_flutter/model/documents_model/document_delete_model/document_delete.dart';
+import 'package:infyhms_flutter/model/documents_model/document_download_model/document_download.dart';
+import 'package:infyhms_flutter/model/documents_model/document_store_model/document_store.dart';
+import 'package:infyhms_flutter/model/documents_model/document_update_model/document_update.dart';
+import 'package:infyhms_flutter/model/documents_model/documents_model/documents.dart';
+import 'package:infyhms_flutter/model/documents_model/documents_type_model/documents_type.dart';
+import 'package:infyhms_flutter/model/invoice_model/invoice_details_model.dart';
+import 'package:infyhms_flutter/model/invoice_model/invoice_model.dart';
 import 'package:infyhms_flutter/model/live_consultancy/live_consultation_details_model.dart';
 import 'package:infyhms_flutter/model/live_consultancy/live_consultation_filter.dart';
 import 'package:infyhms_flutter/model/live_consultancy/live_consultation_model.dart';
@@ -235,7 +235,7 @@ abstract class ApiClient {
     @Body() Map<String, dynamic> data,
   );
 }
-//
+
 // validateStatus: (statusCod
 // if (statusCode == null) {
 // return false;

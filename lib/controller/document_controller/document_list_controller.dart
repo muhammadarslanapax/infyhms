@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_loader.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
+import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/model/documents/document_delete_model/document_delete.dart';
-import 'package:infyhms_flutter/model/documents/documents_model/documents.dart';
+import 'package:infyhms_flutter/model/documents_model/documents_model/documents.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
@@ -144,29 +144,25 @@ class DocumentController extends GetxController {
 
   void deleteData(BuildContext context, int id) {
     CommonLoader.showLoader(context);
-    StringUtils.client.deleteDocument("Bearer ${PreferenceUtils.getStringValue("token")}", id)
-      ..then((value) {
-        DisplaySnackBar.displaySnackBar(context, "Document deleted");
-        Get.back();
-        getDocuments();
-      })
-      ..onError((DioError error, stackTrace) {
-        Get.back();
-        DisplaySnackBar.displaySnackBar(context, error.message);
-        return DocumentDeleteModel();
-      });
+    StringUtils.client.deleteDocument("Bearer ${PreferenceUtils.getStringValue("token")}", id).then((value) {
+      DisplaySnackBar.displaySnackBar(context, "Document deleted");
+      Get.back();
+      getDocuments();
+    }).onError((DioError error, stackTrace) {
+      Get.back();
+      DisplaySnackBar.displaySnackBar(context, error.message);
+      CheckSocketException.checkSocketException(error);
+    });
   }
 
   void getDocuments() {
-    StringUtils.client.getDocuments("Bearer ${PreferenceUtils.getStringValue("token")}")
-      ..then((value) {
-        documentsModel = value;
-        update();
-      })
-      ..onError((DioError error, stackTrace) {
-        documentsModel = DocumentsModel();
-        return DocumentsModel();
-      });
+    StringUtils.client.getDocuments("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+      documentsModel = value;
+      update();
+    }).onError((DioError error, stackTrace) {
+      documentsModel = DocumentsModel();
+      CheckSocketException.checkSocketException(error);
+    });
   }
 
   @override

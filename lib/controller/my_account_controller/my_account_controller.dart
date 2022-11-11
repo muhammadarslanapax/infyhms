@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/model/auth_model/logout_model.dart';
 import 'package:infyhms_flutter/screens/auth/login_screen.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
@@ -13,6 +15,8 @@ class MyAccountController extends GetxController {
         PreferenceUtils.setStringValue("token", "");
         Get.offAll(() => LoginScreen());
       }
+    }).onError((DioError error, stackTrace) {
+      CheckSocketException.checkSocketException(error);
     });
   }
 }
