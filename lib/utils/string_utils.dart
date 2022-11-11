@@ -9,7 +9,10 @@ class StringUtils {
 
   /// auth
   static const signIn = "Sign In";
+  static const resetPassword = "Reset Password";
   static const signInEmail = "Enter Email Address";
+  static const enterNewPassword = "Enter New Password";
+  static const enterConfirmPassword = "Enter Confirm Password";
   static const signInPassword = "Enter Password";
   static const forgotPassword = "Forgot Password?";
   static const rememberPassword = "Remember Me";
@@ -17,6 +20,8 @@ class StringUtils {
   static const forgotScreenDetail = "Enter your email to reset your password";
   static const sendLink = "Send Link";
   static const cancel = "Cancel";
+  static String? token;
+
   static const yes = "Yes";
   static const no = "No";
 

@@ -2,23 +2,29 @@
 
 part of 'invoice_details_model.dart';
 
-// **
+// **************************************************************************
 // JsonSerializableGenerator
-// **
+// **************************************************************************
 
-InvoiceDetailsModel _$InvoiceDetailsModelFromJson(Map<String, dynamic> json) => InvoiceDetailsModel(
+InvoiceDetailsModel _$InvoiceDetailsModelFromJson(Map<String, dynamic> json) =>
+    InvoiceDetailsModel(
       success: json['success'] as bool?,
-      data: json['data'] == null ? null : InvoiceDetailsData.fromJson(json['data'] as Map<String, dynamic>),
+      data: json['data'] == null
+          ? null
+          : InvoiceDetailsData.fromJson(json['data'] as Map<String, dynamic>),
       message: json['message'] as String?,
     );
 
-Map<String, dynamic> _$InvoiceDetailsModelToJson(InvoiceDetailsModel instance) => <String, dynamic>{
+Map<String, dynamic> _$InvoiceDetailsModelToJson(
+        InvoiceDetailsModel instance) =>
+    <String, dynamic>{
       'success': instance.success,
       'data': instance.data,
       'message': instance.message,
     };
 
-InvoiceDetailsData _$InvoiceDetailsDataFromJson(Map<String, dynamic> json) => InvoiceDetailsData(
+InvoiceDetailsData _$InvoiceDetailsDataFromJson(Map<String, dynamic> json) =>
+    InvoiceDetailsData(
       id: json['id'] as int?,
       invoice_id: json['invoice_id'] as String?,
       invoice_date: json['invoice_date'] as String?,
@@ -30,13 +36,16 @@ InvoiceDetailsData _$InvoiceDetailsDataFromJson(Map<String, dynamic> json) => In
       zip: json['zip'] as String?,
       currencySymbol: json['currencySymbol'] as String?,
       invoice_download: json['invoice_download'] as String?,
-      invoice_items: (json['invoice_items'] as List<dynamic>?)?.map((e) => InvoiceItemList.fromJson(e as Map<String, dynamic>)).toList(),
+      invoice_items: (json['invoice_items'] as List<dynamic>?)
+          ?.map((e) => InvoiceItemList.fromJson(e as Map<String, dynamic>))
+          .toList(),
       sub_total: json['sub_total'],
       discount: json['discount'],
       total_amount: json['total_amount'],
     );
 
-Map<String, dynamic> _$InvoiceDetailsDataToJson(InvoiceDetailsData instance) => <String, dynamic>{
+Map<String, dynamic> _$InvoiceDetailsDataToJson(InvoiceDetailsData instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'invoice_id': instance.invoice_id,
       'invoice_date': instance.invoice_date,
@@ -54,7 +63,8 @@ Map<String, dynamic> _$InvoiceDetailsDataToJson(InvoiceDetailsData instance) => 
       'total_amount': instance.total_amount,
     };
 
-InvoiceItemList _$InvoiceItemListFromJson(Map<String, dynamic> json) => InvoiceItemList(
+InvoiceItemList _$InvoiceItemListFromJson(Map<String, dynamic> json) =>
+    InvoiceItemList(
       id: json['id'] as int?,
       account_name: json['account_name'] as String?,
       description: json['description'] as String?,
@@ -63,7 +73,8 @@ InvoiceItemList _$InvoiceItemListFromJson(Map<String, dynamic> json) => InvoiceI
       total: json['total'],
     );
 
-Map<String, dynamic> _$InvoiceItemListToJson(InvoiceItemList instance) => <String, dynamic>{
+Map<String, dynamic> _$InvoiceItemListToJson(InvoiceItemList instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'account_name': instance.account_name,
       'description': instance.description,

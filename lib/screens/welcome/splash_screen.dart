@@ -2,7 +2,9 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/controller/intro_controller/splash_controller.dart';
+import 'package:infyhms_flutter/screens/auth/reset_password_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
+import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -40,6 +42,9 @@ class _SplashScreenState extends State<SplashScreen> {
     final Uri? deepLink = data?.link;
     if (deepLink != null) {
       print('_handleDeepLink | deeplink: $deepLink');
+      StringUtils.token = deepLink.toString().split("/").last;
+      print("+++++++++++++++${StringUtils.token}");
+      Get.to(() => ResetPasswordScreen());
     }
   }
 

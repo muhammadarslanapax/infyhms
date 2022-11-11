@@ -54,7 +54,7 @@ class MyAccountScreen extends StatelessWidget {
             SizedBox(height: height * 0.03),
             Obx(
               () => Text(
-                "${VariableUtils.firstName} ${VariableUtils.lastName}",
+                "${VariableUtils.firstName.value} ${VariableUtils.lastName.value}",
                 style: TextStyleConst.mediumTextStyle(
                   ColorConst.blackColor,
                   width * 0.045,

@@ -930,6 +930,29 @@ class _ApiClient implements ApiClient {
     return value;
   }
 
+  @override
+  Future<ForgotPasswordModel> forgotPassword(data) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(data);
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<ForgotPasswordModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'forgot-password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ForgotPasswordModel.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic && !(requestOptions.responseType == ResponseType.bytes || requestOptions.responseType == ResponseType.stream)) {
       if (T == String) {

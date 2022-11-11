@@ -4,7 +4,7 @@ import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/controller/auth_controller/forgot_controller.dart';
+import 'package:infyhms_flutter/controller/auth_controller/forgot_password_controller.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
@@ -93,17 +93,25 @@ class ForgotPasswordScreen extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    CommonButton(
-                                      textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
-                                      onTap: () {
-                                        if (forgotPasswordController.formKey.currentState!.validate()) {
-                                          forgotPasswordController.forgotController.clear();
-                                        }
-                                      },
-                                      color: ColorConst.blueColor,
-                                      text: StringUtils.sendLink,
-                                      width: width / 2.3,
-                                      height: 50,
+                                    Expanded(
+                                      child: Obx(
+                                        () => forgotPasswordController.isSendLink.value == true
+                                            ? Center(
+                                                child: CommonButton(
+                                                  textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
+                                                  onTap: () {
+                                                    if (forgotPasswordController.formKey.currentState!.validate()) {
+                                                      forgotPasswordController.forgotPassword(context);
+                                                    }
+                                                  },
+                                                  color: ColorConst.blueColor,
+                                                  text: StringUtils.sendLink,
+                                                  width: width / 2.3,
+                                                  height: 50,
+                                                ),
+                                              )
+                                            : const Center(child: CircularProgressIndicator()),
+                                      ),
                                     ),
                                     CommonButton(
                                       textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.05),

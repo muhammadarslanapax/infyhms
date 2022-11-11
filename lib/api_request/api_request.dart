@@ -11,6 +11,7 @@ import 'package:infyhms_flutter/model/appointment_model/doctor/doctor_department
 import 'package:infyhms_flutter/model/appointment_model/doctor/get_doctor_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/filter/filter_appointment_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/slot_booking/slot_booking_model.dart';
+import 'package:infyhms_flutter/model/auth_model/forgot_password_model.dart';
 import 'package:infyhms_flutter/model/auth_model/login_model.dart';
 import 'package:infyhms_flutter/model/auth_model/logout_model.dart';
 import 'package:infyhms_flutter/model/auth_model/reset_password_model.dart';
@@ -232,6 +233,11 @@ abstract class ApiClient {
   @POST("reset-password")
   Future<ResetPasswordModel> resetPassword(
     @Header('Authorization') String? token,
+    @Body() Map<String, dynamic> data,
+  );
+
+  @POST("forgot-password")
+  Future<ForgotPasswordModel> forgotPassword(
     @Body() Map<String, dynamic> data,
   );
 }
