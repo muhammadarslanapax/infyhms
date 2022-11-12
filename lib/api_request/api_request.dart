@@ -15,6 +15,7 @@ import 'package:infyhms_flutter/model/auth_model/forgot_password_model.dart';
 import 'package:infyhms_flutter/model/auth_model/login_model.dart';
 import 'package:infyhms_flutter/model/auth_model/logout_model.dart';
 import 'package:infyhms_flutter/model/auth_model/reset_password_model.dart';
+import 'package:infyhms_flutter/model/auth_model/send_token_model.dart';
 import 'package:infyhms_flutter/model/bills_model/bill_detail_model.dart';
 import 'package:infyhms_flutter/model/bills_model/bill_model.dart';
 import 'package:infyhms_flutter/model/case_model/case_model.dart';
@@ -82,6 +83,7 @@ abstract class ApiClient {
     @Field("doctor_id") String doctorId,
     @Field("opd_date") String selectedDate,
     @Field("time") String selectedTime,
+    @Field("patient_id") String patientId,
   );
 
   @GET("documents")
@@ -239,6 +241,14 @@ abstract class ApiClient {
   @POST("forgot-password")
   Future<ForgotPasswordModel> forgotPassword(
     @Body() Map<String, dynamic> data,
+  );
+
+  @POST("password")
+  Future<SendTokenModel> sendToken(
+    @Field("token") String token,
+    @Field("password") String password,
+    @Field("password_confirmation") String passwordConfirmation,
+    @Field("email") String email,
   );
 }
 

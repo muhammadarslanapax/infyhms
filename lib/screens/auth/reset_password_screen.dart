@@ -4,14 +4,13 @@ import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/controller/auth_controller/login_controller.dart';
+import 'package:infyhms_flutter/controller/auth_controller/send_token_controller.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   ResetPasswordScreen({Key? key}) : super(key: key);
-
-  final LogInController logInController = Get.put(LogInController());
+  final SendTokenController sendTokenController = Get.put(SendTokenController());
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +88,7 @@ class ResetPasswordScreen extends StatelessWidget {
 
                                   /// Email TextField
                                   CommonTextField(
-                                    controller: logInController.emailController,
+                                    controller: sendTokenController.newPassword,
                                     keyBoardType: TextInputType.emailAddress,
                                     validator: (value) {
                                       return null;
@@ -101,7 +100,7 @@ class ResetPasswordScreen extends StatelessWidget {
                                   /// password TextField
                                   CommonTextField(
                                     maxLine: 1,
-                                    controller: logInController.passwordController,
+                                    controller: sendTokenController.confirmPassword,
                                     validator: (value) {
                                       return null;
                                     },
@@ -115,7 +114,9 @@ class ResetPasswordScreen extends StatelessWidget {
                                     children: [
                                       CommonButton(
                                         textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
-                                        onTap: () {},
+                                        onTap: () {
+                                          sendTokenController.sendToken(context);
+                                        },
                                         color: ColorConst.blueColor,
                                         text: StringUtils.save,
                                         width: width / 2.3,

@@ -94,7 +94,7 @@ class NewDocumentScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.white,
                                       image: !controller.showFile
-                                          ? const DecorationImage(image: AssetImage("assets/icon/take_photo.png"),scale: 4)
+                                          ? const DecorationImage(image: AssetImage("assets/icon/take_photo.png"), scale: 4)
                                           : DecorationImage(image: FileImage(File(controller.file!.path))),
                                     ),
                                   ),
@@ -137,6 +137,7 @@ class NewDocumentScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              const SizedBox(height: 20)
                             ],
                           ),
                         ),

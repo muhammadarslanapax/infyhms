@@ -77,10 +77,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                                     style: TextStyleConst.hintTextStyle(ColorConst.hintGreyColor), textAlign: TextAlign.center),
                                 SizedBox(height: height * 0.05),
                                 CommonTextField(
-                                  controller: forgotPasswordController.forgotController,
+                                  controller: forgotPasswordController.emailController,
                                   hintText: StringUtils.signInEmail,
                                   validator: (value) {
-                                    if (forgotPasswordController.forgotController.text.isEmpty) {
+                                    if (forgotPasswordController.emailController.text.isEmpty) {
                                       return "Please enter an email";
                                     }
                                     if (!RegExp(r"[a-zA-Z0-9+_.-]+@[a-zA-Z.-]+\.[a-z]+").hasMatch(value!)) {
@@ -117,7 +117,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                       textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.05),
                                       onTap: () {
                                         Get.back();
-                                        forgotPasswordController.forgotController.clear();
+                                        forgotPasswordController.emailController.clear();
                                       },
                                       color: ColorConst.borderGreyColor,
                                       text: StringUtils.cancel,

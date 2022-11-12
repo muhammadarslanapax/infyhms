@@ -9,6 +9,7 @@ import 'package:infyhms_flutter/model/appointment_model/doctor/get_doctor_model.
 import 'package:infyhms_flutter/model/appointment_model/slot_booking/slot_booking_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
+import 'package:infyhms_flutter/utils/variable_utils.dart';
 
 class NewAppointmentController extends GetxController {
   final TextEditingController doctorController = TextEditingController();
@@ -52,6 +53,7 @@ class NewAppointmentController extends GetxController {
         getDoctorModel = value;
         doctorId = value.data![0].id.toString();
         isSelectDoctor = true;
+        isSelectDoctorDepartment = true;
         update();
       })
       ..onError((DioError error, stackTrace) {
@@ -102,7 +104,14 @@ class NewAppointmentController extends GetxController {
     } else if (slotBookingModel!.data!.bookingSlotArr!.isEmpty) {
       DisplaySnackBar.displaySnackBar(context, "Please select other date");
     } else {
-      StringUtils.client.createAppointment("Bearer ${PreferenceUtils.getStringValue("token")}", departmentId!, doctorId, selectedDate!, selectedTime!)
+      StringUtils.client.createAppointment(
+        "Bearer ${PreferenceUtils.getStringValue("token")}",
+        departmentId!,
+        doctorId,
+        selectedDate!,
+        selectedTime!,
+        VariableUtils.patientId.value,
+      )
         ..then((value) {
           createAppointmentModel = value;
           if (value.success == true) {

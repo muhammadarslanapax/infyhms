@@ -141,7 +141,7 @@ class AppointmentScreen extends StatelessWidget {
                                     appointmentController.currentIndex.value != 2
                                         ? Slidable(
                                             startActionPane: ActionPane(
-                                              extentRatio: 0.2,
+                                              extentRatio: 0.25,
                                               motion: const ScrollMotion(),
                                               children: [
                                                 SlidableAction(
@@ -152,7 +152,7 @@ class AppointmentScreen extends StatelessWidget {
                                                       builder: (context) {
                                                         return Center(
                                                           child: Container(
-                                                            height: height / 2.9,
+                                                            height: height / 2.7,
                                                             width: width / 1.12,
                                                             decoration: BoxDecoration(
                                                               borderRadius: BorderRadius.circular(15),
@@ -238,14 +238,14 @@ class AppointmentScreen extends StatelessWidget {
                                                     );
                                                   },
                                                   backgroundColor: ColorConst.borderGreyColor,
-                                                  foregroundColor: Colors.white,
+                                                  foregroundColor: ColorConst.blackColor,
                                                   label: StringUtils.cancel,
                                                   lableColor: ColorConst.hintGreyColor,
                                                 ),
                                               ],
                                             ),
                                             endActionPane: ActionPane(
-                                              extentRatio: 0.2,
+                                              extentRatio: 0.25,
                                               motion: const ScrollMotion(),
                                               children: [
                                                 SlidableAction(
@@ -256,7 +256,7 @@ class AppointmentScreen extends StatelessWidget {
                                                       builder: (context) {
                                                         return Center(
                                                           child: Container(
-                                                            height: height / 2.9,
+                                                            height: height / 2.7,
                                                             width: width / 1.12,
                                                             decoration: BoxDecoration(
                                                               borderRadius: BorderRadius.circular(15),
@@ -390,9 +390,9 @@ class AppointmentScreen extends StatelessWidget {
                                                     );
                                                   },
                                                   backgroundColor: const Color(0xFFFCE5E5),
-                                                  foregroundColor: Colors.white,
+                                                  foregroundColor: ColorConst.redColor,
                                                   label: StringUtils.delete,
-                                                  lableColor: Colors.red,
+                                                  lableColor: ColorConst.redColor,
                                                 ),
                                               ],
                                             ),
@@ -453,7 +453,7 @@ class AppointmentScreen extends StatelessWidget {
                                           )
                                         : Slidable(
                                             endActionPane: ActionPane(
-                                              extentRatio: 0.2,
+                                              extentRatio: 0.25,
                                               motion: const ScrollMotion(),
                                               children: [
                                                 SlidableAction(
@@ -464,7 +464,7 @@ class AppointmentScreen extends StatelessWidget {
                                                       builder: (context) {
                                                         return Center(
                                                           child: Container(
-                                                            height: height / 2.9,
+                                                            height: height / 2.7,
                                                             width: width / 1.12,
                                                             decoration: BoxDecoration(
                                                               borderRadius: BorderRadius.circular(15),

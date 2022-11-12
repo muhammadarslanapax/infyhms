@@ -21,6 +21,7 @@ class StringUtils {
   static const sendLink = "Send Link";
   static const cancel = "Cancel";
   static String? token;
+  static String sendEmail = "";
 
   static const yes = "Yes";
   static const no = "No";

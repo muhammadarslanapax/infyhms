@@ -183,6 +183,7 @@ class _ApiClient implements ApiClient {
     doctorId,
     selectedDate,
     selectedTime,
+    patientId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -194,6 +195,7 @@ class _ApiClient implements ApiClient {
       'doctor_id': doctorId,
       'opd_date': selectedDate,
       'time': selectedTime,
+      'patient_id': patientId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<CreateAppointmentModel>(Options(
       method: 'POST',
@@ -950,6 +952,38 @@ class _ApiClient implements ApiClient {
         )
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ForgotPasswordModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SendTokenModel> sendToken(
+    token,
+    password,
+    passwordConfirmation,
+    email,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'token': token,
+      'password': password,
+      'password_confirmation': passwordConfirmation,
+      'email': email,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<SendTokenModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SendTokenModel.fromJson(_result.data!);
     return value;
   }
 

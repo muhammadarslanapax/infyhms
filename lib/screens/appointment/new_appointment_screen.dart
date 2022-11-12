@@ -61,9 +61,7 @@ class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
                                 controller.dateController.clear();
                                 controller.departmentId = value;
                                 controller.isSelectDate = false;
-                                controller.getDoctorName(int.parse(value!)).then((value) {
-                                  controller.isSelectDoctorDepartment = true;
-                                });
+                                controller.getDoctorName(int.parse(value!));
                               },
                               hintText: StringUtils.selectDepartment,
                               dropdownItems: controller.doctorDepartmentModel!.data!.map((value) {

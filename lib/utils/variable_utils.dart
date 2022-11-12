@@ -6,4 +6,5 @@ class VariableUtils extends GetxController {
   static RxString email = "".obs;
   static RxString imageUrl = "".obs;
   static RxString phoneNo = "".obs;
+  static RxString patientId = "".obs;
 }

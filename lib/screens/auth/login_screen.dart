@@ -211,6 +211,7 @@ class LoginScreen extends StatelessWidget {
                                             PreferenceUtils.setStringValue("phone_number", logInController.loginModel!.data!.user!.phone_number!);
                                             PreferenceUtils.setStringValue("image_url", logInController.loginModel!.data!.user!.image_url!);
                                             PreferenceUtils.setStringValue("password", logInController.passwordController.text);
+                                            PreferenceUtils.setStringValue("patientId", "${logInController.loginModel!.data!.user!.id}");
 
                                             Get.offAll(() => const HomeScreen());
                                           } else {
