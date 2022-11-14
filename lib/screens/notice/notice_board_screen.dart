@@ -36,6 +36,7 @@ class NoticeBoardScreen extends StatelessWidget {
                             onTap: () {
                               showModalBottomSheet(
                                 shape: const OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.transparent),
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(50),
                                     topRight: Radius.circular(50),

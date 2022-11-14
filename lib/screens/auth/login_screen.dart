@@ -143,51 +143,51 @@ class LoginScreen extends StatelessWidget {
                                   SizedBox(height: height * 0.01),
 
                                   /// Remember me
-                                  Row(
-                                    children: [
-                                      Obx(
-                                        () => InkWell(
-                                          onTap: () {
-                                            if (logInController.isCheck.value == false) {
-                                              logInController.isCheck.value = true;
-                                            } else {
-                                              logInController.isCheck.value = false;
-                                            }
-                                          },
-                                          child: logInController.isCheck.value == true
-                                              ? Container(
-                                                  height: 25,
-                                                  width: 25,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: ColorConst.blueColor,
-                                                  ),
-                                                  child: const Icon(
-                                                    Icons.check,
-                                                    color: ColorConst.whiteColor,
-                                                    size: 18,
-                                                  ),
-                                                )
-                                              : Container(
-                                                  height: 25,
-                                                  width: 25,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    border: Border.all(
-                                                      width: 1.5,
-                                                      color: ColorConst.borderGreyColor,
-                                                    ),
-                                                  ),
-                                                ),
-                                        ),
-                                      ),
-                                      SizedBox(width: width * 0.03),
-                                      Text(
-                                        StringUtils.rememberPassword,
-                                        style: TextStyleConst.mediumTextStyle(ColorConst.blackColor, width * 0.05),
-                                      ),
-                                    ],
-                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     Obx(
+                                  //       () => InkWell(
+                                  //         onTap: () {
+                                  //           if (logInController.isCheck.value == false) {
+                                  //             logInController.isCheck.value = true;
+                                  //           } else {
+                                  //             logInController.isCheck.value = false;
+                                  //           }
+                                  //         },
+                                  //         child: logInController.isCheck.value == true
+                                  //             ? Container(
+                                  //                 height: 25,
+                                  //                 width: 25,
+                                  //                 decoration: BoxDecoration(
+                                  //                   borderRadius: BorderRadius.circular(5),
+                                  //                   color: ColorConst.blueColor,
+                                  //                 ),
+                                  //                 child: const Icon(
+                                  //                   Icons.check,
+                                  //                   color: ColorConst.whiteColor,
+                                  //                   size: 18,
+                                  //                 ),
+                                  //               )
+                                  //             : Container(
+                                  //                 height: 25,
+                                  //                 width: 25,
+                                  //                 decoration: BoxDecoration(
+                                  //                   borderRadius: BorderRadius.circular(5),
+                                  //                   border: Border.all(
+                                  //                     width: 1.5,
+                                  //                     color: ColorConst.borderGreyColor,
+                                  //                   ),
+                                  //                 ),
+                                  //               ),
+                                  //       ),
+                                  //     ),
+                                  //     SizedBox(width: width * 0.03),
+                                  //     Text(
+                                  //       StringUtils.rememberPassword,
+                                  //       style: TextStyleConst.mediumTextStyle(ColorConst.blackColor, width * 0.05),
+                                  //     ),
+                                  //   ],
+                                  // ),
                                   SizedBox(height: height * 0.06),
 
                                   /// Login button

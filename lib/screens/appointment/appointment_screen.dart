@@ -96,7 +96,7 @@ class AppointmentScreen extends StatelessWidget {
                           },
                           child: Container(
                             margin: EdgeInsets.only(left: width * 0.03, right: index == 3 ? 10 : 0),
-                            height: 45,
+                            height: 50,
                             decoration: index == appointmentController.currentIndex.value
                                 ? BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),

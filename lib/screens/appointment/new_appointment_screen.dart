@@ -24,7 +24,7 @@ class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Scaffold(
@@ -157,7 +157,7 @@ class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
                                           itemCount: controller.slotBookingModel!.data!.bookingSlotArr!.length,
                                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 3,
-                                            childAspectRatio: 2.5,
+                                            childAspectRatio: 2,
                                             crossAxisSpacing: 10,
                                             mainAxisSpacing: 10,
                                           ),
@@ -181,17 +181,13 @@ class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
                                                         borderRadius: BorderRadius.circular(10),
                                                         color: ColorConst.blueColor,
                                                       ),
-                                                height: 50,
+                                                height: 100,
                                                 child: Center(
                                                   child: Text(
                                                     controller.slotBookingModel!.data!.bookingSlotArr![index],
                                                     style: controller.currentIndex != index
-                                                        ? TextStyleConst.hintTextStyle(
-                                                            ColorConst.hintGreyColor,
-                                                          )
-                                                        : TextStyleConst.hintTextStyle(
-                                                            ColorConst.whiteColor,
-                                                          ),
+                                                        ? TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.04)
+                                                        : TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.04),
                                                   ),
                                                 ),
                                               ),
