@@ -42,7 +42,7 @@ class MyAccountScreen extends StatelessWidget {
                   width: 100,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.red,
+                    color: ColorConst.borderGreyColor,
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: NetworkImage(VariableUtils.imageUrl.value),

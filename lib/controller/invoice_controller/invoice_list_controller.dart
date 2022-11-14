@@ -9,7 +9,7 @@ class InvoiceListController extends GetxController {
   InvoiceModel? invoiceModel;
 
   void getInvoices() {
-    StringUtils.client.getInvoices("Bearer ${PreferenceUtils.getStringValue("token")}")
+    StringUtils.client.getInvoices(PreferenceUtils.getStringValue("token"))
       ..then((value) {
         invoiceModel = value;
         update();

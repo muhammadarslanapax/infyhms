@@ -16,7 +16,7 @@ class CaseController extends GetxController {
   }
 
   getCase() {
-    StringUtils.client.getCase("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+    StringUtils.client.getCase(PreferenceUtils.getStringValue("token")).then((value) {
       caseModel = value;
       isGetCase.value = true;
     }).onError((DioError error, stackTrace) {

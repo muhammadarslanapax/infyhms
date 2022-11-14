@@ -185,7 +185,6 @@ class BillDetailScreen extends StatelessWidget {
                                       children: List.generate(billDetailsController.billDetailModel!.data!.item_details!.length, (index) {
                                         billDetailsController.totalPrice.value =
                                             billDetailsController.billDetailModel!.data!.item_details![index].total!;
-                                        print(billDetailsController.totalPrice);
                                         return Padding(
                                           padding: EdgeInsets.only(bottom: height * 0.01),
                                           child: Row(
@@ -213,7 +212,7 @@ class BillDetailScreen extends StatelessWidget {
                                                 ],
                                               ),
                                               Text(
-                                                "\$ ${billDetailsController.billDetailModel!.data!.item_details![index].price!}",
+                                                "${billDetailsController.billDetailModel!.data!.currency} ${billDetailsController.billDetailModel!.data!.item_details![index].price!}",
                                                 style: TextStyleConst.mediumTextStyle(
                                                   ColorConst.blackColor,
                                                   width * 0.045,
@@ -248,7 +247,7 @@ class BillDetailScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          "\$ ${billDetailsController.totalPrice}",
+                                          "${billDetailsController.billDetailModel!.data!.currency} ${billDetailsController.totalPrice}",
                                           style: TextStyleConst.boldTextStyle(
                                             ColorConst.blackColor,
                                             width * 0.045,
@@ -262,16 +261,20 @@ class BillDetailScreen extends StatelessWidget {
                             ),
                             SizedBox(height: height * 0.02),
                             Center(
-                              child: CommonButton(
-                                width: width / 2,
-                                height: 50,
-                                text: StringUtils.downloadBill,
-                                color: ColorConst.blueColor,
-                                onTap: () {
-                                  billDetailsController.downloadPDF(context, billDetailsController.billDetailModel!.data!.bill_download!);
-                                },
-                                textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
-                              ),
+                              child: Obx(() {
+                                return billDetailsController.isDownloading.value == true
+                                    ? const Center(child: CircularProgressIndicator(color: ColorConst.primaryColor))
+                                    : CommonButton(
+                                        width: width / 2,
+                                        height: 50,
+                                        text: StringUtils.downloadBill,
+                                        color: ColorConst.blueColor,
+                                        onTap: () {
+                                          billDetailsController.downloadPDF(context, billDetailsController.billDetailModel!.data!.bill_download!);
+                                        },
+                                        textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
+                                      );
+                              }),
                             ),
                             SizedBox(height: height * 0.02),
                           ],

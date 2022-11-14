@@ -26,7 +26,7 @@ class LiveConsultationsController extends GetxController {
 
   void getDetailsOfConsultation(int consultationId) {
     gotDetailsOfConsultation.value = false;
-    StringUtils.client.liveConsultationData("Bearer ${PreferenceUtils.getStringValue("token")}", consultationId).then((value) {
+    StringUtils.client.liveConsultationData(PreferenceUtils.getStringValue("token"), consultationId).then((value) {
       liveConsultationDetailsModel.value = value;
       gotDetailsOfConsultation.value = true;
     }).onError((DioError error, stackTrace) {
@@ -57,7 +57,7 @@ class LiveConsultationsController extends GetxController {
   }
 
   void getConsultancy(String status) {
-    StringUtils.client.liveConsultationFilter("Bearer ${PreferenceUtils.getStringValue("token")}", status).then((value) {
+    StringUtils.client.liveConsultationFilter(PreferenceUtils.getStringValue("token"), status).then((value) {
       liveConsultationFilter.value = value;
       gotConsultationData.value = true;
     }).onError((DioError error, stackTrace) {

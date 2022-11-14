@@ -13,7 +13,7 @@ class PrescriptionController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    StringUtils.client.getPrescription("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+    StringUtils.client.getPrescription(PreferenceUtils.getStringValue("token")).then((value) {
       prescriptionsModel = value;
       isGetPrescription.value = true;
     }).onError((DioError error, stackTrace) {

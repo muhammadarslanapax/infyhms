@@ -41,9 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void _handleDeepLink(PendingDynamicLinkData? data) {
     final Uri? deepLink = data?.link;
     if (deepLink != null) {
-      print('_handleDeepLink | deeplink: $deepLink');
       StringUtils.token = deepLink.toString().split("/").last;
-      print("+++++++++++++++${StringUtils.token}");
       Get.to(() => ResetPasswordScreen());
     }
   }

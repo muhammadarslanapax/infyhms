@@ -22,7 +22,7 @@ class DiagnosisTestController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    StringUtils.client.getDiagnosisTest("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+    StringUtils.client.getDiagnosisTest(PreferenceUtils.getStringValue("token")).then((value) {
       diagnosisTestModel = value;
       isDiagnosisTestApiCall.value = true;
     }).onError((DioError error, stackTrace) {

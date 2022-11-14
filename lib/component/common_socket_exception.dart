@@ -12,7 +12,7 @@ class CheckSocketException {
         backgroundColor: const Color(0xff2d2d2d),
         messageText: Text(
           "Please check internet connection",
-          style: TextStyleConst.mediumTextStyle(Colors.white, 17),
+          style: TextStyleConst.mediumTextStyle(Colors.white, 15),
         ),
         borderRadius: 5,
         duration: Duration(seconds: sec ?? 5),
@@ -23,8 +23,8 @@ class CheckSocketException {
       Get.rawSnackbar(
         backgroundColor: const Color(0xff2d2d2d),
         messageText: Text(
-          error.message,
-          style: TextStyleConst.mediumTextStyle(Colors.white, 17),
+          "${error.response?.data["message"] ?? error.message}",
+          style: TextStyleConst.mediumTextStyle(Colors.white, 15),
         ),
         borderRadius: 5,
         duration: Duration(seconds: sec ?? 5),

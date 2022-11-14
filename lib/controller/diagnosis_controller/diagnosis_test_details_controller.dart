@@ -23,13 +23,12 @@ class DiagnosisTestDetailsController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    StringUtils.client.getDiagnosisTestDetails("Bearer ${PreferenceUtils.getStringValue("token")}", argument).then((value) {
+    StringUtils.client.getDiagnosisTestDetails(PreferenceUtils.getStringValue("token"), argument).then((value) {
       diagnosisTestDetailsModel = value;
       isDetailsGet.value = true;
     }).onError((DioError error, stackTrace) {
       CheckSocketException.checkSocketException(error);
     });
-    print(argument);
   }
 
   void downloadPDF(context, String url) async {

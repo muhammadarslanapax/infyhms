@@ -19,7 +19,7 @@ class FilterAppointmentController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     if (appointmentController.currentIndex.value == 0) {
-      StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "past").then((value) {
+      StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "past").then((value) {
         filterAppointmentModel = value;
         isApiCall.value = true;
       }).onError((DioError error, stackTrace) {

@@ -9,7 +9,7 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 class MyAccountController extends GetxController {
   LogoutModel? logoutModel;
   void logout() {
-    StringUtils.client.logout("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+    StringUtils.client.logout(PreferenceUtils.getStringValue("token")).then((value) {
       logoutModel = value;
       if (logoutModel!.success == true) {
         PreferenceUtils.setStringValue("token", "");

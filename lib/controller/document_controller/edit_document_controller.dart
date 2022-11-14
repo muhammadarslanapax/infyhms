@@ -37,7 +37,7 @@ class EditDocumentController extends GetxController {
   }
 
   void getDocumentTypes() {
-    StringUtils.client.getDocumentsType("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+    StringUtils.client.getDocumentsType(PreferenceUtils.getStringValue("token")).then((value) {
       documentsTypeModel = value;
 
       titleController.text = arguments["title"];
@@ -62,7 +62,7 @@ class EditDocumentController extends GetxController {
     } else {
       CommonLoader.showLoader(context);
       StringUtils.client.updateDocument(
-        "Bearer ${PreferenceUtils.getStringValue("token")}",
+        PreferenceUtils.getStringValue("token"),
         titleController.text.trim(),
         docId ?? "",
         notesController.text.trim(),

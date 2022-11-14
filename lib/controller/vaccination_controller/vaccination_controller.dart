@@ -13,7 +13,7 @@ class VaccinationController extends GetxController {
     // TODO: implement onInit
     super.onInit();
 
-    StringUtils.client.getVaccinated("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+    StringUtils.client.getVaccinated(PreferenceUtils.getStringValue("token")).then((value) {
       vaccinatedModel = value;
       isGetVaccination.value = true;
     }).onError((DioError error, stackTrace) {

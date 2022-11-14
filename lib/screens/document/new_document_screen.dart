@@ -63,7 +63,6 @@ class NewDocumentScreen extends StatelessWidget {
                               CommonDropDown(
                                 onChange: (value) {
                                   controller.docId = value;
-                                  print(controller.docId);
                                 },
                                 hintText: "Select Document Type",
                                 dropdownItems: controller.documentsTypeModel!.data!.map((items) {

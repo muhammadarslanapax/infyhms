@@ -9,7 +9,7 @@ class NoticeBoardController extends GetxController {
   NoticeBoardModel? noticeBoardModel;
 
   void getNotice() {
-    StringUtils.client.getNoticeBoard("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+    StringUtils.client.getNoticeBoard(PreferenceUtils.getStringValue("token")).then((value) {
       noticeBoardModel = value;
       update();
     }).onError((DioError error, stackTrace) {

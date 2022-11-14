@@ -16,6 +16,7 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
 class DocumentController extends GetxController {
   DocumentsModel? documentsModel;
   Dio dio = Dio();
@@ -48,7 +49,7 @@ class DocumentController extends GetxController {
           },
         );
         if (progress == "100") {
-          DisplaySnackBar.displaySnackBar(context, "Downloaded");
+          DisplaySnackBar.displaySnackBar(context, "Document Downloaded");
         }
         isDownloading = false;
         currentIndex.remove(index);
@@ -144,7 +145,7 @@ class DocumentController extends GetxController {
 
   void deleteData(BuildContext context, int id) {
     CommonLoader.showLoader(context);
-    StringUtils.client.deleteDocument("Bearer ${PreferenceUtils.getStringValue("token")}", id).then((value) {
+    StringUtils.client.deleteDocument(PreferenceUtils.getStringValue("token"), id).then((value) {
       DisplaySnackBar.displaySnackBar(context, "Document deleted");
       Get.back();
       getDocuments();
@@ -156,7 +157,7 @@ class DocumentController extends GetxController {
   }
 
   void getDocuments() {
-    StringUtils.client.getDocuments("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+    StringUtils.client.getDocuments(PreferenceUtils.getStringValue("token")).then((value) {
       documentsModel = value;
       update();
     }).onError((DioError error, stackTrace) {

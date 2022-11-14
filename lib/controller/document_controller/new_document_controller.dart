@@ -31,7 +31,7 @@ class NewDocumentController extends GetxController {
   }
 
   void getDocumentTypes() {
-    StringUtils.client.getDocumentsType("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+    StringUtils.client.getDocumentsType(PreferenceUtils.getStringValue("token")).then((value) {
       documentsTypeModel = value;
       update();
     }).onError((DioError error, stackTrace) {
@@ -51,7 +51,7 @@ class NewDocumentController extends GetxController {
     } else {
       CommonLoader.showLoader(context);
       StringUtils.client.storeDocument(
-        "Bearer ${PreferenceUtils.getStringValue("token")}",
+        PreferenceUtils.getStringValue("token"),
         titleController.text.trim(),
         docId ?? "",
         notesController.text.trim(),

@@ -43,10 +43,9 @@ class EditProfileController extends GetxController {
 
   void updateProfile() {
     StringUtils.client
-        .editProfile("Bearer ${PreferenceUtils.getStringValue("token")}", firstNameController.text, lastNameController.text, emailController.text,
+        .editProfile(PreferenceUtils.getStringValue("token"), firstNameController.text, lastNameController.text, emailController.text,
             phoneController.text, file == null ? null : File(file!.path))
         .then((value) {
-      print(value.data!.profile_image);
 
       editProfileModel = value;
 

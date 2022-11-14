@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infyhms_flutter/component/common_loader.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/model/appointment_model/create_appointment/create_appointment_model.dart';
@@ -36,7 +37,7 @@ class NewAppointmentController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    StringUtils.client.getDoctorDepartment("Bearer ${PreferenceUtils.getStringValue("token")}")
+    StringUtils.client.getDoctorDepartment(PreferenceUtils.getStringValue("token"))
       ..then((value) {
         doctorDepartmentModel = value;
         update();
@@ -48,7 +49,7 @@ class NewAppointmentController extends GetxController {
   }
 
   getDoctorName(int id) {
-    StringUtils.client.getDoctor("Bearer ${PreferenceUtils.getStringValue("token")}", id)
+    StringUtils.client.getDoctor(PreferenceUtils.getStringValue("token"), id)
       ..then((value) {
         getDoctorModel = value;
         doctorId = value.data![0].id.toString();
@@ -79,7 +80,7 @@ class NewAppointmentController extends GetxController {
     if (isSelectDoctor) {
       selectDate(context).then((value) async {
         if (selectedDate != null) {
-          await StringUtils.client.getBookingSlotDate("Bearer ${PreferenceUtils.getStringValue("token")}", selectedDate!, doctorId).then((value) {
+          await StringUtils.client.getBookingSlotDate(PreferenceUtils.getStringValue("token"), selectedDate!, doctorId).then((value) {
             slotBookingModel = value;
             isSelectDate = true;
             if (slotBookingModel!.data!.bookingSlotArr!.isNotEmpty) {
@@ -95,6 +96,7 @@ class NewAppointmentController extends GetxController {
   }
 
   createNewAppointment(BuildContext context) {
+
     if (isSelectDoctorDepartment == false) {
       DisplaySnackBar.displaySnackBar(context, "Please select doctor department");
     } else if (isSelectDate == false) {
@@ -104,8 +106,9 @@ class NewAppointmentController extends GetxController {
     } else if (slotBookingModel!.data!.bookingSlotArr!.isEmpty) {
       DisplaySnackBar.displaySnackBar(context, "Please select other date");
     } else {
+      CommonLoader.showLoader(context);
       StringUtils.client.createAppointment(
-        "Bearer ${PreferenceUtils.getStringValue("token")}",
+        PreferenceUtils.getStringValue("token"),
         departmentId!,
         doctorId,
         selectedDate!,
@@ -113,6 +116,7 @@ class NewAppointmentController extends GetxController {
         VariableUtils.patientId.value,
       )
         ..then((value) {
+          Get.back();
           createAppointmentModel = value;
           if (value.success == true) {
             DisplaySnackBar.displaySnackBar(context, value.message!);
@@ -120,6 +124,7 @@ class NewAppointmentController extends GetxController {
           }
         })
         ..onError((DioError error, stackTrace) {
+          Get.back();
           CheckSocketException.checkSocketException(error);
           return CreateAppointmentModel();
         });

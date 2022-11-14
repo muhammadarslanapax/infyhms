@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
@@ -12,14 +13,20 @@ class ForgotPasswordController extends GetxController {
 
   forgotPassword(BuildContext context) {
     isSendLink.value = false;
-    StringUtils.client.forgotPassword({"email": emailController.text}).then((value) {
-      forgotPasswordModel = value;
-      if (forgotPasswordModel!.success == true) {
+    StringUtils.client.forgotPassword({"email": emailController.text})
+      ..then((value) {
+        forgotPasswordModel = value;
+        if (forgotPasswordModel!.success == true) {
+          isSendLink.value = true;
+          StringUtils.sendEmail = emailController.text;
+          emailController.clear();
+          DisplaySnackBar.displaySnackBar(context, forgotPasswordModel!.message!);
+        }
+      })
+      ..onError((DioError error, stackTrace) {
         isSendLink.value = true;
-        StringUtils.sendEmail = emailController.text;
-        emailController.clear();
-        DisplaySnackBar.displaySnackBar(context, forgotPasswordModel!.message!);
-      }
-    });
+        DisplaySnackBar.displaySnackBar(context, "${error.response?.data["message"] ?? error.message}");
+        return ForgotPasswordModel();
+      });
   }
 }

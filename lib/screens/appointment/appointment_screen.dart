@@ -48,7 +48,7 @@ class AppointmentScreen extends StatelessWidget {
                                 filterAppointmentController.isApiCall.value = false;
 
                                 appointmentController.currentIndex.value = 0;
-                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "past").then((value) {
+                                StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "past").then((value) {
                                   filterAppointmentController.filterAppointmentModel = value;
                                   filterAppointmentController.isApiCall.value = true;
                                 }).onError((DioError error, stackTrace) {
@@ -59,7 +59,7 @@ class AppointmentScreen extends StatelessWidget {
                                 filterAppointmentController.isApiCall.value = false;
 
                                 appointmentController.currentIndex.value = 1;
-                                StringUtils.client.getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "pending").then((value) {
+                                StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "pending").then((value) {
                                   filterAppointmentController.filterAppointmentModel = value;
                                   filterAppointmentController.isApiCall.value = true;
                                 }).onError((DioError error, stackTrace) {
@@ -71,7 +71,7 @@ class AppointmentScreen extends StatelessWidget {
 
                                 appointmentController.currentIndex.value = 2;
                                 StringUtils.client
-                                    .getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "cancelled")
+                                    .getPastAppointments(PreferenceUtils.getStringValue("token"), "cancelled")
                                     .then((value) {
                                   filterAppointmentController.filterAppointmentModel = value;
                                   filterAppointmentController.isApiCall.value = true;
@@ -84,7 +84,7 @@ class AppointmentScreen extends StatelessWidget {
 
                                 appointmentController.currentIndex.value = 3;
                                 StringUtils.client
-                                    .getPastAppointments("Bearer ${PreferenceUtils.getStringValue("token")}", "completed")
+                                    .getPastAppointments(PreferenceUtils.getStringValue("token"), "completed")
                                     .then((value) {
                                   filterAppointmentController.filterAppointmentModel = value;
                                   filterAppointmentController.isApiCall.value = true;
@@ -197,14 +197,11 @@ class AppointmentScreen extends StatelessWidget {
                                                                         width * 0.05,
                                                                       ),
                                                                       onTap: () {
-                                                                        print(filterAppointmentController.filterAppointmentModel!.data![index].id);
                                                                         StringUtils.client
-                                                                            .cancelAppointment("Bearer ${PreferenceUtils.getStringValue("token")}",
+                                                                            .cancelAppointment(PreferenceUtils.getStringValue("token"),
                                                                                 filterAppointmentController.filterAppointmentModel!.data![index].id!)
                                                                             .then((value) {
                                                                           filterAppointmentController.cancelAppointmentModel = value;
-                                                                          print(filterAppointmentController.cancelAppointmentModel!.success);
-                                                                          print(filterAppointmentController.cancelAppointmentModel!.message);
                                                                           if (filterAppointmentController.cancelAppointmentModel!.success == true) {
                                                                             DisplaySnackBar.displaySnackBar(
                                                                                 context, "Appoinemnt cancel successfully");
@@ -240,7 +237,7 @@ class AppointmentScreen extends StatelessWidget {
                                                   backgroundColor: ColorConst.borderGreyColor,
                                                   foregroundColor: ColorConst.blackColor,
                                                   label: StringUtils.cancel,
-                                                  lableColor: ColorConst.hintGreyColor,
+                                                  // lableColor: ColorConst.hintGreyColor,
                                                 ),
                                               ],
                                             ),
@@ -302,11 +299,10 @@ class AppointmentScreen extends StatelessWidget {
                                                                       ),
                                                                       onTap: () {
                                                                         StringUtils.client
-                                                                            .deleteAppointment("Bearer ${PreferenceUtils.getStringValue("token")}",
+                                                                            .deleteAppointment(PreferenceUtils.getStringValue("token"),
                                                                                 filterAppointmentController.filterAppointmentModel!.data![index].id!)
                                                                             .then((value) {
                                                                           filterAppointmentController.deleteAppointmentModel = value;
-                                                                          print(filterAppointmentController.deleteAppointmentModel!.message);
 
                                                                           if (filterAppointmentController.deleteAppointmentModel!.success == true) {
                                                                             switch (appointmentController.currentIndex.value) {
@@ -316,7 +312,7 @@ class AppointmentScreen extends StatelessWidget {
                                                                                 appointmentController.currentIndex.value = 0;
                                                                                 StringUtils.client
                                                                                     .getPastAppointments(
-                                                                                        "Bearer ${PreferenceUtils.getStringValue("token")}", "past")
+                                                                                        PreferenceUtils.getStringValue("token"), "past")
                                                                                     .then((value) {
                                                                                   filterAppointmentController.filterAppointmentModel = value;
                                                                                   filterAppointmentController.isApiCall.value = true;
@@ -325,13 +321,12 @@ class AppointmentScreen extends StatelessWidget {
                                                                                 });
                                                                                 break;
                                                                               case 1:
-                                                                                print(index);
                                                                                 filterAppointmentController.isApiCall.value = false;
 
                                                                                 appointmentController.currentIndex.value = 1;
                                                                                 StringUtils.client
                                                                                     .getPastAppointments(
-                                                                                        "Bearer ${PreferenceUtils.getStringValue("token")}",
+                                                                                        PreferenceUtils.getStringValue("token"),
                                                                                         "pending")
                                                                                     .then((value) {
                                                                                   filterAppointmentController.filterAppointmentModel = value;
@@ -347,7 +342,7 @@ class AppointmentScreen extends StatelessWidget {
                                                                                 appointmentController.currentIndex.value = 3;
                                                                                 StringUtils.client
                                                                                     .getPastAppointments(
-                                                                                        "Bearer ${PreferenceUtils.getStringValue("token")}",
+                                                                                        PreferenceUtils.getStringValue("token"),
                                                                                         "completed")
                                                                                     .then((value) {
                                                                                   filterAppointmentController.filterAppointmentModel = value;
@@ -392,7 +387,7 @@ class AppointmentScreen extends StatelessWidget {
                                                   backgroundColor: const Color(0xFFFCE5E5),
                                                   foregroundColor: ColorConst.redColor,
                                                   label: StringUtils.delete,
-                                                  lableColor: ColorConst.redColor,
+                                                  // lableColor: ColorConst.redColor,
                                                 ),
                                               ],
                                             ),
@@ -510,11 +505,10 @@ class AppointmentScreen extends StatelessWidget {
                                                                       ),
                                                                       onTap: () {
                                                                         StringUtils.client
-                                                                            .deleteAppointment("Bearer ${PreferenceUtils.getStringValue("token")}",
+                                                                            .deleteAppointment(PreferenceUtils.getStringValue("token"),
                                                                                 filterAppointmentController.filterAppointmentModel!.data![index].id!)
                                                                             .then((value) {
                                                                           filterAppointmentController.deleteAppointmentModel = value;
-                                                                          print(filterAppointmentController.deleteAppointmentModel!.message);
 
                                                                           if (filterAppointmentController.deleteAppointmentModel!.success == true) {
                                                                             filterAppointmentController.isApiCall.value = false;
@@ -522,7 +516,7 @@ class AppointmentScreen extends StatelessWidget {
                                                                             appointmentController.currentIndex.value = 2;
                                                                             StringUtils.client
                                                                                 .getPastAppointments(
-                                                                                    "Bearer ${PreferenceUtils.getStringValue("token")}", "cancelled")
+                                                                                    PreferenceUtils.getStringValue("token"), "cancelled")
                                                                                 .then((value) {
                                                                               filterAppointmentController.filterAppointmentModel = value;
                                                                               filterAppointmentController.isApiCall.value = true;
@@ -562,9 +556,9 @@ class AppointmentScreen extends StatelessWidget {
                                                     );
                                                   },
                                                   backgroundColor: const Color(0xFFFCE5E5),
-                                                  foregroundColor: Colors.white,
+                                                  foregroundColor: ColorConst.redColor,
                                                   label: StringUtils.delete,
-                                                  lableColor: Colors.red,
+                                                  // lableColor: Colors.red,
                                                 ),
                                               ],
                                             ),

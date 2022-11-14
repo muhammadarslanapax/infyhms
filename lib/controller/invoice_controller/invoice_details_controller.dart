@@ -39,7 +39,7 @@ class InvoiceDetailsController extends GetxController {
           },
         );
         if (progress == "100") {
-          DisplaySnackBar.displaySnackBar(context, "Downloaded");
+          DisplaySnackBar.displaySnackBar(context, "Invoice Downloaded");
         }
         isDownloading = false;
         update();
@@ -50,8 +50,7 @@ class InvoiceDetailsController extends GetxController {
   }
 
   void getInvoiceDetails() {
-    print(invoiceId);
-    StringUtils.client.getInvoiceData("Bearer ${PreferenceUtils.getStringValue("token")}", invoiceId).then((value) {
+    StringUtils.client.getInvoiceData(PreferenceUtils.getStringValue("token"), invoiceId).then((value) {
       invoiceDetailsModel = value;
       update();
     }).onError((DioError error, stackTrace) {

@@ -28,7 +28,7 @@ class ChangePasswordController extends GetxController {
     } else if (newPasswordController.text != confirmPasswordController.text) {
       DisplaySnackBar.displaySnackBar(context, "Password doesn't match");
     } else {
-      StringUtils.client.resetPassword("Bearer ${PreferenceUtils.getStringValue("token")}", {
+      StringUtils.client.resetPassword(PreferenceUtils.getStringValue("token"), {
         "email": VariableUtils.email.value,
         "old_password": currentPasswordController.text,
         "password": newPasswordController.text,

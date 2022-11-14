@@ -8,7 +8,7 @@ class DisplaySnackBar {
         backgroundColor: const Color(0xff2d2d2d),
         content: Text(
           content,
-          style: TextStyleConst.mediumTextStyle(Colors.white, 17),
+          style: TextStyleConst.mediumTextStyle(Colors.white, 15),
         ),
         elevation: 0,
         duration: Duration(seconds: sec ?? 3),

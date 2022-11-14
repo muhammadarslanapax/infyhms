@@ -13,7 +13,7 @@ class BillsController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    StringUtils.client.getBills("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+    StringUtils.client.getBills(PreferenceUtils.getStringValue("token")).then((value) {
       billsModel = value;
       isGetBills.value = true;
     }).onError((DioError error, stackTrace) {

@@ -19,7 +19,7 @@ class BillDetailsController extends GetxController {
   int received = 0;
   String progress = '0';
   int total = 0;
-  bool isDownloading = false;
+  RxBool isDownloading = false.obs;
 
   @override
   void onInit() {
@@ -29,7 +29,7 @@ class BillDetailsController extends GetxController {
   }
 
   void getBillsDetails() {
-    StringUtils.client.getBillsDetails("Bearer ${PreferenceUtils.getStringValue("token")}", argumentData).then((value) {
+    StringUtils.client.getBillsDetails(PreferenceUtils.getStringValue("token"), argumentData).then((value) {
       billDetailModel = value;
       if (billDetailModel!.success == true) {
         isGetBillsDetails.value = true;
@@ -46,7 +46,7 @@ class BillDetailsController extends GetxController {
       String fileName = url.substring(url.lastIndexOf("/") + 1);
       Directory filePath = await Directory("storage/emulated/0/Documents/HMS").create(recursive: true);
       try {
-        isDownloading = true;
+        isDownloading.value = true;
         update();
         await dio.download(
           url,
@@ -59,9 +59,9 @@ class BillDetailsController extends GetxController {
           },
         );
         if (progress == "100") {
-          DisplaySnackBar.displaySnackBar(context, "Downloaded");
+          DisplaySnackBar.displaySnackBar(context, "Bill Downloaded");
         }
-        isDownloading = false;
+        isDownloading.value = false;
         update();
       } catch (e) {
         DisplaySnackBar.displaySnackBar(context, "Document can't be downloaded");

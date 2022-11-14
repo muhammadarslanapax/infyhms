@@ -192,7 +192,7 @@ class HomeScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(right: 15),
                     child: ListTile(
                       onTap: () {
-                        StringUtils.client.logout("Bearer ${PreferenceUtils.getStringValue("token")}").then((value) {
+                        StringUtils.client.logout(PreferenceUtils.getStringValue("token")).then((value) {
                           controller.logoutModel = value;
                           if (controller.logoutModel!.success == true) {
                             PreferenceUtils.setStringValue("token", "");

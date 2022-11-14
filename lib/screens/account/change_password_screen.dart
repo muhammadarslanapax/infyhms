@@ -18,92 +18,103 @@ class ChangePasswordScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
-      child: Scaffold(
-        appBar: CommonAppBar(
-          title: StringUtils.changePassword,
-          leadOnTap: () {
-            Get.back();
-            changePasswordController.clearController();
-          },
-          leadIcon: const Icon(
-            Icons.arrow_back_rounded,
-            color: ColorConst.blackColor,
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Scaffold(
+          appBar: CommonAppBar(
+            title: StringUtils.changePassword,
+            leadOnTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+              if (MediaQuery.of(context).viewInsets.bottom == 0.0) {
+                Navigator.pop(context);
+              }
+              changePasswordController.clearController();
+            },
+            leadIcon: const Icon(
+              Icons.arrow_back_rounded,
+              color: ColorConst.blackColor,
+            ),
           ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: height * 0.02),
-                CommonRequiredText(
-                  width: width,
-                  text: StringUtils.currentPassword,
-                ),
-                SizedBox(height: height * 0.01),
-                CommonTextField(
-                  hintText: "Enter Current Password",
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: changePasswordController.currentPasswordController,
-                ),
-                SizedBox(height: height * 0.02),
-                CommonRequiredText(
-                  width: width,
-                  text: StringUtils.newPassword,
-                ),
-                SizedBox(height: height * 0.01),
-                CommonTextField(
-                  hintText: "Enter New Password",
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: changePasswordController.newPasswordController,
-                ),
-                SizedBox(height: height * 0.02),
-                CommonRequiredText(
-                  width: width,
-                  text: StringUtils.confirmPassword,
-                ),
-                SizedBox(height: height * 0.01),
-                CommonTextField(
-                  hintText: "Re-enter New Password",
-                  validator: (value) {
-                    return null;
-                  },
-                  controller: changePasswordController.confirmPasswordController,
-                ),
-                SizedBox(height: height * 0.05),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonButton(
-                      textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
-                      onTap: () {
-                        changePasswordController.changePassword(context);
-                      },
-                      color: ColorConst.blueColor,
-                      text: StringUtils.save,
-                      width: width / 2.3,
-                      height: 50,
-                    ),
-                    CommonButton(
-                      textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.05),
-                      onTap: () {
-                        Get.back();
-                        changePasswordController.clearController();
-                      },
-                      color: ColorConst.borderGreyColor,
-                      text: StringUtils.cancel,
-                      width: width / 2.3,
-                      height: 50,
-                    ),
-                  ],
-                )
-              ],
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: height * 0.02),
+                  CommonRequiredText(
+                    width: width,
+                    text: StringUtils.currentPassword,
+                  ),
+                  SizedBox(height: height * 0.01),
+                  CommonTextField(
+                    hintText: "Enter Current Password",
+                    validator: (value) {
+                      return null;
+                    },
+                    controller: changePasswordController.currentPasswordController,
+                  ),
+                  SizedBox(height: height * 0.02),
+                  CommonRequiredText(
+                    width: width,
+                    text: StringUtils.newPassword,
+                  ),
+                  SizedBox(height: height * 0.01),
+                  CommonTextField(
+                    hintText: "Enter New Password",
+                    validator: (value) {
+                      return null;
+                    },
+                    controller: changePasswordController.newPasswordController,
+                  ),
+                  SizedBox(height: height * 0.02),
+                  CommonRequiredText(
+                    width: width,
+                    text: StringUtils.confirmPassword,
+                  ),
+                  SizedBox(height: height * 0.01),
+                  CommonTextField(
+                    hintText: "Re-enter New Password",
+                    validator: (value) {
+                      return null;
+                    },
+                    controller: changePasswordController.confirmPasswordController,
+                  ),
+                  SizedBox(height: height * 0.05),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CommonButton(
+                        textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
+                        onTap: () {
+                          changePasswordController.changePassword(context);
+                        },
+                        color: ColorConst.blueColor,
+                        text: StringUtils.save,
+                        width: width / 2.3,
+                        height: 50,
+                      ),
+                      CommonButton(
+                        textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.05),
+                        onTap: () {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          if (MediaQuery.of(context).viewInsets.bottom == 0.0) {
+                            Navigator.pop(context);
+                          }
+                          changePasswordController.clearController();
+                        },
+                        color: ColorConst.borderGreyColor,
+                        text: StringUtils.cancel,
+                        width: width / 2.3,
+                        height: 50,
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
