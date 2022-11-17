@@ -20,7 +20,7 @@ class LiveConsultationsController extends GetxController {
     try {
       launchUrl(Uri.parse(url));
     } catch (e) {
-      DisplaySnackBar.displaySnackBar(context, "Can't launch URL");
+      DisplaySnackBar.displaySnackBar("Can't launch URL");
     }
   }
 

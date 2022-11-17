@@ -41,13 +41,13 @@ class NewDocumentController extends GetxController {
 
   void createDocuments(context) {
     if (titleController.text.trim().isEmpty) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter title");
+      DisplaySnackBar.displaySnackBar("Please enter title");
     } else if (docId == null) {
-      DisplaySnackBar.displaySnackBar(context, "Please select document type");
+      DisplaySnackBar.displaySnackBar("Please select document type");
     } else if (file == null) {
-      DisplaySnackBar.displaySnackBar(context, "Please attach file");
+      DisplaySnackBar.displaySnackBar("Please attach file");
     } else if (notesController.text.trim().isEmpty) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter notes");
+      DisplaySnackBar.displaySnackBar("Please enter notes");
     } else {
       CommonLoader.showLoader(context);
       StringUtils.client.storeDocument(
@@ -59,7 +59,7 @@ class NewDocumentController extends GetxController {
       )
         ..then((value) {
           if (value.success == true) {
-            DisplaySnackBar.displaySnackBar(context, "Document uploaded successfully");
+            DisplaySnackBar.displaySnackBar("Document uploaded successfully");
             Get.back();
             Get.back(result: "Call API");
           }

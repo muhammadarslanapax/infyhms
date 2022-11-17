@@ -17,7 +17,8 @@ class DiagnosisScreen extends StatelessWidget {
     return Obx(
       () => diagnosisTestController.isDiagnosisTestApiCall.value == true
           ? diagnosisTestController.diagnosisTestModel!.data!.isEmpty
-              ? Center(
+              ? Container(
+                  color: ColorConst.whiteColor,
                   child: Center(
                     child: Text(
                       "No diagnosis test found",

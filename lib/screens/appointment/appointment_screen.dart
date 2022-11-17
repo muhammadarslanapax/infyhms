@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
-import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
@@ -70,9 +69,7 @@ class AppointmentScreen extends StatelessWidget {
                                 filterAppointmentController.isApiCall.value = false;
 
                                 appointmentController.currentIndex.value = 2;
-                                StringUtils.client
-                                    .getPastAppointments(PreferenceUtils.getStringValue("token"), "cancelled")
-                                    .then((value) {
+                                StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "cancelled").then((value) {
                                   filterAppointmentController.filterAppointmentModel = value;
                                   filterAppointmentController.isApiCall.value = true;
                                 }).onError((DioError error, stackTrace) {
@@ -83,9 +80,7 @@ class AppointmentScreen extends StatelessWidget {
                                 filterAppointmentController.isApiCall.value = false;
 
                                 appointmentController.currentIndex.value = 3;
-                                StringUtils.client
-                                    .getPastAppointments(PreferenceUtils.getStringValue("token"), "completed")
-                                    .then((value) {
+                                StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "completed").then((value) {
                                   filterAppointmentController.filterAppointmentModel = value;
                                   filterAppointmentController.isApiCall.value = true;
                                 }).onError((DioError error, stackTrace) {
@@ -138,7 +133,7 @@ class AppointmentScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return Column(
                                   children: [
-                                    appointmentController.currentIndex.value != 2
+                                    appointmentController.currentIndex.value == 1
                                         ? Slidable(
                                             startActionPane: ActionPane(
                                               extentRatio: 0.25,
@@ -203,8 +198,65 @@ class AppointmentScreen extends StatelessWidget {
                                                                             .then((value) {
                                                                           filterAppointmentController.cancelAppointmentModel = value;
                                                                           if (filterAppointmentController.cancelAppointmentModel!.success == true) {
-                                                                            DisplaySnackBar.displaySnackBar(
-                                                                                context, "Appoinemnt cancel successfully");
+                                                                            switch (appointmentController.currentIndex.value) {
+                                                                              case 0:
+                                                                                filterAppointmentController.isApiCall.value = false;
+
+                                                                                appointmentController.currentIndex.value = 0;
+                                                                                StringUtils.client
+                                                                                    .getPastAppointments(
+                                                                                        PreferenceUtils.getStringValue("token"), "past")
+                                                                                    .then((value) {
+                                                                                  filterAppointmentController.filterAppointmentModel = value;
+                                                                                  filterAppointmentController.isApiCall.value = true;
+                                                                                }).onError((DioError error, stackTrace) {
+                                                                                  CheckSocketException.checkSocketException(error);
+                                                                                });
+                                                                                break;
+                                                                              case 1:
+                                                                                filterAppointmentController.isApiCall.value = false;
+
+                                                                                appointmentController.currentIndex.value = 1;
+                                                                                StringUtils.client
+                                                                                    .getPastAppointments(
+                                                                                        PreferenceUtils.getStringValue("token"), "pending")
+                                                                                    .then((value) {
+                                                                                  filterAppointmentController.filterAppointmentModel = value;
+                                                                                  filterAppointmentController.isApiCall.value = true;
+                                                                                }).onError((DioError error, stackTrace) {
+                                                                                  CheckSocketException.checkSocketException(error);
+                                                                                });
+                                                                                break;
+                                                                              case 2:
+                                                                                filterAppointmentController.isApiCall.value = false;
+
+                                                                                appointmentController.currentIndex.value = 2;
+                                                                                StringUtils.client
+                                                                                    .getPastAppointments(
+                                                                                        PreferenceUtils.getStringValue("token"), "cancelled")
+                                                                                    .then((value) {
+                                                                                  filterAppointmentController.filterAppointmentModel = value;
+                                                                                  filterAppointmentController.isApiCall.value = true;
+                                                                                }).onError((DioError error, stackTrace) {
+                                                                                  CheckSocketException.checkSocketException(error);
+                                                                                });
+                                                                                break;
+
+                                                                              case 3:
+                                                                                filterAppointmentController.isApiCall.value = false;
+
+                                                                                appointmentController.currentIndex.value = 3;
+                                                                                StringUtils.client
+                                                                                    .getPastAppointments(
+                                                                                        PreferenceUtils.getStringValue("token"), "completed")
+                                                                                    .then((value) {
+                                                                                  filterAppointmentController.filterAppointmentModel = value;
+                                                                                  filterAppointmentController.isApiCall.value = true;
+                                                                                }).onError((DioError error, stackTrace) {
+                                                                                  CheckSocketException.checkSocketException(error);
+                                                                                });
+                                                                                break;
+                                                                            }
                                                                           }
                                                                           Get.back();
                                                                         });
@@ -326,8 +378,7 @@ class AppointmentScreen extends StatelessWidget {
                                                                                 appointmentController.currentIndex.value = 1;
                                                                                 StringUtils.client
                                                                                     .getPastAppointments(
-                                                                                        PreferenceUtils.getStringValue("token"),
-                                                                                        "pending")
+                                                                                        PreferenceUtils.getStringValue("token"), "pending")
                                                                                     .then((value) {
                                                                                   filterAppointmentController.filterAppointmentModel = value;
                                                                                   filterAppointmentController.isApiCall.value = true;
@@ -342,8 +393,7 @@ class AppointmentScreen extends StatelessWidget {
                                                                                 appointmentController.currentIndex.value = 3;
                                                                                 StringUtils.client
                                                                                     .getPastAppointments(
-                                                                                        PreferenceUtils.getStringValue("token"),
-                                                                                        "completed")
+                                                                                        PreferenceUtils.getStringValue("token"), "completed")
                                                                                     .then((value) {
                                                                                   filterAppointmentController.filterAppointmentModel = value;
                                                                                   filterAppointmentController.isApiCall.value = true;
@@ -627,7 +677,7 @@ class AppointmentScreen extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                "Appointment is empty",
+                                "Appointment is not found",
                                 style: TextStyleConst.mediumTextStyle(
                                   ColorConst.blackColor,
                                   width * 0.04,

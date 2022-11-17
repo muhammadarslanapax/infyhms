@@ -15,16 +15,19 @@ class NoticeBoardScreen extends StatelessWidget {
         init: NoticeBoardController(),
         builder: (controller) {
           return Container(
-            color: Colors.white,
+            color: ColorConst.whiteColor,
             child: controller.noticeBoardModel == null
                 ? const Center(child: CircularProgressIndicator(color: ColorConst.primaryColor))
                 : controller.noticeBoardModel?.data?.isEmpty ?? true
-                    ? Center(
-                        child: Text(
-                          "No notice found",
-                          style: TextStyleConst.mediumTextStyle(
-                            ColorConst.blackColor,
-                            width * 0.04,
+                    ? Container(
+                        color: ColorConst.whiteColor,
+                        child: Center(
+                          child: Text(
+                            "No notice found",
+                            style: TextStyleConst.mediumTextStyle(
+                              ColorConst.blackColor,
+                              width * 0.04,
+                            ),
                           ),
                         ),
                       )
@@ -35,6 +38,7 @@ class NoticeBoardScreen extends StatelessWidget {
                           return ListTile(
                             onTap: () {
                               showModalBottomSheet(
+                                backgroundColor: ColorConst.whiteColor,
                                 shape: const OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.transparent),
                                   borderRadius: BorderRadius.only(

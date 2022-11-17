@@ -16,17 +16,17 @@ class ChangePasswordController extends GetxController {
 
   void changePassword(BuildContext context) {
     if (currentPasswordController.text.isEmpty) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter current password");
+      DisplaySnackBar.displaySnackBar("Please enter current password");
     } else if (currentPasswordController.text != PreferenceUtils.getStringValue("password")) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter correct current password");
+      DisplaySnackBar.displaySnackBar("Please enter correct current password");
     } else if (newPasswordController.text.isEmpty) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter new password");
+      DisplaySnackBar.displaySnackBar("Please enter new password");
     } else if (newPasswordController.text.length < 6) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter minimum 6 character password");
+      DisplaySnackBar.displaySnackBar("Please enter minimum 6 character password");
     } else if (confirmPasswordController.text.isEmpty) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter confirm password");
+      DisplaySnackBar.displaySnackBar("Please enter confirm password");
     } else if (newPasswordController.text != confirmPasswordController.text) {
-      DisplaySnackBar.displaySnackBar(context, "Password doesn't match");
+      DisplaySnackBar.displaySnackBar("Password doesn't match");
     } else {
       StringUtils.client.resetPassword(PreferenceUtils.getStringValue("token"), {
         "email": VariableUtils.email.value,
@@ -36,7 +36,7 @@ class ChangePasswordController extends GetxController {
       }).then((value) {
         resetPasswordModel = value;
         if (resetPasswordModel!.success == true) {
-          DisplaySnackBar.displaySnackBar(context, resetPasswordModel!.message!);
+          DisplaySnackBar.displaySnackBar(resetPasswordModel!.message!);
 
           Get.back();
           clearController();

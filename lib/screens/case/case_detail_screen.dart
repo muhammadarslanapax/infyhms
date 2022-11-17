@@ -17,8 +17,9 @@ class CaseDetailScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ColorConst.whiteColor,
         appBar: CommonAppBar(
-          title: "Case Details",
+          title: StringUtils.casesDetails,
           leadOnTap: () {
             Get.back();
           },

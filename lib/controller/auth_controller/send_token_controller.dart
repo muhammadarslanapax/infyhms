@@ -14,20 +14,20 @@ class SendTokenController extends GetxController {
 
   void sendToken(BuildContext context) {
     if (newPassword.text.isEmpty) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter password");
+      DisplaySnackBar.displaySnackBar("Please enter password");
     } else if (newPassword.text.length < 6) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter minimum 6 character");
+      DisplaySnackBar.displaySnackBar("Please enter minimum 6 character");
     } else if (confirmPassword.text.isEmpty) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter confirm password");
+      DisplaySnackBar.displaySnackBar("Please enter confirm password");
     } else if (newPassword.text != confirmPassword.text) {
-      DisplaySnackBar.displaySnackBar(context, "Password doesn't match");
+      DisplaySnackBar.displaySnackBar("Password doesn't match");
     } else {
       StringUtils.client.sendToken(StringUtils.token!, newPassword.text, confirmPassword.text, StringUtils.sendEmail)
         ..then((value) {
           sendTokenModel = value;
           if (sendTokenModel!.success == true) {
             Get.offAll(() => LoginScreen());
-            DisplaySnackBar.displaySnackBar(context, sendTokenModel!.message!);
+            DisplaySnackBar.displaySnackBar(sendTokenModel!.message!);
           }
         })
         ..onError((DioError error, stackTrace) {

@@ -21,6 +21,7 @@ class MyAccountScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ColorConst.whiteColor,
         appBar: CommonAppBar(
           title: StringUtils.myAccount,
           leadOnTap: () {
@@ -105,7 +106,79 @@ class MyAccountScreen extends StatelessWidget {
               text: StringUtils.logOut,
               color: ColorConst.blueColor,
               onTap: () {
-                myAccountController.logout();
+                showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return Center(
+                      child: Material(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Container(
+                          height: height / 4,
+                          width: width / 1.12,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(height: height * 0.03),
+                              Text(
+                                "Log Out",
+                                style: TextStyleConst.boldTextStyle(
+                                  ColorConst.blackColor,
+                                  width * 0.05,
+                                ),
+                              ),
+                              SizedBox(height: height * 0.01),
+                              Text(
+                                "Are you sure to logout?",
+                                textAlign: TextAlign.center,
+                                style: TextStyleConst.mediumTextStyle(
+                                  ColorConst.hintGreyColor,
+                                  width * 0.042,
+                                ),
+                              ),
+                              SizedBox(height: height * 0.03),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  CommonButton(
+                                    textStyleConst: TextStyleConst.mediumTextStyle(
+                                      ColorConst.whiteColor,
+                                      width * 0.05,
+                                    ),
+                                    onTap: () {
+                                      myAccountController.logout();
+                                    },
+                                    color: ColorConst.blueColor,
+                                    text: StringUtils.logOut,
+                                    width: width / 2.5,
+                                    height: 50,
+                                  ),
+                                  CommonButton(
+                                    textStyleConst: TextStyleConst.mediumTextStyle(
+                                      ColorConst.hintGreyColor,
+                                      width * 0.05,
+                                    ),
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    color: ColorConst.borderGreyColor,
+                                    text: StringUtils.cancel,
+                                    width: width / 2.5,
+                                    height: 50,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
               },
               textStyleConst: TextStyleConst.mediumTextStyle(Colors.white, width * 0.045),
             ),

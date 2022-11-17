@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_app_bar.dart';
+import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
@@ -41,6 +42,12 @@ class HomeScreen extends StatelessWidget {
             appBar: CommonAppBar(
               title: controller.appBarTitle.value,
               leadOnTap: () {
+                VariableUtils.firstName.value = PreferenceUtils.getStringValue("first_name");
+                VariableUtils.lastName.value = PreferenceUtils.getStringValue("last_name");
+                VariableUtils.email.value = PreferenceUtils.getStringValue("email");
+                VariableUtils.phoneNo.value = PreferenceUtils.getStringValue("phone_number");
+                VariableUtils.imageUrl.value = PreferenceUtils.getStringValue("image_url");
+                VariableUtils.patientId.value = PreferenceUtils.getStringValue("patientId");
                 controller.scaffoldKey.currentState?.openDrawer();
               },
               leadIcon: const Icon(Icons.menu, color: ColorConst.blackColor),
@@ -192,15 +199,87 @@ class HomeScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(right: 15),
                     child: ListTile(
                       onTap: () {
-                        StringUtils.client.logout(PreferenceUtils.getStringValue("token")).then((value) {
-                          controller.logoutModel = value;
-                          if (controller.logoutModel!.success == true) {
-                            PreferenceUtils.setStringValue("token", "");
-                            Get.offAll(() => LoginScreen());
-                          }
-                        }).onError((DioError error, stackTrace) {
-                          CheckSocketException.checkSocketException(error);
-                        });
+                        showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) {
+                            return Center(
+                              child: Material(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Container(
+                                  height: height / 4,
+                                  width: width / 1.12,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.white,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(height: height * 0.03),
+                                      Text(
+                                        "Log Out",
+                                        style: TextStyleConst.boldTextStyle(
+                                          ColorConst.blackColor,
+                                          width * 0.05,
+                                        ),
+                                      ),
+                                      SizedBox(height: height * 0.01),
+                                      Text(
+                                        "Are you sure to logout?",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyleConst.mediumTextStyle(
+                                          ColorConst.hintGreyColor,
+                                          width * 0.042,
+                                        ),
+                                      ),
+                                      SizedBox(height: height * 0.03),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          CommonButton(
+                                            textStyleConst: TextStyleConst.mediumTextStyle(
+                                              ColorConst.whiteColor,
+                                              width * 0.05,
+                                            ),
+                                            onTap: () {
+                                              StringUtils.client.logout(PreferenceUtils.getStringValue("token")).then((value) {
+                                                controller.logoutModel = value;
+                                                if (controller.logoutModel!.success == true) {
+                                                  PreferenceUtils.setStringValue("token", "");
+                                                  Get.offAll(() => LoginScreen());
+                                                }
+                                              }).onError((DioError error, stackTrace) {
+                                                CheckSocketException.checkSocketException(error);
+                                              });
+                                            },
+                                            color: ColorConst.blueColor,
+                                            text: StringUtils.logOut,
+                                            width: width / 2.5,
+                                            height: 50,
+                                          ),
+                                          CommonButton(
+                                            textStyleConst: TextStyleConst.mediumTextStyle(
+                                              ColorConst.hintGreyColor,
+                                              width * 0.05,
+                                            ),
+                                            onTap: () {
+                                              Get.back();
+                                            },
+                                            color: ColorConst.borderGreyColor,
+                                            text: StringUtils.cancel,
+                                            width: width / 2.5,
+                                            height: 50,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
                       },
                       title: const Text(StringUtils.logOut),
                       leading: const SizedBox(

@@ -51,12 +51,12 @@ class DiagnosisTestDetailsController extends GetxController {
           },
         );
         if (progress == "100") {
-          DisplaySnackBar.displaySnackBar(context, "Downloaded");
+          DisplaySnackBar.displaySnackBar("Diagnosis tests downloaded");
         }
         isDownloading = false;
         update();
       } catch (e) {
-        DisplaySnackBar.displaySnackBar(context, "Document can't be downloaded");
+        DisplaySnackBar.displaySnackBar("Document can't be downloaded");
       }
     }
   }

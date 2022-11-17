@@ -23,6 +23,7 @@ class ChangePasswordScreen extends StatelessWidget {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Scaffold(
+          backgroundColor: ColorConst.whiteColor,
           appBar: CommonAppBar(
             title: StringUtils.changePassword,
             leadOnTap: () {

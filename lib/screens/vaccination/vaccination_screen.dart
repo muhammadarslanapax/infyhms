@@ -15,7 +15,8 @@ class VaccinationScreen extends StatelessWidget {
     return Obx(
       () => vaccinationController.isGetVaccination.value == true
           ? vaccinationController.vaccinatedModel!.data!.isEmpty
-              ? Center(
+              ? Container(
+                  color: ColorConst.whiteColor,
                   child: Center(
                     child: Text(
                       "No vaccinations found",
@@ -27,7 +28,7 @@ class VaccinationScreen extends StatelessWidget {
                   ),
                 )
               : Container(
-                  color: Colors.white,
+                  color: ColorConst.whiteColor,
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     itemCount: vaccinationController.vaccinatedModel!.data!.length,

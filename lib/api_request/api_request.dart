@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:infyhms_flutter/model/account_model/edit_profile_model.dart';
+import 'package:infyhms_flutter/model/account_model/get_profile_model.dart';
 import 'package:infyhms_flutter/model/admission_model/admission_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/appointment_model.dart';
 import 'package:infyhms_flutter/model/appointment_model/cancel_appointment/cancel_appoitment_model.dart';
@@ -249,6 +250,11 @@ abstract class ApiClient {
     @Field("password") String password,
     @Field("password_confirmation") String passwordConfirmation,
     @Field("email") String email,
+  );
+
+  @GET("get-profile")
+  Future<GetProfileModel> getProfile(
+    @Header('Authorization') String? token,
   );
 }
 

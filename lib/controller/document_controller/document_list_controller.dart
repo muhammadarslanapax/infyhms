@@ -13,9 +13,7 @@ import 'package:infyhms_flutter/model/documents_model/documents_model/documents.
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 class DocumentController extends GetxController {
   DocumentsModel? documentsModel;
@@ -31,35 +29,11 @@ class DocumentController extends GetxController {
     String url = documentsModel?.data?[index].document_url ?? "";
     if (Platform.isIOS) {
       launchUrl(Uri.parse(url));
-    } else {
-      String fileName = url.substring(url.lastIndexOf("/") + 1);
-      Directory? dir = await getExternalStorageDirectory();
-      Directory filePath = await Directory("${dir!.path.split("/Android").first}/Documents/HMS").create();
-      try {
-        isDownloading = true;
-        update();
-        await dio.download(
-          url,
-          '${filePath.path}/$fileName', //'Phone/omo/' + fileName,
-          deleteOnError: true,
-          onReceiveProgress: (receivedBytes, totalBytes) {
-            received = receivedBytes;
-            total = totalBytes;
-            progress = (received / total * 100).toStringAsFixed(0);
-          },
-        );
-        if (progress == "100") {
-          DisplaySnackBar.displaySnackBar(context, "Document Downloaded");
-        }
-        isDownloading = false;
-        currentIndex.remove(index);
-        update();
-      } catch (e) {
-        DisplaySnackBar.displaySnackBar(context, "Documents can't be downloaded");
-      }
-    }
+    } else {}
   }
 
+  // DisplaySnackBar.displaySnackBar(context, "Documents Downloaded");
+  // DisplaySnackBar.displaySnackBar(context, "Documents can't be downloaded");
   void showDeleteDialog(context, double height, double width, int index) {
     showDialog(
       barrierDismissible: false,
@@ -146,12 +120,12 @@ class DocumentController extends GetxController {
   void deleteData(BuildContext context, int id) {
     CommonLoader.showLoader(context);
     StringUtils.client.deleteDocument(PreferenceUtils.getStringValue("token"), id).then((value) {
-      DisplaySnackBar.displaySnackBar(context, "Document deleted");
+      DisplaySnackBar.displaySnackBar("Document deleted");
       Get.back();
       getDocuments();
     }).onError((DioError error, stackTrace) {
       Get.back();
-      DisplaySnackBar.displaySnackBar(context, error.message);
+      DisplaySnackBar.displaySnackBar(error.message);
       CheckSocketException.checkSocketException(error);
     });
   }

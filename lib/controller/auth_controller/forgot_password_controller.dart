@@ -20,12 +20,12 @@ class ForgotPasswordController extends GetxController {
           isSendLink.value = true;
           StringUtils.sendEmail = emailController.text;
           emailController.clear();
-          DisplaySnackBar.displaySnackBar(context, forgotPasswordModel!.message!);
+          DisplaySnackBar.displaySnackBar(forgotPasswordModel!.message!);
         }
       })
       ..onError((DioError error, stackTrace) {
         isSendLink.value = true;
-        DisplaySnackBar.displaySnackBar(context, "${error.response?.data["message"] ?? error.message}");
+        DisplaySnackBar.displaySnackBar("${error.response?.data["message"] ?? error.message}");
         return ForgotPasswordModel();
       });
   }

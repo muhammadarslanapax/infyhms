@@ -38,12 +38,15 @@ class StringUtils {
   static const introThreeSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
   static const appointment = "Appointment";
   static const bills = "Bills";
+  static const billsDetails = "Bill Details";
   static const diagnosisTests = "Diagnosis Tests";
+  static const diagnosisTestsDetails = "Diagnosis Tests Details";
   static const documents = "Documents";
   static const noticeBoards = "Notice Boards";
   static const invoices = "Invoices";
   static const liveConsultations = "Live Consultations";
   static const patientsCases = "Cases";
+  static const casesDetails = "Case Details";
   static const myCases = "My Cases";
   static const patientAdmissions = "Admissions";
   static const myAdmissions = "My Admissions";

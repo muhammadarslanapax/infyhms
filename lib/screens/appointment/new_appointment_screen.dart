@@ -4,6 +4,7 @@ import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_dropdown_button.dart';
 import 'package:infyhms_flutter/component/common_required_text.dart';
+import 'package:infyhms_flutter/component/common_text.dart';
 import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
@@ -207,7 +208,7 @@ class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
                               controller.isSelectDate != false ? SizedBox(height: height * 0.02) : const SizedBox(),
 
                               /// Description
-                              CommonRequiredText(
+                              CommonText(
                                 width: width,
                                 text: StringUtils.description,
                               ),

@@ -15,7 +15,8 @@ class PrescriptionsScreen extends StatelessWidget {
     return Obx(
       () => prescriptionController.isGetPrescription.value == true
           ? prescriptionController.prescriptionsModel!.data!.isEmpty
-              ? Center(
+              ? Container(
+                  color: ColorConst.whiteColor,
                   child: Center(
                     child: Text(
                       "No prescription found",

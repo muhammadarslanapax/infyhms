@@ -96,15 +96,14 @@ class NewAppointmentController extends GetxController {
   }
 
   createNewAppointment(BuildContext context) {
-
     if (isSelectDoctorDepartment == false) {
-      DisplaySnackBar.displaySnackBar(context, "Please select doctor department");
+      DisplaySnackBar.displaySnackBar("Please select doctor department");
     } else if (isSelectDate == false) {
-      DisplaySnackBar.displaySnackBar(context, "Please select date");
+      DisplaySnackBar.displaySnackBar("Please select date");
     } else if (isSelectDoctor == false) {
-      DisplaySnackBar.displaySnackBar(context, "Please select doctor");
+      DisplaySnackBar.displaySnackBar("Please select doctor");
     } else if (slotBookingModel!.data!.bookingSlotArr!.isEmpty) {
-      DisplaySnackBar.displaySnackBar(context, "Please select other date");
+      DisplaySnackBar.displaySnackBar("Please select other date");
     } else {
       CommonLoader.showLoader(context);
       StringUtils.client.createAppointment(
@@ -119,7 +118,7 @@ class NewAppointmentController extends GetxController {
           Get.back();
           createAppointmentModel = value;
           if (value.success == true) {
-            DisplaySnackBar.displaySnackBar(context, value.message!);
+            DisplaySnackBar.displaySnackBar(value.message!);
             Get.back();
           }
         })

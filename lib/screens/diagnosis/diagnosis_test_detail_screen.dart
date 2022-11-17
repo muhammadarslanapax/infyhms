@@ -18,8 +18,9 @@ class DiagnosisTestDetailScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ColorConst.whiteColor,
         appBar: CommonAppBar(
-          title: StringUtils.diagnosisTests,
+          title: StringUtils.diagnosisTestsDetails,
           leadOnTap: () {
             Get.back();
           },

@@ -25,6 +25,7 @@ class InvoiceDetailScreen extends StatelessWidget {
           init: InvoiceDetailsController(),
           builder: (controller) {
             return Scaffold(
+              backgroundColor: ColorConst.whiteColor,
               appBar: CommonAppBar(
                 title: "Invoice Details",
                 leadOnTap: () {
@@ -304,7 +305,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                             ),
                             SizedBox(height: height * 0.02),
                             Center(
-                              child: controller.isDownloading == true
+                              child: controller.isDownloading.value == true
                                   ? const Center(child: CircularProgressIndicator(color: ColorConst.primaryColor))
                                   : CommonButton(
                                       width: width / 2,

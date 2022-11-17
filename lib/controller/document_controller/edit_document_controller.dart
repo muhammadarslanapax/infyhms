@@ -27,7 +27,7 @@ class EditDocumentController extends GetxController {
     try {
       file = await imagePicker.pickImage(source: ImageSource.gallery);
     } catch (e) {
-      DisplaySnackBar.displaySnackBar(context, "Please give access to photos from settings", 5);
+      DisplaySnackBar.displaySnackBar("Please give access to photos from settings", 5);
     }
 
     if (file != null) {
@@ -50,15 +50,15 @@ class EditDocumentController extends GetxController {
 
   void editDocuments(context, int documentId) {
     if (titleController.text.trim().isEmpty) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter title");
+      DisplaySnackBar.displaySnackBar("Please enter title");
     } else if (docId == null) {
-      DisplaySnackBar.displaySnackBar(context, "Please select document type");
+      DisplaySnackBar.displaySnackBar("Please select document type");
     }
     // else if (file == null) {
     //   DisplaySnackBar.displaySnackBar(context, "Please attach file");
     // }
     else if (notesController.text.trim().isEmpty) {
-      DisplaySnackBar.displaySnackBar(context, "Please enter notes");
+      DisplaySnackBar.displaySnackBar("Please enter notes");
     } else {
       CommonLoader.showLoader(context);
       StringUtils.client.updateDocument(
@@ -71,7 +71,7 @@ class EditDocumentController extends GetxController {
       )
         ..then((value) {
           if (value.success == true) {
-            DisplaySnackBar.displaySnackBar(context, "Document updated successfully");
+            DisplaySnackBar.displaySnackBar("Document updated successfully");
             Get.back();
             Get.back(result: "Call API");
           }

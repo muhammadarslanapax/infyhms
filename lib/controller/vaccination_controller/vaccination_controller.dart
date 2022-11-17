@@ -12,7 +12,6 @@ class VaccinationController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-
     StringUtils.client.getVaccinated(PreferenceUtils.getStringValue("token")).then((value) {
       vaccinatedModel = value;
       isGetVaccination.value = true;

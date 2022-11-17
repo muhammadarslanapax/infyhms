@@ -16,7 +16,8 @@ class CaseScreen extends StatelessWidget {
     return Obx(
       () => caseController.isGetCase.value == true
           ? caseController.caseModel!.data!.isEmpty
-              ? Center(
+              ? Container(
+                  color: ColorConst.whiteColor,
                   child: Center(
                     child: Text(
                       "No cases found",
@@ -28,7 +29,7 @@ class CaseScreen extends StatelessWidget {
                   ),
                 )
               : Container(
-                  color: Colors.white,
+                  color: ColorConst.whiteColor,
                   child: ListView.builder(
                     itemCount: caseController.caseModel!.data!.length,
                     physics: const BouncingScrollPhysics(),

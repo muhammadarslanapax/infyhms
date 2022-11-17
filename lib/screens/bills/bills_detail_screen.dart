@@ -20,8 +20,9 @@ class BillDetailScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+          backgroundColor: ColorConst.whiteColor,
           appBar: CommonAppBar(
-            title: "Bill Details",
+            title: StringUtils.billsDetails,
             leadOnTap: () {
               Get.back();
             },
@@ -183,8 +184,7 @@ class BillDetailScreen extends StatelessWidget {
                                     padding: const EdgeInsets.only(right: 15, left: 15),
                                     child: Column(
                                       children: List.generate(billDetailsController.billDetailModel!.data!.item_details!.length, (index) {
-                                        billDetailsController.totalPrice.value =
-                                            billDetailsController.billDetailModel!.data!.item_details![index].total!;
+                                        billDetailsController.totalPrice.value = billDetailsController.billDetailModel!.data!.amount!;
                                         return Padding(
                                           padding: EdgeInsets.only(bottom: height * 0.01),
                                           child: Row(
@@ -203,7 +203,7 @@ class BillDetailScreen extends StatelessWidget {
                                                   ),
                                                   SizedBox(height: height * 0.003),
                                                   Text(
-                                                    "QTY ${billDetailsController.billDetailModel!.data!.item_details![index].quantity!} x \$ ${billDetailsController.billDetailModel!.data!.item_details![index].price!}",
+                                                    "QTY ${billDetailsController.billDetailModel!.data!.item_details![index].quantity!} x ${billDetailsController.billDetailModel!.data!.currency!} ${billDetailsController.billDetailModel!.data!.item_details![index].price!}",
                                                     style: TextStyleConst.mediumTextStyle(
                                                       ColorConst.hintGreyColor,
                                                       width * 0.04,
@@ -212,7 +212,7 @@ class BillDetailScreen extends StatelessWidget {
                                                 ],
                                               ),
                                               Text(
-                                                "${billDetailsController.billDetailModel!.data!.currency} ${billDetailsController.billDetailModel!.data!.item_details![index].price!}",
+                                                "${billDetailsController.billDetailModel!.data!.currency} ${billDetailsController.billDetailModel!.data!.item_details![index].total!}",
                                                 style: TextStyleConst.mediumTextStyle(
                                                   ColorConst.blackColor,
                                                   width * 0.045,
