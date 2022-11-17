@@ -15,19 +15,30 @@ import 'package:url_launcher/url_launcher.dart';
 class InvoiceDetailsController extends GetxController {
   int invoiceId = Get.arguments;
   InvoiceDetailsModel? invoiceDetailsModel;
-
-  RxBool isDownloading = false.obs;
-  int progress = 0;
-  final ReceivePort _receivePort = ReceivePort();
+  RxBool isApiCall = false.obs;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     getInvoiceDetails();
-    IsolateNameServer.registerPortWithName(_receivePort.sendPort, "downloading");
-    _receivePort.listen((message) {
-      progress = message[2];
+    listenDownload();
+  }
+
+  RxBool isDownloading = false.obs;
+  RxInt progress = 0.obs;
+  ReceivePort receivePort = ReceivePort();
+
+  void listenDownload() {
+    IsolateNameServer.registerPortWithName(receivePort.sendPort, "downloading");
+    receivePort.listen((message) {
+      progress.value = message[2];
+      if (progress.value == 100) {
+        if (isDownloading.value) {
+          DisplaySnackBar.displaySnackBar("Invoice downloaded");
+          isDownloading.value = false;
+        }
+      }
     });
     FlutterDownloader.registerCallback(downloadingCallback);
   }
@@ -37,7 +48,7 @@ class InvoiceDetailsController extends GetxController {
     sendPort?.send([id, status, progress]);
   }
 
-  void downloadPDF(context, String url) async {
+  void downloadPDF(String url) async {
     if (Platform.isIOS) {
       launchUrl(Uri.parse(url));
     } else {
@@ -51,10 +62,6 @@ class InvoiceDetailsController extends GetxController {
           openFileFromNotification: true,
           saveInPublicStorage: true,
         );
-        isDownloading.value = false;
-
-        DisplaySnackBar.displaySnackBar("Invoice Downloaded");
-        print(isDownloading.value);
       } catch (e) {
         isDownloading.value = false;
         DisplaySnackBar.displaySnackBar("Invoice can't be downloaded");
@@ -62,42 +69,23 @@ class InvoiceDetailsController extends GetxController {
     }
   }
 
-  // void downloadPDF(context, String url) async {
-  //   if (Platform.isIOS) {
-  //     launchUrl(Uri.parse(url));
-  //   } else {
-  //     String fileName = url.substring(url.lastIndexOf("/") + 1);
-  //     Directory filePath = await Directory("storage/emulated/0/Documents/HMS").create(recursive: true);
-  //     try {
-  //       isDownloading = true;
-  //       update();
-  //       await dio.download(
-  //         url,
-  //         '${filePath.path}/$fileName',
-  //         deleteOnError: true,
-  //         onReceiveProgress: (receivedBytes, totalBytes) {
-  //           received = receivedBytes;
-  //           total = totalBytes;
-  //           progress = (received / total * 100).toStringAsFixed(0);
-  //         },
-  //       );
-  //       if (progress == "100") {
-  //         DisplaySnackBar.displaySnackBar(context, "Invoice Downloaded");
-  //       }
-  //       isDownloading = false;
-  //       update();
-  //     } catch (e) {
-  //       DisplaySnackBar.displaySnackBar(context, "Document can't be downloaded");
-  //     }
-  //   }
-  // }
-
   void getInvoiceDetails() {
     StringUtils.client.getInvoiceData(PreferenceUtils.getStringValue("token"), invoiceId).then((value) {
       invoiceDetailsModel = value;
-      update();
+      if (invoiceDetailsModel!.success == true) {
+        isApiCall.value = true;
+      }
     }).onError((DioError error, stackTrace) {
       CheckSocketException.checkSocketException(error);
     });
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    receivePort.close();
+
+    IsolateNameServer.removePortNameMapping('downloading');
   }
 }

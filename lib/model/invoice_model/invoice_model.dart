@@ -24,7 +24,7 @@ class InvoiceData {
   int? id;
   String? invoice_id;
   String? invoice_date;
-  double? amount;
+  dynamic amount;
   bool? status;
   String? currency;
 

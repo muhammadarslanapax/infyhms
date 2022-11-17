@@ -99,19 +99,23 @@ class DiagnosisTestDetailScreen extends StatelessWidget {
                         ),
                         SizedBox(height: height * 0.04),
                         Center(
-                          child: CommonButton(
-                            width: width / 1.3,
-                            height: 50,
-                            text: StringUtils.downloadDiagnosisTest,
-                            color: ColorConst.blueColor,
-                            onTap: () {
-                              diagnosisTestDetailsController.downloadPDF(
-                                  context, diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.pdf_url!);
-                            },
-                            textStyleConst: TextStyleConst.mediumTextStyle(
-                              ColorConst.whiteColor,
-                              width * 0.05,
-                            ),
+                          child: Obx(
+                            () => diagnosisTestDetailsController.isDownloading.value == true
+                                ? const Center(child: CircularProgressIndicator(color: ColorConst.primaryColor))
+                                : CommonButton(
+                                    width: width / 1.2,
+                                    height: 50,
+                                    text: StringUtils.downloadDiagnosisTest,
+                                    color: ColorConst.blueColor,
+                                    onTap: () {
+                                      diagnosisTestDetailsController
+                                          .downloadPDF(diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.pdf_url!);
+                                    },
+                                    textStyleConst: TextStyleConst.mediumTextStyle(
+                                      ColorConst.whiteColor,
+                                      width * 0.05,
+                                    ),
+                                  ),
                           ),
                         ),
                       ],

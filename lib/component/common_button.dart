@@ -34,8 +34,11 @@ class CommonButton extends StatelessWidget {
               fixedSize: Size(width, height),
             ),
             onPressed: onTap,
-            label: Text(text, style: textStyleConst),
-            // child: Text(text, style: textStyleConst),
+            label: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: textStyleConst,
+            ),
           )
         : ElevatedButton(
             style: ElevatedButton.styleFrom(

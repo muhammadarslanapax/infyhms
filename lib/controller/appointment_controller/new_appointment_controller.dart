@@ -32,6 +32,7 @@ class NewAppointmentController extends GetxController {
   bool isSelectDate = false;
   bool isSelectDoctorDepartment = false;
   bool isSelectDoctor = false;
+  DateTime? oldValue;
 
   @override
   void onInit() {
@@ -66,11 +67,12 @@ class NewAppointmentController extends GetxController {
   Future<void> selectDate(BuildContext context) async {
     DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: oldValue ?? DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
     if (picked != null) {
+      oldValue = picked;
       selectedDate = "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
       dateController.text = selectedDate!;
     }
@@ -106,6 +108,7 @@ class NewAppointmentController extends GetxController {
       DisplaySnackBar.displaySnackBar("Please select other date");
     } else {
       CommonLoader.showLoader(context);
+
       StringUtils.client.createAppointment(
         PreferenceUtils.getStringValue("token"),
         departmentId!,
@@ -117,9 +120,10 @@ class NewAppointmentController extends GetxController {
         ..then((value) {
           Get.back();
           createAppointmentModel = value;
+
           if (value.success == true) {
-            DisplaySnackBar.displaySnackBar(value.message!);
             Get.back();
+            DisplaySnackBar.displaySnackBar(value.message!);
           }
         })
         ..onError((DioError error, stackTrace) {

@@ -49,7 +49,7 @@ class BillDetailsController extends GetxController {
     sendPort?.send([id, status, progress]);
   }
 
-  void downloadPDF(context, String url) async {
+  void downloadPDF(String url) async {
     if (Platform.isIOS) {
       launchUrl(Uri.parse(url));
     } else {

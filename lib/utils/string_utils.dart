@@ -69,7 +69,7 @@ class StringUtils {
   static const doctorDepartment = "Doctor Department:";
   static const doctor = "Doctor:";
 
-  static const timer = "Timer:";
+  static const slotAvailable = "Available Slot:";
   static const description = "Description:";
 
   /// Admission
@@ -115,7 +115,7 @@ class StringUtils {
   static const bloodPressure = "Blood Pressure:";
   static const diabetes = "Diabetes:";
   static const cholesterol = "Cholesterol:";
-  static const downloadDiagnosisTest = "Download Diagnosis Test";
+  static const downloadDiagnosisTest = "Download Diagnosis Test PDF";
 
   ///document
   static const title = "Title:";

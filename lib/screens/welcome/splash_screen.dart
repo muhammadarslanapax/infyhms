@@ -1,6 +1,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/controller/intro_controller/splash_controller.dart';
 import 'package:infyhms_flutter/screens/auth/reset_password_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
@@ -43,6 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ColorConst.whiteColor,
         body: Center(
           child: Container(
             height: 100,

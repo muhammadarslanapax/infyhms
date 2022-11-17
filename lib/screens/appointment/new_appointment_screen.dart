@@ -146,7 +146,7 @@ class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
                               controller.isSelectDate != false
                                   ? CommonRequiredText(
                                       width: width,
-                                      text: StringUtils.timer,
+                                      text: StringUtils.slotAvailable,
                                     )
                                   : const SizedBox(),
                               controller.isSelectDate != false ? SizedBox(height: height * 0.01) : const SizedBox(),

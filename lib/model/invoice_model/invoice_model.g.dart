@@ -22,7 +22,7 @@ InvoiceData _$InvoiceDataFromJson(Map<String, dynamic> json) => InvoiceData(
       id: json['id'] as int?,
       invoice_id: json['invoice_id'] as String?,
       invoice_date: json['invoice_date'] as String?,
-      amount: json['amount'] as double?,
+      amount: json['amount'] as dynamic?,
       status: json['status'] as bool?,
       currency: json['currency'] as String?,
     );

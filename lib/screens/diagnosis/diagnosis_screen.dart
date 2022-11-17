@@ -55,21 +55,40 @@ class DiagnosisScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        trailing: GestureDetector(
-                          onTap: () {
-                            diagnosisTestController.downloadPDF(context, diagnosisTestController.diagnosisTestModel!.data![index].pdf_url!);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 10),
-                            width: 25,
-                            height: 25,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(ImageUtils.downloadIcon),
-                              ),
-                            ),
-                          ),
+                        trailing: Obx(
+                          () => diagnosisTestController.isDownloading.value && diagnosisTestController.currentIndex!.value == index
+                              ? const CircularProgressIndicator(color: ColorConst.primaryColor)
+                              : InkWell(
+                                  onTap: () {
+                                    diagnosisTestController.downloadPDF(diagnosisTestController.diagnosisTestModel!.data![index].pdf_url!, index);
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.only(right: 10),
+                                    width: 25,
+                                    height: 25,
+                                    decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(ImageUtils.downloadIcon),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                         ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     diagnosisTestController.downloadPDF(diagnosisTestController.diagnosisTestModel!.data![index].pdf_url!);
+                        //   },
+                        //   child: Container(
+                        //     margin: const EdgeInsets.only(right: 10),
+                        //     width: 25,
+                        //     height: 25,
+                        //     decoration: const BoxDecoration(
+                        //       image: DecorationImage(
+                        //         image: AssetImage(ImageUtils.downloadIcon),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         title: Text(
                           diagnosisTestController.diagnosisTestModel!.data![index].doctor_name!,
                           style: TextStyleConst.mediumTextStyle(

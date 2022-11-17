@@ -563,7 +563,7 @@ class AppointmentScreen extends StatelessWidget {
                                                                           if (filterAppointmentController.deleteAppointmentModel!.success == true) {
                                                                             filterAppointmentController.isApiCall.value = false;
 
-                                                                            appointmentController.currentIndex.value = 2;
+                                                                            appointmentController.currentIndex.value = 0;
                                                                             StringUtils.client
                                                                                 .getPastAppointments(
                                                                                     PreferenceUtils.getStringValue("token"), "cancelled")
@@ -677,7 +677,7 @@ class AppointmentScreen extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                "Appointment is not found",
+                                "Appointment not found",
                                 style: TextStyleConst.mediumTextStyle(
                                   ColorConst.blackColor,
                                   width * 0.04,
