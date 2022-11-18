@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/controller/appointment_controller/appointment_controller.dart';
-import 'package:infyhms_flutter/model/appointment_model/cancel_appointment/cancel_appoitment_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/delete_appointement/delete_appointment_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/filter/filter_appointment_model.dart';
+import 'package:infyhms_flutter/model/patient/appointment_model/cancel_appointment/cancel_appointment_model.dart';
+import 'package:infyhms_flutter/model/patient/appointment_model/delete_appointment/delete_appointment_model.dart';
+import 'package:infyhms_flutter/model/patient/appointment_model/filter/filter_appointment_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
@@ -19,8 +19,32 @@ class FilterAppointmentController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    if (appointmentController.currentIndex.value == 0) {
-      getPastAppointment();
+    if (PreferenceUtils.getBoolValue("isDoctor") == false) {
+      if (appointmentController.currentIndex.value == 0) {
+        getPastAppointment();
+      }
+    }
+  }
+
+  void changeIndex(int index) {
+    isApiCall.value = false;
+    switch (index) {
+      case 0:
+        appointmentController.currentIndex.value = 0;
+        getPastAppointment();
+        break;
+      case 1:
+        appointmentController.currentIndex.value = 1;
+        getPendingAppointment();
+        break;
+      case 2:
+        appointmentController.currentIndex.value = 2;
+        getCancelledAppointment();
+        break;
+      case 3:
+        appointmentController.currentIndex.value = 3;
+        getCompletedAppointment();
+        break;
     }
   }
 

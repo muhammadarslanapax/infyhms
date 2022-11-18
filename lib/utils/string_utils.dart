@@ -165,5 +165,6 @@ class StringUtils {
   static const myPayRoll = "My Payrolls";
   static const reports = "Reports";
   static const icu = "ICU";
+  static const confirm = "Confirm";
   static const patientAdmissionInDoctor = "Patient Admissions";
 }

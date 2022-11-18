@@ -12,7 +12,7 @@ import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
-import 'package:infyhms_flutter/model/documents_model/documents_model/documents.dart';
+import 'package:infyhms_flutter/model/patient/documents_model/documents_model/documents.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';

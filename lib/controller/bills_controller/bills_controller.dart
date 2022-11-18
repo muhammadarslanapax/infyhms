@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
-import 'package:infyhms_flutter/model/bills_model/bill_model.dart';
+import 'package:infyhms_flutter/model/patient/bills_model/bill_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
-import 'package:infyhms_flutter/model/account_model/edit_profile_model.dart';
+import 'package:infyhms_flutter/model/patient/account_model/edit_profile_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:infyhms_flutter/utils/variable_utils.dart';
@@ -46,7 +46,6 @@ class EditProfileController extends GetxController {
         .editProfile(PreferenceUtils.getStringValue("token"), firstNameController.text, lastNameController.text, emailController.text,
             phoneController.text, file == null ? null : File(file!.path))
         .then((value) {
-
       editProfileModel = value;
 
       if (editProfileModel!.success == true) {

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
-import 'package:infyhms_flutter/model/auth_model/send_token_model.dart';
+import 'package:infyhms_flutter/model/patient/auth_model/send_token_model.dart';
 import 'package:infyhms_flutter/screens/auth/login_screen.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 

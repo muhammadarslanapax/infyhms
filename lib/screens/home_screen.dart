@@ -95,13 +95,16 @@ class HomeScreen extends StatelessWidget {
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
                       child: Column(
-                        children: List.generate(ListUtils.drawerList.length, (index) {
+                        children: List.generate(
+                            PreferenceUtils.getBoolValue("isDoctor") ? ListUtils.doctorDrawerList.length : ListUtils.drawerList.length, (index) {
                           return ListTile(
                             onTap: () {
                               controller.changeWidget(index);
                             },
                             title: Text(
-                              ListUtils.drawerList[index]["title"],
+                              PreferenceUtils.getBoolValue("isDoctor")
+                                  ? ListUtils.doctorDrawerList[index]["title"]
+                                  : ListUtils.drawerList[index]["title"],
                               style: TextStyleConst.mediumTextStyle(
                                 ColorConst.blackColor,
                                 width * 0.04,
@@ -111,7 +114,9 @@ class HomeScreen extends StatelessWidget {
                               height: 25,
                               width: 25,
                               child: ImageIcon(
-                                AssetImage(ListUtils.drawerList[index]["icon"]),
+                                AssetImage(PreferenceUtils.getBoolValue("isDoctor")
+                                    ? ListUtils.doctorDrawerList[index]["icon"]
+                                    : ListUtils.drawerList[index]["icon"]),
                                 color: index == controller.currentDrawerIndex.value ? ColorConst.blueColor : ColorConst.hintGreyColor,
                               ),
                             ),

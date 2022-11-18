@@ -1,41 +1,42 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:infyhms_flutter/model/account_model/edit_profile_model.dart';
-import 'package:infyhms_flutter/model/account_model/get_profile_model.dart';
-import 'package:infyhms_flutter/model/admission_model/admission_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/appointment_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/cancel_appointment/cancel_appoitment_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/create_appointment/create_appointment_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/delete_appointement/delete_appointment_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/doctor/doctor_department_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/doctor/get_doctor_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/filter/filter_appointment_model.dart';
-import 'package:infyhms_flutter/model/appointment_model/slot_booking/slot_booking_model.dart';
-import 'package:infyhms_flutter/model/auth_model/forgot_password_model.dart';
-import 'package:infyhms_flutter/model/auth_model/login_model.dart';
-import 'package:infyhms_flutter/model/auth_model/logout_model.dart';
-import 'package:infyhms_flutter/model/auth_model/reset_password_model.dart';
-import 'package:infyhms_flutter/model/auth_model/send_token_model.dart';
-import 'package:infyhms_flutter/model/bills_model/bill_detail_model.dart';
-import 'package:infyhms_flutter/model/bills_model/bill_model.dart';
-import 'package:infyhms_flutter/model/case_model/case_model.dart';
-import 'package:infyhms_flutter/model/diagnosis_model/diagnosis_test_details_model.dart';
-import 'package:infyhms_flutter/model/diagnosis_model/diagnosis_test_model.dart';
-import 'package:infyhms_flutter/model/documents_model/document_delete_model/document_delete.dart';
-import 'package:infyhms_flutter/model/documents_model/document_download_model/document_download.dart';
-import 'package:infyhms_flutter/model/documents_model/document_store_model/document_store.dart';
-import 'package:infyhms_flutter/model/documents_model/document_update_model/document_update.dart';
-import 'package:infyhms_flutter/model/documents_model/documents_model/documents.dart';
-import 'package:infyhms_flutter/model/documents_model/documents_type_model/documents_type.dart';
-import 'package:infyhms_flutter/model/invoice_model/invoice_details_model.dart';
-import 'package:infyhms_flutter/model/invoice_model/invoice_model.dart';
-import 'package:infyhms_flutter/model/live_consultancy/live_consultation_details_model.dart';
-import 'package:infyhms_flutter/model/live_consultancy/live_consultation_filter.dart';
-import 'package:infyhms_flutter/model/live_consultancy/live_consultation_model.dart';
-import 'package:infyhms_flutter/model/notice_board_model/notice_board.dart';
-import 'package:infyhms_flutter/model/prescriptions_model/prescriptions_model.dart';
-import 'package:infyhms_flutter/model/vaccinated_model/vaccinated_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_appointment_model/doctor_appointment_model.dart';
+import 'package:infyhms_flutter/model/patient/account_model/edit_profile_model.dart';
+import 'package:infyhms_flutter/model/patient/account_model/get_profile_model.dart';
+import 'package:infyhms_flutter/model/patient/admission_model/admission_model.dart';
+import 'package:infyhms_flutter/model/patient/appointment_model/appointment_model.dart';
+import 'package:infyhms_flutter/model/patient/appointment_model/cancel_appointment/cancel_appointment_model.dart';
+import 'package:infyhms_flutter/model/patient/appointment_model/create_appointment/create_appointment_model.dart';
+import 'package:infyhms_flutter/model/patient/appointment_model/delete_appointment/delete_appointment_model.dart';
+import 'package:infyhms_flutter/model/patient/appointment_model/doctor/doctor_department_model.dart';
+import 'package:infyhms_flutter/model/patient/appointment_model/doctor/get_doctor_model.dart';
+import 'package:infyhms_flutter/model/patient/appointment_model/filter/filter_appointment_model.dart';
+import 'package:infyhms_flutter/model/patient/appointment_model/slot_booking/slot_booking_model.dart';
+import 'package:infyhms_flutter/model/patient/auth_model/forgot_password_model.dart';
+import 'package:infyhms_flutter/model/patient/auth_model/login_model.dart';
+import 'package:infyhms_flutter/model/patient/auth_model/logout_model.dart';
+import 'package:infyhms_flutter/model/patient/auth_model/reset_password_model.dart';
+import 'package:infyhms_flutter/model/patient/auth_model/send_token_model.dart';
+import 'package:infyhms_flutter/model/patient/bills_model/bill_detail_model.dart';
+import 'package:infyhms_flutter/model/patient/bills_model/bill_model.dart';
+import 'package:infyhms_flutter/model/patient/case_model/case_model.dart';
+import 'package:infyhms_flutter/model/patient/diagnosis_model/diagnosis_test_details_model.dart';
+import 'package:infyhms_flutter/model/patient/diagnosis_model/diagnosis_test_model.dart';
+import 'package:infyhms_flutter/model/patient/documents_model/document_delete_model/document_delete.dart';
+import 'package:infyhms_flutter/model/patient/documents_model/document_download_model/document_download.dart';
+import 'package:infyhms_flutter/model/patient/documents_model/document_store_model/document_store.dart';
+import 'package:infyhms_flutter/model/patient/documents_model/document_update_model/document_update.dart';
+import 'package:infyhms_flutter/model/patient/documents_model/documents_model/documents.dart';
+import 'package:infyhms_flutter/model/patient/documents_model/documents_type_model/documents_type.dart';
+import 'package:infyhms_flutter/model/patient/invoice_model/invoice_details_model.dart';
+import 'package:infyhms_flutter/model/patient/invoice_model/invoice_model.dart';
+import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation_details_model.dart';
+import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation_filter.dart';
+import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation_model.dart';
+import 'package:infyhms_flutter/model/patient/notice_board_model/notice_board.dart';
+import 'package:infyhms_flutter/model/patient/prescriptions_model/prescriptions_model.dart';
+import 'package:infyhms_flutter/model/patient/vaccinated_model/vaccinated_model.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -256,15 +257,12 @@ abstract class ApiClient {
   Future<GetProfileModel> getProfile(
     @Header('Authorization') String? token,
   );
-}
 
-// validateStatus: (statusCod
-// if (statusCode == null) {
-// return false;
-// }
-// if (statusCode == 422) {
-// return true;
-// } else {
-// return statusCode >= 200 && statusCode < 300;
-// }
-// },
+  /// Doctor panel
+
+  @GET("doctors/appointment-filter?status={status}")
+  Future<DoctorAppointmentModel> getDoctorAppointments(
+    @Header('Authorization') String? token,
+    @Path("status") String status,
+  );
+}

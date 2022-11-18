@@ -5,7 +5,7 @@ import 'package:infyhms_flutter/component/common_error.dart';
 import 'package:infyhms_flutter/component/common_loader.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
-import 'package:infyhms_flutter/model/auth_model/login_model.dart';
+import 'package:infyhms_flutter/model/patient/auth_model/login_model.dart';
 import 'package:infyhms_flutter/screens/home_screen.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
@@ -44,6 +44,7 @@ class LogInController extends GetxController {
             PreferenceUtils.setStringValue("image_url", loginModel!.data!.user!.image_url!);
             PreferenceUtils.setStringValue("password", passwordController.text);
             PreferenceUtils.setStringValue("patientId", "${loginModel!.data!.user!.id}");
+            PreferenceUtils.setBoolValue("isDoctor", loginModel!.data!.is_doctor!);
             Get.offAll(() => const HomeScreen());
           } else {
             CommonError().showMaterialBanner(context, "${value.message}");

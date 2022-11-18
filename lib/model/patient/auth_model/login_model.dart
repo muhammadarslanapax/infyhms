@@ -23,9 +23,11 @@ class LoginModel {
 class LoginData {
   String? token;
   UserData? user;
+  bool? is_doctor;
 
   LoginData({
     this.token,
+    this.is_doctor,
     this.user,
   });
 
@@ -37,7 +39,6 @@ class LoginData {
 @JsonSerializable(explicitToJson: true)
 class UserData {
   int? id;
-  bool? is_doctor;
   String? first_name;
   String? last_name;
   String? email;
@@ -46,7 +47,6 @@ class UserData {
 
   UserData({
     this.id,
-    this.is_doctor,
     this.first_name,
     this.last_name,
     this.email,
