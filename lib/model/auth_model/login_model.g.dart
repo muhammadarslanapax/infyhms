@@ -35,6 +35,7 @@ Map<String, dynamic> _$LoginDataToJson(LoginData instance) => <String, dynamic>{
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       id: json['id'] as int?,
+      is_doctor: json['is_doctor'] as bool?,
       first_name: json['first_name'] as String?,
       last_name: json['last_name'] as String?,
       email: json['email'] as String?,
@@ -44,6 +45,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
 
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'id': instance.id,
+      'is_doctor': instance.is_doctor,
       'first_name': instance.first_name,
       'last_name': instance.last_name,
       'email': instance.email,

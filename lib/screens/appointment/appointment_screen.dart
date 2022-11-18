@@ -1,16 +1,13 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
-import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/appointment_controller/appointment_controller.dart';
 import 'package:infyhms_flutter/controller/appointment_controller/filter_appointment_controller.dart';
 import 'package:infyhms_flutter/screens/appointment/new_appointment_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
-import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class AppointmentScreen extends StatelessWidget {
@@ -44,48 +41,20 @@ class AppointmentScreen extends StatelessWidget {
                             filterAppointmentController.isApiCall.value = false;
                             switch (index) {
                               case 0:
-                                filterAppointmentController.isApiCall.value = false;
-
                                 appointmentController.currentIndex.value = 0;
-                                StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "past").then((value) {
-                                  filterAppointmentController.filterAppointmentModel = value;
-                                  filterAppointmentController.isApiCall.value = true;
-                                }).onError((DioError error, stackTrace) {
-                                  CheckSocketException.checkSocketException(error);
-                                });
+                                filterAppointmentController.getPastAppointment();
                                 break;
                               case 1:
-                                filterAppointmentController.isApiCall.value = false;
-
                                 appointmentController.currentIndex.value = 1;
-                                StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "pending").then((value) {
-                                  filterAppointmentController.filterAppointmentModel = value;
-                                  filterAppointmentController.isApiCall.value = true;
-                                }).onError((DioError error, stackTrace) {
-                                  CheckSocketException.checkSocketException(error);
-                                });
+                                filterAppointmentController.getPendingAppointment();
                                 break;
                               case 2:
-                                filterAppointmentController.isApiCall.value = false;
-
                                 appointmentController.currentIndex.value = 2;
-                                StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "cancelled").then((value) {
-                                  filterAppointmentController.filterAppointmentModel = value;
-                                  filterAppointmentController.isApiCall.value = true;
-                                }).onError((DioError error, stackTrace) {
-                                  CheckSocketException.checkSocketException(error);
-                                });
+                                filterAppointmentController.getCancelledAppointment();
                                 break;
                               case 3:
-                                filterAppointmentController.isApiCall.value = false;
-
                                 appointmentController.currentIndex.value = 3;
-                                StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "completed").then((value) {
-                                  filterAppointmentController.filterAppointmentModel = value;
-                                  filterAppointmentController.isApiCall.value = true;
-                                }).onError((DioError error, stackTrace) {
-                                  CheckSocketException.checkSocketException(error);
-                                });
+                                filterAppointmentController.getCompletedAppointment();
                                 break;
                             }
                           },
@@ -187,79 +156,12 @@ class AppointmentScreen extends StatelessWidget {
                                                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                                   children: [
                                                                     CommonButton(
-                                                                      textStyleConst: TextStyleConst.mediumTextStyle(
-                                                                        ColorConst.whiteColor,
-                                                                        width * 0.05,
-                                                                      ),
+                                                                      textStyleConst:
+                                                                          TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                                                       onTap: () {
-                                                                        StringUtils.client
-                                                                            .cancelAppointment(PreferenceUtils.getStringValue("token"),
-                                                                                filterAppointmentController.filterAppointmentModel!.data![index].id!)
-                                                                            .then((value) {
-                                                                          filterAppointmentController.cancelAppointmentModel = value;
-                                                                          if (filterAppointmentController.cancelAppointmentModel!.success == true) {
-                                                                            switch (appointmentController.currentIndex.value) {
-                                                                              case 0:
-                                                                                filterAppointmentController.isApiCall.value = false;
-
-                                                                                appointmentController.currentIndex.value = 0;
-                                                                                StringUtils.client
-                                                                                    .getPastAppointments(
-                                                                                        PreferenceUtils.getStringValue("token"), "past")
-                                                                                    .then((value) {
-                                                                                  filterAppointmentController.filterAppointmentModel = value;
-                                                                                  filterAppointmentController.isApiCall.value = true;
-                                                                                }).onError((DioError error, stackTrace) {
-                                                                                  CheckSocketException.checkSocketException(error);
-                                                                                });
-                                                                                break;
-                                                                              case 1:
-                                                                                filterAppointmentController.isApiCall.value = false;
-
-                                                                                appointmentController.currentIndex.value = 1;
-                                                                                StringUtils.client
-                                                                                    .getPastAppointments(
-                                                                                        PreferenceUtils.getStringValue("token"), "pending")
-                                                                                    .then((value) {
-                                                                                  filterAppointmentController.filterAppointmentModel = value;
-                                                                                  filterAppointmentController.isApiCall.value = true;
-                                                                                }).onError((DioError error, stackTrace) {
-                                                                                  CheckSocketException.checkSocketException(error);
-                                                                                });
-                                                                                break;
-                                                                              case 2:
-                                                                                filterAppointmentController.isApiCall.value = false;
-
-                                                                                appointmentController.currentIndex.value = 2;
-                                                                                StringUtils.client
-                                                                                    .getPastAppointments(
-                                                                                        PreferenceUtils.getStringValue("token"), "cancelled")
-                                                                                    .then((value) {
-                                                                                  filterAppointmentController.filterAppointmentModel = value;
-                                                                                  filterAppointmentController.isApiCall.value = true;
-                                                                                }).onError((DioError error, stackTrace) {
-                                                                                  CheckSocketException.checkSocketException(error);
-                                                                                });
-                                                                                break;
-
-                                                                              case 3:
-                                                                                filterAppointmentController.isApiCall.value = false;
-
-                                                                                appointmentController.currentIndex.value = 3;
-                                                                                StringUtils.client
-                                                                                    .getPastAppointments(
-                                                                                        PreferenceUtils.getStringValue("token"), "completed")
-                                                                                    .then((value) {
-                                                                                  filterAppointmentController.filterAppointmentModel = value;
-                                                                                  filterAppointmentController.isApiCall.value = true;
-                                                                                }).onError((DioError error, stackTrace) {
-                                                                                  CheckSocketException.checkSocketException(error);
-                                                                                });
-                                                                                break;
-                                                                            }
-                                                                          }
-                                                                          Get.back();
-                                                                        });
+                                                                        Get.back();
+                                                                        filterAppointmentController.cancelledPendingAppointment(
+                                                                            filterAppointmentController.filterAppointmentModel!.data![index].id!);
                                                                       },
                                                                       color: ColorConst.blueColor,
                                                                       text: StringUtils.yes,
@@ -350,62 +252,9 @@ class AppointmentScreen extends StatelessWidget {
                                                                         width * 0.05,
                                                                       ),
                                                                       onTap: () {
-                                                                        StringUtils.client
-                                                                            .deleteAppointment(PreferenceUtils.getStringValue("token"),
-                                                                                filterAppointmentController.filterAppointmentModel!.data![index].id!)
-                                                                            .then((value) {
-                                                                          filterAppointmentController.deleteAppointmentModel = value;
-
-                                                                          if (filterAppointmentController.deleteAppointmentModel!.success == true) {
-                                                                            switch (appointmentController.currentIndex.value) {
-                                                                              case 0:
-                                                                                filterAppointmentController.isApiCall.value = false;
-
-                                                                                appointmentController.currentIndex.value = 0;
-                                                                                StringUtils.client
-                                                                                    .getPastAppointments(
-                                                                                        PreferenceUtils.getStringValue("token"), "past")
-                                                                                    .then((value) {
-                                                                                  filterAppointmentController.filterAppointmentModel = value;
-                                                                                  filterAppointmentController.isApiCall.value = true;
-                                                                                }).onError((DioError error, stackTrace) {
-                                                                                  CheckSocketException.checkSocketException(error);
-                                                                                });
-                                                                                break;
-                                                                              case 1:
-                                                                                filterAppointmentController.isApiCall.value = false;
-
-                                                                                appointmentController.currentIndex.value = 1;
-                                                                                StringUtils.client
-                                                                                    .getPastAppointments(
-                                                                                        PreferenceUtils.getStringValue("token"), "pending")
-                                                                                    .then((value) {
-                                                                                  filterAppointmentController.filterAppointmentModel = value;
-                                                                                  filterAppointmentController.isApiCall.value = true;
-                                                                                }).onError((DioError error, stackTrace) {
-                                                                                  CheckSocketException.checkSocketException(error);
-                                                                                });
-                                                                                break;
-
-                                                                              case 3:
-                                                                                filterAppointmentController.isApiCall.value = false;
-
-                                                                                appointmentController.currentIndex.value = 3;
-                                                                                StringUtils.client
-                                                                                    .getPastAppointments(
-                                                                                        PreferenceUtils.getStringValue("token"), "completed")
-                                                                                    .then((value) {
-                                                                                  filterAppointmentController.filterAppointmentModel = value;
-                                                                                  filterAppointmentController.isApiCall.value = true;
-                                                                                }).onError((DioError error, stackTrace) {
-                                                                                  CheckSocketException.checkSocketException(error);
-                                                                                });
-                                                                                break;
-                                                                            }
-                                                                          }
-
-                                                                          Get.back();
-                                                                        });
+                                                                        Get.back();
+                                                                        filterAppointmentController.deletePendingAppointment(
+                                                                            filterAppointmentController.filterAppointmentModel!.data![index].id!);
                                                                       },
                                                                       color: ColorConst.blueColor,
                                                                       text: StringUtils.delete,
@@ -554,29 +403,9 @@ class AppointmentScreen extends StatelessWidget {
                                                                         width * 0.05,
                                                                       ),
                                                                       onTap: () {
-                                                                        StringUtils.client
-                                                                            .deleteAppointment(PreferenceUtils.getStringValue("token"),
-                                                                                filterAppointmentController.filterAppointmentModel!.data![index].id!)
-                                                                            .then((value) {
-                                                                          filterAppointmentController.deleteAppointmentModel = value;
-
-                                                                          if (filterAppointmentController.deleteAppointmentModel!.success == true) {
-                                                                            filterAppointmentController.isApiCall.value = false;
-
-                                                                            appointmentController.currentIndex.value = 0;
-                                                                            StringUtils.client
-                                                                                .getPastAppointments(
-                                                                                    PreferenceUtils.getStringValue("token"), "cancelled")
-                                                                                .then((value) {
-                                                                              filterAppointmentController.filterAppointmentModel = value;
-                                                                              filterAppointmentController.isApiCall.value = true;
-                                                                            }).onError((DioError error, stackTrace) {
-                                                                              CheckSocketException.checkSocketException(error);
-                                                                            });
-                                                                          }
-
-                                                                          Get.back();
-                                                                        });
+                                                                        Get.back();
+                                                                        filterAppointmentController.deleteAppointment(
+                                                                            filterAppointmentController.filterAppointmentModel!.data![index].id!);
                                                                       },
                                                                       color: ColorConst.blueColor,
                                                                       text: StringUtils.delete,

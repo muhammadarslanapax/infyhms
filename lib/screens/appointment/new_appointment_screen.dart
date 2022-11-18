@@ -11,14 +11,9 @@ import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/appointment_controller/new_appointment_controller.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
-class NewAppointmentScreen extends StatefulWidget {
+class NewAppointmentScreen extends StatelessWidget {
   const NewAppointmentScreen({Key? key}) : super(key: key);
 
-  @override
-  State<NewAppointmentScreen> createState() => _NewAppointmentScreenState();
-}
-
-class _NewAppointmentScreenState extends State<NewAppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

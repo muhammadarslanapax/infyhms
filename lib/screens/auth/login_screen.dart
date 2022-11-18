@@ -1,20 +1,12 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
-import 'package:infyhms_flutter/component/common_error.dart';
-import 'package:infyhms_flutter/component/common_loader.dart';
-import 'package:infyhms_flutter/component/common_snackbar.dart';
-import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/auth_controller/login_controller.dart';
-import 'package:infyhms_flutter/model/auth_model/login_model.dart';
 import 'package:infyhms_flutter/screens/auth/forgot_password_screen.dart';
-import 'package:infyhms_flutter/screens/home_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
-import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -147,39 +139,7 @@ class LoginScreen extends StatelessWidget {
                                   CommonButton(
                                     textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                     onTap: () {
-                                      if (logInController.emailController.text.isEmpty) {
-                                        DisplaySnackBar.displaySnackBar("Please enter email");
-                                      } else if (logInController.emailController.text.isEmpty) {
-                                        DisplaySnackBar.displaySnackBar("Please enter password");
-                                      } else {
-                                        CommonLoader.showLoader(context);
-                                        StringUtils.client.loginPatient({
-                                          "email": logInController.emailController.text,
-                                          "password": logInController.passwordController.text,
-                                        })
-                                          ..then((value) {
-                                            logInController.loginModel = value;
-                                            if (logInController.loginModel!.success == true) {
-                                              PreferenceUtils.setStringValue("token", "Bearer ${logInController.loginModel!.data!.token!}");
-                                              PreferenceUtils.setStringValue("first_name", logInController.loginModel!.data!.user!.first_name!);
-                                              PreferenceUtils.setStringValue("last_name", logInController.loginModel!.data!.user!.last_name!);
-                                              PreferenceUtils.setStringValue("email", logInController.loginModel!.data!.user!.email!);
-                                              PreferenceUtils.setStringValue("phone_number", logInController.loginModel!.data!.user!.phone_number!);
-                                              PreferenceUtils.setStringValue("image_url", logInController.loginModel!.data!.user!.image_url!);
-                                              PreferenceUtils.setStringValue("password", logInController.passwordController.text);
-                                              PreferenceUtils.setStringValue("patientId", "${logInController.loginModel!.data!.user!.id}");
-                                              Get.offAll(() => const HomeScreen());
-                                            } else {
-                                              CommonError().showMaterialBanner(context, "${value.message}");
-                                            }
-                                          })
-                                          ..onError((DioError error, stackTrace) {
-                                            Navigator.pop(context);
-                                            // DisplaySnackBar.displaySnackBar(context, "${error.response!.data["message"]}");
-                                            CheckSocketException.checkSocketException(error);
-                                            return LoginModel();
-                                          });
-                                      }
+                                      logInController.loginPatient(context);
                                     },
                                     color: ColorConst.blueColor,
                                     text: StringUtils.login,

@@ -21,6 +21,7 @@ class NewAppointmentController extends GetxController {
   SlotBookingModel? slotBookingModel;
   GetDoctorModel? getDoctorModel;
   CreateAppointmentModel? createAppointmentModel;
+  DateTime? oldValue;
 
   String doctorId = "";
   String? departmentId;
@@ -32,7 +33,6 @@ class NewAppointmentController extends GetxController {
   bool isSelectDate = false;
   bool isSelectDoctorDepartment = false;
   bool isSelectDoctor = false;
-  DateTime? oldValue;
 
   @override
   void onInit() {

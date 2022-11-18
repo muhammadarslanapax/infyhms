@@ -150,7 +150,7 @@ class MyAccountScreen extends StatelessWidget {
                                       width * 0.05,
                                     ),
                                     onTap: () {
-                                      myAccountController.logout();
+                                      myAccountController.logout(context);
                                     },
                                     color: ColorConst.blueColor,
                                     text: StringUtils.logOut,

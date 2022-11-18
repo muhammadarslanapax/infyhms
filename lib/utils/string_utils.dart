@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:infyhms_flutter/api_request/api_request.dart';
 
 class StringUtils {
+  /// Patient Panel
+
   /// api calling
   static final client = ApiClient(Dio(BaseOptions(contentType: "application/json")));
   static const loginPatient = "login";
@@ -153,4 +155,15 @@ class StringUtils {
   static const selectDate = "Select Date";
   static const typeHere = "Type here..";
   static const date = "Date";
+
+  /// Doctor Panel
+
+  static const bedAssign = "Bed Assigns";
+  static const bedStatus = "Bed Status";
+  static const doctorDrawer = "Doctor";
+  static const schedules = "Schedules";
+  static const myPayRoll = "My Payrolls";
+  static const reports = "Reports";
+  static const icu = "ICU";
+  static const patientAdmissionInDoctor = "Patient Admissions";
 }

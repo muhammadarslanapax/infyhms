@@ -1,25 +1,11 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
-import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/home_controller.dart';
 import 'package:infyhms_flutter/screens/account/my_account_screen.dart';
-import 'package:infyhms_flutter/screens/admission/admissions_screen.dart';
-import 'package:infyhms_flutter/screens/appointment/appointment_screen.dart';
-import 'package:infyhms_flutter/screens/auth/login_screen.dart';
-import 'package:infyhms_flutter/screens/bills/bills_screen.dart';
-import 'package:infyhms_flutter/screens/case/case_screen.dart';
-import 'package:infyhms_flutter/screens/consultancy/live_consultations_screen.dart';
-import 'package:infyhms_flutter/screens/diagnosis/diagnosis_screen.dart';
-import 'package:infyhms_flutter/screens/document/document_screen.dart';
-import 'package:infyhms_flutter/screens/invoice/invoice_screen.dart';
-import 'package:infyhms_flutter/screens/notice/notice_board_screen.dart';
-import 'package:infyhms_flutter/screens/prescription/prescriptions_screen.dart';
-import 'package:infyhms_flutter/screens/vaccination/vaccination_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/list_utils.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
@@ -109,69 +95,10 @@ class HomeScreen extends StatelessWidget {
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
                       child: Column(
-                        children: List.generate(11, (index) {
+                        children: List.generate(ListUtils.drawerList.length, (index) {
                           return ListTile(
                             onTap: () {
-                              Get.back();
-                              Get.deleteAll();
-                              controller.update();
-                              switch (index) {
-                                case 0:
-                                  controller.currentWidget = AppointmentScreen();
-                                  controller.appBarTitle.value = StringUtils.appointment;
-                                  controller.currentDrawerIndex.value = 0;
-                                  break;
-                                case 1:
-                                  controller.currentWidget = BillScreen();
-                                  controller.appBarTitle.value = StringUtils.bills;
-                                  controller.currentDrawerIndex.value = 1;
-                                  break;
-                                case 2:
-                                  controller.currentWidget = DiagnosisScreen();
-                                  controller.appBarTitle.value = StringUtils.diagnosisTests;
-                                  controller.currentDrawerIndex.value = 2;
-                                  break;
-                                case 3:
-                                  controller.currentWidget = const DocumentScreen();
-                                  controller.appBarTitle.value = StringUtils.documents;
-                                  controller.currentDrawerIndex.value = 3;
-                                  break;
-                                case 4:
-                                  controller.currentWidget = const NoticeBoardScreen();
-                                  controller.appBarTitle.value = StringUtils.noticeBoards;
-                                  controller.currentDrawerIndex.value = 4;
-                                  break;
-                                case 5:
-                                  controller.currentWidget = const InvoiceScreen();
-                                  controller.appBarTitle.value = StringUtils.invoices;
-                                  controller.currentDrawerIndex.value = 5;
-                                  break;
-                                case 6:
-                                  controller.currentWidget = LiveConsultationsScreen();
-                                  controller.appBarTitle.value = StringUtils.liveConsultations;
-                                  controller.currentDrawerIndex.value = 6;
-                                  break;
-                                case 7:
-                                  controller.currentWidget = CaseScreen();
-                                  controller.appBarTitle.value = StringUtils.myCases;
-                                  controller.currentDrawerIndex.value = 7;
-                                  break;
-                                case 8:
-                                  controller.currentWidget = AdmissionScreen();
-                                  controller.appBarTitle.value = StringUtils.myAdmissions;
-                                  controller.currentDrawerIndex.value = 8;
-                                  break;
-                                case 9:
-                                  controller.currentWidget = PrescriptionsScreen();
-                                  controller.appBarTitle.value = StringUtils.prescriptions;
-                                  controller.currentDrawerIndex.value = 9;
-                                  break;
-                                case 10:
-                                  controller.currentWidget = VaccinationScreen();
-                                  controller.appBarTitle.value = StringUtils.vaccinatedPatients;
-                                  controller.currentDrawerIndex.value = 10;
-                                  break;
-                              }
+                              controller.changeWidget(index);
                             },
                             title: Text(
                               ListUtils.drawerList[index]["title"],
@@ -243,15 +170,7 @@ class HomeScreen extends StatelessWidget {
                                               width * 0.05,
                                             ),
                                             onTap: () {
-                                              StringUtils.client.logout(PreferenceUtils.getStringValue("token")).then((value) {
-                                                controller.logoutModel = value;
-                                                if (controller.logoutModel!.success == true) {
-                                                  PreferenceUtils.setStringValue("token", "");
-                                                  Get.offAll(() => LoginScreen());
-                                                }
-                                              }).onError((DioError error, stackTrace) {
-                                                CheckSocketException.checkSocketException(error);
-                                              });
+                                              controller.logOut(context);
                                             },
                                             color: ColorConst.blueColor,
                                             text: StringUtils.logOut,
