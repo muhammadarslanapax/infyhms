@@ -2,6 +2,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_appointment_model/doctor_appointment_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_model/doctor_detail_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_model/doctor_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_prescription_model/doctor_prescription_detail_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_prescription_model/doctor_prescription_model.dart';
 import 'package:infyhms_flutter/model/patient/account_model/edit_profile_model.dart';
 import 'package:infyhms_flutter/model/patient/account_model/get_profile_model.dart';
 import 'package:infyhms_flutter/model/patient/admission_model/admission_model.dart';
@@ -264,5 +268,27 @@ abstract class ApiClient {
   Future<DoctorAppointmentModel> getDoctorAppointments(
     @Header('Authorization') String? token,
     @Path("status") String status,
+  );
+
+  @GET("doctors/doctors")
+  Future<DoctorsModel> getDoctors(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("doctors/doctors/{id}")
+  Future<DoctorsDetailModel> getDoctorsDetail(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @GET("doctors/prescriptions")
+  Future<DoctorPrescriptionModel> getDoctorsPrescription(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("doctors/prescriptions/{id}")
+  Future<DoctorPrescriptionDetailModel> getDoctorsPrescriptionDetail(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
   );
 }

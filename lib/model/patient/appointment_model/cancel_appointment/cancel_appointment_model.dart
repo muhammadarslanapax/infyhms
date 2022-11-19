@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'cancel_appoitment_model.g.dart';
+part 'cancel_appointment_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class CancelAppointmentModel {

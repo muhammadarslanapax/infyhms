@@ -167,4 +167,5 @@ class StringUtils {
   static const icu = "ICU";
   static const confirm = "Confirm";
   static const patientAdmissionInDoctor = "Patient Admissions";
+  static const patientDetails = "Patient Details";
 }

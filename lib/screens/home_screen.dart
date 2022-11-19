@@ -99,7 +99,7 @@ class HomeScreen extends StatelessWidget {
                             PreferenceUtils.getBoolValue("isDoctor") ? ListUtils.doctorDrawerList.length : ListUtils.drawerList.length, (index) {
                           return ListTile(
                             onTap: () {
-                              controller.changeWidget(index);
+                              PreferenceUtils.getBoolValue("isDoctor") ? controller.changeDoctorWidget(index) : controller.changeWidget(index);
                             },
                             title: Text(
                               PreferenceUtils.getBoolValue("isDoctor")
