@@ -168,4 +168,8 @@ class StringUtils {
   static const confirm = "Confirm";
   static const patientAdmissionInDoctor = "Patient Admissions";
   static const patientDetails = "Patient Details";
+  static const prescriptionDetails = "Prescription Details";
+  static const overview = "Overview";
+  static const rx = "Rx:";
+  static const downloadPrescription = "Download Prescription";
 }

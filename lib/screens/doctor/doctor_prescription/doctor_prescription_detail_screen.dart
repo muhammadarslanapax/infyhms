@@ -22,7 +22,7 @@ class DoctorPrescriptionDetailScreen extends StatelessWidget {
       child: Scaffold(
           backgroundColor: ColorConst.whiteColor,
           appBar: CommonAppBar(
-            title: StringUtils.billsDetails,
+            title: StringUtils.prescriptionDetails,
             leadOnTap: () {
               Get.back();
             },
@@ -103,6 +103,10 @@ class DoctorPrescriptionDetailScreen extends StatelessWidget {
                               descriptionText: "${doctorPrescriptionDetailController.doctorPrescriptionDetailModel!.data!.patient_age!}",
                             ),
                             SizedBox(height: height * 0.02),
+                            CommonText(
+                              width: width,
+                              text: StringUtils.overview,
+                            ),
                             SizedBox(height: height * 0.025),
                             CommonDetailText(
                               width: width,
@@ -127,127 +131,111 @@ class DoctorPrescriptionDetailScreen extends StatelessWidget {
                               titleText: "Advice:",
                               descriptionText: doctorPrescriptionDetailController.doctorPrescriptionDetailModel!.data!.advice!,
                             ),
-                            SizedBox(height: height * 0.02),
-                            // Container(
-                            //   width: double.infinity,
-                            //   decoration: BoxDecoration(
-                            //     borderRadius: BorderRadius.circular(15),
-                            //     color: ColorConst.bgGreyColor,
-                            //   ),
-                            //   child: Column(
-                            //     crossAxisAlignment: CrossAxisAlignment.start,
-                            //     children: [
-                            //       Padding(
-                            //         padding: const EdgeInsets.only(top: 15, right: 15, left: 15),
-                            //         child: Text(
-                            //           StringUtils.itemDetails,
-                            //           style: TextStyleConst.mediumTextStyle(
-                            //             ColorConst.blackColor,
-                            //             width * 0.04,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //       SizedBox(height: height * 0.01),
-                            //       const Padding(
-                            //         padding: EdgeInsets.only(right: 15, left: 15),
-                            //         child: Divider(
-                            //           color: ColorConst.hintGreyColor,
-                            //           thickness: 1.5,
-                            //         ),
-                            //       ),
-                            //       SizedBox(height: height * 0.01),
-                            //       // Padding(
-                            //       //   padding: const EdgeInsets.only(right: 15, left: 15),
-                            //       //   child: Column(
-                            //       //     children:
-                            //       //         List.generate(doctorPrescriptionDetailController.billDetailModel!.data!.item_details!.length, (index) {
-                            //       //       billDetailsController.totalPrice.value = billDetailsController.billDetailModel!.data!.amount!;
-                            //       //       return Padding(
-                            //       //         padding: EdgeInsets.only(bottom: height * 0.01),
-                            //       //         child: Row(
-                            //       //           crossAxisAlignment: CrossAxisAlignment.start,
-                            //       //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //       //           children: [
-                            //       //             Column(
-                            //       //               crossAxisAlignment: CrossAxisAlignment.start,
-                            //       //               children: [
-                            //       //                 Text(
-                            //       //                   billDetailsController.billDetailModel!.data!.item_details![index].item_name!,
-                            //       //                   style: TextStyleConst.mediumTextStyle(
-                            //       //                     ColorConst.blackColor,
-                            //       //                     width * 0.045,
-                            //       //                   ),
-                            //       //                 ),
-                            //       //                 SizedBox(height: height * 0.003),
-                            //       //                 Text(
-                            //       //                   "QTY ${billDetailsController.billDetailModel!.data!.item_details![index].quantity!} x ${billDetailsController.billDetailModel!.data!.currency!} ${billDetailsController.billDetailModel!.data!.item_details![index].price!}",
-                            //       //                   style: TextStyleConst.mediumTextStyle(
-                            //       //                     ColorConst.hintGreyColor,
-                            //       //                     width * 0.04,
-                            //       //                   ),
-                            //       //                 )
-                            //       //               ],
-                            //       //             ),
-                            //       //             Text(
-                            //       //               "${billDetailsController.billDetailModel!.data!.currency} ${billDetailsController.billDetailModel!.data!.item_details![index].total!}",
-                            //       //               style: TextStyleConst.mediumTextStyle(
-                            //       //                 ColorConst.blackColor,
-                            //       //                 width * 0.045,
-                            //       //               ),
-                            //       //             ),
-                            //       //           ],
-                            //       //         ),
-                            //       //       );
-                            //       //     }),
-                            //       //   ),
-                            //       // ),
-                            //       SizedBox(height: height * 0.01),
-                            //       Container(
-                            //         height: 50,
-                            //         width: double.infinity,
-                            //         padding: const EdgeInsets.symmetric(horizontal: 15),
-                            //         decoration: const BoxDecoration(
-                            //           borderRadius: BorderRadius.only(
-                            //             bottomLeft: Radius.circular(15),
-                            //             bottomRight: Radius.circular(15),
-                            //           ),
-                            //           color: ColorConst.lightBlueColor,
-                            //         ),
-                            //         child: Row(
-                            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //           children: [
-                            //             Text(
-                            //               StringUtils.totalAmount,
-                            //               style: TextStyleConst.boldTextStyle(
-                            //                 ColorConst.blackColor,
-                            //                 width * 0.045,
-                            //               ),
-                            //             ),
-                            //             Text(
-                            //               "${billDetailsController.billDetailModel!.data!.currency} ${billDetailsController.totalPrice}",
-                            //               style: TextStyleConst.boldTextStyle(
-                            //                 ColorConst.blackColor,
-                            //                 width * 0.045,
-                            //               ),
-                            //             ),
-                            //           ],
-                            //         ),
-                            //       )
-                            //     ],
-                            //   ),
-                            // ),
-                            // SizedBox(height: height * 0.02),
+                            SizedBox(
+                              height: doctorPrescriptionDetailController.doctorPrescriptionDetailModel!.data!.medicine!.isEmpty
+                                  ? height * 0.04
+                                  : height * 0.02,
+                            ),
+                            doctorPrescriptionDetailController.doctorPrescriptionDetailModel!.data!.medicine!.isEmpty
+                                ? Center(
+                                    child: CommonText(
+                                      width: width,
+                                      text: "No Medicine Available",
+                                      color: ColorConst.redColor,
+                                    ),
+                                  )
+                                : Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: ColorConst.bgGreyColor,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 15, right: 15, left: 15),
+                                          child: Text(
+                                            StringUtils.rx,
+                                            style: TextStyleConst.mediumTextStyle(
+                                              ColorConst.blackColor,
+                                              width * 0.04,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: height * 0.01),
+                                        const Padding(
+                                          padding: EdgeInsets.only(right: 15, left: 15),
+                                          child: Divider(
+                                            color: ColorConst.dividerColor,
+                                            thickness: 1.5,
+                                          ),
+                                        ),
+                                        SizedBox(height: height * 0.01),
+                                        Padding(
+                                          padding: const EdgeInsets.only(right: 15, left: 15),
+                                          child: Column(
+                                            children: List.generate(
+                                                doctorPrescriptionDetailController.doctorPrescriptionDetailModel!.data!.medicine!.length, (index) {
+                                              return Padding(
+                                                padding: EdgeInsets.only(bottom: height * 0.01),
+                                                child: Row(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          doctorPrescriptionDetailController
+                                                              .doctorPrescriptionDetailModel!.data!.medicine![index].name!,
+                                                          style: TextStyleConst.mediumTextStyle(
+                                                            ColorConst.blackColor,
+                                                            width * 0.045,
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: height * 0.003),
+                                                        Text(
+                                                          doctorPrescriptionDetailController
+                                                              .doctorPrescriptionDetailModel!.data!.medicine![index].salt_composition!,
+                                                          style: TextStyleConst.mediumTextStyle(
+                                                            ColorConst.hintGreyColor,
+                                                            width * 0.04,
+                                                          ),
+                                                        ),
+                                                        SizedBox(height: height * 0.01),
+                                                      ],
+                                                    ),
+                                                    Text(
+                                                      doctorPrescriptionDetailController
+                                                          .doctorPrescriptionDetailModel!.data!.medicine![index].created_at!,
+                                                      style: TextStyleConst.mediumTextStyle(
+                                                        ColorConst.blackColor,
+                                                        width * 0.045,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            }),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                            SizedBox(height: height * 0.04),
                             Center(
                               child: Obx(() {
                                 return doctorPrescriptionDetailController.isDownloading.value == true
                                     ? const Center(child: CircularProgressIndicator(color: ColorConst.primaryColor))
                                     : CommonButton(
-                                        width: width / 2,
+                                        width: width / 1.45,
                                         height: 50,
-                                        text: StringUtils.downloadBill,
+                                        text: StringUtils.downloadPrescription,
                                         color: ColorConst.blueColor,
                                         onTap: () {
-                                          // billDetailsController.downloadPDF(billDetailsController.billDetailModel!.data!.bill_download!);
+                                          doctorPrescriptionDetailController.downloadPDF(
+                                              doctorPrescriptionDetailController.doctorPrescriptionDetailModel!.data!.download_prescription!);
                                         },
                                         textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                       );

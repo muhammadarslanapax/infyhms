@@ -96,9 +96,9 @@ class DoctorDetailsScreen extends StatelessWidget {
                               titleText: "Specialist:",
                               descriptionText: doctorDetailController.doctorsDetailModel!.data!.specialist!,
                             ),
-                            SizedBox(height: height * 0.04),
+                            SizedBox(height: height * 0.02),
                             CommonText(width: width, text: "Address Details"),
-                            SizedBox(height: height * 0.015),
+                            SizedBox(height: height * 0.02),
                             CommonDetailText(
                               width: width,
                               titleText: "Address 1:",

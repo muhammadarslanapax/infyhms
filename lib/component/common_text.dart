@@ -7,17 +7,19 @@ class CommonText extends StatelessWidget {
     Key? key,
     required this.width,
     required this.text,
+    this.color,
   }) : super(key: key);
 
   final double width;
   final String text;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyleConst.boldTextStyle(
-        ColorConst.blackColor,
+        color ?? ColorConst.blackColor,
         width * 0.05,
       ),
     );
