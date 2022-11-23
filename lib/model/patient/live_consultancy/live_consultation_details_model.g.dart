@@ -31,16 +31,10 @@ LiveConsultationDetailsData _$LiveConsultationDetailsDataFromJson(
       id: json['id'] as int?,
       consultation_title: json['consultation_title'] as String?,
       consultation_date: json['consultation_date'] as String?,
-      consultation_time: json['consultation_time'] as String?,
-      status: json['status'] as String?,
       duration: json['duration'] as String?,
-      doctor_name: json['doctor_name'] as String?,
-      meeting_id: json['meeting_id'] as String?,
-      password: json['password'] as String?,
-      host_video: json['host_video'] as String?,
+      patient_name: json['patient_name'] as String?,
       type: json['type'] as String?,
       type_number: json['type_number'] as String?,
-      join_url: json['join_url'] as String?,
     );
 
 Map<String, dynamic> _$LiveConsultationDetailsDataToJson(
@@ -49,14 +43,8 @@ Map<String, dynamic> _$LiveConsultationDetailsDataToJson(
       'id': instance.id,
       'consultation_title': instance.consultation_title,
       'consultation_date': instance.consultation_date,
-      'consultation_time': instance.consultation_time,
-      'status': instance.status,
       'duration': instance.duration,
-      'doctor_name': instance.doctor_name,
-      'meeting_id': instance.meeting_id,
-      'password': instance.password,
-      'host_video': instance.host_video,
+      'patient_name': instance.patient_name,
       'type': instance.type,
       'type_number': instance.type_number,
-      'join_url': instance.join_url,
     };

@@ -6,6 +6,7 @@ import 'package:infyhms_flutter/component/common_detail_text.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/diagnosis_controller/diagnosis_test_details_controller.dart';
+import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class DiagnosisTestDetailScreen extends StatelessWidget {
@@ -40,62 +41,105 @@ class DiagnosisTestDetailScreen extends StatelessWidget {
                         SizedBox(height: height * 0.02),
                         CommonDetailText(
                           width: width,
-                          titleText: StringUtils.doctor,
-                          descriptionText: diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.doctor_name!,
+                          titleText: PreferenceUtils.getBoolValue("isDoctor") ? StringUtils.patient : StringUtils.doctor,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.patient_name!
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.doctor_name!,
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.diagnosisCategory,
-                          descriptionText: diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.category!,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.category!
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.category!,
                         ),
+                        SizedBox(height: height * 0.015),
+                        PreferenceUtils.getBoolValue("isDoctor")
+                            ? CommonDetailText(
+                                width: width,
+                                titleText: StringUtils.age,
+                                descriptionText: diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.patient_diagnosis!.age!,
+                              )
+                            : const SizedBox(),
+                        PreferenceUtils.getBoolValue("isDoctor") ? SizedBox(height: height * 0.015) : const SizedBox(),
+                        CommonDetailText(
+                          width: width,
+                          titleText: StringUtils.height,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.patient_diagnosis!.height!
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.height!,
+                        ),
+                        SizedBox(height: height * 0.015),
+                        CommonDetailText(
+                            width: width,
+                            titleText: StringUtils.weight,
+                            descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                                ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.patient_diagnosis!.weight!
+                                : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.weight!),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.reportNumber,
-                          descriptionText: diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.report_number!,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.report_number!
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.report_number!,
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.averageGlucose,
-                          descriptionText: diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.average_glucose!,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.patient_diagnosis!.average_glucose!
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.average_glucose!,
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.fastingBloodSugar,
-                          descriptionText: diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.fasting_blood_sugar!,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.patient_diagnosis!.fasting_blood_sugar!
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.fasting_blood_sugar!,
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.urineSugar,
-                          descriptionText: diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.urine_sugar!,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.patient_diagnosis!.urine_sugar!
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.urine_sugar!,
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.bloodPressure,
-                          descriptionText: diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.blood_pressure!,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.patient_diagnosis!.blood_pressure!
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.blood_pressure!,
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.diabetes,
-                          descriptionText: diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.diabetes!,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.patient_diagnosis!.diabetes!
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.diabetes!,
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.cholesterol,
-                          descriptionText: diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.cholesterol!,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.patient_diagnosis!.cholesterol!
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.patient_diagnosis!.cholesterol!,
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.createOn,
-                          descriptionText: diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.created_on!,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.created_on!
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.created_on!,
                         ),
                         SizedBox(height: height * 0.04),
                         Center(
@@ -108,8 +152,9 @@ class DiagnosisTestDetailScreen extends StatelessWidget {
                                     text: StringUtils.downloadDiagnosisTest,
                                     color: ColorConst.blueColor,
                                     onTap: () {
-                                      diagnosisTestDetailsController
-                                          .downloadPDF(diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.pdf_url!);
+                                      diagnosisTestDetailsController.downloadPDF(PreferenceUtils.getBoolValue("isDoctor")
+                                          ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.pdf_url!
+                                          : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.pdf_url!);
                                     },
                                     textStyleConst: TextStyleConst.mediumTextStyle(
                                       ColorConst.whiteColor,

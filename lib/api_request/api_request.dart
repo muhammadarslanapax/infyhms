@@ -2,8 +2,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_appointment_model/doctor_appointment_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/delete_test_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/doctor_diagnosis_test_detail_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/doctor_diagnosis_test_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_model/doctor_detail_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_model/doctor_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_payroll_model/payroll_details_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_payroll_model/payroll_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_prescription_model/doctor_prescription_detail_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_prescription_model/doctor_prescription_model.dart';
 import 'package:infyhms_flutter/model/patient/account_model/edit_profile_model.dart';
@@ -37,7 +42,7 @@ import 'package:infyhms_flutter/model/patient/invoice_model/invoice_details_mode
 import 'package:infyhms_flutter/model/patient/invoice_model/invoice_model.dart';
 import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation_details_model.dart';
 import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation_filter.dart';
-import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation_model.dart';
+import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation_meeting_model.dart';
 import 'package:infyhms_flutter/model/patient/notice_board_model/notice_board.dart';
 import 'package:infyhms_flutter/model/patient/prescriptions_model/prescriptions_model.dart';
 import 'package:infyhms_flutter/model/patient/vaccinated_model/vaccinated_model.dart';
@@ -151,13 +156,14 @@ abstract class ApiClient {
     @Path("id") int invoiceId,
   );
 
-  @GET("live-consultation")
-  Future<LiveConsultationModel> liveConsultations(
-    @Header('Authorization') String? token,
-  );
-
   @GET("live-consultation/{id}")
   Future<LiveConsultationDetailsModel> liveConsultationData(
+    @Header('Authorization') String? token,
+    @Path("id") int consultationId,
+  );
+
+  @GET("live-consultation-meeting/{id}")
+  Future<LiveConsultationMeetingModel> liveConsultationMeetingData(
     @Header('Authorization') String? token,
     @Path("id") int consultationId,
   );
@@ -288,6 +294,34 @@ abstract class ApiClient {
 
   @GET("doctors/prescriptions/{id}")
   Future<DoctorPrescriptionDetailModel> getDoctorsPrescriptionDetail(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @GET("doctors/doctor-diagnosis")
+  Future<DoctorDiagnosisTestModel> getDoctorsDiagnosisTest(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("doctors/doctor-diagnosis/{id}")
+  Future<DoctorDiagnosisTestDetailsModel> getDoctorsDiagnosisTestDetails(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @DELETE("doctors/doctor-diagnosis/{id}")
+  Future<DeleteTestModel> deleteTest(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @GET("doctors/doctor-payroll")
+  Future<PayrollModel> getPayroll(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("doctors/doctor-payroll/{id}")
+  Future<PayrollDetailsModel> getPayrollDetails(
     @Header('Authorization') String? token,
     @Path("id") int id,
   );

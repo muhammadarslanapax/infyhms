@@ -32,6 +32,7 @@ class CommonLoader {
 
   static void showAndroidLoader(context) {
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return AlertDialog(

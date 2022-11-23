@@ -24,31 +24,19 @@ class LiveConsultationDetailsData {
   int? id;
   String? consultation_title;
   String? consultation_date;
-  String? consultation_time;
-  String? status;
   String? duration;
-  String? doctor_name;
-  String? meeting_id;
-  String? password;
-  String? host_video;
+  String? patient_name;
   String? type;
   String? type_number;
-  String? join_url;
 
   LiveConsultationDetailsData({
     this.id,
     this.consultation_title,
     this.consultation_date,
-    this.consultation_time,
-    this.status,
     this.duration,
-    this.doctor_name,
-    this.meeting_id,
-    this.password,
-    this.host_video,
+    this.patient_name,
     this.type,
     this.type_number,
-    this.join_url,
   });
 
   factory LiveConsultationDetailsData.fromJson(Map<String, dynamic> json) => _$LiveConsultationDetailsDataFromJson(json);

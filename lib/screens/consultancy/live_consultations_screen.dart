@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:infyhms_flutter/component/common_button.dart';
-import 'package:infyhms_flutter/component/common_detail_text.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/live_consultancy_controller/live_consultations_controller.dart';
@@ -88,11 +86,11 @@ class LiveConsultationsScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return ListTile(
                               onTap: () {
-                                liveConsultationsController
-                                    .getDetailsOfConsultation(liveConsultationsController.liveConsultationFilter.value?.data?[index].id ?? 0);
-
-                                Get.to(() => LiveConsultationsDetailScreen(liveConsultationsController: liveConsultationsController),
-                                    transition: Transition.rightToLeft);
+                                Get.to(
+                                  () => LiveConsultationsDetailScreen(),
+                                  transition: Transition.rightToLeft,
+                                  arguments: liveConsultationsController.liveConsultationFilter.value?.data?[index].id,
+                                );
                               },
                               contentPadding: EdgeInsets.only(top: index == 0 ? 15 : 10, left: 15, right: 15),
                               leading: Container(
@@ -110,95 +108,11 @@ class LiveConsultationsScreen extends StatelessWidget {
                               ),
                               trailing: GestureDetector(
                                 onTap: () {
-                                  liveConsultationsController
-                                      .getDetailsOfConsultation(liveConsultationsController.liveConsultationFilter.value?.data?[index].id ?? 0);
-                                  showModalBottomSheet(
-                                    shape: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(50),
-                                        topRight: Radius.circular(50),
-                                      ),
-                                    ),
-                                    context: context,
-                                    builder: (context) {
-                                      return Container(
-                                        margin: const EdgeInsets.only(right: 25, top: 30, left: 25),
-                                        height: height * 0.4,
-                                        child: Obx(() {
-                                          return !liveConsultationsController.gotDetailsOfConsultation.value
-                                              ? const Center(child: CircularProgressIndicator(color: ColorConst.primaryColor))
-                                              : SingleChildScrollView(
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Center(
-                                                        child: Container(
-                                                          height: 5,
-                                                          width: 60,
-                                                          decoration:
-                                                              BoxDecoration(color: const Color(0xffE7E9EB), borderRadius: BorderRadius.circular(5)),
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        liveConsultationsController.liveConsultationDetailsModel.value?.data?.consultation_title ??
-                                                            "N/A",
-                                                        style: TextStyleConst.boldTextStyle(
-                                                          ColorConst.blackColor,
-                                                          width * 0.045,
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: height * 0.01),
-                                                      statusText(
-                                                          liveConsultationsController.liveConsultationDetailsModel.value?.data?.status ?? "N/A",
-                                                          width),
-                                                      SizedBox(height: height * 0.02),
-                                                      CommonDetailText(
-                                                        width: width,
-                                                        titleText: "Host Video:",
-                                                        descriptionText:
-                                                            liveConsultationsController.liveConsultationDetailsModel.value?.data?.host_video ?? "N/A",
-                                                      ),
-                                                      SizedBox(height: height * 0.01),
-                                                      CommonDetailText(
-                                                        width: width,
-                                                        titleText: "Consultation Date:",
-                                                        descriptionText:
-                                                            "${liveConsultationsController.liveConsultationDetailsModel.value?.data?.consultation_date ?? "N/A"}, ${liveConsultationsController.liveConsultationDetailsModel.value?.data?.consultation_time ?? "N/A"}",
-                                                      ),
-                                                      SizedBox(height: height * 0.01),
-                                                      CommonDetailText(
-                                                        width: width,
-                                                        titleText: "Duration:",
-                                                        descriptionText:
-                                                            "${liveConsultationsController.liveConsultationDetailsModel.value?.data?.duration ?? "N/A"} minutes",
-                                                      ),
-                                                      SizedBox(height: height * 0.03),
-                                                      Center(
-                                                        child: CommonButton(
-                                                          isIcon: true,
-                                                          width: width / 2,
-                                                          height: 50,
-                                                          text: "Join now",
-                                                          color: ColorConst.blueColor,
-                                                          onTap: () {
-                                                            liveConsultationsController.launchConsultationURL(
-                                                                context,
-                                                                liveConsultationsController.liveConsultationDetailsModel.value?.data?.join_url ??
-                                                                    "N/A");
-                                                          },
-                                                          textStyleConst: TextStyleConst.mediumTextStyle(
-                                                            ColorConst.whiteColor,
-                                                            width * 0.05,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: height * 0.02),
-                                                    ],
-                                                  ),
-                                                );
-                                        }),
-                                      );
-                                    },
+                                  liveConsultationsController.getLiveMeeting(
+                                    liveConsultationsController.liveConsultationFilter.value!.data![index].id!,
+                                    context,
+                                    height,
+                                    width,
                                   );
                                 },
                                 child: Container(

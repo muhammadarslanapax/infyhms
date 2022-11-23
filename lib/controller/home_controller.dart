@@ -14,6 +14,7 @@ import 'package:infyhms_flutter/screens/consultancy/live_consultations_screen.da
 import 'package:infyhms_flutter/screens/diagnosis/diagnosis_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/doctor_prescription/doctor_prescription_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/doctor_screen/doctors_screen.dart';
+import 'package:infyhms_flutter/screens/doctor/payroll_screen/my_payrolls_screen.dart';
 import 'package:infyhms_flutter/screens/document/document_screen.dart';
 import 'package:infyhms_flutter/screens/invoice/invoice_screen.dart';
 import 'package:infyhms_flutter/screens/notice/notice_board_screen.dart';
@@ -174,11 +175,14 @@ class HomeController extends GetxController {
         // currentDrawerIndex.value = 6;
         break;
       case 7:
-        // currentWidget = CaseScreen();
-        // appBarTitle.value = StringUtils.myCases;
-        // currentDrawerIndex.value = 7;
+        currentWidget = DiagnosisScreen();
+        appBarTitle.value = StringUtils.diagnosisTests;
+        currentDrawerIndex.value = 7;
         break;
       case 8:
+        currentWidget = const NoticeBoardScreen();
+        appBarTitle.value = StringUtils.noticeBoards;
+        currentDrawerIndex.value = 8;
         // currentWidget = AdmissionScreen();
         // appBarTitle.value = StringUtils.myAdmissions;
         // currentDrawerIndex.value = 8;
@@ -189,6 +193,9 @@ class HomeController extends GetxController {
         // currentDrawerIndex.value = 9;
         break;
       case 10:
+        currentWidget = MyPayrollsScreen();
+        appBarTitle.value = StringUtils.myPayrolls;
+        currentDrawerIndex.value = 10;
         // currentWidget = VaccinationScreen();
         // appBarTitle.value = StringUtils.vaccinatedPatients;
         // currentDrawerIndex.value = 10;

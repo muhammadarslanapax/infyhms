@@ -172,4 +172,18 @@ class StringUtils {
   static const overview = "Overview";
   static const rx = "Rx:";
   static const downloadPrescription = "Download Prescription";
+  static const patient = "Patient";
+  static const height = "Height:";
+  static const age = "Age:";
+  static const weight = "Weight:";
+
+  /// payRoll
+  static const srNo = "Sr No:";
+  static const myPayrolls = "My Payrolls";
+  static const payrollsDetails = "Payroll Details";
+  static const salaryDetails = "Salary Details";
+  static const basicSalary = "Basic Salary:";
+  static const allowance = "Allowance:";
+  static const deductions = "Deductions:";
+  static const netSalary = "Net Salary:";
 }

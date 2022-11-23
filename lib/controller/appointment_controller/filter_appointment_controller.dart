@@ -21,7 +21,7 @@ class FilterAppointmentController extends GetxController {
     super.onInit();
     if (PreferenceUtils.getBoolValue("isDoctor") == false) {
       if (appointmentController.currentIndex.value == 0) {
-        getPastAppointment();
+        getAppointment("past");
       }
     }
   }
@@ -31,52 +31,25 @@ class FilterAppointmentController extends GetxController {
     switch (index) {
       case 0:
         appointmentController.currentIndex.value = 0;
-        getPastAppointment();
+        getAppointment("past");
         break;
       case 1:
         appointmentController.currentIndex.value = 1;
-        getPendingAppointment();
+        getAppointment("pending");
         break;
       case 2:
         appointmentController.currentIndex.value = 2;
-        getCancelledAppointment();
+        getAppointment("cancelled");
         break;
       case 3:
         appointmentController.currentIndex.value = 3;
-        getCompletedAppointment();
+        getAppointment("completed");
         break;
     }
   }
 
-  void getPastAppointment() {
-    StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "past").then((value) {
-      filterAppointmentModel = value;
-      isApiCall.value = true;
-    }).onError((DioError error, stackTrace) {
-      CheckSocketException.checkSocketException(error);
-    });
-  }
-
-  void getPendingAppointment() {
-    StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "pending").then((value) {
-      filterAppointmentModel = value;
-      isApiCall.value = true;
-    }).onError((DioError error, stackTrace) {
-      CheckSocketException.checkSocketException(error);
-    });
-  }
-
-  void getCancelledAppointment() {
-    StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "cancelled").then((value) {
-      filterAppointmentModel = value;
-      isApiCall.value = true;
-    }).onError((DioError error, stackTrace) {
-      CheckSocketException.checkSocketException(error);
-    });
-  }
-
-  void getCompletedAppointment() {
-    StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), "completed").then((value) {
+  void getAppointment(String filter) {
+    StringUtils.client.getPastAppointments(PreferenceUtils.getStringValue("token"), filter).then((value) {
       filterAppointmentModel = value;
       isApiCall.value = true;
     }).onError((DioError error, stackTrace) {
@@ -93,15 +66,15 @@ class FilterAppointmentController extends GetxController {
           switch (appointmentController.currentIndex.value) {
             case 0:
               appointmentController.currentIndex.value = 0;
-              getPastAppointment();
+              getAppointment("past");
               break;
             case 2:
               appointmentController.currentIndex.value = 2;
-              getCancelledAppointment();
+              getAppointment("cancelled");
               break;
             case 3:
               appointmentController.currentIndex.value = 3;
-              getCompletedAppointment();
+              getAppointment("completed");
               break;
           }
         }
@@ -120,7 +93,7 @@ class FilterAppointmentController extends GetxController {
         cancelAppointmentModel = value;
         if (cancelAppointmentModel!.success == true) {
           appointmentController.currentIndex.value = 1;
-          getPendingAppointment();
+          getAppointment("pending");
         }
         Get.back();
       })
@@ -138,7 +111,7 @@ class FilterAppointmentController extends GetxController {
         deleteAppointmentModel = value;
         if (deleteAppointmentModel!.success == true) {
           appointmentController.currentIndex.value = 1;
-          getPendingAppointment();
+          getAppointment("pending");
         }
         Get.back();
       })

@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_detail_text.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
-import 'package:infyhms_flutter/controller/live_consultancy_controller/live_consultations_controller.dart';
+import 'package:infyhms_flutter/controller/live_consultancy_controller/live_consultancy_details_controller.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class LiveConsultationsDetailScreen extends StatelessWidget {
-  const LiveConsultationsDetailScreen({Key? key, required this.liveConsultationsController}) : super(key: key);
+  LiveConsultationsDetailScreen({Key? key}) : super(key: key);
 
-  final LiveConsultationsController liveConsultationsController;
+  final LiveConsultancyDetailsController liveConsultationsController = Get.put(LiveConsultancyDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +47,7 @@ class LiveConsultationsDetailScreen extends StatelessWidget {
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.consultationDate,
-                          descriptionText:
-                              "${liveConsultationsController.liveConsultationDetailsModel.value?.data?.consultation_date ?? "N/A"} - ${liveConsultationsController.liveConsultationDetailsModel.value?.data?.consultation_time ?? "N/A"}",
+                          descriptionText: liveConsultationsController.liveConsultationDetailsModel.value?.data?.consultation_date ?? "N/A",
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
@@ -60,7 +59,7 @@ class LiveConsultationsDetailScreen extends StatelessWidget {
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.doctorName,
-                          descriptionText: liveConsultationsController.liveConsultationDetailsModel.value?.data?.doctor_name ?? "N/A",
+                          descriptionText: liveConsultationsController.liveConsultationDetailsModel.value?.data?.patient_name ?? "N/A",
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
