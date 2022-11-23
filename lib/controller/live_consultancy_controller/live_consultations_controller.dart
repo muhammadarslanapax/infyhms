@@ -8,6 +8,8 @@ import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_live_consultations_model/doctor_live_consultations_meeting_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_live_consultations_model/doctor_live_consultations_model.dart';
 import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation_filter.dart';
 import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation_meeting_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
@@ -17,9 +19,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 class LiveConsultationsController extends GetxController {
   LiveConsultationMeetingModel? liveConsultationMeetingModel;
+  LiveConsultationFilter? liveConsultationFilter;
+  DoctorLiveConsultationsModel? doctorLiveConsultationsModel;
+  DoctorLiveConsultationsMeetingModel? doctorLiveConsultationsMeetingModel;
   RxList consultationsStatus = ["All", "Awaited", "Cancelled", "Finished"].obs;
   RxInt currentIndex = 0.obs;
-  Rx<LiveConsultationFilter?> liveConsultationFilter = LiveConsultationFilter().obs;
+
   RxBool gotConsultationData = false.obs;
   RxBool gotMeetingData = false.obs;
 
@@ -27,7 +32,7 @@ class LiveConsultationsController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getConsultancy("all");
+    PreferenceUtils.getBoolValue("isDoctor") ? getDoctorConsultancy("all") : getConsultancy("all");
   }
 
   void changeIndex(int index) {
@@ -35,19 +40,19 @@ class LiveConsultationsController extends GetxController {
     switch (index) {
       case 0:
         currentIndex.value = 0;
-        getConsultancy("all");
+        PreferenceUtils.getBoolValue("isDoctor") ? getDoctorConsultancy("all") : getConsultancy("all");
         break;
       case 1:
         currentIndex.value = 1;
-        getConsultancy("awaited");
+        PreferenceUtils.getBoolValue("isDoctor") ? getDoctorConsultancy("awaited") : getConsultancy("awaited");
         break;
       case 2:
         currentIndex.value = 2;
-        getConsultancy("cancelled");
+        PreferenceUtils.getBoolValue("isDoctor") ? getDoctorConsultancy("cancelled") : getConsultancy("cancelled");
         break;
       case 3:
         currentIndex.value = 3;
-        getConsultancy("finished");
+        PreferenceUtils.getBoolValue("isDoctor") ? getDoctorConsultancy("finished") : getConsultancy("finished");
         break;
     }
   }
@@ -55,13 +60,27 @@ class LiveConsultationsController extends GetxController {
   void getConsultancy(String status) {
     StringUtils.client.liveConsultationFilter(PreferenceUtils.getStringValue("token"), status)
       ..then((value) {
-        liveConsultationFilter.value = value;
+        liveConsultationFilter = value;
+        gotConsultationData.value = true;
+      })
+      ..onError((DioError error, stackTrace) {
+        // gotConsultationData.value = true;
+        CheckSocketException.checkSocketException(error);
+        return LiveConsultationFilter();
+      });
+  }
+
+  void getDoctorConsultancy(String status) {
+    StringUtils.client.liveDoctorConsultationFilter(PreferenceUtils.getStringValue("token"), status)
+      ..then((value) {
+        doctorLiveConsultationsModel = value;
         gotConsultationData.value = true;
       })
       ..onError((DioError error, stackTrace) {
         gotConsultationData.value = true;
         CheckSocketException.checkSocketException(error);
-        return LiveConsultationFilter();
+
+        return DoctorLiveConsultationsModel();
       });
   }
 
@@ -167,6 +186,103 @@ class LiveConsultationsController extends GetxController {
         gotMeetingData.value = true;
         CheckSocketException.checkSocketException(error);
         return LiveConsultationMeetingModel();
+      });
+  }
+
+  void getDoctorLiveMeeting(int consultationId, BuildContext context, double height, double width) {
+    CommonLoader.showLoader(context);
+    StringUtils.client.liveDoctorConsultationMeetingData(PreferenceUtils.getStringValue("token"), consultationId)
+      ..then((value) {
+        doctorLiveConsultationsMeetingModel = value;
+        if (doctorLiveConsultationsMeetingModel!.success == true) {
+          gotMeetingData.value = true;
+          Get.back();
+          showModalBottomSheet(
+            backgroundColor: ColorConst.whiteColor,
+            shape: const OutlineInputBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50),
+                topRight: Radius.circular(50),
+              ),
+              borderSide: BorderSide.none,
+            ),
+            context: context,
+            builder: (context) {
+              return Container(
+                color: ColorConst.whiteColor,
+                margin: const EdgeInsets.only(right: 25, top: 20, left: 25),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Container(
+                          height: 5,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: const Color(0xffE7E9EB),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: height * 0.03),
+                      Text(
+                        "${doctorLiveConsultationsMeetingModel!.data!.consultation_title}",
+                        style: TextStyleConst.boldTextStyle(
+                          ColorConst.blackColor,
+                          width * 0.045,
+                        ),
+                      ),
+                      SizedBox(height: height * 0.01),
+                      statusText("${doctorLiveConsultationsMeetingModel!.data!.status}", width),
+                      SizedBox(height: height * 0.02),
+                      CommonDetailText(
+                        width: width,
+                        titleText: "Host Video:",
+                        descriptionText: "${doctorLiveConsultationsMeetingModel!.data!.host_video}",
+                      ),
+                      SizedBox(height: height * 0.01),
+                      CommonDetailText(
+                        width: width,
+                        titleText: "Consultation Date:",
+                        descriptionText: "${doctorLiveConsultationsMeetingModel!.data!.consultation_date}",
+                      ),
+                      SizedBox(height: height * 0.01),
+                      CommonDetailText(
+                        width: width,
+                        titleText: "Duration:",
+                        descriptionText: "${doctorLiveConsultationsMeetingModel!.data!.duration_minutes} Minutes",
+                      ),
+                      SizedBox(height: height * 0.03),
+                      Center(
+                        child: CommonButton(
+                          isIcon: true,
+                          width: width / 2,
+                          height: 50,
+                          text: "Join now",
+                          color: ColorConst.blueColor,
+                          onTap: () {
+                            launchConsultationURL(doctorLiveConsultationsMeetingModel!.data!.meta!);
+                          },
+                          textStyleConst: TextStyleConst.mediumTextStyle(
+                            ColorConst.whiteColor,
+                            width * 0.05,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: height * 0.02),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        }
+      })
+      ..onError((DioError error, stackTrace) {
+        gotMeetingData.value = true;
+        CheckSocketException.checkSocketException(error);
+        return DoctorLiveConsultationsMeetingModel();
       });
   }
 }

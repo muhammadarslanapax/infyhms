@@ -15,7 +15,8 @@ class AdmissionScreen extends StatelessWidget {
     return Obx(
       () => admissionController.isGetAdmission.value == true
           ? admissionController.admissionModel!.data!.isEmpty
-              ? Center(
+              ? Container(
+                  color: ColorConst.whiteColor,
                   child: Center(
                     child: Text(
                       "No admission found",

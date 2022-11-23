@@ -25,7 +25,7 @@ class LiveConsultationDetailsData {
   String? consultation_title;
   String? consultation_date;
   String? duration;
-  String? patient_name;
+  String? dostor_name;
   String? type;
   String? type_number;
 
@@ -34,7 +34,7 @@ class LiveConsultationDetailsData {
     this.consultation_title,
     this.consultation_date,
     this.duration,
-    this.patient_name,
+    this.dostor_name,
     this.type,
     this.type_number,
   });

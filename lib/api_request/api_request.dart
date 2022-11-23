@@ -5,12 +5,18 @@ import 'package:infyhms_flutter/model/doctor/doctor_appointment_model/doctor_app
 import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/delete_test_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/doctor_diagnosis_test_detail_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/doctor_diagnosis_test_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_live_consultations_model/doctor_live_consultations_details_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_live_consultations_model/doctor_live_consultations_meeting_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_live_consultations_model/doctor_live_consultations_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_model/doctor_detail_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_model/doctor_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_payroll_model/payroll_details_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_payroll_model/payroll_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_prescription_model/doctor_prescription_detail_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_prescription_model/doctor_prescription_model.dart';
+import 'package:infyhms_flutter/model/doctor/patient_admission_model/delete_admission_model.dart';
+import 'package:infyhms_flutter/model/doctor/patient_admission_model/patient_admission_details_model.dart';
+import 'package:infyhms_flutter/model/doctor/patient_admission_model/patient_admission_model.dart';
 import 'package:infyhms_flutter/model/patient/account_model/edit_profile_model.dart';
 import 'package:infyhms_flutter/model/patient/account_model/get_profile_model.dart';
 import 'package:infyhms_flutter/model/patient/admission_model/admission_model.dart';
@@ -322,6 +328,41 @@ abstract class ApiClient {
 
   @GET("doctors/doctor-payroll/{id}")
   Future<PayrollDetailsModel> getPayrollDetails(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @GET("doctors/live-consultation-show/{id}")
+  Future<DoctorLiveConsultationsDetailsModel> liveDoctorConsultationData(
+    @Header('Authorization') String? token,
+    @Path("id") int consultationId,
+  );
+
+  @GET("doctors/live-consultation-meeting/{id}")
+  Future<DoctorLiveConsultationsMeetingModel> liveDoctorConsultationMeetingData(
+    @Header('Authorization') String? token,
+    @Path("id") int consultationId,
+  );
+
+  @GET("doctors/live-consultation-filter?status={status}")
+  Future<DoctorLiveConsultationsModel> liveDoctorConsultationFilter(
+    @Header('Authorization') String? token,
+    @Path("status") String status,
+  );
+
+  @GET("doctors/patient-admission")
+  Future<PatientAdmissionModel> getPatientAdmission(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("doctors/patient-admission-show/{id}")
+  Future<PatientAdmissionDetailsModel> getPatientAdmissionDetails(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @DELETE("doctors/patient-admission-delete/{id}")
+  Future<DeleteAdmissionModel> deleteAdmission(
     @Header('Authorization') String? token,
     @Path("id") int id,
   );

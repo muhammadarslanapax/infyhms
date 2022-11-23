@@ -32,7 +32,7 @@ LiveConsultationDetailsData _$LiveConsultationDetailsDataFromJson(
       consultation_title: json['consultation_title'] as String?,
       consultation_date: json['consultation_date'] as String?,
       duration: json['duration'] as String?,
-      patient_name: json['patient_name'] as String?,
+      dostor_name: json['dostor_name'] as String?,
       type: json['type'] as String?,
       type_number: json['type_number'] as String?,
     );
@@ -44,7 +44,7 @@ Map<String, dynamic> _$LiveConsultationDetailsDataToJson(
       'consultation_title': instance.consultation_title,
       'consultation_date': instance.consultation_date,
       'duration': instance.duration,
-      'patient_name': instance.patient_name,
+      'dostor_name': instance.dostor_name,
       'type': instance.type,
       'type_number': instance.type_number,
     };

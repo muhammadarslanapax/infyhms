@@ -50,7 +50,7 @@ class StringUtils {
   static const patientsCases = "Cases";
   static const casesDetails = "Case Details";
   static const myCases = "My Cases";
-  static const patientAdmissions = "Admissions";
+  static const patientAdmissions = "Patient Admissions";
   static const myAdmissions = "My Admissions";
   static const prescriptions = "Prescriptions";
   static const vaccinatedPatients = "Vaccinated";
@@ -186,4 +186,10 @@ class StringUtils {
   static const allowance = "Allowance:";
   static const deductions = "Deductions:";
   static const netSalary = "Net Salary:";
+
+  ///
+  static const patientName = "Patient Name:";
+
+  /// admission
+
 }

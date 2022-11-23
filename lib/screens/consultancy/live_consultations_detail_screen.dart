@@ -4,6 +4,7 @@ import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_detail_text.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/controller/live_consultancy_controller/live_consultancy_details_controller.dart';
+import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class LiveConsultationsDetailScreen extends StatelessWidget {
@@ -41,37 +42,49 @@ class LiveConsultationsDetailScreen extends StatelessWidget {
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.consultationTitle,
-                          descriptionText: liveConsultationsController.liveConsultationDetailsModel.value?.data?.consultation_title ?? "N/A",
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? liveConsultationsController.doctorLiveConsultationsDetailsModel?.data?.consultation_title ?? "N/A"
+                              : liveConsultationsController.liveConsultationDetailsModel?.data?.consultation_title ?? "N/A",
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.consultationDate,
-                          descriptionText: liveConsultationsController.liveConsultationDetailsModel.value?.data?.consultation_date ?? "N/A",
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? liveConsultationsController.doctorLiveConsultationsDetailsModel?.data?.consultation_date ?? "N/A"
+                              : liveConsultationsController.liveConsultationDetailsModel?.data?.consultation_date ?? "N/A",
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.durationMinute,
-                          descriptionText: liveConsultationsController.liveConsultationDetailsModel.value?.data?.duration ?? "N/A",
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? liveConsultationsController.doctorLiveConsultationsDetailsModel?.data?.duration_minutes ?? "N/A"
+                              : liveConsultationsController.liveConsultationDetailsModel?.data?.duration ?? "N/A",
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
-                          titleText: StringUtils.doctorName,
-                          descriptionText: liveConsultationsController.liveConsultationDetailsModel.value?.data?.patient_name ?? "N/A",
+                          titleText: PreferenceUtils.getBoolValue("isDoctor") ? StringUtils.patientName : StringUtils.doctorName,
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? liveConsultationsController.doctorLiveConsultationsDetailsModel?.data?.patient_name ?? "N/A"
+                              : liveConsultationsController.liveConsultationDetailsModel?.data?.dostor_name ?? "N/A",
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.type,
-                          descriptionText: liveConsultationsController.liveConsultationDetailsModel.value?.data?.type ?? "N/A",
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? liveConsultationsController.doctorLiveConsultationsDetailsModel?.data?.type ?? "N/A"
+                              : liveConsultationsController.liveConsultationDetailsModel?.data?.type ?? "N/A",
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.typeNumber,
-                          descriptionText: liveConsultationsController.liveConsultationDetailsModel.value?.data?.type_number ?? "N/A",
+                          descriptionText: PreferenceUtils.getBoolValue("isDoctor")
+                              ? liveConsultationsController.doctorLiveConsultationsDetailsModel?.data?.type_number ?? "N/A"
+                              : liveConsultationsController.liveConsultationDetailsModel?.data?.type_number ?? "N/A",
                         ),
                       ],
                     ),

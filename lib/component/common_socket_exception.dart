@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 
 class CheckSocketException {
-  static void checkSocketException(DioError error, [int? sec]) {
+  static void checkSocketException(DioError error, [int? sec, String? showError]) {
     if (error.error is SocketException) {
       Get.rawSnackbar(
         backgroundColor: const Color(0xff2d2d2d),
@@ -23,7 +23,7 @@ class CheckSocketException {
       Get.rawSnackbar(
         backgroundColor: const Color(0xff2d2d2d),
         messageText: Text(
-          "${error.response?.data["message"] ?? error.message}",
+          showError ?? error.response?.data["message"] ?? error.message,
           style: TextStyleConst.mediumTextStyle(Colors.white, 15),
         ),
         borderRadius: 5,
