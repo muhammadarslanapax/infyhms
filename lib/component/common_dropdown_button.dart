@@ -10,6 +10,8 @@ class CommonDropDown extends StatelessWidget {
     this.onChange,
     this.errorText,
     this.onTap,
+    this.enabled,
+    this.color,
     this.value,
     required this.dropdownItems,
   }) : super(key: key);
@@ -20,6 +22,8 @@ class CommonDropDown extends StatelessWidget {
   final ValueChanged<String?>? onChange;
   final String? errorText;
   final VoidCallback? onTap;
+  final Color? color;
+  final bool? enabled;
   final String? value;
 
   @override
@@ -27,7 +31,7 @@ class CommonDropDown extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
+        color: color ?? Colors.white,
       ),
       child: DropdownButtonFormField(
         value: value,
@@ -37,6 +41,7 @@ class CommonDropDown extends StatelessWidget {
         menuMaxHeight: dropButtonHeight,
         icon: const Icon(Icons.keyboard_arrow_down_rounded),
         decoration: InputDecoration(
+          enabled: enabled ?? true,
           errorText: errorText,
           focusedErrorBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Color(0xffE8EAF0), width: 2),
@@ -53,7 +58,7 @@ class CommonDropDown extends StatelessWidget {
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: TextStyleConst.hintTextStyle(ColorConst.hintGreyColor),
-          contentPadding: const EdgeInsets.fromLTRB(10, 30, 10, 8),
+          contentPadding: enabled ?? true ? const EdgeInsets.fromLTRB(10, 30, 10, 8) : const EdgeInsets.fromLTRB(10, 20, 10, 20),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Color(0xffE8EAF0), width: 2),
             borderRadius: BorderRadius.all(
@@ -68,7 +73,7 @@ class CommonDropDown extends StatelessWidget {
           ),
         ),
         items: dropdownItems,
-        onChanged: onChange!,
+        onChanged: onChange,
       ),
     );
   }

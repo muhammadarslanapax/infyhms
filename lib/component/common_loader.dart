@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CommonLoader {
   static void showLoader(context) {
@@ -13,38 +14,28 @@ class CommonLoader {
   }
 
   static void showIOSLoader(context) {
-    showCupertinoDialog(
-      context: context,
-      builder: (context) {
-        return CupertinoAlertDialog(
-          content: Row(
-            children: const [
-              CupertinoActivityIndicator(),
-              SizedBox(width: 10),
-              Text("Please wait"),
-            ],
-          ),
-        );
-      },
-      barrierDismissible: false,
-    );
+    Get.dialog(CupertinoAlertDialog(
+      content: Row(
+        children: const [
+          CupertinoActivityIndicator(),
+          SizedBox(width: 10),
+          Text("Please wait"),
+        ],
+      ),
+    ));
   }
 
   static void showAndroidLoader(context) {
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: Row(
-            children: const [
-              CircularProgressIndicator(),
-              SizedBox(width: 10),
-              Text("Please wait"),
-            ],
-          ),
-        );
-      },
+    Get.dialog(
+      AlertDialog(
+        content: Row(
+          children: const [
+            CircularProgressIndicator(),
+            SizedBox(width: 10),
+            Text("Please wait"),
+          ],
+        ),
+      ),
     );
   }
 }

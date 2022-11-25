@@ -5,11 +5,14 @@ import 'package:infyhms_flutter/component/common_loader.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/model/patient/account_model/get_profile_model.dart';
 import 'package:infyhms_flutter/model/patient/auth_model/logout_model.dart';
+import 'package:infyhms_flutter/screens/doctor/bed_assign/bed_assigns_screen.dart';
+import 'package:infyhms_flutter/screens/doctor/bed_status/bed_status_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/doctor_admission_screen/patient_admission_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/doctor_prescription/doctor_prescription_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/doctor_screen/doctors_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/payroll_screen/my_payrolls_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/report_screen/select_report_screen.dart';
+import 'package:infyhms_flutter/screens/doctor/schedule_screen/schedules_screen.dart';
 import 'package:infyhms_flutter/screens/patient/admission/admissions_screen.dart';
 import 'package:infyhms_flutter/screens/patient/appointment/appointment_screen.dart';
 import 'package:infyhms_flutter/screens/patient/auth/login_screen.dart';
@@ -94,7 +97,7 @@ class HomeController extends GetxController {
         currentDrawerIndex.value = 2;
         break;
       case 3:
-        currentWidget = const DocumentScreen();
+        currentWidget = DocumentScreen();
         appBarTitle.value = StringUtils.documents;
         currentDrawerIndex.value = 3;
         break;
@@ -147,14 +150,14 @@ class HomeController extends GetxController {
         currentDrawerIndex.value = 0;
         break;
       case 1:
-        // currentWidget = BillScreen();
-        // appBarTitle.value = StringUtils.bills;
-        // currentDrawerIndex.value = 1;
+        currentWidget = BedAssignsScreen();
+        appBarTitle.value = StringUtils.bedAssign;
+        currentDrawerIndex.value = 1;
         break;
       case 2:
-        // currentWidget = DiagnosisScreen();
-        // appBarTitle.value = StringUtils.diagnosisTests;
-        // currentDrawerIndex.value = 2;
+        currentWidget = BedStatusScreen();
+        appBarTitle.value = StringUtils.bedStatus;
+        currentDrawerIndex.value = 2;
         break;
       case 3:
         currentWidget = DoctorScreen();
@@ -162,9 +165,9 @@ class HomeController extends GetxController {
         currentDrawerIndex.value = 3;
         break;
       case 4:
-        // currentWidget = const NoticeBoardScreen();
-        // appBarTitle.value = StringUtils.noticeBoards;
-        // currentDrawerIndex.value = 4;
+        currentWidget = SchedulesScreen();
+        appBarTitle.value = StringUtils.schedules;
+        currentDrawerIndex.value = 4;
         break;
       case 5:
         currentWidget = DoctorPrescriptionScreen();
@@ -172,9 +175,9 @@ class HomeController extends GetxController {
         currentDrawerIndex.value = 5;
         break;
       case 6:
-        // currentWidget = LiveConsultationsScreen();
-        // appBarTitle.value = StringUtils.liveConsultations;
-        // currentDrawerIndex.value = 6;
+        currentWidget = DocumentScreen();
+        appBarTitle.value = StringUtils.documents;
+        currentDrawerIndex.value = 6;
         break;
       case 7:
         currentWidget = DiagnosisScreen();
@@ -185,41 +188,27 @@ class HomeController extends GetxController {
         currentWidget = NoticeBoardScreen();
         appBarTitle.value = StringUtils.noticeBoards;
         currentDrawerIndex.value = 8;
-        // currentWidget = AdmissionScreen();
-        // appBarTitle.value = StringUtils.myAdmissions;
-        // currentDrawerIndex.value = 8;
         break;
       case 9:
         currentWidget = LiveConsultationsScreen();
         appBarTitle.value = StringUtils.liveConsultations;
         currentDrawerIndex.value = 9;
-        // currentWidget = PrescriptionsScreen();
-        // appBarTitle.value = StringUtils.prescriptions;
-        // currentDrawerIndex.value = 9;
         break;
       case 10:
         currentWidget = MyPayrollsScreen();
         appBarTitle.value = StringUtils.myPayrolls;
         currentDrawerIndex.value = 10;
-        // currentWidget = VaccinationScreen();
-        // appBarTitle.value = StringUtils.vaccinatedPatients;
-        // currentDrawerIndex.value = 10;
         break;
       case 11:
         currentWidget = PatientAdmission();
         appBarTitle.value = StringUtils.patientAdmissions;
         currentDrawerIndex.value = 11;
-        // currentWidget = VaccinationScreen();
-        // appBarTitle.value = StringUtils.vaccinatedPatients;
-        // currentDrawerIndex.value = 10;
         break;
       case 12:
         currentWidget = const SelectReportScreen();
         appBarTitle.value = StringUtils.report;
         currentDrawerIndex.value = 12;
-        // currentWidget = VaccinationScreen();
-        // appBarTitle.value = StringUtils.vaccinatedPatients;
-        // currentDrawerIndex.value = 10;
+
         break;
     }
   }

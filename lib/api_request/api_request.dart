@@ -1,10 +1,24 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_assign_delete.dart';
+import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_assign_model.dart';
+import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_details_model.dart';
+import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_update_model.dart';
+import 'package:infyhms_flutter/model/doctor/bed_assign_model/beds_model.dart';
+import 'package:infyhms_flutter/model/doctor/bed_assign_model/create_new_bed_model.dart';
+import 'package:infyhms_flutter/model/doctor/bed_assign_model/ipd_patients_model.dart';
+import 'package:infyhms_flutter/model/doctor/bed_assign_model/patient_cases_model.dart';
+import 'package:infyhms_flutter/model/doctor/bed_status_model/bed_status_details_model.dart';
+import 'package:infyhms_flutter/model/doctor/bed_status_model/bed_status_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_appointment_model/doctor_appointment_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/delete_test_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/doctor_diagnosis_test_detail_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/doctor_diagnosis_test_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_document_model/doctor_documents_crud_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_document_model/doctor_documents_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_document_model/doctor_documents_type_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_document_model/doctor_patients_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_live_consultations_model/doctor_live_consultations_details_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_live_consultations_model/doctor_live_consultations_meeting_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_live_consultations_model/doctor_live_consultations_model.dart';
@@ -14,6 +28,8 @@ import 'package:infyhms_flutter/model/doctor/doctor_payroll_model/payroll_detail
 import 'package:infyhms_flutter/model/doctor/doctor_payroll_model/payroll_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_prescription_model/doctor_prescription_detail_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_prescription_model/doctor_prescription_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_schedule_model/doctor_schedule_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_schedule_model/doctor_schedule_update_model.dart';
 import 'package:infyhms_flutter/model/doctor/patient_admission_model/delete_admission_model.dart';
 import 'package:infyhms_flutter/model/doctor/patient_admission_model/patient_admission_details_model.dart';
 import 'package:infyhms_flutter/model/doctor/patient_admission_model/patient_admission_model.dart';
@@ -419,5 +435,130 @@ abstract class ApiClient {
   Future<DoctorCaseDetailsModel> getDoctorCaseDetails(
     @Header('Authorization') String? token,
     @Path("caseId") String caseId,
+  );
+
+  ////////
+
+  @GET("doctors/bed-assign-filter?status={status}")
+  Future<BedAssignFilterModel> getBedData(
+    @Header('Authorization') String? token,
+    @Path("status") String status,
+  );
+
+  @GET("doctors/bed-assign/{id}")
+  Future<BedDetailsModel> getBedDataDetails(
+    @Header('Authorization') String? token,
+    @Path("id") String id,
+  );
+  //
+  @GET("doctors/bed-status")
+  Future<BedStatusModel> getBedStatus(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("doctors/bed-status-detail/{id}")
+  Future<BedStatusDetailsModel> getBedStatusDetails(
+    @Header('Authorization') String? token,
+    @Path("id") String id,
+  );
+
+  @GET("doctors/beds")
+  Future<BedsModel> getBeds(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("doctors/ipd-patient/{caseId}")
+  Future<IPDPatientsModel> getIPDModel(
+    @Header('Authorization') String? token,
+    @Path("caseId") String caseId,
+  );
+
+  @GET("doctors/patient-cases")
+  Future<PatientCases> getPatientCases(
+    @Header('Authorization') String? token,
+  );
+
+  @POST("doctors/bed-assign-update/{id}")
+  Future<BedUpdatedDetailsModel> updateBedAssign(
+    @Header('Authorization') String? token,
+    @Path("id") String id,
+    @Field("bed_id") String bedId,
+    @Field("patient_id") String patientId,
+    @Field("case_id") String caseId,
+    @Field("assign_date") String assignDate,
+    @Field("discharge_date") String dischargeDate,
+  );
+
+  @POST("doctors/bed-assign-delete/{id}")
+  Future<BedAssignDelete> deleteBedAssign(
+    @Header('Authorization') String? token,
+    @Path("id") String id,
+  );
+
+  @POST("doctors/bed-assign-create")
+  Future<CreateNewBedModel> createNewBedAssign(
+    @Header('Authorization') String? token,
+    @Field("bed_id") String? bedId,
+    @Field("patient_id") String? patientId,
+    @Field("case_id") String caseId,
+    @Field("assign_date") String assignDate,
+  );
+
+  /// doctor documents
+
+  @GET("doctors/doctor-documents")
+  Future<DoctorDocumentsModel> doctorDocuments(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("doctors/doctor-document-type")
+  Future<DoctorDocumentsTypeModel> doctorDocumentType(
+    @Header('Authorization') String? token,
+  );
+
+  @GET("doctors/doctor-patients")
+  Future<DoctorPatientsDocumentsModel> doctorPatientsDocument(
+    @Header('Authorization') String? token,
+  );
+
+  /// doctor documents crud
+
+  @MultiPart()
+  @POST("doctors/doctor-document-store")
+  Future<DoctorDocumentsCRUDModel> createNewDoctorDocument(
+    @Header('Authorization') String? token,
+    @Part(name: "title") String title,
+    @Part(name: "document_type_id") String documentTypeId,
+    @Part(name: "patient_id") String patientId,
+    @Part(name: "attachment") File? attachment,
+  );
+
+  @MultiPart()
+  @POST("doctors/doctor-document-update/{id}")
+  Future<DoctorDocumentsCRUDModel> updateDoctorsDocuments(
+    @Header('Authorization') String? token,
+    @Path("id") String docId,
+    @Part(name: "title") String title,
+    @Part(name: "document_type_id") String documentTypeId,
+    @Part(name: "patient_id") String patientId,
+    @Part(name: "attachment") File? attachment,
+  );
+
+  @DELETE("doctors/doctor-document-delete/{id}")
+  Future<DoctorDocumentsCRUDModel> deleteDoctorDocuments(
+    @Header('Authorization') String? token,
+    @Path("id") String docId,
+  );
+
+  @GET("doctors/doctor-schedule")
+  Future<DoctorScheduleModel> schedule(
+    @Header('Authorization') String? token,
+  );
+
+  @POST("doctors/doctor-schedule/update/{id}")
+  Future<DoctorScheduleUpdateModel> scheduleUpdate(
+    @Header('Authorization') String? token,
+    @Path("id") String id,
+    @Body() Map<String, dynamic> data,
   );
 }

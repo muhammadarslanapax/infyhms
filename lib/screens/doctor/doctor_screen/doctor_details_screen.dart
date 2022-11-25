@@ -16,6 +16,7 @@ class DoctorDetailsScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+          backgroundColor: ColorConst.whiteColor,
           appBar: CommonAppBar(
             title: "Doctor Details",
             leadOnTap: () {

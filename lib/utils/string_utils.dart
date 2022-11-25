@@ -197,4 +197,10 @@ class StringUtils {
   static const deathReport = "Death Reports";
   static const investigationReport = "Investigation Reports";
   static const operationReport = "Operation Reports";
+
+  static const newCase = "Case";
+  static const ipdPatient = "IPD Patient";
+  static const bedInEditBed = "Bed";
+  static const assignDate = "Assign Date";
+  static const disChargeDate = "Discharge Date";
 }
