@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/firebase_options.dart';
-import 'package:infyhms_flutter/screens/welcome/splash_screen.dart';
+import 'package:infyhms_flutter/screens/patient/welcome/splash_screen.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 
 void main() async {

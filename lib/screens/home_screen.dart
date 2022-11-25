@@ -5,7 +5,7 @@ import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/home_controller.dart';
-import 'package:infyhms_flutter/screens/account/my_account_screen.dart';
+import 'package:infyhms_flutter/screens/patient/account/my_account_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/list_utils.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';

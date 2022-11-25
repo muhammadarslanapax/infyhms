@@ -5,23 +5,23 @@ import 'package:infyhms_flutter/component/common_loader.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/model/patient/account_model/get_profile_model.dart';
 import 'package:infyhms_flutter/model/patient/auth_model/logout_model.dart';
-import 'package:infyhms_flutter/screens/admission/admissions_screen.dart';
-import 'package:infyhms_flutter/screens/appointment/appointment_screen.dart';
-import 'package:infyhms_flutter/screens/auth/login_screen.dart';
-import 'package:infyhms_flutter/screens/bills/bills_screen.dart';
-import 'package:infyhms_flutter/screens/case/case_screen.dart';
-import 'package:infyhms_flutter/screens/consultancy/live_consultations_screen.dart';
-import 'package:infyhms_flutter/screens/diagnosis/diagnosis_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/doctor_admission_screen/patient_admission_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/doctor_prescription/doctor_prescription_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/doctor_screen/doctors_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/payroll_screen/my_payrolls_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/report_screen/select_report_screen.dart';
-import 'package:infyhms_flutter/screens/document/document_screen.dart';
-import 'package:infyhms_flutter/screens/invoice/invoice_screen.dart';
-import 'package:infyhms_flutter/screens/notice/notice_board_screen.dart';
-import 'package:infyhms_flutter/screens/prescription/prescriptions_screen.dart';
-import 'package:infyhms_flutter/screens/vaccination/vaccination_screen.dart';
+import 'package:infyhms_flutter/screens/patient/admission/admissions_screen.dart';
+import 'package:infyhms_flutter/screens/patient/appointment/appointment_screen.dart';
+import 'package:infyhms_flutter/screens/patient/auth/login_screen.dart';
+import 'package:infyhms_flutter/screens/patient/bills/bills_screen.dart';
+import 'package:infyhms_flutter/screens/patient/case/case_screen.dart';
+import 'package:infyhms_flutter/screens/patient/consultancy/live_consultations_screen.dart';
+import 'package:infyhms_flutter/screens/patient/diagnosis/diagnosis_screen.dart';
+import 'package:infyhms_flutter/screens/patient/document/document_screen.dart';
+import 'package:infyhms_flutter/screens/patient/invoice/invoice_screen.dart';
+import 'package:infyhms_flutter/screens/patient/notice/notice_board_screen.dart';
+import 'package:infyhms_flutter/screens/patient/prescription/prescriptions_screen.dart';
+import 'package:infyhms_flutter/screens/patient/vaccination/vaccination_screen.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
@@ -99,12 +99,12 @@ class HomeController extends GetxController {
         currentDrawerIndex.value = 3;
         break;
       case 4:
-        currentWidget = const NoticeBoardScreen();
+        currentWidget = NoticeBoardScreen();
         appBarTitle.value = StringUtils.noticeBoards;
         currentDrawerIndex.value = 4;
         break;
       case 5:
-        currentWidget = const InvoiceScreen();
+        currentWidget = InvoiceScreen();
         appBarTitle.value = StringUtils.invoices;
         currentDrawerIndex.value = 5;
         break;
@@ -182,7 +182,7 @@ class HomeController extends GetxController {
         currentDrawerIndex.value = 7;
         break;
       case 8:
-        currentWidget = const NoticeBoardScreen();
+        currentWidget = NoticeBoardScreen();
         appBarTitle.value = StringUtils.noticeBoards;
         currentDrawerIndex.value = 8;
         // currentWidget = AdmissionScreen();
