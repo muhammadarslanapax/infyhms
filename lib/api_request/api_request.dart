@@ -17,6 +17,10 @@ import 'package:infyhms_flutter/model/doctor/doctor_prescription_model/doctor_pr
 import 'package:infyhms_flutter/model/doctor/patient_admission_model/delete_admission_model.dart';
 import 'package:infyhms_flutter/model/doctor/patient_admission_model/patient_admission_details_model.dart';
 import 'package:infyhms_flutter/model/doctor/patient_admission_model/patient_admission_model.dart';
+import 'package:infyhms_flutter/model/doctor/report_model/common_report_model/common_report_model.dart';
+import 'package:infyhms_flutter/model/doctor/report_model/common_report_model/delete_common_report_model.dart';
+import 'package:infyhms_flutter/model/doctor/report_model/doctor_case_details_model.dart';
+import 'package:infyhms_flutter/model/doctor/report_model/investigation_report_model/investigation_report_model.dart';
 import 'package:infyhms_flutter/model/patient/account_model/edit_profile_model.dart';
 import 'package:infyhms_flutter/model/patient/account_model/get_profile_model.dart';
 import 'package:infyhms_flutter/model/patient/admission_model/admission_model.dart';
@@ -365,5 +369,55 @@ abstract class ApiClient {
   Future<DeleteAdmissionModel> deleteAdmission(
     @Header('Authorization') String? token,
     @Path("id") int id,
+  );
+
+  @GET("doctors/birth-report")
+  Future<CommonReportModel> getBirthReport(
+    @Header('Authorization') String? token,
+  );
+
+  @DELETE("doctors/birth-report/{id}")
+  Future<DeleteCommonReportModel> deleteBirthReport(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @GET("doctors/death-report")
+  Future<CommonReportModel> getDeathReport(
+    @Header('Authorization') String? token,
+  );
+
+  @DELETE("doctors/death-report/{id}")
+  Future<DeleteCommonReportModel> deleteDeathReport(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @GET("doctors/operation-report")
+  Future<CommonReportModel> getOperationReport(
+    @Header('Authorization') String? token,
+  );
+
+  @DELETE("doctors/operation-report/{id}")
+  Future<DeleteCommonReportModel> deleteOperationReport(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @GET("doctors/investigation-report")
+  Future<InvestigationReportModel> getInvestigationReport(
+    @Header('Authorization') String? token,
+  );
+
+  @DELETE("doctors/investigation-report/{id}")
+  Future<DeleteCommonReportModel> deleteInvestigationReport(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
+
+  @GET("doctors/case-detail/{caseId}")
+  Future<DoctorCaseDetailsModel> getDoctorCaseDetails(
+    @Header('Authorization') String? token,
+    @Path("caseId") String caseId,
   );
 }

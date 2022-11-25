@@ -16,6 +16,7 @@ import 'package:infyhms_flutter/screens/doctor/doctor_admission_screen/patient_a
 import 'package:infyhms_flutter/screens/doctor/doctor_prescription/doctor_prescription_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/doctor_screen/doctors_screen.dart';
 import 'package:infyhms_flutter/screens/doctor/payroll_screen/my_payrolls_screen.dart';
+import 'package:infyhms_flutter/screens/doctor/report_screen/select_report_screen.dart';
 import 'package:infyhms_flutter/screens/document/document_screen.dart';
 import 'package:infyhms_flutter/screens/invoice/invoice_screen.dart';
 import 'package:infyhms_flutter/screens/notice/notice_board_screen.dart';
@@ -213,6 +214,9 @@ class HomeController extends GetxController {
         // currentDrawerIndex.value = 10;
         break;
       case 12:
+        currentWidget = const SelectReportScreen();
+        appBarTitle.value = StringUtils.report;
+        currentDrawerIndex.value = 12;
         // currentWidget = VaccinationScreen();
         // appBarTitle.value = StringUtils.vaccinatedPatients;
         // currentDrawerIndex.value = 10;

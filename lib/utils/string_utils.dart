@@ -190,6 +190,11 @@ class StringUtils {
   ///
   static const patientName = "Patient Name:";
 
-  /// admission
+  /// report
 
+  static const report = "Report";
+  static const birthReport = "Birth Reports";
+  static const deathReport = "Death Reports";
+  static const investigationReport = "Investigation Reports";
+  static const operationReport = "Operation Reports";
 }

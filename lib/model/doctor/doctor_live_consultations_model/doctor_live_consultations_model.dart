@@ -23,7 +23,7 @@ class DoctorLiveConsultationsModel {
 class DoctorLiveConsultationsData {
   int? id;
   String? consultation_title;
-  int? status;
+  String? status;
   String? consultation_time;
   String? consultation_date;
   String? patient_image;

@@ -30,7 +30,7 @@ DoctorLiveConsultationsData _$DoctorLiveConsultationsDataFromJson(
     DoctorLiveConsultationsData(
       id: json['id'] as int?,
       consultation_title: json['consultation_title'] as String?,
-      status: json['status'] as int?,
+      status: json['status'] as String?,
       consultation_time: json['consultation_time'] as String?,
       consultation_date: json['consultation_date'] as String?,
       patient_image: json['patient_image'] as String?,

@@ -110,11 +110,10 @@ class DocumentScreen extends StatelessWidget {
                                         ),
                                       ),
                                       trailing: Obx(
-                                        () => controller.isDownloading.value && controller.currentIndex == index
+                                        () => controller.isDownloading.value && controller.currentIndex!.value == index
                                             ? const CircularProgressIndicator(color: ColorConst.primaryColor)
                                             : InkWell(
                                                 onTap: () {
-                                                  print("object");
                                                   controller.downloadDocument(context, index);
                                                 },
                                                 child: Container(

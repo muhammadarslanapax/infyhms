@@ -20,6 +20,7 @@ class OnBoardingScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ColorConst.whiteColor,
         body: Stack(
           children: [
             OnBoardingAnimation(
