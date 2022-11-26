@@ -29,6 +29,7 @@ class BedStatusScreen extends StatelessWidget {
                     itemBuilder: (context, mainIndex) {
                       return Column(
                         children: [
+                          const SizedBox(height: 15),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -88,8 +89,7 @@ class BedStatusScreen extends StatelessWidget {
                             );
                           }),
                           const Divider(
-                            color: Colors.grey,
-                            // color: Color(0xffE7E9EB),
+                            color: ColorConst.borderGreyColor,
                           ),
                         ],
                       );

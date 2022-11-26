@@ -24,6 +24,7 @@ class HomeScreen extends StatelessWidget {
         init: HomeController(),
         builder: (controller) {
           return Scaffold(
+            backgroundColor: ColorConst.whiteColor,
             key: controller.scaffoldKey,
             appBar: CommonAppBar(
               title: controller.appBarTitle.value,

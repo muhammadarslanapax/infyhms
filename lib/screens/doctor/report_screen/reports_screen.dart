@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:infyhms_flutter/component/common_alert_box.dart';
 import 'package:infyhms_flutter/component/common_app_bar.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
@@ -61,86 +62,22 @@ class ReportScreen extends StatelessWidget {
                                   children: [
                                     SlidableAction(
                                       onPressed: (context) {
-                                        showDialog(
-                                          barrierDismissible: false,
-                                          context: context,
-                                          builder: (context) {
-                                            return Center(
-                                              child: Container(
-                                                height: height / 2.7,
-                                                width: width / 1.12,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(15),
-                                                  color: Colors.white,
-                                                ),
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    Container(
-                                                      height: 60,
-                                                      width: 60,
-                                                      decoration: const BoxDecoration(
-                                                        image: DecorationImage(
-                                                          image: AssetImage(ImageUtils.deleteIcon),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(height: height * 0.03),
-                                                    Text(
-                                                      "Delete",
-                                                      style: TextStyleConst.boldTextStyle(
-                                                        ColorConst.blackColor,
-                                                        width * 0.05,
-                                                      ),
-                                                    ),
-                                                    SizedBox(height: height * 0.01),
-                                                    Text(
-                                                      "Are you sure want to delete this\n appointment?",
-                                                      textAlign: TextAlign.center,
-                                                      style: TextStyleConst.mediumTextStyle(
-                                                        ColorConst.hintGreyColor,
-                                                        width * 0.042,
-                                                      ),
-                                                    ),
-                                                    SizedBox(height: height * 0.03),
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                      children: [
-                                                        CommonButton(
-                                                          textStyleConst: TextStyleConst.mediumTextStyle(
-                                                            ColorConst.whiteColor,
-                                                            width * 0.05,
-                                                          ),
-                                                          onTap: () {
-                                                            reportScreenController
-                                                                .deleteReport(reportScreenController.investigationReportModel!.data![index].id!);
-                                                          },
-                                                          color: ColorConst.blueColor,
-                                                          text: StringUtils.delete,
-                                                          width: width / 2.5,
-                                                          height: 50,
-                                                        ),
-                                                        CommonButton(
-                                                          textStyleConst: TextStyleConst.mediumTextStyle(
-                                                            ColorConst.hintGreyColor,
-                                                            width * 0.05,
-                                                          ),
-                                                          onTap: () {
-                                                            Get.back();
-                                                          },
-                                                          color: ColorConst.borderGreyColor,
-                                                          text: StringUtils.cancel,
-                                                          width: width / 2.5,
-                                                          height: 50,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            );
+                                        ContentOfDialog contentOfDialog = ContentOfDialog(
+                                          height: height,
+                                          width: width,
+                                          image: ImageUtils.deleteIcon,
+                                          title: "Delete",
+                                          description: "Are you sure want to delete this\nappointment?",
+                                          leftText: StringUtils.delete,
+                                          rightText: StringUtils.cancel,
+                                          leftTapEvent: () {
+                                            reportScreenController.deleteReport(reportScreenController.investigationReportModel!.data![index].id!);
+                                          },
+                                          rightTapEvent: () {
+                                            Get.back();
                                           },
                                         );
+                                        CommonAlertDialog.commonAlertDialog(context, contentOfDialog);
                                       },
                                       backgroundColor: const Color(0xFFFCE5E5),
                                       foregroundColor: ColorConst.redColor,

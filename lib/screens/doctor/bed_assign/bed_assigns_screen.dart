@@ -98,10 +98,12 @@ class BedAssignsScreen extends StatelessWidget {
                                                 "bedId": "${bedAssignController.bedAssignFilterModel?.data?[index].bed_id}",
                                                 "assignDate": "${bedAssignController.bedAssignFilterModel?.data?[index].assign_date}",
                                               };
-                                              print(bedAssignController.bedAssignFilterModel?.data?[index].id);
-                                              print(bedAssignController.bedAssignFilterModel?.data?[index].bed);
+                                              // print(bedAssignController.bedAssignFilterModel?.data?[index].id);
+                                              print(bedAssignController.bedAssignFilterModel?.data?[index].bed_id);
+                                              // print(bedAssignController.bedAssignFilterModel?.data?[index].bed);
+
                                               Get.to(
-                                                () => const EditBedScreen(),
+                                                () => EditBedScreen(),
                                                 arguments: data,
                                               );
                                             },

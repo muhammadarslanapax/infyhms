@@ -11,13 +11,13 @@ import 'package:infyhms_flutter/controller/doctor/bed_assign_controller/bed_edit
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class EditBedScreen extends StatelessWidget {
-  const EditBedScreen({Key? key}) : super(key: key);
-
+  EditBedScreen({Key? key}) : super(key: key);
+  final EditBedController editBedController = Get.put(EditBedController());
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    EditBedController editBedController = Get.put(EditBedController());
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorConst.whiteColor,
@@ -51,15 +51,7 @@ class EditBedScreen extends StatelessWidget {
                                 editBedController.patientCases?.data?.isEmpty ?? true ? null : editBedController.patientCases?.data?[0].patient_case,
                             color: ColorConst.bgGreyColor,
                             hintText: "Select case",
-                            dropdownItems:
-                                // editBedController.patientCases?.data?.map((value) {
-                                //       return DropdownMenuItem(
-                                //         value: value.patient_case,
-                                //         child: Text(value.patient_case ?? "", style: const TextStyle(color: ColorConst.hintGreyColor)),
-                                //       );
-                                //     }).toString() ??
-                                //     [],
-                                List.generate(
+                            dropdownItems: List.generate(
                               editBedController.patientCases?.data?.length ?? 0,
                               (index) => DropdownMenuItem(
                                 value: editBedController.patientCases?.data?[index].patient_case,

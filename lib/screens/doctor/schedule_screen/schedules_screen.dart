@@ -97,30 +97,17 @@ class SchedulesScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CommonButton(
-                          textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
-                          onTap: () {
-                            schedulesController.updateSchedules();
-                          },
-                          color: ColorConst.blueColor,
-                          text: StringUtils.save,
-                          width: width / 2.3,
-                          height: 50,
-                        ),
-                        CommonButton(
-                          textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.05),
-                          onTap: () {
-                            Get.back();
-                          },
-                          color: ColorConst.borderGreyColor,
-                          text: StringUtils.cancel,
-                          width: width / 2.3,
-                          height: 50,
-                        ),
-                      ],
+                    Center(
+                      child: CommonButton(
+                        textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
+                        onTap: () {
+                          schedulesController.updateSchedules();
+                        },
+                        color: ColorConst.blueColor,
+                        text: StringUtils.save,
+                        width: width / 2.3,
+                        height: 50,
+                      ),
                     ),
                     const SizedBox(height: 25),
                   ],
