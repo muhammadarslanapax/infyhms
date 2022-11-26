@@ -6,19 +6,26 @@ part of 'bed_assign_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BedAssignFilterModel _$BedAssignFilterModelFromJson(Map<String, dynamic> json) => BedAssignFilterModel(
+BedAssignFilterModel _$BedAssignFilterModelFromJson(
+        Map<String, dynamic> json) =>
+    BedAssignFilterModel(
       success: json['success'] as bool?,
-      data: (json['data'] as List<dynamic>?)?.map((e) => BedAssignData.fromJson(e as Map<String, dynamic>)).toList(),
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => BedAssignData.fromJson(e as Map<String, dynamic>))
+          .toList(),
       message: json['message'] as String?,
     );
 
-Map<String, dynamic> _$BedAssignFilterModelToJson(BedAssignFilterModel instance) => <String, dynamic>{
+Map<String, dynamic> _$BedAssignFilterModelToJson(
+        BedAssignFilterModel instance) =>
+    <String, dynamic>{
       'success': instance.success,
       'data': instance.data,
       'message': instance.message,
     };
 
-BedAssignData _$BedAssignDataFromJson(Map<String, dynamic> json) => BedAssignData(
+BedAssignData _$BedAssignDataFromJson(Map<String, dynamic> json) =>
+    BedAssignData(
       id: json['id'] as int?,
       patient_name: json['patient_name'] as String?,
       bed: json['bed'] as String?,
@@ -29,7 +36,8 @@ BedAssignData _$BedAssignDataFromJson(Map<String, dynamic> json) => BedAssignDat
       patient_image: json['patient_image'] as String?,
     );
 
-Map<String, dynamic> _$BedAssignDataToJson(BedAssignData instance) => <String, dynamic>{
+Map<String, dynamic> _$BedAssignDataToJson(BedAssignData instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'patient_name': instance.patient_name,
       'bed': instance.bed,

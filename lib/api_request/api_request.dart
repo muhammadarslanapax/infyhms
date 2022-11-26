@@ -457,6 +457,7 @@ abstract class ApiClient {
     @Header('Authorization') String? token,
     @Path("id") String id,
   );
+
   //
   @GET("doctors/bed-status")
   Future<BedStatusModel> getBedStatus(
@@ -472,6 +473,12 @@ abstract class ApiClient {
   @GET("doctors/beds")
   Future<BedsModel> getBeds(
     @Header('Authorization') String? token,
+  );
+
+  @POST("doctors/bed-assign-edit-bed")
+  Future<BedsModel> getBedsForEdit(
+    @Header('Authorization') String? token,
+    @Field("bed_id") String bedId,
   );
 
   @GET("doctors/ipd-patient/{caseId}")

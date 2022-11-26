@@ -154,7 +154,6 @@ class LiveConsultationsScreen extends StatelessWidget {
                             },
                           );
               } else {
-                print("object1");
                 return !liveConsultationsController.gotConsultationData.value
                     ? const Center(child: CircularProgressIndicator(color: ColorConst.primaryColor))
                     : liveConsultationsController.liveConsultationFilter?.data?.isEmpty ?? true

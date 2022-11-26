@@ -14,11 +14,11 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 class BedAssignsScreen extends StatelessWidget {
   BedAssignsScreen({Key? key}) : super(key: key);
   final BedAssignController bedAssignController = Get.put(BedAssignController());
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-
     return Container(
       color: ColorConst.whiteColor,
       child: Stack(
@@ -97,11 +97,8 @@ class BedAssignsScreen extends StatelessWidget {
                                                 "bed": "${bedAssignController.bedAssignFilterModel?.data?[index].bed}",
                                                 "bedId": "${bedAssignController.bedAssignFilterModel?.data?[index].bed_id}",
                                                 "assignDate": "${bedAssignController.bedAssignFilterModel?.data?[index].assign_date}",
+                                                "assignId": "${bedAssignController.bedAssignFilterModel?.data?[index].id}",
                                               };
-                                              // print(bedAssignController.bedAssignFilterModel?.data?[index].id);
-                                              print(bedAssignController.bedAssignFilterModel?.data?[index].bed_id);
-                                              // print(bedAssignController.bedAssignFilterModel?.data?[index].bed);
-
                                               Get.to(
                                                 () => EditBedScreen(),
                                                 arguments: data,

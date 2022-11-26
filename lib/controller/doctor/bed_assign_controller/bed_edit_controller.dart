@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infyhms_flutter/component/common_loader.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
+import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_update_model.dart';
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/beds_model.dart';
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/ipd_patients_model.dart';
@@ -35,6 +37,8 @@ class EditBedController extends GetxController {
   String? ipdPatientId;
   String? bedId;
 
+  String? assignId;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -44,6 +48,7 @@ class EditBedController extends GetxController {
     selectedBedAssignController.text = selectedBedAssignDate ?? "";
     bedId = bedAssignData["bedId"];
     bed = bedAssignData["bed"];
+    assignId = bedAssignData["assignId"];
   }
 
   Future<String?> selectDate(BuildContext context, DateTime? oldDate, bool isAssign) async {
@@ -70,7 +75,7 @@ class EditBedController extends GetxController {
     StringUtils.client.getPatientCases(PreferenceUtils.getStringValue("token"))
       ..then((value) {
         patientCases = value;
-        String caseId = value.data?.isEmpty ?? true ? "" : value.data?[0].patient_case?.split(" ").first ?? "";
+        String? caseId = value.data?.isEmpty ?? true ? null : value.data?[0].patient_case?.split(" ").first ?? "";
         myCasesId = caseId;
         getIPDPatients(caseId);
         getBeds();
@@ -81,8 +86,8 @@ class EditBedController extends GetxController {
       });
   }
 
-  void getIPDPatients(String caseId) {
-    StringUtils.client.getIPDModel(PreferenceUtils.getStringValue("token"), caseId)
+  void getIPDPatients(String? caseId) {
+    StringUtils.client.getIPDModel(PreferenceUtils.getStringValue("token"), caseId ?? "")
       ..then((value) {
         ipdPatientsModel = value;
       })
@@ -92,7 +97,7 @@ class EditBedController extends GetxController {
   }
 
   void getBeds() {
-    StringUtils.client.getBeds(PreferenceUtils.getStringValue("token"))
+    StringUtils.client.getBedsForEdit(PreferenceUtils.getStringValue("token"), "$bedId")
       ..then((value) {
         bedsModel = value;
         isCasesApiCalled.value = true;
@@ -113,6 +118,7 @@ class EditBedController extends GetxController {
   }
 
   void saveData() {
+
     if (bedId == null) {
       DisplaySnackBar.displaySnackBar("Please select bed");
     } else if (selectedBedAssignDate == null) {
@@ -120,9 +126,11 @@ class EditBedController extends GetxController {
     } else if (selectedDischargeDate == null) {
       DisplaySnackBar.displaySnackBar("Please select discharge date");
     } else {
+      var context;
+      CommonLoader.showLoader(context);
       StringUtils.client.updateBedAssign(
         PreferenceUtils.getStringValue("token"),
-        "${bedAssignData["bedId"]}",
+        "${bedAssignData["assignId"]}",
         "$bedId",
         "$ipdPatientId",
         "$myCasesId",
@@ -130,9 +138,12 @@ class EditBedController extends GetxController {
         "$selectedDischargeDate",
       )
         ..then((value) {
+          Get.back();
           DisplaySnackBar.displaySnackBar("Bed details updated successfully");
         })
         ..onError((DioError error, stackTrace) {
+          Get.back();
+          CheckSocketException.checkSocketException(error);
           return BedUpdatedDetailsModel();
         });
     }

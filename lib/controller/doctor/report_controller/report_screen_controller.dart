@@ -19,7 +19,6 @@ class ReportScreenController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     callReportApi();
-    print(report);
   }
 
   void callReportApi() {
