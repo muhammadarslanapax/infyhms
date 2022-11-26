@@ -1042,6 +1042,33 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<ConfirmAppointmentModel> confirmAppointment(
+    token,
+    id,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<ConfirmAppointmentModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'doctors/confirm-appointment/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ConfirmAppointmentModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<DoctorsModel> getDoctors(token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

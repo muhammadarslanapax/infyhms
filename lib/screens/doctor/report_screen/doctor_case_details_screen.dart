@@ -46,7 +46,10 @@ class DoctorCaseDetailsScreen extends StatelessWidget {
                           width: width, titleText: "Phone:", descriptionText: caseDetailsController.doctorCaseDetailsModel!.data!.phone!),
                       SizedBox(height: height * 0.015),
                       CommonDetailText(
-                          width: width, titleText: "Fee:", descriptionText: "\$ ${caseDetailsController.doctorCaseDetailsModel!.data!.fee!}"),
+                          width: width,
+                          titleText: "Fee:",
+                          descriptionText:
+                              "${caseDetailsController.doctorCaseDetailsModel!.data!.currency!} ${caseDetailsController.doctorCaseDetailsModel!.data!.fee!}"),
                       SizedBox(height: height * 0.015),
                       CommonDetailText(
                           width: width, titleText: "Created On:", descriptionText: caseDetailsController.doctorCaseDetailsModel!.data!.created_on!),

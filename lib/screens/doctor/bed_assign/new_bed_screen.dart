@@ -46,9 +46,12 @@ class NewBedScreen extends StatelessWidget {
 
                           /// Case
                           CommonDropDown(
-                            onChange: (value) {
-                              newBedController.caseChoice(value ?? "");
-                            },
+                            color: newBedController.patientCases?.data?.isEmpty ?? true ? ColorConst.bgGreyColor : ColorConst.whiteColor,
+                            onChange: newBedController.patientCases?.data?.isEmpty ?? true
+                                ? null
+                                : (value) {
+                                    newBedController.caseChoice(value ?? "");
+                                  },
                             dropdownItems: newBedController.patientCases?.data?.map((value) {
                                   return DropdownMenuItem<String>(
                                     value: value.patient_case.toString(),

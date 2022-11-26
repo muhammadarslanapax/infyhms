@@ -15,7 +15,6 @@ class SchedulesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-
     return Container(
       color: ColorConst.whiteColor,
       padding: const EdgeInsets.only(right: 15, left: 15, top: 15),

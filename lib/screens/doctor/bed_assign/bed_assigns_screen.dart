@@ -95,9 +95,11 @@ class BedAssignsScreen extends StatelessWidget {
                                             onPressed: (context) {
                                               var data = {
                                                 "bed": "${bedAssignController.bedAssignFilterModel?.data?[index].bed}",
-                                                "bedId": "${bedAssignController.bedAssignFilterModel?.data?[index].id}",
+                                                "bedId": "${bedAssignController.bedAssignFilterModel?.data?[index].bed_id}",
                                                 "assignDate": "${bedAssignController.bedAssignFilterModel?.data?[index].assign_date}",
                                               };
+                                              print(bedAssignController.bedAssignFilterModel?.data?[index].id);
+                                              print(bedAssignController.bedAssignFilterModel?.data?[index].bed);
                                               Get.to(
                                                 () => const EditBedScreen(),
                                                 arguments: data,

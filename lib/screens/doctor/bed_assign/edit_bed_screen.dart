@@ -50,6 +50,7 @@ class EditBedScreen extends StatelessWidget {
                             value:
                                 editBedController.patientCases?.data?.isEmpty ?? true ? null : editBedController.patientCases?.data?[0].patient_case,
                             color: ColorConst.bgGreyColor,
+                            hintText: "Select case",
                             dropdownItems:
                                 // editBedController.patientCases?.data?.map((value) {
                                 //       return DropdownMenuItem(

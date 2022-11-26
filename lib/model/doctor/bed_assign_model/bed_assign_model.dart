@@ -27,6 +27,7 @@ class BedAssignData {
   String? patient_name;
   String? bed;
   String? case_id;
+  int? bed_id;
   String? assign_date;
   String? assign_time;
   String? patient_image;
@@ -36,6 +37,7 @@ class BedAssignData {
     this.patient_name,
     this.bed,
     this.case_id,
+    this.bed_id,
     this.assign_date,
     this.assign_time,
     this.patient_image,

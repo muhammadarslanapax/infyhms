@@ -29,6 +29,7 @@ class DoctorCaseDetailsData {
   int? fee;
   String? created_on;
   String? description;
+  String? currency;
 
   DoctorCaseDetailsData({
     this.id,
@@ -39,6 +40,7 @@ class DoctorCaseDetailsData {
     this.fee,
     this.created_on,
     this.description,
+    this.currency,
   });
   factory DoctorCaseDetailsData.fromJson(Map<String, dynamic> json) => _$DoctorCaseDetailsDataFromJson(json);
 

@@ -99,7 +99,7 @@ class NewBedController extends GetxController {
         })
         ..onError((DioError error, stackTrace) {
           Get.back();
-          CheckSocketException.checkSocketException(error);
+          CheckSocketException.checkSocketException(error, 3, "You can't assign new bed");
           return CreateNewBedModel();
         });
     }

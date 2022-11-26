@@ -114,7 +114,7 @@ class DocumentScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    trailing: documentController.isDownloading.value && documentController.currentIndex.contains(index)
+                                    trailing: documentController.isCurrentDownloading[index].value
                                         ? const CircularProgressIndicator(color: ColorConst.primaryColor)
                                         : InkWell(
                                             onTap: () {
@@ -257,7 +257,7 @@ class DocumentScreen extends StatelessWidget {
                                         ),
                                       ),
                                       trailing: Obx(
-                                        () => documentController.isDownloading.value && documentController.currentIndex.contains(index)
+                                        () => documentController.isCurrentDownloading[index].value
                                             ? const CircularProgressIndicator(color: ColorConst.primaryColor)
                                             : InkWell(
                                                 onTap: () {

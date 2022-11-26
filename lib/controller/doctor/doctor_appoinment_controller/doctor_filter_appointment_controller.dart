@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/controller/doctor/doctor_appoinment_controller/doctor_appoinment_controller.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_appointment_model/confirm_appointment_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_appointment_model/doctor_appointment_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
@@ -9,6 +10,7 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 class DoctorFilterAppointmentController extends GetxController {
   DoctorAppointmentController doctorAppointmentController = Get.put(DoctorAppointmentController());
   DoctorAppointmentModel? doctorAppointmentModel;
+  ConfirmAppointmentModel? confirmAppointmentModel;
 
   RxBool isDoctorFilterApiCall = false.obs;
   @override
@@ -74,5 +76,21 @@ class DoctorFilterAppointmentController extends GetxController {
         getCompletedAppointment();
         break;
     }
+  }
+
+  void confirmAppointment(int id) {
+    Get.back();
+    isDoctorFilterApiCall.value = false;
+    StringUtils.client.confirmAppointment(PreferenceUtils.getStringValue("token"), id)
+      ..then((value) {
+        confirmAppointmentModel = value;
+        if (confirmAppointmentModel!.success == true) {
+          getPendingAppointment();
+        }
+      })
+      ..onError((DioError error, stackTrace) {
+        CheckSocketException.checkSocketException(error);
+        return ConfirmAppointmentModel();
+      });
   }
 }

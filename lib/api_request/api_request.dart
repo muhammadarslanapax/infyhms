@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_assign_delete.dart';
+import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_assign_delete_model.dart';
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_assign_model.dart';
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_details_model.dart';
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_update_model.dart';
@@ -11,6 +11,7 @@ import 'package:infyhms_flutter/model/doctor/bed_assign_model/ipd_patients_model
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/patient_cases_model.dart';
 import 'package:infyhms_flutter/model/doctor/bed_status_model/bed_status_details_model.dart';
 import 'package:infyhms_flutter/model/doctor/bed_status_model/bed_status_model.dart';
+import 'package:infyhms_flutter/model/doctor/doctor_appointment_model/confirm_appointment_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_appointment_model/doctor_appointment_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/delete_test_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/doctor_diagnosis_test_detail_model.dart';
@@ -300,6 +301,12 @@ abstract class ApiClient {
   Future<DoctorAppointmentModel> getDoctorAppointments(
     @Header('Authorization') String? token,
     @Path("status") String status,
+  );
+
+  @POST("doctors/confirm-appointment/{id}")
+  Future<ConfirmAppointmentModel> confirmAppointment(
+    @Header('Authorization') String? token,
+    @Path("id") int id,
   );
 
   @GET("doctors/doctors")

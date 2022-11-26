@@ -6,28 +6,19 @@ part of 'doctor_case_details_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DoctorCaseDetailsModel _$DoctorCaseDetailsModelFromJson(
-        Map<String, dynamic> json) =>
-    DoctorCaseDetailsModel(
+DoctorCaseDetailsModel _$DoctorCaseDetailsModelFromJson(Map<String, dynamic> json) => DoctorCaseDetailsModel(
       success: json['success'] as bool?,
-      data: json['data'] == null
-          ? null
-          : DoctorCaseDetailsData.fromJson(
-              json['data'] as Map<String, dynamic>),
+      data: json['data'] == null ? null : DoctorCaseDetailsData.fromJson(json['data'] as Map<String, dynamic>),
       message: json['message'] as String?,
     );
 
-Map<String, dynamic> _$DoctorCaseDetailsModelToJson(
-        DoctorCaseDetailsModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DoctorCaseDetailsModelToJson(DoctorCaseDetailsModel instance) => <String, dynamic>{
       'success': instance.success,
       'data': instance.data?.toJson(),
       'message': instance.message,
     };
 
-DoctorCaseDetailsData _$DoctorCaseDetailsDataFromJson(
-        Map<String, dynamic> json) =>
-    DoctorCaseDetailsData(
+DoctorCaseDetailsData _$DoctorCaseDetailsDataFromJson(Map<String, dynamic> json) => DoctorCaseDetailsData(
       id: json['id'] as int?,
       case_id: json['case_id'] as String?,
       case_date: json['case_date'] as String?,
@@ -36,11 +27,10 @@ DoctorCaseDetailsData _$DoctorCaseDetailsDataFromJson(
       fee: json['fee'] as int?,
       created_on: json['created_on'] as String?,
       description: json['description'] as String?,
+      currency: json['description'] as String?,
     );
 
-Map<String, dynamic> _$DoctorCaseDetailsDataToJson(
-        DoctorCaseDetailsData instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DoctorCaseDetailsDataToJson(DoctorCaseDetailsData instance) => <String, dynamic>{
       'id': instance.id,
       'case_id': instance.case_id,
       'case_date': instance.case_date,
@@ -49,4 +39,5 @@ Map<String, dynamic> _$DoctorCaseDetailsDataToJson(
       'fee': instance.fee,
       'created_on': instance.created_on,
       'description': instance.description,
+      'currency': instance.currency,
     };

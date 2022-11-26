@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_loader.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
-import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_assign_delete.dart';
+import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_assign_delete_model.dart';
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_assign_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';

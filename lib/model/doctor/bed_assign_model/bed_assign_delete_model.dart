@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'bed_assign_delete.g.dart';
+part 'bed_assign_delete_model.g.dart';
 
 @JsonSerializable()
 class BedAssignDelete {
