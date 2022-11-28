@@ -97,7 +97,7 @@ class NewAppointmentController extends GetxController {
     }
   }
 
-  createNewAppointment(BuildContext context) {
+  createNewAppointment() {
     if (isSelectDoctorDepartment == false) {
       DisplaySnackBar.displaySnackBar("Please select doctor department");
     } else if (isSelectDate == false) {
@@ -107,7 +107,7 @@ class NewAppointmentController extends GetxController {
     } else if (slotBookingModel!.data!.bookingSlotArr!.isEmpty) {
       DisplaySnackBar.displaySnackBar("Please select other date");
     } else {
-      CommonLoader.showLoader(context);
+      CommonLoader.showLoader();
 
       StringUtils.client.createAppointment(
         PreferenceUtils.getStringValue("token"),

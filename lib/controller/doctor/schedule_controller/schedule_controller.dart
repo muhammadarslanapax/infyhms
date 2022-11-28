@@ -36,8 +36,8 @@ class SchedulesController extends GetxController {
       "available_from": availableFrom,
       "available_to": availableTo,
     };
-    var context;
-    CommonLoader.showLoader(context);
+
+    CommonLoader.showLoader();
     StringUtils.client.scheduleUpdate(PreferenceUtils.getStringValue("token"), doctorScheduleModel?.data?.id.toString() ?? "", data)
       ..then((value) {
         Get.back();

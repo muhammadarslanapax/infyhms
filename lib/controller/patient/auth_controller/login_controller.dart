@@ -28,7 +28,7 @@ class LogInController extends GetxController {
     } else if (emailController.text.isEmpty) {
       DisplaySnackBar.displaySnackBar("Please enter password");
     } else {
-      CommonLoader.showLoader(context);
+      CommonLoader.showLoader();
       StringUtils.client.loginPatient({
         "email": emailController.text,
         "password": passwordController.text,

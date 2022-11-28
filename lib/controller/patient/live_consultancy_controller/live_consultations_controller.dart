@@ -93,7 +93,7 @@ class LiveConsultationsController extends GetxController {
   }
 
   void getLiveMeeting(int consultationId, BuildContext context, double height, double width) {
-    CommonLoader.showLoader(context);
+    CommonLoader.showLoader();
     StringUtils.client.liveConsultationMeetingData(PreferenceUtils.getStringValue("token"), consultationId)
       ..then((value) {
         liveConsultationMeetingModel = value;
@@ -190,7 +190,7 @@ class LiveConsultationsController extends GetxController {
   }
 
   void getDoctorLiveMeeting(int consultationId, BuildContext context, double height, double width) {
-    CommonLoader.showLoader(context);
+    CommonLoader.showLoader();
     StringUtils.client.liveDoctorConsultationMeetingData(PreferenceUtils.getStringValue("token"), consultationId)
       ..then((value) {
         doctorLiveConsultationsMeetingModel = value;

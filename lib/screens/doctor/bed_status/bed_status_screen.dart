@@ -63,7 +63,7 @@ class BedStatusScreen extends StatelessWidget {
                                   (subIndex) {
                                     return ListTile(
                                       onTap: () {
-                                        CommonLoader.showLoader(context);
+                                        CommonLoader.showLoader();
                                         bedStatusController.getBedDetails(
                                           "${bedStatusController.bedStatusModel?.data?[mainIndex].bed?[subIndex].id}",
                                           context,

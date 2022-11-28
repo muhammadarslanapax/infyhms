@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_loader.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
@@ -10,9 +9,9 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class MyAccountController extends GetxController {
   LogoutModel? logoutModel;
-  void logout(BuildContext context) {
+  void logout() {
     Get.back();
-    CommonLoader.showLoader(context);
+    CommonLoader.showLoader();
     StringUtils.client.logout(PreferenceUtils.getStringValue("token")).then((value) {
       logoutModel = value;
       if (logoutModel!.success == true) {

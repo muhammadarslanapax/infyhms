@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CommonLoader {
-  static void showLoader(context) {
+  static void showLoader() {
     if (Platform.isIOS) {
-      showIOSLoader(context);
+      showIOSLoader();
     } else {
-      showAndroidLoader(context);
+      showAndroidLoader();
     }
   }
 
-  static void showIOSLoader(context) {
+  static void showIOSLoader() {
     Get.dialog(CupertinoAlertDialog(
       content: Row(
         children: const [
@@ -25,7 +25,7 @@ class CommonLoader {
     ));
   }
 
-  static void showAndroidLoader(context) {
+  static void showAndroidLoader() {
     Get.dialog(
       AlertDialog(
         content: Row(

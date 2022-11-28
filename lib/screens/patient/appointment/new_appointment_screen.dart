@@ -227,7 +227,7 @@ class NewAppointmentScreen extends StatelessWidget {
                                   CommonButton(
                                     textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                     onTap: () {
-                                      controller.createNewAppointment(context);
+                                      controller.createNewAppointment();
                                     },
                                     color: ColorConst.blueColor,
                                     text: StringUtils.save,

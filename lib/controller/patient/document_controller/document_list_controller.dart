@@ -152,9 +152,9 @@ class DocumentController extends GetxController {
                       onTap: () {
                         Get.back();
                         if (PreferenceUtils.getBoolValue("isDoctor")) {
-                          deleteDoctorDocument(context, doctorDocumentsModel?.data?[index].id ?? 0);
+                          deleteDoctorDocument(doctorDocumentsModel?.data?[index].id ?? 0);
                         } else {
-                          deleteDocData(context, documentsModel?.data?[index].id ?? 0);
+                          deleteDocData(documentsModel?.data?[index].id ?? 0);
                         }
                       },
                       color: ColorConst.blueColor,
@@ -185,8 +185,8 @@ class DocumentController extends GetxController {
     );
   }
 
-  void deleteDocData(BuildContext context, int id) {
-    CommonLoader.showLoader(context);
+  void deleteDocData(int id) {
+    CommonLoader.showLoader();
     StringUtils.client.deleteDocument(PreferenceUtils.getStringValue("token"), id)
       ..then((value) {
         DisplaySnackBar.displaySnackBar("Document deleted");
@@ -235,8 +235,8 @@ class DocumentController extends GetxController {
       });
   }
 
-  void deleteDoctorDocument(BuildContext context, int id) {
-    CommonLoader.showLoader(context);
+  void deleteDoctorDocument(int id) {
+    CommonLoader.showLoader();
     StringUtils.client.deleteDoctorDocuments(PreferenceUtils.getStringValue("token"), id.toString())
       ..then((value) {
         Get.back();

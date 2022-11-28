@@ -62,9 +62,9 @@ class HomeController extends GetxController {
       });
   }
 
-  void logOut(BuildContext context) {
+  void logOut() {
     Get.back();
-    CommonLoader.showLoader(context);
+    CommonLoader.showLoader();
     StringUtils.client.logout(PreferenceUtils.getStringValue("token")).then((value) {
       logoutModel = value;
       if (logoutModel!.success == true) {

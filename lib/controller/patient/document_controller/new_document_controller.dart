@@ -54,7 +54,7 @@ class NewDocumentController extends GetxController {
       });
   }
 
-  void createDocuments(context) {
+  void createDocuments() {
     if (titleController.text.trim().isEmpty) {
       DisplaySnackBar.displaySnackBar("Please enter title");
     } else if (docId == null) {
@@ -68,7 +68,7 @@ class NewDocumentController extends GetxController {
         if (patientId == null) {
           DisplaySnackBar.displaySnackBar("Please select patient");
         } else {
-          CommonLoader.showLoader(context);
+          CommonLoader.showLoader();
           StringUtils.client.createNewDoctorDocument(
             PreferenceUtils.getStringValue("token"),
             titleController.text.trim(),
@@ -91,7 +91,7 @@ class NewDocumentController extends GetxController {
             });
         }
       } else {
-        CommonLoader.showLoader(context);
+        CommonLoader.showLoader();
         StringUtils.client.storeDocument(
           PreferenceUtils.getStringValue("token"),
           titleController.text.trim(),

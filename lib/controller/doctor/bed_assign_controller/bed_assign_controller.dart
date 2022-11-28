@@ -70,7 +70,7 @@ class BedAssignController extends GetxController {
 
   void deleteBedAssign(BuildContext context, String id, int index) {
     Get.back();
-    CommonLoader.showLoader(context);
+    CommonLoader.showLoader();
     StringUtils.client.deleteBedAssign(PreferenceUtils.getStringValue("token"), id)
       ..then((value) {
         if (value.success == true) {

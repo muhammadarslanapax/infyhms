@@ -176,7 +176,7 @@ class HomeScreen extends StatelessWidget {
                                               width * 0.05,
                                             ),
                                             onTap: () {
-                                              controller.logOut(context);
+                                              controller.logOut();
                                             },
                                             color: ColorConst.blueColor,
                                             text: StringUtils.logOut,
@@ -184,10 +184,7 @@ class HomeScreen extends StatelessWidget {
                                             height: 50,
                                           ),
                                           CommonButton(
-                                            textStyleConst: TextStyleConst.mediumTextStyle(
-                                              ColorConst.hintGreyColor,
-                                              width * 0.05,
-                                            ),
+                                            textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.05),
                                             onTap: () {
                                               Get.back();
                                             },

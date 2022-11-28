@@ -139,7 +139,7 @@ class EditDocumentScreen extends StatelessWidget {
                               CommonButton(
                                 textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                 onTap: () {
-                                  editDocumentController.editDocuments(context, documentId);
+                                  editDocumentController.editDocuments(documentId);
                                 },
                                 color: ColorConst.blueColor,
                                 text: StringUtils.save,

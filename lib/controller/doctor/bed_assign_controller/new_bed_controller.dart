@@ -88,8 +88,7 @@ class NewBedController extends GetxController {
     } else if (selectedDate == null) {
       DisplaySnackBar.displaySnackBar("Please select date");
     } else {
-      BuildContext? context;
-      CommonLoader.showLoader(context);
+      CommonLoader.showLoader();
       StringUtils.client.createNewBedAssign(PreferenceUtils.getStringValue("token"), bedId, patientId, caseId ?? "", selectedDate ?? "")
         ..then((value) {
           if (value.success == true) {

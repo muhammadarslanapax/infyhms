@@ -60,7 +60,7 @@ class EditDocumentController extends GetxController {
       });
   }
 
-  void editDocuments(context, int documentId) {
+  void editDocuments(int documentId) {
     if (titleController.text.trim().isEmpty) {
       DisplaySnackBar.displaySnackBar("Please enter title");
     } else if (docTypeId == null) {
@@ -69,7 +69,7 @@ class EditDocumentController extends GetxController {
       DisplaySnackBar.displaySnackBar("Please enter notes");
     } else {
       if (PreferenceUtils.getBoolValue("isDoctor")) {
-        CommonLoader.showLoader(context);
+        CommonLoader.showLoader();
         StringUtils.client.updateDoctorsDocuments(
           PreferenceUtils.getStringValue("token"),
           documentId.toString(),
@@ -90,7 +90,7 @@ class EditDocumentController extends GetxController {
             return DoctorDocumentsCRUDModel();
           });
       } else {
-        CommonLoader.showLoader(context);
+        CommonLoader.showLoader();
         StringUtils.client.updateDocument(
           PreferenceUtils.getStringValue("token"),
           titleController.text.trim(),

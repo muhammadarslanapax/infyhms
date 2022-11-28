@@ -118,7 +118,6 @@ class EditBedController extends GetxController {
   }
 
   void saveData() {
-
     if (bedId == null) {
       DisplaySnackBar.displaySnackBar("Please select bed");
     } else if (selectedBedAssignDate == null) {
@@ -126,8 +125,7 @@ class EditBedController extends GetxController {
     } else if (selectedDischargeDate == null) {
       DisplaySnackBar.displaySnackBar("Please select discharge date");
     } else {
-      var context;
-      CommonLoader.showLoader(context);
+      CommonLoader.showLoader();
       StringUtils.client.updateBedAssign(
         PreferenceUtils.getStringValue("token"),
         "${bedAssignData["assignId"]}",
