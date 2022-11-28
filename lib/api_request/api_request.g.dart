@@ -2170,7 +2170,7 @@ class _ApiClient implements ApiClient {
     ));
     if(attachment != null){
     _data.files.add(MapEntry(
-      'attachment',
+      'file',
       MultipartFile.fromFileSync(
         attachment.path,
         filename: attachment.path.split(Platform.pathSeparator).last,
@@ -2223,7 +2223,7 @@ class _ApiClient implements ApiClient {
     ));
     if(attachment != null){
     _data.files.add(MapEntry(
-      'attachment',
+      'file',
       MultipartFile.fromFileSync(
         attachment.path,
         filename: attachment.path.split(Platform.pathSeparator).last,

@@ -41,6 +41,7 @@ class BedAssignController extends GetxController {
   }
 
   void getBedAssignData() {
+    isBedAssignDataCalled.value = false;
     StringUtils.client.getBedData(PreferenceUtils.getStringValue("token"), "all")
       ..then((value) {
         bedAssignFilterModel = value;
@@ -70,6 +71,9 @@ class BedAssignController extends GetxController {
 
   void deleteBedAssign(BuildContext context, String id, int index) {
     Get.back();
+    if (Get.isSnackbarOpen) {
+      Get.closeCurrentSnackbar();
+    }
     CommonLoader.showLoader();
     StringUtils.client.deleteBedAssign(PreferenceUtils.getStringValue("token"), id)
       ..then((value) {

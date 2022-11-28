@@ -64,7 +64,7 @@ class EditBedController extends GetxController {
       } else {
         oldDischargeDate = picked;
       }
-      selectedDate = "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+      selectedDate = "${picked.day.toString().padLeft(2, '0')}-${picked.month.toString().padLeft(2, '0')}-${picked.year}";
       return selectedDate ?? "";
     } else {
       return null;
@@ -137,6 +137,7 @@ class EditBedController extends GetxController {
       )
         ..then((value) {
           Get.back();
+          Get.back(result: "Call API");
           DisplaySnackBar.displaySnackBar("Bed details updated successfully");
         })
         ..onError((DioError error, stackTrace) {

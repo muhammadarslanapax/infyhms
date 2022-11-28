@@ -249,7 +249,7 @@ class DiagnosisScreen extends StatelessWidget {
                               ),
                             ),
                             title: Text(
-                              diagnosisTestController.diagnosisTestModel!.data![index].doctor_name!,
+                              diagnosisTestController.diagnosisTestModel!.data![index].patient_name ?? "N/A",
                               style: TextStyleConst.mediumTextStyle(
                                 ColorConst.blackColor,
                                 width * 0.045,
@@ -260,7 +260,7 @@ class DiagnosisScreen extends StatelessWidget {
                               children: [
                                 SizedBox(height: height * 0.002),
                                 Text(
-                                  diagnosisTestController.diagnosisTestModel!.data![index].category!,
+                                  diagnosisTestController.diagnosisTestModel!.data![index].category ?? "N/A",
                                   style: TextStyleConst.mediumTextStyle(
                                     ColorConst.hintGreyColor,
                                     width * 0.035,

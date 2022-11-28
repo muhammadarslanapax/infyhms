@@ -87,8 +87,8 @@ class NewDocumentScreen extends StatelessWidget {
                                     );
                                   }).toList(),
                                 ),
-                          SizedBox(height: height * 0.02),
-                          CommonRequiredText(width: width, text: "Patient"),
+                          PreferenceUtils.getBoolValue("isDoctor") ? SizedBox(height: height * 0.02) : const SizedBox(),
+                          PreferenceUtils.getBoolValue("isDoctor") ? CommonRequiredText(width: width, text: "Patient") : const SizedBox(),
 
                           SizedBox(height: height * 0.02),
 
@@ -130,7 +130,7 @@ class NewDocumentScreen extends StatelessWidget {
                                     color: Colors.white,
                                     image: !newDocumentController.showFile.value
                                         ? const DecorationImage(image: AssetImage("assets/icon/take_photo.png"), scale: 4)
-                                        : DecorationImage(image: FileImage(File(newDocumentController.file!.path))),
+                                        : DecorationImage(image: FileImage(File(newDocumentController.file.value?.path ?? ""))),
                                   ),
                                 );
                               }),

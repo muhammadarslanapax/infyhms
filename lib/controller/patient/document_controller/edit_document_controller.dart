@@ -25,7 +25,7 @@ class EditDocumentController extends GetxController {
   var arguments = Get.arguments;
   String? docTypeId;
   ImagePicker imagePicker = ImagePicker();
-  XFile? file;
+  Rx<XFile?> file = XFile("").obs;
   String filePath = "";
   RxBool showFile = false.obs;
 
@@ -33,12 +33,12 @@ class EditDocumentController extends GetxController {
 
   void pickImage(BuildContext context) async {
     try {
-      file = await imagePicker.pickImage(source: ImageSource.gallery);
+      file.value = await imagePicker.pickImage(source: ImageSource.gallery);
     } catch (e) {
       DisplaySnackBar.displaySnackBar("Please give access to photos from settings", 5);
     }
 
-    if (file != null) {
+    if ((file.value?.path ?? "") != "") {
       showFile.value = true;
       update();
     }
@@ -70,13 +70,14 @@ class EditDocumentController extends GetxController {
     } else {
       if (PreferenceUtils.getBoolValue("isDoctor")) {
         CommonLoader.showLoader();
+        print("$file");
         StringUtils.client.updateDoctorsDocuments(
           PreferenceUtils.getStringValue("token"),
           documentId.toString(),
           titleController.text.trim(),
           docTypeId ?? "",
           patientId ?? "",
-          file == null ? null : File(file?.path ?? ""),
+          file.value == null ? null : File(file.value?.path ?? ""),
         )
           ..then((value) {
             Get.back();
@@ -96,7 +97,7 @@ class EditDocumentController extends GetxController {
           titleController.text.trim(),
           docTypeId ?? "",
           notesController.text.trim(),
-          file == null ? null : File(file?.path ?? ""),
+          file.value == null ? null : File(file.value?.path ?? ""),
           documentId,
         )
           ..then((value) {

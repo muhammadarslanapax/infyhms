@@ -81,7 +81,7 @@ class NewBedController extends GetxController {
   }
 
   void createNewBedAssign() {
-    if (patientCases?.data?.isNotEmpty ?? true && caseId == null) {
+    if ((patientCases?.data?.isNotEmpty ?? true) && caseId == null) {
       DisplaySnackBar.displaySnackBar("Please select case");
     } else if (bedId == null) {
       DisplaySnackBar.displaySnackBar("Please select bed");
@@ -91,10 +91,13 @@ class NewBedController extends GetxController {
       CommonLoader.showLoader();
       StringUtils.client.createNewBedAssign(PreferenceUtils.getStringValue("token"), bedId, patientId, caseId ?? "", selectedDate ?? "")
         ..then((value) {
-          if (value.success == true) {
-            DisplaySnackBar.displaySnackBar("New Bed Assigned Successfully");
-          }
           Get.back();
+          if (value.success == true) {
+            Get.back(result: "Call API");
+            DisplaySnackBar.displaySnackBar("New Bed Assigned Successfully");
+          } else {
+            Get.back();
+          }
         })
         ..onError((DioError error, stackTrace) {
           Get.back();
@@ -113,7 +116,7 @@ class NewBedController extends GetxController {
     );
     if (picked != null) {
       oldDate = picked;
-      selectedDate = "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+      selectedDate = "${picked.day.toString().padLeft(2, '0')}-${picked.month.toString().padLeft(2, '0')}-${picked.year}";
       return selectedDate ?? "";
     } else {
       return null;

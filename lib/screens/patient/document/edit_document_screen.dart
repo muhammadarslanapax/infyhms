@@ -115,7 +115,7 @@ class EditDocumentScreen extends StatelessWidget {
                                     color: Colors.white,
                                     image: !editDocumentController.showFile.value
                                         ? DecorationImage(image: NetworkImage(editDocumentController.filePath))
-                                        : DecorationImage(image: FileImage(File(editDocumentController.file!.path))),
+                                        : DecorationImage(image: FileImage(File(editDocumentController.file.value!.path))),
                                   ),
                                 );
                               }),

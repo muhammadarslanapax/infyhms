@@ -26,15 +26,15 @@ class NewDocumentController extends GetxController {
 
   String? docId;
   ImagePicker imagePicker = ImagePicker();
-  XFile? file;
+  Rx<XFile?> file = XFile("").obs;
   RxBool showFile = false.obs;
   RxBool gotData = false.obs;
 
   String? patientId;
 
   pickImage() async {
-    file = await imagePicker.pickImage(source: ImageSource.gallery);
-    if (file != null) {
+    file.value = await imagePicker.pickImage(source: ImageSource.gallery);
+    if ((file.value?.path ?? "") != "") {
       showFile.value = true;
       update();
     }
@@ -74,7 +74,7 @@ class NewDocumentController extends GetxController {
             titleController.text.trim(),
             docId ?? "",
             patientId ?? "",
-            File(file!.path),
+            File(file.value?.path ?? ""),
           )
             ..then((value) {
               if (value.success == true) {
@@ -97,7 +97,7 @@ class NewDocumentController extends GetxController {
           titleController.text.trim(),
           docId ?? "",
           notesController.text.trim(),
-          File(file!.path),
+          File(file.value?.path ?? ""),
         )
           ..then((value) {
             if (value.success == true) {

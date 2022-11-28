@@ -24,8 +24,6 @@ class DiagnosisTestData {
   int? id;
   String? patient_name;
   String? patient_image;
-  String? doctor_name;
-  String? doctor_image;
   String? category;
   String? report_number;
   String? created_at;
@@ -35,8 +33,6 @@ class DiagnosisTestData {
     this.id,
     this.patient_name,
     this.patient_image,
-    this.doctor_name,
-    this.doctor_image,
     this.category,
     this.report_number,
     this.created_at,

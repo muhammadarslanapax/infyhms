@@ -92,17 +92,20 @@ class BedAssignsScreen extends StatelessWidget {
                                         motion: const ScrollMotion(),
                                         children: [
                                           SlidableAction(
-                                            onPressed: (context) {
+                                            onPressed: (context) async {
                                               var data = {
                                                 "bed": "${bedAssignController.bedAssignFilterModel?.data?[index].bed}",
                                                 "bedId": "${bedAssignController.bedAssignFilterModel?.data?[index].bed_id}",
                                                 "assignDate": "${bedAssignController.bedAssignFilterModel?.data?[index].assign_date}",
                                                 "assignId": "${bedAssignController.bedAssignFilterModel?.data?[index].id}",
                                               };
-                                              Get.to(
+                                              final result = await Get.to(
                                                 () => EditBedScreen(),
                                                 arguments: data,
                                               );
+                                              if (result == "Call API") {
+                                                bedAssignController.getBedAssignData();
+                                              }
                                             },
                                             backgroundColor: ColorConst.orangeColor.withOpacity(0.15),
                                             label: StringUtils.edit,
@@ -219,8 +222,11 @@ class BedAssignsScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(25),
               child: GestureDetector(
-                onTap: () {
-                  Get.to(() => NewBedScreen());
+                onTap: () async {
+                  final result = await Get.to(() => NewBedScreen());
+                  if (result == "Call API") {
+                    bedAssignController.getBedAssignData();
+                  }
                 },
                 child: Container(
                   height: 55,

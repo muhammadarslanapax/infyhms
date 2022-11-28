@@ -114,23 +114,25 @@ class DocumentScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    trailing: documentController.isCurrentDownloading[index].value
-                                        ? const CircularProgressIndicator(color: ColorConst.primaryColor)
-                                        : InkWell(
-                                            onTap: () {
-                                              documentController.downloadDocument(context, index);
-                                            },
-                                            child: Container(
-                                              margin: const EdgeInsets.only(right: 10),
-                                              width: 25,
-                                              height: 25,
-                                              decoration: const BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: AssetImage(ImageUtils.downloadIcon),
+                                    trailing: Obx(() {
+                                      return documentController.isCurrentDownloading[index].value
+                                          ? const CircularProgressIndicator(color: ColorConst.primaryColor)
+                                          : InkWell(
+                                              onTap: () {
+                                                documentController.downloadDocument(context, index);
+                                              },
+                                              child: Container(
+                                                margin: const EdgeInsets.only(right: 10),
+                                                width: 25,
+                                                height: 25,
+                                                decoration: const BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage(ImageUtils.downloadIcon),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
+                                            );
+                                    }),
                                   ),
                                 ),
                               ],
@@ -210,6 +212,7 @@ class DocumentScreen extends StatelessWidget {
                                         },
                                         backgroundColor: ColorConst.orangeColor.withOpacity(0.15),
                                         label: StringUtils.edit,
+                                        foregroundColor: ColorConst.orangeColor,
                                         // lableColor: ColorConst.orangeColor,
                                       ),
                                     ],
@@ -224,6 +227,7 @@ class DocumentScreen extends StatelessWidget {
                                         },
                                         backgroundColor: const Color(0xFFFCE5E5),
                                         label: StringUtils.delete,
+                                        foregroundColor: ColorConst.redColor,
                                         // lableColor: Colors.red,
                                       ),
                                     ],

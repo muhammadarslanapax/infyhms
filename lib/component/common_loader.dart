@@ -14,15 +14,18 @@ class CommonLoader {
   }
 
   static void showIOSLoader() {
-    Get.dialog(CupertinoAlertDialog(
-      content: Row(
-        children: const [
-          CupertinoActivityIndicator(),
-          SizedBox(width: 10),
-          Text("Please wait"),
-        ],
+    Get.dialog(
+      CupertinoAlertDialog(
+        content: Row(
+          children: const [
+            CupertinoActivityIndicator(),
+            SizedBox(width: 10),
+            Text("Please wait..."),
+          ],
+        ),
       ),
-    ));
+      barrierDismissible: false,
+    );
   }
 
   static void showAndroidLoader() {
@@ -32,10 +35,11 @@ class CommonLoader {
           children: const [
             CircularProgressIndicator(),
             SizedBox(width: 10),
-            Text("Please wait"),
+            Text("Please wait..."),
           ],
         ),
       ),
+      barrierDismissible: false,
     );
   }
 }
