@@ -36,7 +36,6 @@ class NewDocumentController extends GetxController {
     file.value = await imagePicker.pickImage(source: ImageSource.gallery);
     if ((file.value?.path ?? "") != "") {
       showFile.value = true;
-      update();
     }
   }
 
@@ -59,7 +58,7 @@ class NewDocumentController extends GetxController {
       DisplaySnackBar.displaySnackBar("Please enter title");
     } else if (docId == null) {
       DisplaySnackBar.displaySnackBar("Please select document type");
-    } else if (file == null) {
+    } else if (file.value == null) {
       DisplaySnackBar.displaySnackBar("Please attach file");
     } else if (notesController.text.trim().isEmpty) {
       DisplaySnackBar.displaySnackBar("Please enter notes");

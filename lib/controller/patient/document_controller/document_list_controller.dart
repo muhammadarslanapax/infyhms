@@ -67,15 +67,13 @@ class DocumentController extends GetxController {
 
   void downloadDocument(context, int index) async {
     if (!isCurrentDownloading.contains(true.obs)) {
-    currentIndex = index;
-    String url;
-    if (PreferenceUtils.getBoolValue("isDoctor")) {
-      url = doctorDocumentsModel?.data?[index].document_url ?? "";
-    } else {
-      url = documentsModel?.data?[index].document_url ?? "";
-    }
-
       currentIndex = index;
+      String url;
+      if (PreferenceUtils.getBoolValue("isDoctor")) {
+        url = doctorDocumentsModel?.data?[index].document_url ?? "";
+      } else {
+        url = documentsModel?.data?[index].document_url ?? "";
+      }
       if (Platform.isIOS) {
         launchUrl(Uri.parse(url));
       } else {
