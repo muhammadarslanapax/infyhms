@@ -10,8 +10,9 @@ import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/doctor/bed_assign_controller/new_bed_controller.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
-class NewBedScreen extends StatelessWidget {
-  NewBedScreen({Key? key}) : super(key: key);
+class NewBedScreen extends StatelessWidget{
+final String? bedId;
+  NewBedScreen({Key? key, this.bedId}) : super(key: key);
   final NewBedController newBedController = Get.put(NewBedController());
 
   @override
@@ -74,15 +75,20 @@ class NewBedScreen extends StatelessWidget {
                             /// IPD Patient
                             CommonDropDown(
                               color: ColorConst.bgGreyColor,
-                              dropdownItems: newBedController.ipdPatientsModel?.data?.map((value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value.id.toString(),
-                                      child: Text(
-                                        value.ipd_number ?? "",
-                                      ),
-                                    );
-                                  }).toList() ??
-                                  [],
+                              value: newBedController.patientId.value,
+                              onChange: (value){
+                                newBedController.patientId.value = value!;
+                                newBedController.update();
+                              },
+                              dropdownItems: newBedController.gotDropDownData.value != false
+                                  ? newBedController.ipdPatientsModel?.data?.map((value) {
+                                return DropdownMenuItem<String>(
+                                  value: value.id.toString(),
+                                  child: Text(
+                                    value.ipd_number ?? "",
+                                  ),
+                                );
+                              }).toList() ?? [] : [],
                               hintText: "Select IPD Patient",
                             ),
                             SizedBox(height: height * 0.02),
@@ -94,6 +100,7 @@ class NewBedScreen extends StatelessWidget {
                               onChange: (value) {
                                 newBedController.bedId = value ?? "";
                               },
+                              value: bedId ,
                               dropdownItems: newBedController.bedsModel?.data?.map((value) {
                                     return DropdownMenuItem<String>(
                                       value: value.id.toString(),

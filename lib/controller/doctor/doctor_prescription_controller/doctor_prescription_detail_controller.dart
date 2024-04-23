@@ -7,6 +7,7 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
+import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_prescription_model/doctor_prescription_detail_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
@@ -15,7 +16,7 @@ import 'package:url_launcher/url_launcher.dart';
 class DoctorPrescriptionDetailController extends GetxController {
   RxBool isGetDetail = false.obs;
   RxBool isDownloading = false.obs;
-  int id = Get.arguments;
+  //int id = Get.arguments;
   DoctorPrescriptionDetailModel? doctorPrescriptionDetailModel;
 
   RxInt progress = 0.obs;
@@ -25,7 +26,6 @@ class DoctorPrescriptionDetailController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getDoctorPrescriptionDetail();
     listenDownload();
   }
 
@@ -35,7 +35,7 @@ class DoctorPrescriptionDetailController extends GetxController {
       progress.value = message[2];
       if (progress.value == 100) {
         if (isDownloading.value) {
-          DisplaySnackBar.displaySnackBar("Document downloaded");
+          DisplaySnackBar.displaySnackBar("Prescription has been downloaded", 3 , ColorConst.greenColor);
           isDownloading.value = false;
         }
       }
@@ -64,12 +64,12 @@ class DoctorPrescriptionDetailController extends GetxController {
         );
       } catch (e) {
         isDownloading.value = false;
-        DisplaySnackBar.displaySnackBar("Document can't be downloaded");
+        DisplaySnackBar.displaySnackBar("Prescription can't be downloaded");
       }
     }
   }
 
-  void getDoctorPrescriptionDetail() {
+  void getDoctorPrescriptionDetail(int id) {
     StringUtils.client.getDoctorsPrescriptionDetail(PreferenceUtils.getStringValue("token"), id)
       ..then((value) {
         doctorPrescriptionDetailModel = value;

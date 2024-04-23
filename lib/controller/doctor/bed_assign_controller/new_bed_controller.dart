@@ -23,7 +23,8 @@ class NewBedController extends GetxController {
   BedsModel? bedsModel;
 
   String? caseId;
-  String? patientId;
+  // String? patientId;
+  RxString patientId = RxString("");
   String? bedId;
 
   DateTime? oldDate;
@@ -57,9 +58,12 @@ class NewBedController extends GetxController {
     StringUtils.client.getIPDModel(PreferenceUtils.getStringValue("token"), caseId)
       ..then((value) {
         ipdPatientsModel = value;
+        patientId.value = ((value.data?.isEmpty ?? true) ? null : value.data?[0].id.toString()) ?? "";
+        gotDropDownData.value = true;
         getBeds();
+        update();
       })
-      ..onError((DioError error, stackTrace) {
+      ..onError((DioException error, stackTrace) {
         return IPDPatientsModel();
       });
   }
@@ -89,7 +93,7 @@ class NewBedController extends GetxController {
       DisplaySnackBar.displaySnackBar("Please select date");
     } else {
       CommonLoader.showLoader();
-      StringUtils.client.createNewBedAssign(PreferenceUtils.getStringValue("token"), bedId, patientId, caseId ?? "", selectedDate ?? "")
+      StringUtils.client.createNewBedAssign(PreferenceUtils.getStringValue("token"), bedId, patientId.value, caseId ?? "", selectedDate ?? "")
         ..then((value) {
           Get.back();
           if (value.success == true) {

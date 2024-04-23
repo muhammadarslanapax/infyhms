@@ -8,29 +8,25 @@ import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
-import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/doctor_diagnosis_test_detail_model.dart';
-import 'package:infyhms_flutter/model/patient/diagnosis_model/diagnosis_test_details_model.dart';
+import 'package:infyhms_flutter/model/patient/prescriptions_model/prescription_details_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DiagnosisTestDetailsController extends GetxController {
-  int diagnosisTestId = Get.arguments;
-  int doctorDiagnosisTestId = Get.arguments;
-  DiagnosisTestDetailsModel? diagnosisTestDetailsModel;
-  DoctorDiagnosisTestDetailsModel? doctorDiagnosisTestDetailsModel;
-  RxBool isDetailsGet = false.obs;
-
+class PrescriptionDetailsController extends GetxController {
+  PrescriptionDetailModel? prescriptionDetailsModel;
+  RxBool isGotDetails = false.obs;
   RxBool isDownloading = false.obs;
+
+  // int id = Get.arguments;
+
   RxInt progress = 0.obs;
   ReceivePort receivePort = ReceivePort();
-
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     listenDownload();
-    PreferenceUtils.getBoolValue("isDoctor") ? getDoctorDiagnosisTestDetails() : getDiagnosisTestDetails();
   }
 
   void listenDownload() {
@@ -39,7 +35,7 @@ class DiagnosisTestDetailsController extends GetxController {
       progress.value = message[2];
       if (progress.value == 100) {
         if (isDownloading.value) {
-          DisplaySnackBar.displaySnackBar("Diagnosis tests PDF downloaded" , 3 , ColorConst.greenColor);
+          DisplaySnackBar.displaySnackBar("Prescription has been downloaded", 3 ,ColorConst.greenColor);
           isDownloading.value = false;
         }
       }
@@ -47,6 +43,7 @@ class DiagnosisTestDetailsController extends GetxController {
     FlutterDownloader.registerCallback(downloadingCallback);
   }
 
+  @pragma('vm:entry-point')
   static downloadingCallback(id, status, progress) {
     SendPort? sendPort = IsolateNameServer.lookupPortByName("downloading");
     sendPort?.send([id, status, progress]);
@@ -68,32 +65,20 @@ class DiagnosisTestDetailsController extends GetxController {
         );
       } catch (e) {
         isDownloading.value = false;
-        DisplaySnackBar.displaySnackBar("Diagnosis tests PDF can't be downloaded", 3 , ColorConst.redColor);
+        DisplaySnackBar.displaySnackBar("Document can't be downloaded", 3 ,ColorConst.redColor);
       }
     }
   }
 
-  void getDiagnosisTestDetails() {
-    StringUtils.client.getDiagnosisTestDetails(PreferenceUtils.getStringValue("token"), diagnosisTestId)
+  void getPrescriptionDetails(int id) {
+    StringUtils.client.getPrescriptionDetails(PreferenceUtils.getStringValue("token"), id)
       ..then((value) {
-        diagnosisTestDetailsModel = value;
-        isDetailsGet.value = true;
+        prescriptionDetailsModel = value;
+        isGotDetails.value = true;
       })
-      ..onError((DioError error, stackTrace) {
+      ..onError((DioException error, stackTrace) {
         CheckSocketException.checkSocketException(error);
-        return DiagnosisTestDetailsModel();
-      });
-  }
-
-  void getDoctorDiagnosisTestDetails() {
-    StringUtils.client.getDoctorsDiagnosisTestDetails(PreferenceUtils.getStringValue("token"), doctorDiagnosisTestId)
-      ..then((value) {
-        doctorDiagnosisTestDetailsModel = value;
-        isDetailsGet.value = true;
-      })
-      ..onError((DioError error, stackTrace) {
-        CheckSocketException.checkSocketException(error);
-        return DoctorDiagnosisTestDetailsModel();
+        return PrescriptionDetailModel();
       });
   }
 

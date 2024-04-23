@@ -305,7 +305,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                             () => invoiceDetailsController.isDownloading.value == true
                                 ? const Center(child: CircularProgressIndicator(color: ColorConst.primaryColor))
                                 : CommonButton(
-                                    width: width / 2,
+                                    width: width * 0.6,
                                     height: 50,
                                     text: StringUtils.downInvoice,
                                     color: ColorConst.blueColor,
@@ -313,7 +313,7 @@ class InvoiceDetailScreen extends StatelessWidget {
                                       invoiceDetailsController
                                           .downloadPDF(invoiceDetailsController.invoiceDetailsModel?.data?.invoice_download ?? "");
                                     },
-                                    textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
+                                    textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.047),
                                   ),
                           ),
                         ),

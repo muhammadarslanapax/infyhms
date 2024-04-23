@@ -21,8 +21,8 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<LoginModel> loginPatient(data) async {
-    const _extra = <String, dynamic>{};
+  Future<LoginModel> loginPatient(Map<String, dynamic> data) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -39,19 +39,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LoginModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<AppointmentModel> getAppointments(token) async {
-    const _extra = <String, dynamic>{};
+  Future<AppointmentModel> getAppointments(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<AppointmentModel>(Options(
       method: 'GET',
@@ -64,22 +68,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = AppointmentModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<FilterAppointmentModel> getPastAppointments(
-    token,
-    filter,
+    String? token,
+    String filter,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<FilterAppointmentModel>(Options(
       method: 'POST',
@@ -92,19 +100,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = FilterAppointmentModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DoctorDepartmentModel> getDoctorDepartment(token) async {
-    const _extra = <String, dynamic>{};
+  Future<DoctorDepartmentModel> getDoctorDepartment(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorDepartmentModel>(Options(
       method: 'GET',
@@ -117,22 +129,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorDepartmentModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<GetDoctorModel> getDoctor(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<GetDoctorModel>(Options(
       method: 'POST',
@@ -145,18 +161,22 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = GetDoctorModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<SlotBookingModel> getBookingSlotDate(
-    token,
-    editSelectedDate,
-    doctorId,
+    String? token,
+    String editSelectedDate,
+    String doctorId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -177,21 +197,25 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = SlotBookingModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<CreateAppointmentModel> createAppointment(
-    token,
-    departmentId,
-    doctorId,
-    selectedDate,
-    selectedTime,
-    patientId,
+    String? token,
+    String departmentId,
+    String doctorId,
+    String selectedDate,
+    String selectedTime,
+    String patientId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -215,19 +239,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = CreateAppointmentModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DocumentsModel> getDocuments(token) async {
-    const _extra = <String, dynamic>{};
+  Future<DocumentsModel> getDocuments(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<DocumentsModel>(Options(
       method: 'GET',
@@ -240,19 +268,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DocumentsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DocumentsTypeModel> getDocumentsType(token) async {
-    const _extra = <String, dynamic>{};
+  Future<DocumentsTypeModel> getDocumentsType(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<DocumentsTypeModel>(Options(
       method: 'GET',
@@ -265,20 +297,24 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DocumentsTypeModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DocumentStoreModel> storeDocument(
-    token,
-    title,
-    documentTypeId,
-    notes,
-    file,
+    String? token,
+    String title,
+    String documentTypeId,
+    String notes,
+    File file,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -316,21 +352,25 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DocumentStoreModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DocumentUpdateModel> updateDocument(
-    token,
-    title,
-    documentTypeId,
-    notes,
-    file,
-    documentId,
+    String? token,
+    String title,
+    String documentTypeId,
+    String notes,
+    File? file,
+    int documentId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -348,14 +388,17 @@ class _ApiClient implements ApiClient {
       'notes',
       notes,
     ));
-    if(file != null){
-    _data.files.add(MapEntry(
-      'file',
-      MultipartFile.fromFileSync(
-        file.path,
-        filename: file.path.split(Platform.pathSeparator).last,
-      ),
-    ));}
+    if(file != null) {
+      _data.files.add(MapEntry(
+        'file',
+        MultipartFile.fromFileSync(
+          file.path,
+          filename: file.path
+              .split(Platform.pathSeparator)
+              .last,
+        ),
+      ));
+    }
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DocumentUpdateModel>(Options(
       method: 'POST',
@@ -369,22 +412,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DocumentUpdateModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DocumentDeleteModel> deleteDocument(
-    token,
-    documentId,
+    String? token,
+    int documentId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DocumentDeleteModel>(Options(
       method: 'GET',
@@ -397,22 +444,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DocumentDeleteModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DocumentDownloadModel> downloadDocument(
-    token,
-    documentId,
+    String? token,
+    int documentId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DocumentDownloadModel>(Options(
       method: 'GET',
@@ -425,19 +476,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DocumentDownloadModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<NoticeBoardModel> getNoticeBoard(token) async {
-    const _extra = <String, dynamic>{};
+  Future<NoticeBoardModel> getNoticeBoard(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<NoticeBoardModel>(Options(
       method: 'GET',
@@ -450,19 +505,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = NoticeBoardModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<InvoiceModel> getInvoices(token) async {
-    const _extra = <String, dynamic>{};
+  Future<InvoiceModel> getInvoices(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<InvoiceModel>(Options(
       method: 'GET',
@@ -475,22 +534,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = InvoiceModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<InvoiceDetailsModel> getInvoiceData(
-    token,
-    invoiceId,
+    String? token,
+    int invoiceId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<InvoiceDetailsModel>(Options(
       method: 'GET',
@@ -503,22 +566,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = InvoiceDetailsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<LiveConsultationDetailsModel> liveConsultationData(
-    token,
-    consultationId,
+    String? token,
+    int consultationId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<LiveConsultationDetailsModel>(Options(
       method: 'GET',
@@ -531,22 +598,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveConsultationDetailsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<LiveConsultationMeetingModel> liveConsultationMeetingData(
-    token,
-    consultationId,
+    String? token,
+    int consultationId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<LiveConsultationMeetingModel>(Options(
       method: 'GET',
@@ -559,22 +630,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveConsultationMeetingModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<LiveConsultationFilter> liveConsultationFilter(
-    token,
-    status,
+    String? token,
+    String status,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<LiveConsultationFilter>(Options(
       method: 'POST',
@@ -587,17 +662,21 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveConsultationFilter.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<CancelAppointmentModel> cancelAppointment(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -615,17 +694,21 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = CancelAppointmentModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DeleteAppointmentModel> deleteAppointment(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -643,19 +726,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DeleteAppointmentModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<BillsModel> getBills(token) async {
-    const _extra = <String, dynamic>{};
+  Future<BillsModel> getBills(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<BillsModel>(Options(
       method: 'GET',
@@ -668,22 +755,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BillsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<BillDetailModel> getBillsDetails(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<BillDetailModel>(Options(
       method: 'GET',
@@ -696,19 +787,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BillDetailModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DiagnosisTestModel> getDiagnosisTest(token) async {
-    const _extra = <String, dynamic>{};
+  Future<DiagnosisTestModel> getDiagnosisTest(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<DiagnosisTestModel>(Options(
       method: 'GET',
@@ -721,22 +816,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DiagnosisTestModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DiagnosisTestDetailsModel> getDiagnosisTestDetails(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DiagnosisTestDetailsModel>(Options(
       method: 'GET',
@@ -749,19 +848,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DiagnosisTestDetailsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<CaseModel> getCase(token) async {
-    const _extra = <String, dynamic>{};
+  Future<CaseModel> getCase(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CaseModel>(Options(
       method: 'GET',
@@ -774,19 +877,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = CaseModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<AdmissionModel> getAdmission(token) async {
-    const _extra = <String, dynamic>{};
+  Future<AdmissionModel> getAdmission(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<AdmissionModel>(Options(
       method: 'GET',
@@ -799,19 +906,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = AdmissionModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<PrescriptionsModel> getPrescription(token) async {
-    const _extra = <String, dynamic>{};
+  Future<PrescriptionsModel> getPrescription(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<PrescriptionsModel>(Options(
       method: 'GET',
@@ -824,19 +935,55 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = PrescriptionsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<VaccinatedModel> getVaccinated(token) async {
-    const _extra = <String, dynamic>{};
+  Future<PrescriptionDetailModel> getPrescriptionDetails(
+    String? token,
+    int id,
+  ) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PrescriptionDetailModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'patient-prescription/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = PrescriptionDetailModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VaccinatedModel> getVaccinated(String? token) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<VaccinatedModel>(Options(
       method: 'GET',
@@ -849,21 +996,25 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = VaccinatedModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<EditProfileModel> editProfile(
-    token,
-    firstName,
-    lastName,
-    email,
-    phone,
-    profileImage,
+    String? token,
+    String firstName,
+    String lastName,
+    String email,
+    String phone,
+    File? profileImage,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -885,14 +1036,17 @@ class _ApiClient implements ApiClient {
       'phone',
       phone,
     ));
-    if(profileImage != null){
-    _data.files.add(MapEntry(
-      'image',
-      MultipartFile.fromFileSync(
-        profileImage.path,
-        filename: profileImage.path.split(Platform.pathSeparator).last,
-      ),
-    ));}
+    if(profileImage != null) {
+      _data.files.add(MapEntry(
+        'image',
+        MultipartFile.fromFileSync(
+          profileImage.path,
+          filename: profileImage.path
+              .split(Platform.pathSeparator)
+              .last,
+        ),
+      ));
+    }
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<EditProfileModel>(Options(
       method: 'POST',
@@ -906,19 +1060,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = EditProfileModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<LogoutModel> logout(token) async {
-    const _extra = <String, dynamic>{};
+  Future<LogoutModel> logout(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<LogoutModel>(Options(
       method: 'POST',
@@ -931,17 +1089,21 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LogoutModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<ResetPasswordModel> resetPassword(
-    token,
-    data,
+    String? token,
+    Map<String, dynamic> data,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -960,14 +1122,18 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = ResetPasswordModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<ForgotPasswordModel> forgotPassword(data) async {
-    const _extra = <String, dynamic>{};
+  Future<ForgotPasswordModel> forgotPassword(Map<String, dynamic> data) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -984,19 +1150,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = ForgotPasswordModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<SendTokenModel> sendToken(
-    token,
-    password,
-    passwordConfirmation,
-    email,
+    String token,
+    String password,
+    String passwordConfirmation,
+    String email,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -1017,19 +1187,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = SendTokenModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<GetProfileModel> getProfile(token) async {
-    const _extra = <String, dynamic>{};
+  Future<GetProfileModel> getProfile(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<GetProfileModel>(Options(
       method: 'GET',
@@ -1042,22 +1216,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = GetProfileModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorAppointmentModel> getDoctorAppointments(
-    token,
-    status,
+    String? token,
+    String status,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorAppointmentModel>(Options(
       method: 'GET',
@@ -1070,22 +1248,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorAppointmentModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<ConfirmAppointmentModel> confirmAppointment(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ConfirmAppointmentModel>(Options(
       method: 'POST',
@@ -1098,19 +1280,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = ConfirmAppointmentModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DoctorsModel> getDoctors(token) async {
-    const _extra = <String, dynamic>{};
+  Future<DoctorsModel> getDoctors(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<DoctorsModel>(Options(
       method: 'GET',
@@ -1123,22 +1309,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorsDetailModel> getDoctorsDetail(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<DoctorsDetailModel>(Options(
       method: 'GET',
@@ -1151,19 +1341,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorsDetailModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DoctorPrescriptionModel> getDoctorsPrescription(token) async {
-    const _extra = <String, dynamic>{};
+  Future<DoctorPrescriptionModel> getDoctorsPrescription(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorPrescriptionModel>(Options(
       method: 'GET',
@@ -1176,22 +1370,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorPrescriptionModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorPrescriptionDetailModel> getDoctorsPrescriptionDetail(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorPrescriptionDetailModel>(Options(
       method: 'GET',
@@ -1204,19 +1402,24 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorPrescriptionDetailModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DoctorDiagnosisTestModel> getDoctorsDiagnosisTest(token) async {
-    const _extra = <String, dynamic>{};
+  Future<DoctorDiagnosisTestModel> getDoctorsDiagnosisTest(
+      String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorDiagnosisTestModel>(Options(
       method: 'GET',
@@ -1229,22 +1432,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorDiagnosisTestModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorDiagnosisTestDetailsModel> getDoctorsDiagnosisTestDetails(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorDiagnosisTestDetailsModel>(Options(
       method: 'GET',
@@ -1257,22 +1464,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorDiagnosisTestDetailsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DeleteTestModel> deleteTest(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<DeleteTestModel>(Options(
       method: 'DELETE',
@@ -1285,19 +1496,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DeleteTestModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<PayrollModel> getPayroll(token) async {
-    const _extra = <String, dynamic>{};
+  Future<PayrollModel> getPayroll(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<PayrollModel>(Options(
       method: 'GET',
@@ -1310,22 +1525,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = PayrollModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<PayrollDetailsModel> getPayrollDetails(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PayrollDetailsModel>(Options(
       method: 'GET',
@@ -1338,22 +1557,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = PayrollDetailsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorLiveConsultationsDetailsModel> liveDoctorConsultationData(
-    token,
-    consultationId,
+    String? token,
+    int consultationId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorLiveConsultationsDetailsModel>(Options(
       method: 'GET',
@@ -1366,22 +1589,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorLiveConsultationsDetailsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorLiveConsultationsMeetingModel> liveDoctorConsultationMeetingData(
-    token,
-    consultationId,
+    String? token,
+    int consultationId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorLiveConsultationsMeetingModel>(Options(
       method: 'GET',
@@ -1394,22 +1621,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorLiveConsultationsMeetingModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorLiveConsultationsModel> liveDoctorConsultationFilter(
-    token,
-    status,
+    String? token,
+    String status,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorLiveConsultationsModel>(Options(
       method: 'GET',
@@ -1422,19 +1653,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorLiveConsultationsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<PatientAdmissionModel> getPatientAdmission(token) async {
-    const _extra = <String, dynamic>{};
+  Future<PatientAdmissionModel> getPatientAdmission(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PatientAdmissionModel>(Options(
       method: 'GET',
@@ -1447,22 +1682,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = PatientAdmissionModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<PatientAdmissionDetailsModel> getPatientAdmissionDetails(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PatientAdmissionDetailsModel>(Options(
       method: 'GET',
@@ -1475,22 +1714,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = PatientAdmissionDetailsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DeleteAdmissionModel> deleteAdmission(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DeleteAdmissionModel>(Options(
       method: 'DELETE',
@@ -1503,19 +1746,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DeleteAdmissionModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<CommonReportModel> getBirthReport(token) async {
-    const _extra = <String, dynamic>{};
+  Future<CommonReportModel> getBirthReport(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CommonReportModel>(Options(
       method: 'GET',
@@ -1528,22 +1775,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = CommonReportModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DeleteCommonReportModel> deleteBirthReport(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DeleteCommonReportModel>(Options(
       method: 'DELETE',
@@ -1556,19 +1807,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DeleteCommonReportModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<CommonReportModel> getDeathReport(token) async {
-    const _extra = <String, dynamic>{};
+  Future<CommonReportModel> getDeathReport(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CommonReportModel>(Options(
       method: 'GET',
@@ -1581,22 +1836,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = CommonReportModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DeleteCommonReportModel> deleteDeathReport(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DeleteCommonReportModel>(Options(
       method: 'DELETE',
@@ -1609,19 +1868,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DeleteCommonReportModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<CommonReportModel> getOperationReport(token) async {
-    const _extra = <String, dynamic>{};
+  Future<CommonReportModel> getOperationReport(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CommonReportModel>(Options(
       method: 'GET',
@@ -1634,22 +1897,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = CommonReportModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DeleteCommonReportModel> deleteOperationReport(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DeleteCommonReportModel>(Options(
       method: 'DELETE',
@@ -1662,19 +1929,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DeleteCommonReportModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<InvestigationReportModel> getInvestigationReport(token) async {
-    const _extra = <String, dynamic>{};
+  Future<InvestigationReportModel> getInvestigationReport(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<InvestigationReportModel>(Options(
       method: 'GET',
@@ -1687,22 +1958,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = InvestigationReportModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DeleteCommonReportModel> deleteInvestigationReport(
-    token,
-    id,
+    String? token,
+    int id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DeleteCommonReportModel>(Options(
       method: 'DELETE',
@@ -1715,22 +1990,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DeleteCommonReportModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorCaseDetailsModel> getDoctorCaseDetails(
-    token,
-    caseId,
+    String? token,
+    String caseId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorCaseDetailsModel>(Options(
       method: 'GET',
@@ -1743,22 +2022,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorCaseDetailsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<BedAssignFilterModel> getBedData(
-    token,
-    status,
+    String? token,
+    String status,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BedAssignFilterModel>(Options(
       method: 'GET',
@@ -1771,22 +2054,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BedAssignFilterModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<BedDetailsModel> getBedDataDetails(
-    token,
-    id,
+    String? token,
+    String id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<BedDetailsModel>(Options(
       method: 'GET',
@@ -1799,19 +2086,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BedDetailsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<BedStatusModel> getBedStatus(token) async {
-    const _extra = <String, dynamic>{};
+  Future<BedStatusModel> getBedStatus(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<BedStatusModel>(Options(
       method: 'GET',
@@ -1824,22 +2115,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BedStatusModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<BedStatusDetailsModel> getBedStatusDetails(
-    token,
-    id,
+    String? token,
+    String id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BedStatusDetailsModel>(Options(
       method: 'GET',
@@ -1852,19 +2147,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BedStatusDetailsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<BedsModel> getBeds(token) async {
-    const _extra = <String, dynamic>{};
+  Future<BedsModel> getBeds(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<BedsModel>(Options(
       method: 'GET',
@@ -1877,17 +2176,21 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BedsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<BedsModel> getBedsForEdit(
-    token,
-    bedId,
+    String? token,
+    String bedId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -1905,22 +2208,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BedsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<IPDPatientsModel> getIPDModel(
-    token,
-    caseId,
+    String? token,
+    String caseId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<IPDPatientsModel>(Options(
       method: 'GET',
@@ -1933,19 +2240,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = IPDPatientsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<PatientCases> getPatientCases(token) async {
-    const _extra = <String, dynamic>{};
+  Future<PatientCases> getPatientCases(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<PatientCases>(Options(
       method: 'GET',
@@ -1958,22 +2269,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = PatientCases.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<BedUpdatedDetailsModel> updateBedAssign(
-    token,
-    id,
-    bedId,
-    patientId,
-    caseId,
-    assignDate,
-    dischargeDate,
+    String? token,
+    String id,
+    String bedId,
+    String patientId,
+    String caseId,
+    String assignDate,
+    String dischargeDate,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -1997,22 +2312,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BedUpdatedDetailsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<BedAssignDelete> deleteBedAssign(
-    token,
-    id,
+    String? token,
+    String id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<BedAssignDelete>(Options(
       method: 'POST',
@@ -2025,20 +2344,24 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = BedAssignDelete.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<CreateNewBedModel> createNewBedAssign(
-    token,
-    bedId,
-    patientId,
-    caseId,
-    assignDate,
+    String? token,
+    String? bedId,
+    String? patientId,
+    String caseId,
+    String assignDate,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -2062,19 +2385,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = CreateNewBedModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DoctorDocumentsModel> doctorDocuments(token) async {
-    const _extra = <String, dynamic>{};
+  Future<DoctorDocumentsModel> doctorDocuments(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorDocumentsModel>(Options(
       method: 'GET',
@@ -2087,19 +2414,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorDocumentsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DoctorDocumentsTypeModel> doctorDocumentType(token) async {
-    const _extra = <String, dynamic>{};
+  Future<DoctorDocumentsTypeModel> doctorDocumentType(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorDocumentsTypeModel>(Options(
       method: 'GET',
@@ -2112,19 +2443,24 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorDocumentsTypeModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DoctorPatientsDocumentsModel> doctorPatientsDocument(token) async {
-    const _extra = <String, dynamic>{};
+  Future<DoctorPatientsDocumentsModel> doctorPatientsDocument(
+      String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorPatientsDocumentsModel>(Options(
       method: 'GET',
@@ -2137,20 +2473,24 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorPatientsDocumentsModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorDocumentsCRUDModel> createNewDoctorDocument(
-    token,
-    title,
-    documentTypeId,
-    patientId,
-    attachment,
+    String? token,
+    String title,
+    String documentTypeId,
+    String patientId,
+    File? attachment,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -2168,14 +2508,17 @@ class _ApiClient implements ApiClient {
       'patient_id',
       patientId,
     ));
-    if(attachment != null){
-    _data.files.add(MapEntry(
-      'file',
-      MultipartFile.fromFileSync(
-        attachment.path,
-        filename: attachment.path.split(Platform.pathSeparator).last,
-      ),
-    ));}
+    if(attachment != null) {
+      _data.files.add(MapEntry(
+        'file',
+        MultipartFile.fromFileSync(
+          attachment.path,
+          filename: attachment.path
+              .split(Platform.pathSeparator)
+              .last,
+        ),
+      ));
+    }
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorDocumentsCRUDModel>(Options(
       method: 'POST',
@@ -2189,21 +2532,25 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorDocumentsCRUDModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorDocumentsCRUDModel> updateDoctorsDocuments(
-    token,
-    docId,
-    title,
-    documentTypeId,
-    patientId,
-    attachment,
+    String? token,
+    String docId,
+    String title,
+    String documentTypeId,
+    String patientId,
+    File? attachment,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -2221,14 +2568,17 @@ class _ApiClient implements ApiClient {
       'patient_id',
       patientId,
     ));
-    if(attachment != null){
-    _data.files.add(MapEntry(
-      'file',
-      MultipartFile.fromFileSync(
-        attachment.path,
-        filename: attachment.path.split(Platform.pathSeparator).last,
-      ),
-    ));}
+    if(attachment != null) {
+      _data.files.add(MapEntry(
+        'file',
+        MultipartFile.fromFileSync(
+          attachment.path,
+          filename: attachment.path
+              .split(Platform.pathSeparator)
+              .last,
+        ),
+      ));
+    }
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorDocumentsCRUDModel>(Options(
       method: 'POST',
@@ -2242,22 +2592,26 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorDocumentsCRUDModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorDocumentsCRUDModel> deleteDoctorDocuments(
-    token,
-    docId,
+    String? token,
+    String docId,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorDocumentsCRUDModel>(Options(
       method: 'DELETE',
@@ -2270,19 +2624,23 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorDocumentsCRUDModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DoctorScheduleModel> schedule(token) async {
-    const _extra = <String, dynamic>{};
+  Future<DoctorScheduleModel> schedule(String? token) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorScheduleModel>(Options(
       method: 'GET',
@@ -2295,18 +2653,22 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorScheduleModel.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DoctorScheduleUpdateModel> scheduleUpdate(
-    token,
-    id,
-    data,
+    String? token,
+    String id,
+    Map<String, dynamic> data,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
@@ -2325,7 +2687,11 @@ class _ApiClient implements ApiClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DoctorScheduleUpdateModel.fromJson(_result.data!);
     return value;
   }
@@ -2341,5 +2707,22 @@ class _ApiClient implements ApiClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

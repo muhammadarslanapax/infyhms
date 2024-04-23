@@ -71,6 +71,7 @@ import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation
 import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation_filter.dart';
 import 'package:infyhms_flutter/model/patient/live_consultancy/live_consultation_meeting_model.dart';
 import 'package:infyhms_flutter/model/patient/notice_board_model/notice_board.dart';
+import 'package:infyhms_flutter/model/patient/prescriptions_model/prescription_details_model.dart';
 import 'package:infyhms_flutter/model/patient/prescriptions_model/prescriptions_model.dart';
 import 'package:infyhms_flutter/model/patient/vaccinated_model/vaccinated_model.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
@@ -249,6 +250,12 @@ abstract class ApiClient {
   Future<PrescriptionsModel> getPrescription(
     @Header('Authorization') String? token,
   );
+
+  @GET("patient-prescription/{id}")
+  Future<PrescriptionDetailModel> getPrescriptionDetails(
+      @Header('Authorization') String? token,
+      @Path("id") int id,
+      );
 
   @GET("vaccinated-patient")
   Future<VaccinatedModel> getVaccinated(

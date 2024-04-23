@@ -1,41 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'doctor_prescription_detail_model.dart';
+part of 'prescription_details_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-DoctorPrescriptionDetailModel _$DoctorPrescriptionDetailModelFromJson(
+PrescriptionDetailModel _$PrescriptionDetailModelFromJson(
         Map<String, dynamic> json) =>
-    DoctorPrescriptionDetailModel(
+    PrescriptionDetailModel(
       success: json['success'] as bool?,
       data: json['data'] == null
           ? null
-          : DoctorPrescriptionDetailData.fromJson(
+          : PrescriptionDetailData.fromJson(
               json['data'] as Map<String, dynamic>),
       message: json['message'] as String?,
     );
 
-Map<String, dynamic> _$DoctorPrescriptionDetailModelToJson(
-        DoctorPrescriptionDetailModel instance) =>
+Map<String, dynamic> _$PrescriptionDetailModelToJson(
+        PrescriptionDetailModel instance) =>
     <String, dynamic>{
       'success': instance.success,
       'data': instance.data?.toJson(),
       'message': instance.message,
     };
 
-DoctorPrescriptionDetailData _$DoctorPrescriptionDetailDataFromJson(
+PrescriptionDetailData _$PrescriptionDetailDataFromJson(
         Map<String, dynamic> json) =>
-    DoctorPrescriptionDetailData(
-      id: json['id'] as int?,
-      doctor_id: json['doctor_id'] as int?,
+    PrescriptionDetailData(
       doctor_name: json['doctor_name'] as String?,
       specialist: json['specialist'] as String?,
-      patient_name: json['patient_name'] as String?,
-      patient_age: json['patient_age'] as int?,
-      created_date: json['created_date'] as String?,
-      created_time: json['created_time'] as String?,
       problem: json['problem'] as String?,
       test: json['test'] as String?,
       advice: json['advice'] as String?,
@@ -45,17 +39,11 @@ DoctorPrescriptionDetailData _$DoctorPrescriptionDetailDataFromJson(
       download_prescription: json['download_prescription'] as String?,
     );
 
-Map<String, dynamic> _$DoctorPrescriptionDetailDataToJson(
-        DoctorPrescriptionDetailData instance) =>
+Map<String, dynamic> _$PrescriptionDetailDataToJson(
+        PrescriptionDetailData instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'doctor_id': instance.doctor_id,
       'doctor_name': instance.doctor_name,
       'specialist': instance.specialist,
-      'patient_name': instance.patient_name,
-      'patient_age': instance.patient_age,
-      'created_date': instance.created_date,
-      'created_time': instance.created_time,
       'problem': instance.problem,
       'test': instance.test,
       'advice': instance.advice,

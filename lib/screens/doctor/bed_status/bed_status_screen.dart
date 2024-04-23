@@ -5,6 +5,7 @@ import 'package:infyhms_flutter/component/common_text.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 import 'package:infyhms_flutter/controller/doctor/bed_status_controller/bed_status_controller.dart';
+import 'package:infyhms_flutter/screens/doctor/bed_assign/new_bed_screen.dart';
 import 'package:infyhms_flutter/utils/image_utils.dart';
 
 class BedStatusScreen extends StatelessWidget {
@@ -63,13 +64,29 @@ class BedStatusScreen extends StatelessWidget {
                                   (subIndex) {
                                     return ListTile(
                                       onTap: () {
-                                        CommonLoader.showLoader();
-                                        bedStatusController.getBedDetails(
-                                          "${bedStatusController.bedStatusModel?.data?[mainIndex].bed?[subIndex].id}",
-                                          context,
-                                          height,
-                                          width,
-                                        );
+                                        if (bedStatusController.bedStatusModel?.data?[mainIndex].bed?[subIndex].status == false) {
+                                          CommonLoader.showLoader();
+                                          bedStatusController.getBedDetails(
+                                            "${bedStatusController.bedStatusModel?.data?[mainIndex].bed?[subIndex].id}",
+                                            context,
+                                            height,
+                                            width,
+                                          );
+                                        } else {
+                                          Get.to(
+                                                () => NewBedScreen(
+                                                bedId: bedStatusController.bedStatusModel?.data?[mainIndex].bed?[subIndex].id == null
+                                                    ? null
+                                                    : "${bedStatusController.bedStatusModel?.data?[mainIndex].bed?[subIndex].id}"),
+                                          );
+                                        }
+                                        // CommonLoader.showLoader();
+                                        // bedStatusController.getBedDetails(
+                                        //   "${bedStatusController.bedStatusModel?.data?[mainIndex].bed?[subIndex].id}",
+                                        //   context,
+                                        //   height,
+                                        //   width,
+                                        // );
                                       },
                                       title: Text(
                                         bedStatusController.bedStatusModel?.data?[mainIndex].bed?[subIndex].name ?? "",

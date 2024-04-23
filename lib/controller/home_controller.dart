@@ -27,6 +27,7 @@ import 'package:infyhms_flutter/screens/patient/prescription/prescriptions_scree
 import 'package:infyhms_flutter/screens/patient/vaccination/vaccination_screen.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
+import 'package:infyhms_flutter/utils/variable_utils.dart';
 
 class HomeController extends GetxController {
   Widget currentWidget = AppointmentScreen();
@@ -41,7 +42,9 @@ class HomeController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+
     getProfile();
+    VariableUtils.patientId.value = PreferenceUtils.getStringValue("patientId");
   }
 
   Future getProfile() async {

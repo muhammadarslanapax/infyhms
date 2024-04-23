@@ -131,7 +131,7 @@ class AppointmentScreen extends StatelessWidget {
                                                         width: width,
                                                         image: ImageUtils.alertIcon,
                                                         title: "Change status",
-                                                        description: "Are you sure want to change\nappointment status?",
+                                                        description: "Are you sure want to change\nAppointment status?",
                                                         leftText: StringUtils.confirm,
                                                         rightText: StringUtils.cancel,
                                                         leftTapEvent: () {
@@ -414,7 +414,7 @@ class AppointmentScreen extends StatelessWidget {
                                                                   ),
                                                                   SizedBox(height: height * 0.01),
                                                                   Text(
-                                                                    "Are you sure want to delete this\n appointment?",
+                                                                    "Are you sure want to delete this\n Appointment?",
                                                                     textAlign: TextAlign.center,
                                                                     style: TextStyleConst.mediumTextStyle(
                                                                       ColorConst.hintGreyColor,

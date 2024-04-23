@@ -50,7 +50,7 @@ class BedDetails extends StatelessWidget {
                           SizedBox(height: height * 0.015),
                           CommonDetailText(
                             width: width,
-                            titleText: "Bed Id :",
+                            titleText: "Bed ID :",
                             descriptionText: bedDetailsController.bedDetailsModel?.data?.bed_id ?? "",
                           ),
                           SizedBox(height: height * 0.015),

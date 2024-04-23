@@ -26,7 +26,7 @@ class PayrollDetailsData {
   String? payroll_id;
   String? month;
   int? year;
-  String? net_salary;
+  int? net_salary;
   String? status;
   int? basic_salary;
   int? allowance;

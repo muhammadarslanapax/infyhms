@@ -67,7 +67,7 @@ class ReportScreen extends StatelessWidget {
                                           width: width,
                                           image: ImageUtils.deleteIcon,
                                           title: "Delete",
-                                          description: "Are you sure want to delete this\nappointment?",
+                                          description: "Are you sure want to delete this\nReport?",
                                           leftText: StringUtils.delete,
                                           rightText: StringUtils.cancel,
                                           leftTapEvent: () {

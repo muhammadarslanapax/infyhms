@@ -24,7 +24,7 @@ class LogInController extends GetxController {
 
   void loginPatient(BuildContext context) {
     if (emailController.text.isEmpty) {
-      DisplaySnackBar.displaySnackBar("Please enter email");
+      DisplaySnackBar.displaySnackBar("Please enter email address");
     } else if (emailController.text.isEmpty) {
       DisplaySnackBar.displaySnackBar("Please enter password");
     } else {

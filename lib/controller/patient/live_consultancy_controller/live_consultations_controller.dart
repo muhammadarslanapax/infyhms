@@ -162,7 +162,7 @@ class LiveConsultationsController extends GetxController {
                           isIcon: true,
                           width: width / 2,
                           height: 50,
-                          text: "Join now",
+                          text: "Join Now",
                           color: ColorConst.blueColor,
                           onTap: () {
                             launchConsultationURL(liveConsultationMeetingModel!.data!.meta!);
@@ -259,7 +259,7 @@ class LiveConsultationsController extends GetxController {
                           isIcon: true,
                           width: width / 2,
                           height: 50,
-                          text: "Join now",
+                          text: "Start Now",
                           color: ColorConst.blueColor,
                           onTap: () {
                             launchConsultationURL(doctorLiveConsultationsMeetingModel!.data!.meta!);

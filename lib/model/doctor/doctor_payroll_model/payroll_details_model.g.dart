@@ -30,7 +30,7 @@ PayrollDetailsData _$PayrollDetailsDataFromJson(Map<String, dynamic> json) =>
       payroll_id: json['payroll_id'] as String?,
       month: json['month'] as String?,
       year: json['year'] as int?,
-      net_salary: json['net_salary'] as String?,
+      net_salary: json['net_salary'] as int?,
       status: json['status'] as String?,
       basic_salary: json['basic_salary'] as int?,
       allowance: json['allowance'] as int?,

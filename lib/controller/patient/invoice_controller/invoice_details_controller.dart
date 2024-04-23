@@ -7,6 +7,7 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_snackbar.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
+import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/model/patient/invoice_model/invoice_details_model.dart';
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
@@ -35,7 +36,7 @@ class InvoiceDetailsController extends GetxController {
       progress.value = message[2];
       if (progress.value == 100) {
         if (isDownloading.value) {
-          DisplaySnackBar.displaySnackBar("Invoice downloaded");
+          DisplaySnackBar.displaySnackBar("Invoice downloaded", 3 , ColorConst.greenColor);
           isDownloading.value = false;
         }
       }
@@ -64,7 +65,7 @@ class InvoiceDetailsController extends GetxController {
         );
       } catch (e) {
         isDownloading.value = false;
-        DisplaySnackBar.displaySnackBar("Invoice can't be downloaded");
+        DisplaySnackBar.displaySnackBar("Invoice can't be downloaded", 3, ColorConst.redColor);
       }
     }
   }
