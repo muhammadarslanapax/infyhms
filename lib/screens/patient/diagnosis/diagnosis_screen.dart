@@ -234,7 +234,7 @@ class DiagnosisScreen extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: NetworkImage(diagnosisTestController.diagnosisTestModel!.data![index].patient_image!),
+                                  image: NetworkImage(diagnosisTestController.diagnosisTestModel!.data![index].doctor_image!),
                                 ),
                               ),
                             ),
@@ -249,7 +249,7 @@ class DiagnosisScreen extends StatelessWidget {
                               ),
                             ),
                             title: Text(
-                              diagnosisTestController.diagnosisTestModel!.data![index].patient_name ?? "N/A",
+                              diagnosisTestController.diagnosisTestModel!.data![index].doctor_name ?? "N/A",
                               style: TextStyleConst.mediumTextStyle(
                                 ColorConst.blackColor,
                                 width * 0.045,

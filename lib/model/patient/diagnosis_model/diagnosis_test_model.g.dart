@@ -31,6 +31,8 @@ DiagnosisTestData _$DiagnosisTestDataFromJson(Map<String, dynamic> json) =>
       report_number: json['report_number'] as String?,
       created_at: json['created_at'] as String?,
       pdf_url: json['pdf_url'] as String?,
+      doctor_name: json['doctor_name'] as String?,
+      doctor_image: json['doctor_image'] as String?,
     );
 
 Map<String, dynamic> _$DiagnosisTestDataToJson(DiagnosisTestData instance) =>
@@ -42,4 +44,6 @@ Map<String, dynamic> _$DiagnosisTestDataToJson(DiagnosisTestData instance) =>
       'report_number': instance.report_number,
       'created_at': instance.created_at,
       'pdf_url': instance.pdf_url,
+      'doctor_name': instance.doctor_name,
+      'doctor_image': instance.doctor_image,
     };

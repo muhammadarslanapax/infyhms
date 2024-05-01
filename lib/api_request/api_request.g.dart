@@ -388,16 +388,14 @@ class _ApiClient implements ApiClient {
       'notes',
       notes,
     ));
-    if(file != null) {
-      _data.files.add(MapEntry(
-        'file',
-        MultipartFile.fromFileSync(
-          file.path,
-          filename: file.path
-              .split(Platform.pathSeparator)
-              .last,
-        ),
-      ));
+    if(file != null){
+    _data.files.add(MapEntry(
+      'file',
+      MultipartFile.fromFileSync(
+        file.path,
+        filename: file.path.split(Platform.pathSeparator).last,
+      ),
+    ));
     }
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DocumentUpdateModel>(Options(
@@ -1036,16 +1034,14 @@ class _ApiClient implements ApiClient {
       'phone',
       phone,
     ));
-    if(profileImage != null) {
-      _data.files.add(MapEntry(
-        'image',
-        MultipartFile.fromFileSync(
-          profileImage.path,
-          filename: profileImage.path
-              .split(Platform.pathSeparator)
-              .last,
-        ),
-      ));
+    if(profileImage != null){
+    _data.files.add(MapEntry(
+      'image',
+      MultipartFile.fromFileSync(
+        profileImage.path,
+        filename: profileImage.path.split(Platform.pathSeparator).last,
+      ),
+    ));
     }
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<EditProfileModel>(Options(
@@ -2279,12 +2275,44 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<EditBedAssignModel> getBedEditAssignDetails(
+    String? token,
+    int id,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<EditBedAssignModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'doctors/bed-assign-edit/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = EditBedAssignModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<BedUpdatedDetailsModel> updateBedAssign(
     String? token,
     String id,
-    String bedId,
-    String patientId,
     String caseId,
+    String patientId,
+    String bedId,
     String assignDate,
     String dischargeDate,
   ) async {
@@ -2294,9 +2322,9 @@ class _ApiClient implements ApiClient {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = {
-      'bed_id': bedId,
-      'patient_id': patientId,
       'case_id': caseId,
+      'ipd_patient_department_id': patientId,
+      'bed_id': bedId,
       'assign_date': assignDate,
       'discharge_date': dischargeDate,
     };
@@ -2356,10 +2384,10 @@ class _ApiClient implements ApiClient {
   @override
   Future<CreateNewBedModel> createNewBedAssign(
     String? token,
-    String? bedId,
-    String? patientId,
     String caseId,
-    String assignDate,
+    String? bedId,
+    String? assignDate,
+    String patientId,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2367,10 +2395,10 @@ class _ApiClient implements ApiClient {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = {
-      'bed_id': bedId,
-      'patient_id': patientId,
       'case_id': caseId,
+      'bed_id': bedId,
       'assign_date': assignDate,
+      'ipd_patient_department_id': patientId,
     };
     _data.removeWhere((k, v) => v == null);
     final _result = await _dio
@@ -2513,9 +2541,7 @@ class _ApiClient implements ApiClient {
         'file',
         MultipartFile.fromFileSync(
           attachment.path,
-          filename: attachment.path
-              .split(Platform.pathSeparator)
-              .last,
+          filename: attachment.path.split(Platform.pathSeparator).last,
         ),
       ));
     }
@@ -2568,16 +2594,14 @@ class _ApiClient implements ApiClient {
       'patient_id',
       patientId,
     ));
-    if(attachment != null) {
-      _data.files.add(MapEntry(
-        'file',
-        MultipartFile.fromFileSync(
-          attachment.path,
-          filename: attachment.path
-              .split(Platform.pathSeparator)
-              .last,
-        ),
-      ));
+    if(attachment != null){
+    _data.files.add(MapEntry(
+      'file',
+      MultipartFile.fromFileSync(
+        attachment.path,
+        filename: attachment.path.split(Platform.pathSeparator).last,
+      ),
+    ));
     }
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorDocumentsCRUDModel>(Options(

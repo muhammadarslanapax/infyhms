@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_assign_delete_model.dart';
+import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_assign_edit_model.dart';
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_assign_model.dart';
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_details_model.dart';
 import 'package:infyhms_flutter/model/doctor/bed_assign_model/bed_update_model.dart';
@@ -253,9 +254,9 @@ abstract class ApiClient {
 
   @GET("patient-prescription/{id}")
   Future<PrescriptionDetailModel> getPrescriptionDetails(
-      @Header('Authorization') String? token,
-      @Path("id") int id,
-      );
+    @Header('Authorization') String? token,
+    @Path("id") int id,
+  );
 
   @GET("vaccinated-patient")
   Future<VaccinatedModel> getVaccinated(
@@ -499,13 +500,19 @@ abstract class ApiClient {
     @Header('Authorization') String? token,
   );
 
+  @GET("doctors/bed-assign-edit/{bedAssignId}")
+  Future<EditBedAssignModel> getBedEditAssignDetails(
+    @Header('Authorization') String? token,
+    @Path("bedAssignId") int id,
+  );
+
   @POST("doctors/bed-assign-update/{id}")
   Future<BedUpdatedDetailsModel> updateBedAssign(
     @Header('Authorization') String? token,
     @Path("id") String id,
-    @Field("bed_id") String bedId,
-    @Field("patient_id") String patientId,
     @Field("case_id") String caseId,
+    @Field("ipd_patient_department_id") String patientId,
+    @Field("bed_id") String bedId,
     @Field("assign_date") String assignDate,
     @Field("discharge_date") String dischargeDate,
   );
@@ -519,10 +526,10 @@ abstract class ApiClient {
   @POST("doctors/bed-assign-create")
   Future<CreateNewBedModel> createNewBedAssign(
     @Header('Authorization') String? token,
-    @Field("bed_id") String? bedId,
-    @Field("patient_id") String? patientId,
     @Field("case_id") String caseId,
-    @Field("assign_date") String assignDate,
+    @Field("bed_id") String? bedId,
+    @Field("assign_date") String? assignDate,
+    @Field("ipd_patient_department_id") String patientId,
   );
 
   /// doctor documents
