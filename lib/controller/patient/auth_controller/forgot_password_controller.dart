@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +16,7 @@ class ForgotPasswordController extends GetxController {
 
   forgotPassword(BuildContext context) {
     isSendLink.value = false;
-    StringUtils.client.forgotPassword({"email": emailController.text})
+    StringUtils.client.forgotPassword({"email": emailController.text, "url_domain": Platform.isAndroid?'http:':'myHMSApp:'})
       ..then((value) {
         forgotPasswordModel = value;
         if (forgotPasswordModel!.success == true) {

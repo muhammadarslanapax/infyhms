@@ -8,15 +8,8 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 class PayrollDetailsController extends GetxController {
   PayrollDetailsModel? payrollDetailsModel;
   RxBool isGetDetails = false.obs;
-  int id = Get.arguments;
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    getPayrollDetails();
-  }
 
-  void getPayrollDetails() {
+  void getPayrollDetails(int id) {
     StringUtils.client.getPayrollDetails(PreferenceUtils.getStringValue("token"), id)
       ..then((value) {
         payrollDetailsModel = value;

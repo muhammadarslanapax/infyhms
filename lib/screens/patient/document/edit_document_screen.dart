@@ -27,6 +27,8 @@ class EditDocumentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    var arguments = ModalRoute.of(context)!.settings.arguments;
+    editDocumentController.getDocumentDetail(arguments);
     return SafeArea(
       child: GestureDetector(
         onTap: () {

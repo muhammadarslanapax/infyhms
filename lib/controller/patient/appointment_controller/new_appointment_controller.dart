@@ -108,7 +108,6 @@ class NewAppointmentController extends GetxController {
       DisplaySnackBar.displaySnackBar("Please select other date");
     } else {
       CommonLoader.showLoader();
-
       StringUtils.client.createAppointment(
         PreferenceUtils.getStringValue("token"),
         departmentId!,
@@ -118,7 +117,6 @@ class NewAppointmentController extends GetxController {
         VariableUtils.patientId.value,
       )
         ..then((value) {
-          Get.back();
           createAppointmentModel = value;
 
           if (value.success == true) {

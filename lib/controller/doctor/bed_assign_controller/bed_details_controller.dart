@@ -8,14 +8,6 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 class BedDetailsController extends GetxController {
   BedDetailsModel? bedDetailsModel;
   RxBool isBedDetailsApiCalled = false.obs;
-  var id = Get.arguments;
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    getBedDetails(id.toString());
-  }
 
   void getBedDetails(String id) {
     StringUtils.client.getBedDataDetails(PreferenceUtils.getStringValue("token"), id)

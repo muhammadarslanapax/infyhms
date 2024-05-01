@@ -135,6 +135,7 @@ class AppointmentScreen extends StatelessWidget {
                                                         leftText: StringUtils.confirm,
                                                         rightText: StringUtils.cancel,
                                                         leftTapEvent: () {
+                                                          Get.back();
                                                           doctorFilterAppointmentController.confirmAppointment(
                                                               doctorFilterAppointmentController.doctorAppointmentModel!.data![index].id!);
                                                         },
@@ -431,6 +432,7 @@ class AppointmentScreen extends StatelessWidget {
                                                                           width * 0.05,
                                                                         ),
                                                                         onTap: () {
+                                                                          print('-=-=-=-=-=-=-=-=-Delete-=-=-=1');
                                                                           Get.back();
                                                                           filterAppointmentController.deletePendingAppointment(
                                                                               filterAppointmentController.filterAppointmentModel!.data![index].id!);

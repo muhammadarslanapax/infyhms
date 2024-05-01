@@ -18,6 +18,9 @@ class DoctorPrescriptionDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    var id = ModalRoute.of(context)!.settings.arguments as int;
+    doctorPrescriptionDetailController.getDoctorPrescriptionDetail(id);
+
     return SafeArea(
       child: Scaffold(
           backgroundColor: ColorConst.whiteColor,
@@ -177,6 +180,7 @@ class DoctorPrescriptionDetailScreen extends StatelessWidget {
                                           child: Column(
                                             children: List.generate(
                                                 doctorPrescriptionDetailController.doctorPrescriptionDetailModel!.data!.medicine!.length, (index) {
+
                                               return Padding(
                                                 padding: EdgeInsets.only(bottom: height * 0.01),
                                                 child: Row(
@@ -197,7 +201,7 @@ class DoctorPrescriptionDetailScreen extends StatelessWidget {
                                                         SizedBox(height: height * 0.003),
                                                         Text(
                                                           doctorPrescriptionDetailController
-                                                              .doctorPrescriptionDetailModel!.data!.medicine![index].salt_composition!,
+                                                              .doctorPrescriptionDetailModel!.data!.medicine![index].salt_composition?? 'N/A',
                                                           style: TextStyleConst.mediumTextStyle(
                                                             ColorConst.hintGreyColor,
                                                             width * 0.04,
@@ -207,8 +211,9 @@ class DoctorPrescriptionDetailScreen extends StatelessWidget {
                                                       ],
                                                     ),
                                                     Text(
+
                                                       doctorPrescriptionDetailController
-                                                          .doctorPrescriptionDetailModel!.data!.medicine![index].created_at!,
+                                                          .doctorPrescriptionDetailModel!.data!.medicine![index].created_at??'N/A',
                                                       style: TextStyleConst.mediumTextStyle(
                                                         ColorConst.blackColor,
                                                         width * 0.045,

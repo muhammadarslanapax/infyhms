@@ -24,7 +24,7 @@ class EditBedController extends GetxController {
   BedsModel? bedsModel;
   RxBool isCasesApiCalled = false.obs;
 
-  Map<String, dynamic> bedAssignData = Get.arguments;
+
 
   DateTime? oldAssignDate;
   DateTime? oldDischargeDate;
@@ -44,6 +44,10 @@ class EditBedController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     getMyCases();
+
+  }
+
+  assignValue(Map<String, dynamic> bedAssignData){
     selectedBedAssignDate = bedAssignData["assignDate"];
     selectedBedAssignController.text = selectedBedAssignDate ?? "";
     bedId = bedAssignData["bedId"];
@@ -117,7 +121,7 @@ class EditBedController extends GetxController {
     selectedDischargeController.text = selectedDischargeDate ?? "";
   }
 
-  void saveData() {
+  void saveData(String assignId) {
     if (bedId == null) {
       DisplaySnackBar.displaySnackBar("Please select bed");
     } else if (selectedBedAssignDate == null) {
@@ -128,7 +132,7 @@ class EditBedController extends GetxController {
       CommonLoader.showLoader();
       StringUtils.client.updateBedAssign(
         PreferenceUtils.getStringValue("token"),
-        "${bedAssignData["assignId"]}",
+        assignId,
         "$bedId",
         "$ipdPatientId",
         "$myCasesId",

@@ -18,6 +18,9 @@ class BillDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    var argumentData = ModalRoute.of(context)!.settings.arguments as int;
+    billDetailsController.getBillsDetails(argumentData);
+
     return SafeArea(
       child: Scaffold(
           backgroundColor: ColorConst.whiteColor,

@@ -12,7 +12,7 @@ class SendTokenController extends GetxController {
   TextEditingController newPassword = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
 
-  void sendToken(BuildContext context) {
+  void sendToken(BuildContext context, String email, String token) {
     if (newPassword.text.isEmpty) {
       DisplaySnackBar.displaySnackBar("Please enter password");
     } else if (newPassword.text.length < 6) {
@@ -22,11 +22,11 @@ class SendTokenController extends GetxController {
     } else if (newPassword.text != confirmPassword.text) {
       DisplaySnackBar.displaySnackBar("Password doesn't match");
     } else {
-      StringUtils.client.sendToken(StringUtils.token!, newPassword.text, confirmPassword.text, StringUtils.sendEmail)
+      StringUtils.client.sendToken(token, newPassword.text, confirmPassword.text, email)
         ..then((value) {
           sendTokenModel = value;
           if (sendTokenModel!.success == true) {
-            Get.offAll(() => LoginScreen());
+            Get.to(() => LoginScreen());
             DisplaySnackBar.displaySnackBar(sendTokenModel!.message!);
           }
         })

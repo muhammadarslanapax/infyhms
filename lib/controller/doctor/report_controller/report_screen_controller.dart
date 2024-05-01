@@ -12,16 +12,9 @@ class ReportScreenController extends GetxController {
   DeleteCommonReportModel? deleteCommonReportModel;
   InvestigationReportModel? investigationReportModel;
   RxBool isGotReport = false.obs;
-  String report = Get.arguments;
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    callReportApi();
-  }
 
-  void callReportApi() {
+  void callReportApi(String report) {
     switch (report) {
       case StringUtils.birthReport:
         getBirthReport();
@@ -38,7 +31,7 @@ class ReportScreenController extends GetxController {
     }
   }
 
-  void deleteReport(int id) {
+  void deleteReport(int id, String report) {
     Get.back();
     switch (report) {
       case StringUtils.birthReport:

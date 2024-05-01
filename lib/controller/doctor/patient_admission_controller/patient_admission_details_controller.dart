@@ -8,15 +8,8 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 class PatientAdmissionDetailsController extends GetxController {
   PatientAdmissionDetailsModel? patientAdmissionDetailsModel;
   RxBool isGotDetails = false.obs;
-  int id = Get.arguments;
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    getPatientAdmissionDetails();
-  }
 
-  void getPatientAdmissionDetails() {
+  void getPatientAdmissionDetails(int id) {
     StringUtils.client.getPatientAdmissionDetails(PreferenceUtils.getStringValue("token"), id)
       ..then((value) {
         patientAdmissionDetailsModel = value;

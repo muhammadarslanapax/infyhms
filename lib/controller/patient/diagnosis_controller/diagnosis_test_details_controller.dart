@@ -14,8 +14,7 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DiagnosisTestDetailsController extends GetxController {
-  int diagnosisTestId = Get.arguments;
-  int doctorDiagnosisTestId = Get.arguments;
+
   DiagnosisTestDetailsModel? diagnosisTestDetailsModel;
   DoctorDiagnosisTestDetailsModel? doctorDiagnosisTestDetailsModel;
   RxBool isDetailsGet = false.obs;
@@ -29,7 +28,7 @@ class DiagnosisTestDetailsController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     listenDownload();
-    PreferenceUtils.getBoolValue("isDoctor") ? getDoctorDiagnosisTestDetails() : getDiagnosisTestDetails();
+
   }
 
   void listenDownload() {
@@ -72,7 +71,11 @@ class DiagnosisTestDetailsController extends GetxController {
     }
   }
 
-  void getDiagnosisTestDetails() {
+  void getDiagnosisDetail(int id){
+    PreferenceUtils.getBoolValue("isDoctor") ? getDoctorDiagnosisTestDetails(id) : getDiagnosisTestDetails(id);
+  }
+
+  void getDiagnosisTestDetails(int diagnosisTestId) {
     StringUtils.client.getDiagnosisTestDetails(PreferenceUtils.getStringValue("token"), diagnosisTestId)
       ..then((value) {
         diagnosisTestDetailsModel = value;
@@ -84,7 +87,7 @@ class DiagnosisTestDetailsController extends GetxController {
       });
   }
 
-  void getDoctorDiagnosisTestDetails() {
+  void getDoctorDiagnosisTestDetails(int doctorDiagnosisTestId) {
     StringUtils.client.getDoctorsDiagnosisTestDetails(PreferenceUtils.getStringValue("token"), doctorDiagnosisTestId)
       ..then((value) {
         doctorDiagnosisTestDetailsModel = value;

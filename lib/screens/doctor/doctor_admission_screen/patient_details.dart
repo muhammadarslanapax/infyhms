@@ -15,6 +15,8 @@ class PatientAdmissionDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    var id = ModalRoute.of(context)!.settings.arguments as int;
+    patientAdmissionDetailsController.getPatientAdmissionDetails(id);
     return SafeArea(
       child: Scaffold(
           backgroundColor: ColorConst.whiteColor,
@@ -48,61 +50,61 @@ class PatientAdmissionDetailsScreen extends StatelessWidget {
                             CommonDetailText(
                               width: width,
                               titleText: "Admission Id:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.admission_id!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.admission_id??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Patient:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.patient!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.patient??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Admission Date:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.admission_date!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.admission_date??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Discharge Date:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.discharge_date!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.discharge_date??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Bed:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.bed!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.bed??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Guardian Name:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.guardian_name!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.guardian_name??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Guardian Relation:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.guardian_relation!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.guardian_relation??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Guardian Contact:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.guardian_contact!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.guardian_contact??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Guardian Address:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.guardian_address!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.guardian_address??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Created On:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.created_on!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.created_on??'N/A',
                             ),
                             SizedBox(height: height * 0.04),
                             CommonText(
@@ -113,25 +115,25 @@ class PatientAdmissionDetailsScreen extends StatelessWidget {
                             CommonDetailText(
                               width: width,
                               titleText: "Package Name:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.package_name!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.package_name??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Insurance Name:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.insurance_name!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.insurance_name??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Agent Name:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.agent_name!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.agent_name??'N/A',
                             ),
                             SizedBox(height: height * 0.015),
                             CommonDetailText(
                               width: width,
                               titleText: "Policy No:",
-                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.policy_number!,
+                              descriptionText: patientAdmissionDetailsController.patientAdmissionDetailsModel!.data!.policy_number??'N/A',
                             ),
                           ],
                         ),

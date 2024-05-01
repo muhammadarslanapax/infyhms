@@ -12,9 +12,11 @@ class BedDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BedDetailsController bedDetailsController = Get.put(BedDetailsController());
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    BedDetailsController bedDetailsController = Get.put(BedDetailsController());
+    var id = ModalRoute.of(context)!.settings.arguments as int;
+    bedDetailsController.getBedDetails(id.toString());
     return SafeArea(
       child: Scaffold(
         appBar: CommonAppBar(

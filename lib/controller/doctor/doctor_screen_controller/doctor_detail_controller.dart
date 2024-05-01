@@ -7,16 +7,9 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class DoctorDetailController extends GetxController {
   DoctorsDetailModel? doctorsDetailModel;
-  int id = Get.arguments;
   RxBool isGetDetail = false.obs;
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    getDoctorDetail();
-  }
 
-  void getDoctorDetail() {
+  void getDoctorDetail(int id) {
     StringUtils.client.getDoctorsDetail(PreferenceUtils.getStringValue("token"), id)
       ..then((value) {
         doctorsDetailModel = value;

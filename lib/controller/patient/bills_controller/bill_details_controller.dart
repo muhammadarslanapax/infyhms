@@ -14,7 +14,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class BillDetailsController extends GetxController {
   BillDetailModel? billDetailModel;
-  int argumentData = Get.arguments;
   RxBool isGetBillsDetails = false.obs;
   RxInt totalPrice = 0.obs;
 
@@ -27,7 +26,6 @@ class BillDetailsController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     listenDownload();
-    getBillsDetails();
   }
 
   void listenDownload() {
@@ -70,7 +68,7 @@ class BillDetailsController extends GetxController {
     }
   }
 
-  void getBillsDetails() {
+  void getBillsDetails(int argumentData) {
     StringUtils.client.getBillsDetails(PreferenceUtils.getStringValue("token"), argumentData).then((value) {
       billDetailModel = value;
       if (billDetailModel!.success == true) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/src/state.dart';
 import 'package:infyhms_flutter/component/common_button.dart';
 import 'package:infyhms_flutter/component/common_text_field.dart';
 import 'package:infyhms_flutter/constant/color_const.dart';
@@ -9,7 +10,8 @@ import 'package:infyhms_flutter/utils/image_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
-  ResetPasswordScreen({Key? key}) : super(key: key);
+  ResetPasswordScreen({super.key, required this.state});
+  final GoRouterState state;
   final SendTokenController sendTokenController = Get.put(SendTokenController());
 
   @override
@@ -115,8 +117,10 @@ class ResetPasswordScreen extends StatelessWidget {
                                       CommonButton(
                                         textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                         onTap: () {
-                                          sendTokenController.sendToken(context);
-                                        },
+                                          String token = state.uri.toString().split('token=').last.split('&').first;
+                                          String email = state.uri.toString().split('email=').last.split('&').first;
+                                          sendTokenController.sendToken(context, email, token);
+                                        } ,
                                         color: ColorConst.blueColor,
                                         text: StringUtils.save,
                                         width: width / 2.3,

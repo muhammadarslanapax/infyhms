@@ -15,10 +15,9 @@ class ChangePasswordController extends GetxController {
   ResetPasswordModel? resetPasswordModel;
 
   void changePassword(BuildContext context) {
+    print(PreferenceUtils.getStringValue("password"));
     if (currentPasswordController.text.isEmpty) {
       DisplaySnackBar.displaySnackBar("Please enter current password");
-    } else if (currentPasswordController.text != PreferenceUtils.getStringValue("password")) {
-      DisplaySnackBar.displaySnackBar("Please enter correct current password");
     } else if (newPasswordController.text.isEmpty) {
       DisplaySnackBar.displaySnackBar("Please enter new password");
     } else if (newPasswordController.text.length < 6) {
@@ -36,12 +35,13 @@ class ChangePasswordController extends GetxController {
       }).then((value) {
         resetPasswordModel = value;
         if (resetPasswordModel!.success == true) {
-          DisplaySnackBar.displaySnackBar(resetPasswordModel!.message!);
-
+          PreferenceUtils.setStringValue("password", newPasswordController.text);
+          update();
           Get.back();
           clearController();
         }
-      }).onError((DioError error, stackTrace) {
+        DisplaySnackBar.displaySnackBar(resetPasswordModel!.message??"Something went wrong", 3);
+      }).onError((DioException error, stackTrace) {
         CheckSocketException.checkSocketException(error);
       });
     }

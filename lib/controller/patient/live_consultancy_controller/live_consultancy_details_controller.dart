@@ -10,15 +10,12 @@ class LiveConsultancyDetailsController extends GetxController {
   LiveConsultationDetailsModel? liveConsultationDetailsModel;
   DoctorLiveConsultationsDetailsModel? doctorLiveConsultationsDetailsModel;
   RxBool gotDetailsOfConsultation = false.obs;
-  int consultationId = Get.arguments;
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    PreferenceUtils.getBoolValue("isDoctor") ? getDoctorDetailsOfConsultation() : getDetailsOfConsultation();
+
+  getConsultationDetail(int consultationId){
+    PreferenceUtils.getBoolValue("isDoctor") ? getDoctorDetailsOfConsultation(consultationId) : getDetailsOfConsultation(consultationId);
   }
 
-  void getDetailsOfConsultation() {
+  void getDetailsOfConsultation(int consultationId) {
     gotDetailsOfConsultation.value = false;
     StringUtils.client.liveConsultationData(PreferenceUtils.getStringValue("token"), consultationId)
       ..then((value) {
@@ -31,7 +28,7 @@ class LiveConsultancyDetailsController extends GetxController {
       });
   }
 
-  void getDoctorDetailsOfConsultation() {
+  void getDoctorDetailsOfConsultation(int consultationId) {
     StringUtils.client.liveDoctorConsultationData(PreferenceUtils.getStringValue("token"), consultationId)
       ..then((value) {
         doctorLiveConsultationsDetailsModel = value;

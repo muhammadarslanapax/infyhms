@@ -22,7 +22,6 @@ class EditDocumentController extends GetxController {
 
   RxBool gotData = false.obs;
 
-  var arguments = Get.arguments;
   String? docTypeId;
   ImagePicker imagePicker = ImagePicker();
   Rx<XFile?> file = XFile("").obs;
@@ -44,7 +43,7 @@ class EditDocumentController extends GetxController {
     }
   }
 
-  void getDocumentTypes() {
+  void getDocumentTypes(var arguments) {
     StringUtils.client.getDocumentsType(PreferenceUtils.getStringValue("token"))
       ..then((value) {
         documentsTypeModel = value;
@@ -118,7 +117,7 @@ class EditDocumentController extends GetxController {
   }
 
   /// doctor
-  void getDoctorsDocumentType() {
+  void getDoctorsDocumentType(var arguments) {
     StringUtils.client.doctorDocumentType(PreferenceUtils.getStringValue("token"))
       ..then((value) {
         doctorDocumentsTypeModel = value;
@@ -135,14 +134,11 @@ class EditDocumentController extends GetxController {
       });
   }
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
+  getDocumentDetail(var arguments){
     if (PreferenceUtils.getBoolValue("isDoctor")) {
-      getDoctorsDocumentType();
+      getDoctorsDocumentType(arguments);
     } else {
-      getDocumentTypes();
+      getDocumentTypes(arguments);
     }
   }
 }

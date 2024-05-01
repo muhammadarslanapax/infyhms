@@ -9,12 +9,13 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 
 class CaseDetailScreen extends StatelessWidget {
   CaseDetailScreen({Key? key}) : super(key: key);
-  final argument = Get.arguments;
+
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final argument = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorConst.whiteColor,

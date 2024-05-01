@@ -79,7 +79,7 @@ class BedAssignController extends GetxController {
       ..then((value) {
         if (value.success == true) {
           isBedAssignDataCalled.value = true;
-          Get.back();
+
           DisplaySnackBar.displaySnackBar("Bed Deleted");
           changeIndex(index);
         } else {

@@ -10,9 +10,7 @@ BedStatusDetailsModel _$BedStatusDetailsModelFromJson(
         Map<String, dynamic> json) =>
     BedStatusDetailsModel(
       success: json['success'] as bool?,
-      data: (json['data'] as List<dynamic>?)
-          ?.map((e) => BedStatusDetailsData.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      data:json['data'] as Map<String, dynamic>?,
       message: json['message'] as String?,
     );
 

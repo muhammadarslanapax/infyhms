@@ -91,6 +91,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       CommonButton(
                         textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                         onTap: () {
+                          print('-=-=-=-=-=-=-=-=-=-=');
                           changePasswordController.changePassword(context);
                         },
                         color: ColorConst.blueColor,

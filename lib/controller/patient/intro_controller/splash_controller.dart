@@ -11,12 +11,12 @@ class SplashController extends GetxController {
       const Duration(seconds: 5),
       () {
         if (PreferenceUtils.getBoolValue("isShowOnBoarding")) {
-          Get.offAll(() => OnBoardingScreen(), transition: Transition.fade);
+          Get.to(() => OnBoardingScreen(), transition: Transition.fade);
         } else {
           if (PreferenceUtils.getStringValue("token") != "") {
-            Get.offAll(() => const HomeScreen(), transition: Transition.fade);
+            Get.to(() => const HomeScreen(), transition: Transition.fade);
           } else {
-            Get.offAll(() => LoginScreen(), transition: Transition.fade);
+            Get.to(() => LoginScreen(), transition: Transition.fade);
           }
         }
       },

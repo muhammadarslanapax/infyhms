@@ -17,6 +17,9 @@ class LiveConsultationsDetailScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
+    int consultationId = ModalRoute.of(context)!.settings.arguments as int;
+    liveConsultationsController.getConsultationDetail(consultationId);
+
     return SafeArea(
       child: Scaffold(
         appBar: CommonAppBar(

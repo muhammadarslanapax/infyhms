@@ -15,7 +15,6 @@ import 'package:url_launcher/url_launcher.dart';
 class DoctorPrescriptionDetailController extends GetxController {
   RxBool isGetDetail = false.obs;
   RxBool isDownloading = false.obs;
-  int id = Get.arguments;
   DoctorPrescriptionDetailModel? doctorPrescriptionDetailModel;
 
   RxInt progress = 0.obs;
@@ -25,7 +24,6 @@ class DoctorPrescriptionDetailController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getDoctorPrescriptionDetail();
     listenDownload();
   }
 
@@ -69,7 +67,7 @@ class DoctorPrescriptionDetailController extends GetxController {
     }
   }
 
-  void getDoctorPrescriptionDetail() {
+  void getDoctorPrescriptionDetail(int id) {
     StringUtils.client.getDoctorsPrescriptionDetail(PreferenceUtils.getStringValue("token"), id)
       ..then((value) {
         doctorPrescriptionDetailModel = value;

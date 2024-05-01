@@ -155,16 +155,28 @@ class DiagnosisScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              trailing: Container(
-                                margin: const EdgeInsets.only(right: 10),
-                                width: 25,
-                                height: 25,
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(ImageUtils.downloadIcon),
-                                  ),
-                                ),
-                              ),
+                              trailing: Obx(() => (diagnosisTestController
+                                      .isCurrentDownloading[index].value)
+                                  ? const CircularProgressIndicator(
+                                      color: ColorConst.primaryColor)
+                                  : InkWell(
+                                      onTap: () {
+                                        diagnosisTestController
+                                            .downloadDiagnosis(context, index);
+                                      },
+                                      child: Container(
+                                        margin:
+                                            const EdgeInsets.only(right: 10),
+                                        width: 25,
+                                        height: 25,
+                                        decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                                ImageUtils.downloadIcon),
+                                          ),
+                                        ),
+                                      ),
+                                    )),
                               title: Text(
                                 diagnosisTestController.doctorDiagnosisTestModel!.data![index].patient_name!,
                                 style: TextStyleConst.mediumTextStyle(
@@ -238,15 +250,29 @@ class DiagnosisScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            trailing: Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              width: 25,
-                              height: 25,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(ImageUtils.downloadIcon),
-                                ),
-                              ),
+                            trailing: Obx(
+                              () => (diagnosisTestController
+                                      .isCurrentDownloading[index].value)
+                                  ? const CircularProgressIndicator(
+                                      color: ColorConst.primaryColor)
+                                  : InkWell(
+                                      onTap: () {
+                                        diagnosisTestController
+                                            .downloadDiagnosis(context, index);
+                                      },
+                                      child: Container(
+                                        margin:
+                                            const EdgeInsets.only(right: 10),
+                                        width: 25,
+                                        height: 25,
+                                        decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                                ImageUtils.downloadIcon),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                             ),
                             title: Text(
                               diagnosisTestController.diagnosisTestModel!.data![index].patient_name ?? "N/A",

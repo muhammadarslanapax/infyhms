@@ -13,7 +13,6 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InvoiceDetailsController extends GetxController {
-  int invoiceId = Get.arguments;
   InvoiceDetailsModel? invoiceDetailsModel;
   RxBool isApiCall = false.obs;
 
@@ -21,7 +20,6 @@ class InvoiceDetailsController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getInvoiceDetails();
     listenDownload();
   }
 
@@ -69,7 +67,7 @@ class InvoiceDetailsController extends GetxController {
     }
   }
 
-  void getInvoiceDetails() {
+  void getInvoiceDetails(int invoiceId) {
     StringUtils.client.getInvoiceData(PreferenceUtils.getStringValue("token"), invoiceId).then((value) {
       invoiceDetailsModel = value;
       if (invoiceDetailsModel!.success == true) {

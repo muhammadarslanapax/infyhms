@@ -97,9 +97,9 @@ class LiveConsultationsController extends GetxController {
     StringUtils.client.liveConsultationMeetingData(PreferenceUtils.getStringValue("token"), consultationId)
       ..then((value) {
         liveConsultationMeetingModel = value;
+        Get.back();
         if (liveConsultationMeetingModel!.success == true) {
           gotMeetingData.value = true;
-          Get.back();
           showModalBottomSheet(
             backgroundColor: ColorConst.whiteColor,
             shape: const OutlineInputBorder(
@@ -181,8 +181,10 @@ class LiveConsultationsController extends GetxController {
             },
           );
         }
+
       })
       ..onError((DioError error, stackTrace) {
+        Get.back();
         gotMeetingData.value = true;
         CheckSocketException.checkSocketException(error);
         return LiveConsultationMeetingModel();
@@ -194,9 +196,9 @@ class LiveConsultationsController extends GetxController {
     StringUtils.client.liveDoctorConsultationMeetingData(PreferenceUtils.getStringValue("token"), consultationId)
       ..then((value) {
         doctorLiveConsultationsMeetingModel = value;
+        Get.back();
         if (doctorLiveConsultationsMeetingModel!.success == true) {
           gotMeetingData.value = true;
-          Get.back();
           showModalBottomSheet(
             backgroundColor: ColorConst.whiteColor,
             shape: const OutlineInputBorder(
@@ -280,6 +282,7 @@ class LiveConsultationsController extends GetxController {
         }
       })
       ..onError((DioError error, stackTrace) {
+        Get.back();
         gotMeetingData.value = true;
         CheckSocketException.checkSocketException(error);
         return DoctorLiveConsultationsMeetingModel();

@@ -17,6 +17,9 @@ class DiagnosisTestDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    var id = ModalRoute.of(context)!.settings.arguments as int;
+    diagnosisTestDetailsController.getDiagnosisDetail(id);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorConst.whiteColor,

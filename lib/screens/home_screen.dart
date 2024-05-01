@@ -13,7 +13,7 @@ import 'package:infyhms_flutter/utils/string_utils.dart';
 import 'package:infyhms_flutter/utils/variable_utils.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +77,15 @@ class HomeScreen extends StatelessWidget {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(VariableUtils.imageUrl.replaceAll(" ", "")),
+                            image: NetworkImage(
+                                VariableUtils.imageUrl.replaceAll(" ", "")),
                           ),
                         ),
                       ),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.arrow_forward_ios_rounded, size: 15),
+                      icon:
+                          const Icon(Icons.arrow_forward_ios_rounded, size: 15),
                       onPressed: () {
                         Get.back();
                         Get.to(() => MyAccountScreen());
@@ -91,16 +93,23 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.01),
-                  Container(height: 1.5, width: double.infinity, color: ColorConst.borderGreyColor),
+                  Container(
+                      height: 1.5,
+                      width: double.infinity,
+                      color: ColorConst.borderGreyColor),
                   Expanded(
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: List.generate(
-                            PreferenceUtils.getBoolValue("isDoctor") ? ListUtils.doctorDrawerList.length : ListUtils.drawerList.length, (index) {
+                            PreferenceUtils.getBoolValue("isDoctor")
+                                ? ListUtils.doctorDrawerList.length
+                                : ListUtils.drawerList.length, (index) {
                           return ListTile(
                             onTap: () {
-                              PreferenceUtils.getBoolValue("isDoctor") ? controller.changeDoctorWidget(index) : controller.changeWidget(index);
+                              PreferenceUtils.getBoolValue("isDoctor")
+                                  ? controller.changeDoctorWidget(index)
+                                  : controller.changeWidget(index);
                             },
                             title: Text(
                               PreferenceUtils.getBoolValue("isDoctor")
@@ -115,10 +124,15 @@ class HomeScreen extends StatelessWidget {
                               height: 25,
                               width: 25,
                               child: ImageIcon(
-                                AssetImage(PreferenceUtils.getBoolValue("isDoctor")
-                                    ? ListUtils.doctorDrawerList[index]["icon"]
-                                    : ListUtils.drawerList[index]["icon"]),
-                                color: index == controller.currentDrawerIndex.value ? ColorConst.blueColor : ColorConst.hintGreyColor,
+                                AssetImage(
+                                    PreferenceUtils.getBoolValue("isDoctor")
+                                        ? ListUtils.doctorDrawerList[index]
+                                            ["icon"]
+                                        : ListUtils.drawerList[index]["icon"]),
+                                color:
+                                    index == controller.currentDrawerIndex.value
+                                        ? ColorConst.blueColor
+                                        : ColorConst.hintGreyColor,
                               ),
                             ),
                           );
@@ -126,7 +140,10 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(height: 1.5, width: double.infinity, color: ColorConst.borderGreyColor),
+                  Container(
+                      height: 1.5,
+                      width: double.infinity,
+                      color: ColorConst.borderGreyColor),
                   SizedBox(height: height * 0.002),
                   Container(
                     margin: const EdgeInsets.only(right: 15),
@@ -168,10 +185,12 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       SizedBox(height: height * 0.03),
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
                                         children: [
                                           CommonButton(
-                                            textStyleConst: TextStyleConst.mediumTextStyle(
+                                            textStyleConst:
+                                                TextStyleConst.mediumTextStyle(
                                               ColorConst.whiteColor,
                                               width * 0.05,
                                             ),
@@ -184,7 +203,10 @@ class HomeScreen extends StatelessWidget {
                                             height: 50,
                                           ),
                                           CommonButton(
-                                            textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.hintGreyColor, width * 0.05),
+                                            textStyleConst:
+                                                TextStyleConst.mediumTextStyle(
+                                                    ColorConst.hintGreyColor,
+                                                    width * 0.05),
                                             onTap: () {
                                               Get.back();
                                             },
@@ -217,7 +239,10 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            body: controller.currentWidget,
+            body: WillPopScope(
+              onWillPop: ()async => false,
+              child: controller.currentWidget,
+            ),
           );
         },
       ),

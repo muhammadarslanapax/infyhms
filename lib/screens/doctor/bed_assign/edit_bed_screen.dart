@@ -18,6 +18,8 @@ class EditBedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    var bedAssignData = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    editBedController.assignValue(bedAssignData);
 
     return SafeArea(
       child: GestureDetector(
@@ -168,7 +170,7 @@ class EditBedScreen extends StatelessWidget {
                                 CommonButton(
                                   textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                   onTap: () {
-                                    editBedController.saveData();
+                                    editBedController.saveData(bedAssignData['assignId']);
                                   },
                                   color: ColorConst.blueColor,
                                   text: StringUtils.save,

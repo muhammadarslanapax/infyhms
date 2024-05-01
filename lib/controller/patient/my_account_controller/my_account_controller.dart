@@ -16,7 +16,7 @@ class MyAccountController extends GetxController {
       logoutModel = value;
       if (logoutModel!.success == true) {
         PreferenceUtils.setStringValue("token", "");
-        Get.offAll(() => LoginScreen());
+        Get.to(() => LoginScreen());
       }
     }).onError((DioError error, stackTrace) {
       CheckSocketException.checkSocketException(error);

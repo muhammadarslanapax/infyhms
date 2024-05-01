@@ -78,7 +78,6 @@ class FilterAppointmentController extends GetxController {
               break;
           }
         }
-        Get.back();
       })
       ..onError((DioError error, stackTrace) {
         CheckSocketException.checkSocketException(error);
@@ -95,7 +94,7 @@ class FilterAppointmentController extends GetxController {
           appointmentController.currentIndex.value = 1;
           getAppointment("pending");
         }
-        Get.back();
+
       })
       ..onError((DioError error, stackTrace) {
         Get.back();
@@ -113,7 +112,6 @@ class FilterAppointmentController extends GetxController {
           appointmentController.currentIndex.value = 1;
           getAppointment("pending");
         }
-        Get.back();
       })
       ..onError((DioError error, stackTrace) {
         CheckSocketException.checkSocketException(error);

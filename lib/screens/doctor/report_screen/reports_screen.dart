@@ -20,6 +20,9 @@ class ReportScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    var report = ModalRoute.of(context)!.settings.arguments as String;
+    reportScreenController.callReportApi(report);
+
     return SafeArea(
       child: Scaffold(
         appBar: CommonAppBar(
@@ -71,7 +74,7 @@ class ReportScreen extends StatelessWidget {
                                           leftText: StringUtils.delete,
                                           rightText: StringUtils.cancel,
                                           leftTapEvent: () {
-                                            reportScreenController.deleteReport(reportScreenController.investigationReportModel!.data![index].id!);
+                                            reportScreenController.deleteReport(reportScreenController.investigationReportModel!.data![index].id!, report);
                                           },
                                           rightTapEvent: () {
                                             Get.back();
@@ -87,13 +90,7 @@ class ReportScreen extends StatelessWidget {
                                 ),
                                 child: ListTile(
                                   contentPadding: EdgeInsets.only(top: index == 0 ? 10 : 0, left: 10, right: 10),
-                                  onTap: () {
-                                    Get.to(
-                                      () => DoctorCaseDetailsScreen(),
-                                      transition: Transition.rightToLeft,
-                                      arguments: reportScreenController.commonReportModel!.data![index].case_id!,
-                                    );
-                                  },
+                                  onTap: () {},
                                   leading: Container(
                                     height: 60,
                                     width: 60,
@@ -226,7 +223,7 @@ class ReportScreen extends StatelessWidget {
                                                           ),
                                                           onTap: () {
                                                             reportScreenController
-                                                                .deleteReport(reportScreenController.commonReportModel!.data![index].id!);
+                                                                .deleteReport(reportScreenController.commonReportModel!.data![index].id!, report);
                                                           },
                                                           color: ColorConst.blueColor,
                                                           text: StringUtils.delete,

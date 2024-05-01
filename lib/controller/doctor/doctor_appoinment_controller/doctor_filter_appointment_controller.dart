@@ -79,7 +79,7 @@ class DoctorFilterAppointmentController extends GetxController {
   }
 
   void confirmAppointment(int id) {
-    Get.back();
+
     isDoctorFilterApiCall.value = false;
     StringUtils.client.confirmAppointment(PreferenceUtils.getStringValue("token"), id)
       ..then((value) {

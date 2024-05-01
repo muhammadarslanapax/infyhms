@@ -18,6 +18,9 @@ class InvoiceDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    int invoiceId = ModalRoute.of(context)!.settings.arguments as int;
+    invoiceDetailsController.getInvoiceDetails(invoiceId);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorConst.whiteColor,
