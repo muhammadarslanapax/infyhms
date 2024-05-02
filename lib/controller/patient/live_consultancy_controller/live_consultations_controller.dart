@@ -32,7 +32,9 @@ class LiveConsultationsController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    PreferenceUtils.getBoolValue("isDoctor") ? getDoctorConsultancy("all") : getConsultancy("all");
+    PreferenceUtils.getBoolValue("isDoctor")
+        ? getDoctorConsultancy("all")
+        : getConsultancy("all");
   }
 
   void changeIndex(int index) {
@@ -40,25 +42,34 @@ class LiveConsultationsController extends GetxController {
     switch (index) {
       case 0:
         currentIndex.value = 0;
-        PreferenceUtils.getBoolValue("isDoctor") ? getDoctorConsultancy("all") : getConsultancy("all");
+        PreferenceUtils.getBoolValue("isDoctor")
+            ? getDoctorConsultancy("all")
+            : getConsultancy("all");
         break;
       case 1:
         currentIndex.value = 1;
-        PreferenceUtils.getBoolValue("isDoctor") ? getDoctorConsultancy("awaited") : getConsultancy("awaited");
+        PreferenceUtils.getBoolValue("isDoctor")
+            ? getDoctorConsultancy("awaited")
+            : getConsultancy("awaited");
         break;
       case 2:
         currentIndex.value = 2;
-        PreferenceUtils.getBoolValue("isDoctor") ? getDoctorConsultancy("cancelled") : getConsultancy("cancelled");
+        PreferenceUtils.getBoolValue("isDoctor")
+            ? getDoctorConsultancy("cancelled")
+            : getConsultancy("cancelled");
         break;
       case 3:
         currentIndex.value = 3;
-        PreferenceUtils.getBoolValue("isDoctor") ? getDoctorConsultancy("finished") : getConsultancy("finished");
+        PreferenceUtils.getBoolValue("isDoctor")
+            ? getDoctorConsultancy("finished")
+            : getConsultancy("finished");
         break;
     }
   }
 
   void getConsultancy(String status) {
-    StringUtils.client.liveConsultationFilter(PreferenceUtils.getStringValue("token"), status)
+    StringUtils.client
+        .liveConsultationFilter(PreferenceUtils.getStringValue("token"), status)
       ..then((value) {
         liveConsultationFilter = value;
         gotConsultationData.value = true;
@@ -71,7 +82,8 @@ class LiveConsultationsController extends GetxController {
   }
 
   void getDoctorConsultancy(String status) {
-    StringUtils.client.liveDoctorConsultationFilter(PreferenceUtils.getStringValue("token"), status)
+    StringUtils.client.liveDoctorConsultationFilter(
+        PreferenceUtils.getStringValue("token"), status)
       ..then((value) {
         doctorLiveConsultationsModel = value;
         gotConsultationData.value = true;
@@ -92,9 +104,11 @@ class LiveConsultationsController extends GetxController {
     }
   }
 
-  void getLiveMeeting(int consultationId, BuildContext context, double height, double width) {
+  void getLiveMeeting(
+      int consultationId, BuildContext context, double height, double width) {
     CommonLoader.showLoader();
-    StringUtils.client.liveConsultationMeetingData(PreferenceUtils.getStringValue("token"), consultationId)
+    StringUtils.client.liveConsultationMeetingData(
+        PreferenceUtils.getStringValue("token"), consultationId)
       ..then((value) {
         liveConsultationMeetingModel = value;
         if (liveConsultationMeetingModel!.success == true) {
@@ -158,20 +172,47 @@ class LiveConsultationsController extends GetxController {
                       ),
                       SizedBox(height: height * 0.03),
                       Center(
-                        child: CommonButton(
-                          isIcon: true,
-                          width: width / 2,
-                          height: 50,
-                          text: "Join Now",
-                          color: ColorConst.blueColor,
-                          onTap: () {
-                            launchConsultationURL(liveConsultationMeetingModel!.data!.meta!);
-                          },
-                          textStyleConst: TextStyleConst.mediumTextStyle(
-                            ColorConst.whiteColor,
-                            width * 0.05,
-                          ),
-                        ),
+                        child: liveConsultationMeetingModel!.data!.meta! == "N/A"
+                            ? ElevatedButton.icon(
+                                icon: const Icon(
+                                  Icons.videocam_rounded,
+                                  color: ColorConst.whiteColor,
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  splashFactory: NoSplash.splashFactory,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  elevation: 0,
+                                  disabledBackgroundColor:
+                                      ColorConst.blueColor.withOpacity(0.5),
+                                  fixedSize: Size(width / 2, 50),
+                                ),
+                                onPressed: null,
+                                onLongPress: null,
+                                label: Text(
+                                  "Join Now",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyleConst.mediumTextStyle(
+                                    ColorConst.whiteColor,
+                                    width * 0.05,
+                                  ),
+                                ),
+                              )
+                            : CommonButton(
+                                isIcon: true,
+                                width: width / 2,
+                                height: 50,
+                                text: "Join Now",
+                                color: ColorConst.blueColor,
+                                onTap: () {
+                                  launchConsultationURL(liveConsultationMeetingModel!.data!.meta!);
+                                },
+                                textStyleConst: TextStyleConst.mediumTextStyle(
+                                  ColorConst.whiteColor,
+                                  width * 0.05,
+                                ),
+                              ),
                       ),
                       SizedBox(height: height * 0.02),
                     ],
@@ -189,9 +230,11 @@ class LiveConsultationsController extends GetxController {
       });
   }
 
-  void getDoctorLiveMeeting(int consultationId, BuildContext context, double height, double width) {
+  void getDoctorLiveMeeting(
+      int consultationId, BuildContext context, double height, double width) {
     CommonLoader.showLoader();
-    StringUtils.client.liveDoctorConsultationMeetingData(PreferenceUtils.getStringValue("token"), consultationId)
+    StringUtils.client.liveDoctorConsultationMeetingData(
+        PreferenceUtils.getStringValue("token"), consultationId)
       ..then((value) {
         doctorLiveConsultationsMeetingModel = value;
         if (doctorLiveConsultationsMeetingModel!.success == true) {
@@ -234,41 +277,72 @@ class LiveConsultationsController extends GetxController {
                         ),
                       ),
                       SizedBox(height: height * 0.01),
-                      statusText("${doctorLiveConsultationsMeetingModel!.data!.status}", width),
+                      statusText(
+                          "${doctorLiveConsultationsMeetingModel!.data!.status}",
+                          width),
                       SizedBox(height: height * 0.02),
                       CommonDetailText(
                         width: width,
                         titleText: "Host Video:",
-                        descriptionText: "${doctorLiveConsultationsMeetingModel!.data!.host_video}",
+                        descriptionText:
+                            "${doctorLiveConsultationsMeetingModel!.data!.host_video}",
                       ),
                       SizedBox(height: height * 0.01),
                       CommonDetailText(
                         width: width,
                         titleText: "Consultation Date:",
-                        descriptionText: "${doctorLiveConsultationsMeetingModel!.data!.consultation_date}",
+                        descriptionText:
+                            "${doctorLiveConsultationsMeetingModel!.data!.consultation_date}",
                       ),
                       SizedBox(height: height * 0.01),
                       CommonDetailText(
                         width: width,
                         titleText: "Duration:",
-                        descriptionText: "${doctorLiveConsultationsMeetingModel!.data!.duration_minutes} Minutes",
+                        descriptionText:
+                            "${doctorLiveConsultationsMeetingModel!.data!.duration_minutes} Minutes",
                       ),
                       SizedBox(height: height * 0.03),
                       Center(
-                        child: CommonButton(
-                          isIcon: true,
-                          width: width / 2,
-                          height: 50,
-                          text: "Start Now",
-                          color: ColorConst.blueColor,
-                          onTap: () {
-                            launchConsultationURL(doctorLiveConsultationsMeetingModel!.data!.meta!);
-                          },
-                          textStyleConst: TextStyleConst.mediumTextStyle(
-                            ColorConst.whiteColor,
-                            width * 0.05,
-                          ),
-                        ),
+                        child: doctorLiveConsultationsMeetingModel!.data!.meta! == "N/A"
+                            ? ElevatedButton.icon(
+                                icon: const Icon(
+                                  Icons.videocam_rounded,
+                                  color: ColorConst.whiteColor,
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  splashFactory: NoSplash.splashFactory,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  elevation: 0,
+                                  disabledBackgroundColor: ColorConst.blueColor.withOpacity(0.5),
+                                  fixedSize: Size(width / 2, 50),
+                                ),
+                                onPressed: null,
+                                onLongPress: null,
+                                label: Text(
+                                  "Start Now",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyleConst.mediumTextStyle(
+                                    ColorConst.whiteColor,
+                                    width * 0.05,
+                                  ),
+                                ),
+                              )
+                            : CommonButton(
+                                isIcon: true,
+                                width: width / 2,
+                                height: 50,
+                                text: "Start Now",
+                                color: ColorConst.blueColor,
+                                onTap: () {
+                                  launchConsultationURL(doctorLiveConsultationsMeetingModel!.data!.meta!);
+                                },
+                                textStyleConst: TextStyleConst.mediumTextStyle(
+                                  ColorConst.whiteColor,
+                                  width * 0.05,
+                                ),
+                              ),
                       ),
                       SizedBox(height: height * 0.02),
                     ],

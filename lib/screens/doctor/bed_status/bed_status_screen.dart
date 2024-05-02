@@ -80,13 +80,6 @@ class BedStatusScreen extends StatelessWidget {
                                                     : "${bedStatusController.bedStatusModel?.data?[mainIndex].bed?[subIndex].id}"),
                                           );
                                         }
-                                        // CommonLoader.showLoader();
-                                        // bedStatusController.getBedDetails(
-                                        //   "${bedStatusController.bedStatusModel?.data?[mainIndex].bed?[subIndex].id}",
-                                        //   context,
-                                        //   height,
-                                        //   width,
-                                        // );
                                       },
                                       title: Text(
                                         bedStatusController.bedStatusModel?.data?[mainIndex].bed?[subIndex].name ?? "",
