@@ -53,49 +53,77 @@ class EditBedScreen extends StatelessWidget {
                             const SizedBox(height: 10),
 
                             /// My Cases
-                            CommonDropDown(
-                              enabled: false,
-                              value:
-                                  editBedController.patientCases?.data?.isEmpty ?? true ? null : editBedController.patientCases?.data?[0].patient_case,
-                              color: ColorConst.bgGreyColor,
-                              hintText: "Select case",
-                              dropdownItems: List.generate(
-                                editBedController.patientCases?.data?.length ?? 0,
-                                (index) => DropdownMenuItem(
-                                  value: editBedController.patientCases?.data?[index].patient_case,
-                                  child: Text(
-                                    editBedController.patientCases?.data?[index].patient_case ?? "",
-                                    style: const TextStyle(color: ColorConst.hintGreyColor),
-                                  ),
-                                ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: ColorConst.greyShadowColor,
+                              ),
+                              child: CommonTextField(
+                                readOnly: true,
+                                validator: (value) {
+                                  return null;
+                                },
+                                controller: editBedController.myCaseController,
+                                suffixIcon: const Icon(Icons.arrow_drop_down, color: ColorConst.blackColor),
                               ),
                             ),
+                            // CommonDropDown(
+                            //   enabled: false,
+                            //   value:
+                            //       editBedController.patientCases?.data?.isEmpty ?? true ? null : editBedController.patientCases?.data?[0].patient_case,
+                            //   color: ColorConst.bgGreyColor,
+                            //   hintText: "Select case",
+                            //   dropdownItems: List.generate(
+                            //     editBedController.patientCases?.data?.length ?? 0,
+                            //     (index) => DropdownMenuItem(
+                            //       value: editBedController.patientCases?.data?[index].patient_case,
+                            //       child: Text(
+                            //         editBedController.patientCases?.data?[index].patient_case ?? "",
+                            //         style: const TextStyle(color: ColorConst.hintGreyColor),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                             SizedBox(height: height * 0.02),
                             CommonRequiredText(width: width, text: StringUtils.ipdPatient),
                             SizedBox(height: height * 0.01),
 
                             /// IPD Patient
-                            CommonDropDown(
-                              value: editBedController.ipdPatientId.toString(),
-                              enabled: editBedController.ipdPatientsModel?.data?.isNotEmpty ?? false,
-                              color: editBedController.ipdPatientsModel?.data?.isNotEmpty ?? false ? ColorConst.whiteColor : ColorConst.bgGreyColor,
-                              hintText:
-                                  editBedController.ipdPatientsModel?.data?.isNotEmpty ?? false ? "Please Select IPD Patient" : "No IPD Patient Found",
-                              onChange: editBedController.ipdPatientsModel?.data?.isNotEmpty ?? false
-                                  ? (value) {
-                                      editBedController.ipdPatientId = value;
-                                    }
-                                  : null,
-                              dropdownItems: editBedController.ipdPatientsModel?.data?.map((value) {
-                                    return DropdownMenuItem(
-                                      value: value.id.toString(),
-                                      child: Text(
-                                        value.ipd_number ?? "",
-                                      ),
-                                    );
-                                  }).toList() ??
-                                  [],
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: ColorConst.greyShadowColor,
+                              ),
+                              child: CommonTextField(
+                                readOnly: true,
+                                suffixIcon: const Icon(Icons.arrow_drop_down, color: ColorConst.blackColor),
+                                validator: (value) {
+                                  return null;
+                                },
+                                controller: editBedController.ipdPatientController,
+                              ),
                             ),
+                            // CommonDropDown(
+                            //   value: editBedController.ipdPatientId.toString(),
+                            //   enabled: editBedController.ipdPatientsModel?.data?.isNotEmpty ?? false,
+                            //   color: editBedController.ipdPatientsModel?.data?.isNotEmpty ?? false ? ColorConst.whiteColor : ColorConst.bgGreyColor,
+                            //   hintText:
+                            //       editBedController.ipdPatientsModel?.data?.isNotEmpty ?? false ? "Please Select IPD Patient" : "No IPD Patient Found",
+                            //   onChange: editBedController.ipdPatientsModel?.data?.isNotEmpty ?? false
+                            //       ? (value) {
+                            //           editBedController.ipdPatientId = value;
+                            //         }
+                            //       : null,
+                            //   dropdownItems: editBedController.ipdPatientsModel?.data?.map((value) {
+                            //         return DropdownMenuItem(
+                            //           value: value.id.toString(),
+                            //           child: Text(
+                            //             value.ipd_number ?? "",
+                            //           ),
+                            //         );
+                            //       }).toList() ??
+                            //       [],
+                            // ),
                             SizedBox(height: height * 0.02),
                             CommonRequiredText(width: width, text: StringUtils.bedInEditBed),
                             SizedBox(height: height * 0.01),

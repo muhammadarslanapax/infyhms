@@ -10,7 +10,9 @@ BedStatusDetailsModel _$BedStatusDetailsModelFromJson(
         Map<String, dynamic> json) =>
     BedStatusDetailsModel(
       success: json['success'] as bool?,
-      data:json['data'] as Map<String, dynamic>?,
+      data: json['data'] == null
+          ? null
+          : BedStatusDetailsData.fromJson(json['data'] as Map<String, dynamic>),
       message: json['message'] as String?,
     );
 

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'diagnosis_test_model.g.dart';
@@ -28,6 +30,8 @@ class DiagnosisTestData {
   String? report_number;
   String? created_at;
   String? pdf_url;
+  String? doctor_name;
+  String? doctor_image;
 
   DiagnosisTestData({
     this.id,
@@ -37,6 +41,8 @@ class DiagnosisTestData {
     this.report_number,
     this.created_at,
     this.pdf_url,
+    this.doctor_name,
+    this.doctor_image
   });
   factory DiagnosisTestData.fromJson(Map<String, dynamic> json) => _$DiagnosisTestDataFromJson(json);
 

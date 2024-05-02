@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/constant/text_style_const.dart';
 
+import '../constant/color_const.dart';
+
+
 class DisplaySnackBar {
-  static displaySnackBar(String content, [int? sec]) {
+  static displaySnackBar(String content, [int? sec, Color? bgColor]) {
     Get.rawSnackbar(
-      backgroundColor: const Color(0xff2d2d2d),
+      backgroundColor: bgColor ??  ColorConst.blackColor,
       messageText: Text(
         content,
         style: TextStyleConst.mediumTextStyle(Colors.white, 15),
@@ -17,3 +20,4 @@ class DisplaySnackBar {
     );
   }
 }
+

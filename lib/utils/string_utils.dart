@@ -33,27 +33,27 @@ class StringUtils {
   static const newDocument = "New Document";
   static const delete = "Delete";
   static const introOneTitle = "Book an Appointment";
-  static const introOneSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
+  static const introOneSubTitle = "Book appointments with ease, putting your health in your hands";
   static const introTwoTitle = "Schedule Live Consultation";
-  static const introTwoSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
+  static const introTwoSubTitle = "Seamlessly schedule live consultations, connecting you with healthcare professionals on your terms";
   static const introThreeTitle = "Read Prescriptions";
-  static const introThreeSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
+  static const introThreeSubTitle = "Navigate your treatment with clarity – easily read and follow your doctor's prescribed plan";
   static const appointment = "Appointment";
   static const bills = "Bills";
   static const billsDetails = "Bill Details";
   static const diagnosisTests = "Diagnosis Tests";
-  static const diagnosisTestsDetails = "Diagnosis Tests Details";
+  static const diagnosisTestsDetails = "Diagnosis Test Details";
   static const documents = "Documents";
   static const noticeBoards = "Notice Boards";
   static const invoices = "Invoices";
   static const liveConsultations = "Live Consultations";
   static const patientsCases = "Cases";
   static const casesDetails = "Case Details";
-  static const myCases = "My Cases";
+  static const myCases = "Case";
   static const patientAdmissions = "Patient Admissions";
   static const myAdmissions = "My Admissions";
   static const prescriptions = "Prescriptions";
-  static const vaccinatedPatients = "Vaccinated";
+  static const vaccinatedPatients = "Vaccination";
   static const logOut = "Logout";
   static const myAccount = "My Account";
   static const editProfile = "Edit Profile";
@@ -77,7 +77,7 @@ class StringUtils {
   /// Admission
   static const admissionDetails = "Admission Details";
   static const insuranceDetails = "Insurance Details";
-  static const admissionId = "Admission Id:";
+  static const admissionId = "Admission ID:";
   static const admissionDate = "Admission Date:";
   static const dischargeDate = "Discharge Date:";
   static const bed = "Bed:";
@@ -123,7 +123,7 @@ class StringUtils {
   static const title = "Title:";
   static const documentType = "Document Type:";
   static const attachment = "Attachment:";
-  static const note = "Note:";
+  static const note = "Notes:";
 
   /// invoice
   static const issueFor = "Issue For:";

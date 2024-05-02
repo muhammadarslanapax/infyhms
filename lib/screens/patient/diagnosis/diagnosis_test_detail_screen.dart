@@ -46,16 +46,16 @@ class DiagnosisTestDetailScreen extends StatelessWidget {
                           width: width,
                           titleText: PreferenceUtils.getBoolValue("isDoctor") ? StringUtils.patient : StringUtils.doctor,
                           descriptionText: PreferenceUtils.getBoolValue("isDoctor")
-                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.patient_name!
-                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.doctor_name!,
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel?.data?.patient_name ?? ""
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel?.data?.doctor_name ?? "",
                         ),
                         SizedBox(height: height * 0.015),
                         CommonDetailText(
                           width: width,
                           titleText: StringUtils.diagnosisCategory,
                           descriptionText: PreferenceUtils.getBoolValue("isDoctor")
-                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel!.data!.category!
-                              : diagnosisTestDetailsController.diagnosisTestDetailsModel!.data!.category!,
+                              ? diagnosisTestDetailsController.doctorDiagnosisTestDetailsModel?.data?.category ?? ""
+                              : diagnosisTestDetailsController.diagnosisTestDetailsModel?.data?.category ?? "",
                         ),
                         SizedBox(height: height * 0.015),
                         PreferenceUtils.getBoolValue("isDoctor")
@@ -161,7 +161,7 @@ class DiagnosisTestDetailScreen extends StatelessWidget {
                                     },
                                     textStyleConst: TextStyleConst.mediumTextStyle(
                                       ColorConst.whiteColor,
-                                      width * 0.05,
+                                      width * 0.047,
                                     ),
                                   ),
                           ),

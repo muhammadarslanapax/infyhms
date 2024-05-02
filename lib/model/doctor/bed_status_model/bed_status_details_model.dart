@@ -7,7 +7,7 @@ part 'bed_status_details_model.g.dart';
 @JsonSerializable()
 class BedStatusDetailsModel {
   bool? success;
-  Map<String, dynamic>? data;
+  BedStatusDetailsData? data;
   String? message;
 
   BedStatusDetailsModel({

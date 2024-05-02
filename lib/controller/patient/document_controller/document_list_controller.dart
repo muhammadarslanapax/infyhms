@@ -51,7 +51,7 @@ class DocumentController extends GetxController {
       progress.value = message[2];
       if (progress.value == 100) {
         if (isCurrentDownloading[currentIndex ?? 0].value) {
-          DisplaySnackBar.displaySnackBar("Document downloaded");
+          DisplaySnackBar.displaySnackBar("Document downloaded", 3 , ColorConst.greenColor);
           isCurrentDownloading[currentIndex ?? 0].value = false;
           currentIndex = null;
         }
@@ -89,7 +89,7 @@ class DocumentController extends GetxController {
           );
         } catch (e) {
           isCurrentDownloading[index].value = false;
-          DisplaySnackBar.displaySnackBar("Document can't be downloaded");
+          DisplaySnackBar.displaySnackBar("Document can't be downloaded", 3, ColorConst.redColor);
         }
       }
     }

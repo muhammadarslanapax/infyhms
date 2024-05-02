@@ -1,49 +1,37 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'doctor_prescription_detail_model.g.dart';
+part 'prescription_details_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class DoctorPrescriptionDetailModel {
+class PrescriptionDetailModel {
   bool? success;
-  DoctorPrescriptionDetailData? data;
+  PrescriptionDetailData? data;
   String? message;
 
-  DoctorPrescriptionDetailModel({
+  PrescriptionDetailModel({
     this.success,
     this.data,
     this.message,
   });
 
-  factory DoctorPrescriptionDetailModel.fromJson(Map<String, dynamic> json) => _$DoctorPrescriptionDetailModelFromJson(json);
+  factory PrescriptionDetailModel.fromJson(Map<String, dynamic> json) => _$PrescriptionDetailModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DoctorPrescriptionDetailModelToJson(this);
+  Map<String, dynamic> toJson() => _$PrescriptionDetailModelToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class DoctorPrescriptionDetailData {
-  int? id;
-  int? doctor_id;
+class PrescriptionDetailData {
   String? doctor_name;
   String? specialist;
-  String? patient_name;
-  int? patient_age;
-  String? created_date;
-  String? created_time;
   String? problem;
   String? test;
   String? advice;
   List<Medicine>? medicine;
   String? download_prescription;
 
-  DoctorPrescriptionDetailData({
-    this.id,
-    this.doctor_id,
+  PrescriptionDetailData({
     this.doctor_name,
     this.specialist,
-    this.patient_name,
-    this.patient_age,
-    this.created_date,
-    this.created_time,
     this.problem,
     this.test,
     this.advice,
@@ -51,9 +39,9 @@ class DoctorPrescriptionDetailData {
     this.download_prescription,
   });
 
-  factory DoctorPrescriptionDetailData.fromJson(Map<String, dynamic> json) => _$DoctorPrescriptionDetailDataFromJson(json);
+  factory PrescriptionDetailData.fromJson(Map<String, dynamic> json) => _$PrescriptionDetailDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DoctorPrescriptionDetailDataToJson(this);
+  Map<String, dynamic> toJson() => _$PrescriptionDetailDataToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)

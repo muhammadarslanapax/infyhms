@@ -63,7 +63,7 @@ class NewDocumentController extends GetxController {
     } else if (notesController.text.trim().isEmpty) {
       DisplaySnackBar.displaySnackBar("Please enter notes");
     } else {
-      if (PreferenceUtils.getBoolValue("isLocated")) {
+      if (PreferenceUtils.getBoolValue("isDoctor")) {
         if (patientId == null) {
           DisplaySnackBar.displaySnackBar("Please select patient");
         } else {

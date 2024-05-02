@@ -18,6 +18,8 @@ class ResetPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    MediaQueryData mediaQuery = MediaQuery.of(context);
+
     return SafeArea(
       child: GestureDetector(
         onTap: () {
@@ -26,8 +28,8 @@ class ResetPasswordScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: ColorConst.whiteColor,
           body: ListView(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
+            // shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               Column(
                 children: [
@@ -48,67 +50,59 @@ class ResetPasswordScreen extends StatelessWidget {
                   ),
 
                   /// bottom container
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: height / 3.2,
-                          width: width,
-                          color: ColorConst.bgGreyColor,
+                  Container(
+                    height: height / 1.54,
+                    width: double.infinity,
+                    padding: EdgeInsets.only(bottom: mediaQuery.viewInsets.bottom, ),
+                    decoration: BoxDecoration(
+                      color: ColorConst.whiteColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: ColorConst.greyShadowColor,
+                          blurRadius: 5,
+                          spreadRadius: 3,
+                          offset: const Offset(0, -5),
                         ),
-                        Container(
-                          height: height / 1.54,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: ColorConst.whiteColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: ColorConst.greyShadowColor,
-                                blurRadius: 5,
-                                spreadRadius: 3,
-                                offset: const Offset(0, -5),
-                              ),
-                            ],
-                            borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(60),
-                              topLeft: Radius.circular(60),
+                      ],
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(60),
+                        topLeft: Radius.circular(60),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: height * 0.06, left: 20, right: 20),
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            /// SignIn
+                            Text(
+                              StringUtils.resetPassword,
+                              style: TextStyleConst.boldTextStyle(Colors.black, width * 0.06),
                             ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(top: height * 0.06, left: 20, right: 20),
-                            child: SingleChildScrollView(
-                              physics: const BouncingScrollPhysics(),
-                              child: Column(
-                                children: [
-                                  /// SignIn
-                                  Text(
-                                    StringUtils.resetPassword,
-                                    style: TextStyleConst.boldTextStyle(Colors.black, width * 0.06),
-                                  ),
-                                  SizedBox(height: height * 0.03),
+                            SizedBox(height: height * 0.03),
 
-                                  /// Email TextField
-                                  CommonTextField(
-                                    controller: sendTokenController.newPassword,
-                                    keyBoardType: TextInputType.emailAddress,
-                                    validator: (value) {
-                                      return null;
-                                    },
-                                    hintText: StringUtils.enterNewPassword,
-                                  ),
-                                  SizedBox(height: height * 0.02),
+                            /// Email TextField
+                            CommonTextField(
+                              controller: sendTokenController.newPassword,
+                              keyBoardType: TextInputType.emailAddress,
+                              validator: (value) {
+                                return null;
+                              },
+                              hintText: StringUtils.enterNewPassword,
+                            ),
+                            SizedBox(height: height * 0.02),
 
-                                  /// password TextField
-                                  CommonTextField(
-                                    maxLine: 1,
-                                    controller: sendTokenController.confirmPassword,
-                                    validator: (value) {
-                                      return null;
-                                    },
-                                    hintText: StringUtils.enterNewPassword,
-                                  ),
-                                  SizedBox(height: height * 0.06),
+                            /// password TextField
+                            CommonTextField(
+                              maxLine: 1,
+                              controller: sendTokenController.confirmPassword,
+                              validator: (value) {
+                                return null;
+                              },
+                              hintText: StringUtils.enterNewPassword,
+                            ),
+                            SizedBox(height: height * 0.06),
 
                                   /// Login button
                                   Row(
