@@ -20,6 +20,7 @@ class EditBedScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     var bedAssignData = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     editBedController.assignValue(bedAssignData);
+    editBedController.getEditBedDetails(int.parse(bedAssignData['assignId']));
 
     return SafeArea(
       child: GestureDetector(

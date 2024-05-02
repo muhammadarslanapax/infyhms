@@ -140,13 +140,11 @@ class ResetPasswordScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
                 ],
               ),
-            ],
           ),
         ),
-      ),
+
     );
   }
 }

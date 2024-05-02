@@ -70,7 +70,6 @@ class BedAssignController extends GetxController {
   }
 
   void deleteBedAssign(BuildContext context, String id, int index) {
-    Get.back();
     if (Get.isSnackbarOpen) {
       Get.closeCurrentSnackbar();
     }
@@ -79,7 +78,7 @@ class BedAssignController extends GetxController {
       ..then((value) {
         if (value.success == true) {
           isBedAssignDataCalled.value = true;
-
+Get.back();
           DisplaySnackBar.displaySnackBar("Bed Deleted");
           changeIndex(index);
         } else {

@@ -48,7 +48,7 @@ class EditBedController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getEditBedDetails();
+
     //getMyCases();
     // selectedBedAssignDate = bedAssignData["assignDate"];
     // selectedBedAssignController.text = selectedBedAssignDate ?? "";
@@ -84,8 +84,8 @@ class EditBedController extends GetxController {
     }
   }
 
-  void getEditBedDetails() {
-    StringUtils.client.getBedEditAssignDetails(PreferenceUtils.getStringValue("token"), int.parse(bedAssignData["assignId"]))
+  void getEditBedDetails(int assignId) {
+    StringUtils.client.getBedEditAssignDetails(PreferenceUtils.getStringValue("token"), assignId)
       ..then((value) {
         editBedAssignModel = value;
         myCaseController.text = "${editBedAssignModel!.data!.case_id} ${editBedAssignModel!.data!.patient_name}";
