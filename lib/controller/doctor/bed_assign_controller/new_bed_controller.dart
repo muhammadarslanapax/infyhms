@@ -97,7 +97,8 @@ class NewBedController extends GetxController {
         PreferenceUtils.getStringValue("token"),
         caseId ?? "",
         bedId,selectedDate ?? "",
-        patientId.value
+        patientId.value,
+        notesController.text
       )
         ..then((value) {
           Get.back();

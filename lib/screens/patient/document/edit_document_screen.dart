@@ -14,21 +14,34 @@ import 'package:infyhms_flutter/controller/patient/document_controller/edit_docu
 import 'package:infyhms_flutter/utils/preference_utils.dart';
 import 'package:infyhms_flutter/utils/string_utils.dart';
 
-class EditDocumentScreen extends StatelessWidget {
+class EditDocumentScreen extends StatefulWidget {
   EditDocumentScreen({
     Key? key,
     required this.documentId,
   }) : super(key: key);
   final int documentId;
 
+  @override
+  State<EditDocumentScreen> createState() => _EditDocumentScreenState();
+}
+
+class _EditDocumentScreenState extends State<EditDocumentScreen> {
   final EditDocumentController editDocumentController = Get.put(EditDocumentController());
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      var arguments = ModalRoute.of(context)!.settings.arguments;
+      editDocumentController.getDocumentDetail(arguments);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    var arguments = ModalRoute.of(context)!.settings.arguments;
-    editDocumentController.getDocumentDetail(arguments);
+
     return SafeArea(
       child: GestureDetector(
         onTap: () {
@@ -141,7 +154,7 @@ class EditDocumentScreen extends StatelessWidget {
                               CommonButton(
                                 textStyleConst: TextStyleConst.mediumTextStyle(ColorConst.whiteColor, width * 0.05),
                                 onTap: () {
-                                  editDocumentController.editDocuments(documentId);
+                                  editDocumentController.editDocuments(widget.documentId);
                                 },
                                 color: ColorConst.blueColor,
                                 text: StringUtils.save,

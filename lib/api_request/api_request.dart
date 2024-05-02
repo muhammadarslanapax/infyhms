@@ -515,6 +515,7 @@ abstract class ApiClient {
     @Field("bed_id") String bedId,
     @Field("assign_date") String assignDate,
     @Field("discharge_date") String dischargeDate,
+      @Field("description") String description
   );
 
   @POST("doctors/bed-assign-delete/{id}")
@@ -530,6 +531,7 @@ abstract class ApiClient {
     @Field("bed_id") String? bedId,
     @Field("assign_date") String? assignDate,
     @Field("ipd_patient_department_id") String patientId,
+      @Field("description") String description
   );
 
   /// doctor documents
@@ -559,6 +561,7 @@ abstract class ApiClient {
     @Part(name: "document_type_id") String documentTypeId,
     @Part(name: "patient_id") String patientId,
     @Part(name: "file") File? attachment,
+      @Part(name: "notes") String notes,
   );
 
   @MultiPart()
@@ -570,6 +573,7 @@ abstract class ApiClient {
     @Part(name: "document_type_id") String documentTypeId,
     @Part(name: "patient_id") String patientId,
     @Part(name: "file") File? attachment,
+      @Part(name: "notes") String notes,
   );
 
   @DELETE("doctors/doctor-document-delete/{id}")

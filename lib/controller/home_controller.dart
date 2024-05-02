@@ -33,7 +33,7 @@ class HomeController extends GetxController {
   Widget currentWidget = AppointmentScreen();
   LogoutModel? logoutModel;
   GetProfileModel? getProfileModel;
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   RxInt currentDrawerIndex = 0.obs;
   RxString appBarTitle = StringUtils.appointment.obs;
   RxBool isSetValue = false.obs;

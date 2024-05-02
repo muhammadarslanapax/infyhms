@@ -48,12 +48,6 @@ class EditBedController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-
-    //getMyCases();
-    // selectedBedAssignDate = bedAssignData["assignDate"];
-    // selectedBedAssignController.text = selectedBedAssignDate ?? "";
-    // getMyCases();
-
   }
 
   assignValue(Map<String, dynamic> bedAssignData){
@@ -94,6 +88,7 @@ class EditBedController extends GetxController {
         selectedBedAssignDate = editBedAssignModel!.data!.assign_date!;
         selectedDischargeController.text = editBedAssignModel!.data!.discharge_date! == "N/A" ? "" : editBedAssignModel!.data!.discharge_date!;
         selectedDischargeDate = editBedAssignModel!.data!.discharge_date! == "N/A" ? null : editBedAssignModel!.data!.discharge_date!;
+        notesController.text = editBedAssignModel?.data?.description ?? "N/A";
         getBeds();
       })
       ..onError((DioException error, stackTrace) {
@@ -140,6 +135,7 @@ class EditBedController extends GetxController {
         "$bedId",
         "$selectedBedAssignDate",
         "$selectedDischargeDate",
+        notesController.text,
       )
         ..then((value) {
           Get.back();

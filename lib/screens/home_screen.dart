@@ -19,13 +19,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return SafeArea(
       child: GetBuilder<HomeController>(
         init: HomeController(),
         builder: (controller) {
           return Scaffold(
             backgroundColor: ColorConst.whiteColor,
-            key: controller.scaffoldKey,
+            key: scaffoldKey,
             appBar: CommonAppBar(
               title: controller.appBarTitle.value,
               leadOnTap: () {
@@ -35,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                 VariableUtils.phoneNo.value = PreferenceUtils.getStringValue("phone_number");
                 VariableUtils.imageUrl.value = PreferenceUtils.getStringValue("image_url");
                 VariableUtils.patientId.value = PreferenceUtils.getStringValue("patientId");
-                controller.scaffoldKey.currentState?.openDrawer();
+                scaffoldKey.currentState?.openDrawer();
               },
               leadIcon: const Icon(Icons.menu, color: ColorConst.blackColor),
             ),

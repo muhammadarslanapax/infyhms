@@ -149,7 +149,11 @@ class DocumentScreen extends StatelessWidget {
                 onTap: () async {
                   final message = await Get.to(() => NewDocumentScreen(), transition: Transition.rightToLeft);
                   if (message == "Call API") {
-                    documentController.getDocuments();
+                    if (PreferenceUtils.getBoolValue("isDoctor")) {
+                      documentController.getDoctorDocuments();
+                    } else {
+                      documentController.getDocuments();
+                    }
                   }
                 },
                 child: Container(
@@ -294,7 +298,11 @@ class DocumentScreen extends StatelessWidget {
                 onTap: () async {
                   final message = await Get.to(() => NewDocumentScreen(), transition: Transition.rightToLeft);
                   if (message == "Call API") {
-                    documentController.getDocuments();
+                    if (PreferenceUtils.getBoolValue("isDoctor")) {
+                      documentController.getDoctorDocuments();
+                    } else {
+                      documentController.getDocuments();
+                    }
                   }
                 },
                 child: Container(

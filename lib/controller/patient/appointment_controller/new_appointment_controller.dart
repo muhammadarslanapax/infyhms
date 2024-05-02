@@ -118,7 +118,7 @@ class NewAppointmentController extends GetxController {
       )
         ..then((value) {
           createAppointmentModel = value;
-
+          Get.back();
           if (value.success == true) {
             Get.back();
             DisplaySnackBar.displaySnackBar(value.message!);

@@ -389,13 +389,13 @@ class _ApiClient implements ApiClient {
       notes,
     ));
     if(file != null){
-    _data.files.add(MapEntry(
-      'file',
-      MultipartFile.fromFileSync(
-        file.path,
-        filename: file.path.split(Platform.pathSeparator).last,
-      ),
-    ));
+      _data.files.add(MapEntry(
+        'file',
+        MultipartFile.fromFileSync(
+          file.path,
+          filename: file.path.split(Platform.pathSeparator).last,
+        ),
+      ));
     }
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DocumentUpdateModel>(Options(
@@ -1035,13 +1035,13 @@ class _ApiClient implements ApiClient {
       phone,
     ));
     if(profileImage != null){
-    _data.files.add(MapEntry(
-      'image',
-      MultipartFile.fromFileSync(
-        profileImage.path,
-        filename: profileImage.path.split(Platform.pathSeparator).last,
-      ),
-    ));
+      _data.files.add(MapEntry(
+        'image',
+        MultipartFile.fromFileSync(
+          profileImage.path,
+          filename: profileImage.path.split(Platform.pathSeparator).last,
+        ),
+      ));
     }
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<EditProfileModel>(Options(
@@ -2315,6 +2315,7 @@ class _ApiClient implements ApiClient {
     String bedId,
     String assignDate,
     String dischargeDate,
+    String description,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2327,6 +2328,7 @@ class _ApiClient implements ApiClient {
       'bed_id': bedId,
       'assign_date': assignDate,
       'discharge_date': dischargeDate,
+      'description': description,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BedUpdatedDetailsModel>(Options(
@@ -2388,6 +2390,7 @@ class _ApiClient implements ApiClient {
     String? bedId,
     String? assignDate,
     String patientId,
+    String description,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2399,6 +2402,7 @@ class _ApiClient implements ApiClient {
       'bed_id': bedId,
       'assign_date': assignDate,
       'ipd_patient_department_id': patientId,
+      'description': description,
     };
     _data.removeWhere((k, v) => v == null);
     final _result = await _dio
@@ -2517,6 +2521,7 @@ class _ApiClient implements ApiClient {
     String documentTypeId,
     String patientId,
     File? attachment,
+    String notes,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2536,7 +2541,7 @@ class _ApiClient implements ApiClient {
       'patient_id',
       patientId,
     ));
-    if(attachment != null) {
+    if(attachment != null){
       _data.files.add(MapEntry(
         'file',
         MultipartFile.fromFileSync(
@@ -2545,6 +2550,10 @@ class _ApiClient implements ApiClient {
         ),
       ));
     }
+    _data.fields.add(MapEntry(
+      'notes',
+      notes,
+    ));
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorDocumentsCRUDModel>(Options(
       method: 'POST',
@@ -2575,6 +2584,7 @@ class _ApiClient implements ApiClient {
     String documentTypeId,
     String patientId,
     File? attachment,
+    String notes,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2595,14 +2605,18 @@ class _ApiClient implements ApiClient {
       patientId,
     ));
     if(attachment != null){
-    _data.files.add(MapEntry(
-      'file',
-      MultipartFile.fromFileSync(
-        attachment.path,
-        filename: attachment.path.split(Platform.pathSeparator).last,
-      ),
-    ));
+      _data.files.add(MapEntry(
+        'file',
+        MultipartFile.fromFileSync(
+          attachment.path,
+          filename: attachment.path.split(Platform.pathSeparator).last,
+        ),
+      ));
     }
+    _data.fields.add(MapEntry(
+      'notes',
+      notes,
+    ));
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DoctorDocumentsCRUDModel>(Options(
       method: 'POST',

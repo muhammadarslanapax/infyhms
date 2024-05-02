@@ -76,7 +76,8 @@ class EditDocumentController extends GetxController {
           titleController.text.trim(),
           docTypeId ?? "",
           patientId ?? "",
-          file.value == null ? null : File(file.value?.path ?? ""),
+          file.value!.path == "" ? null : File(file.value?.path ?? ""),
+          notesController.text,
         )
           ..then((value) {
             Get.back();
@@ -96,7 +97,7 @@ class EditDocumentController extends GetxController {
           titleController.text.trim(),
           docTypeId ?? "",
           notesController.text.trim(),
-          file.value == null ? null : File(file.value?.path ?? ""),
+          file.value!.path == "" ? null : File(file.value?.path ?? ""),
           documentId,
         )
           ..then((value) {

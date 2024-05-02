@@ -74,6 +74,7 @@ class NewDocumentController extends GetxController {
             docId ?? "",
             patientId ?? "",
             File(file.value?.path ?? ""),
+            notesController.text,
           )
             ..then((value) {
               if (value.success == true) {

@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
 import 'package:infyhms_flutter/component/common_socket_exception.dart';
+import 'package:infyhms_flutter/constant/color_const.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/delete_test_model.dart';
 import 'package:infyhms_flutter/model/doctor/doctor_diagnosis_test_model/doctor_diagnosis_test_model.dart';
 import 'package:infyhms_flutter/model/patient/diagnosis_model/diagnosis_test_model.dart';
@@ -42,9 +43,9 @@ class DiagnosisTestController extends GetxController {
       progress.value = message[2];
       if (progress.value == 100) {
         if (isCurrentDownloading[currentIndex ?? 0].value) {
-          DisplaySnackBar.displaySnackBar("Document downloaded");
-          isCurrentDownloading[currentIndex ?? 0].value = false;
-          currentIndex = null;
+          // DisplaySnackBar.displaySnackBar("Diagnosis tests PDF has been downloaded");
+          // isCurrentDownloading[currentIndex ?? 0].value = false;
+          // currentIndex = null;
         }
       }
     });
@@ -81,8 +82,9 @@ class DiagnosisTestController extends GetxController {
             saveInPublicStorage: true,
           );
           await Future.delayed(const Duration(milliseconds: 2000));
-          DisplaySnackBar.displaySnackBar("Diagnosis tests PDF has been downloaded", 3);
+          DisplaySnackBar.displaySnackBar("Diagnosis tests PDF has been downloaded", 3, ColorConst.greenColor);
           isCurrentDownloading[index].value = false;
+          currentIndex = null;
         } catch (e) {
           isCurrentDownloading[index].value = false;
           DisplaySnackBar.displaySnackBar("Document can't be downloaded");
