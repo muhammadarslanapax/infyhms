@@ -55,6 +55,7 @@ import 'package:infyhms_flutter/model/patient/auth_model/login_model.dart';
 import 'package:infyhms_flutter/model/patient/auth_model/logout_model.dart';
 import 'package:infyhms_flutter/model/patient/auth_model/reset_password_model.dart';
 import 'package:infyhms_flutter/model/patient/auth_model/send_token_model.dart';
+import 'package:infyhms_flutter/model/patient/auth_model/sigup_model.dart';
 import 'package:infyhms_flutter/model/patient/bills_model/bill_detail_model.dart';
 import 'package:infyhms_flutter/model/patient/bills_model/bill_model.dart';
 import 'package:infyhms_flutter/model/patient/case_model/case_model.dart';
@@ -302,6 +303,17 @@ abstract class ApiClient {
   Future<GetProfileModel> getProfile(
     @Header('Authorization') String? token,
   );
+
+  @POST("patient-register")
+  Future<SignUpModel> patientRegistration(
+      @Field("first_name") String firstName,
+      @Field("last_name") String lastName,
+      @Field("email") String email,
+      @Field("gender") String gender,
+      @Field("password") String password,
+      @Field("password_confirmation") String passwordConfirmation,
+      );
+
 
   /// Doctor panel
 

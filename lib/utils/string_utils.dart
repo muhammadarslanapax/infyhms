@@ -11,6 +11,7 @@ class StringUtils {
 
   /// auth
   static const signIn = "Sign In";
+  static const patientRegistration = "Patient Registration";
   static const resetPassword = "Reset Password";
   static const signInEmail = "Enter Email Address";
   static const enterNewPassword = "Enter New Password";
