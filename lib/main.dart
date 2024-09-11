@@ -34,22 +34,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return GetMaterialApp(
-    //   theme: ThemeData(
-    //     useMaterial3: false,
-    //     appBarTheme: const AppBarTheme(
-    //         systemOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light, statusBarBrightness: Brightness.dark),
-    //         iconTheme: IconThemeData(color: Colors.black)),
-    //   ),
-    //   debugShowCheckedModeBanner: false,
-    //   home: const SplashScreen(),
-    // );
-
     return GetMaterialApp.router(
       theme: ThemeData(
         useMaterial3: false,
         appBarTheme: const AppBarTheme(
-            systemOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light, statusBarBrightness: Brightness.dark),
+            systemOverlayStyle:
+                SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light, statusBarBrightness: Brightness.dark),
             iconTheme: IconThemeData(color: Colors.black)),
       ),
       routeInformationParser: router.routeInformationParser,
@@ -60,7 +50,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 final router = GoRouter(
   initialLocation: '/',
